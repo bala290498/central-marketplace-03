@@ -220,13 +220,22 @@ offersEl.addEventListener("click", async event => {
 const chromeBar = document.getElementById("chrome");
 const menuButton = document.getElementById("menuButton");
 const siteNav = document.getElementById("siteNav");
-menuButton.addEventListener("click", () => siteNav.classList.toggle("open"));
+const navBackdrop = document.getElementById("navBackdrop");
+const navClose = document.getElementById("navClose");
+function setMenuOpen(open) {
+  siteNav.classList.toggle("open", open);
+  if (navBackdrop) navBackdrop.classList.toggle("open", open);
+  document.body.style.overflow = open ? "hidden" : "";
+}
+menuButton.addEventListener("click", () => setMenuOpen(!siteNav.classList.contains("open")));
+if (navClose) navClose.addEventListener("click", () => setMenuOpen(false));
+if (navBackdrop) navBackdrop.addEventListener("click", () => setMenuOpen(false));
 let lastScrollY = 0;
 window.addEventListener("scroll", () => {
   const y = window.scrollY;
   if (y > lastScrollY && y > 48) {
     chromeBar.classList.add("compact");
-    siteNav.classList.remove("open");
+    setMenuOpen(false);
   } else chromeBar.classList.remove("compact");
   lastScrollY = y;
 }, { passive: true });

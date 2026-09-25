@@ -21,11 +21,12 @@ body{margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:#111
 .brand-block p{margin:2px 0 0;color:#6b7280;font-size:12px}
 .header-actions{margin-left:auto}
 .menu-btn{border:0;background:transparent;padding:0;width:auto;height:auto;font-size:28px;line-height:1;cursor:pointer;color:#111827}
-.nav-backdrop{display:none}
-.site-nav{position:fixed;inset:0;width:100%;height:100%;height:100dvh;background:#fff;z-index:41;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:22px;padding:28px 24px;transform:translateY(-100%);transition:transform .28s ease}
-.site-nav.open{transform:translateY(0)}
-.site-nav a{color:#111827;font-size:22px;font-weight:800;text-decoration:none}
-.nav-close{position:absolute;top:16px;right:18px;border:0;background:transparent;font-size:32px;line-height:1;cursor:pointer;color:#111827}
+.nav-backdrop{display:none;position:fixed;inset:0;background:rgba(17,24,39,.4);z-index:90}
+.nav-backdrop.open{display:block}
+.site-nav{position:fixed;top:0;left:0;width:min(300px,80vw);height:100dvh;background:#fff;z-index:91;display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;gap:20px;padding:64px 22px 24px;transform:translateX(-100%);transition:transform .25s ease}
+.site-nav.open{transform:translateX(0)}
+.site-nav a{color:#111827;font-size:18px;font-weight:800;text-decoration:none}
+.nav-close{position:absolute;top:14px;right:14px;border:0;background:transparent;font-size:34px;line-height:1;cursor:pointer;color:#111827;z-index:92}
 .sticky-tools{width:min(430px,100%);margin:0 auto;padding:0 14px 10px;background:#fff}
 .status{display:none}
 .categories{display:flex;gap:8px;overflow-x:auto;padding:8px 0 12px}
@@ -63,7 +64,7 @@ body{margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:#111
 .chrome{display:flex;flex-wrap:wrap;align-items:center}
 .site-header{width:auto;flex:1;order:1;max-height:120px;padding:18px 16px 10px 28px;flex-wrap:nowrap}
 .menu-btn{display:none}
-.nav-backdrop,.nav-close{display:none!important}.site-nav,.site-nav.open{position:static;transform:none;width:auto;height:auto;justify-content:flex-start;align-items:center;display:flex;flex-direction:row;gap:14px;padding:0;margin-left:24px;background:transparent}.site-nav a{font-size:13px;font-weight:700}
+.nav-backdrop,.nav-close{display:none!important}.site-nav,.site-nav.open{position:static;transform:none;width:auto;height:auto;order:1;justify-content:flex-start;align-items:center;display:flex;flex-direction:row;gap:14px;padding:0;margin:0 16px 0 0;background:transparent}.site-nav a{font-size:13px;font-weight:700}
 .sticky-locate{order:2;width:auto;margin:0 28px 0 auto;padding:18px 0 10px}
 .sticky-tools{order:3;width:100%;padding:0 28px 12px}
 .categories{flex-wrap:wrap;overflow:visible}
