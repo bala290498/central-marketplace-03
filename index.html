@@ -117,7 +117,7 @@
 
     .offer {
       position: relative;
-      border: 1px solid #6b7280;
+      border: 1px solid #d1d5db;
       border-radius: 18px;
       padding: 14px;
       background: #fff;
@@ -639,7 +639,7 @@
             <span class="distance">${userLocation ? distanceLabel(offer.distance) : "km"}</span>
             <span class="ends">${ends ? escapeHtml(ends) : "—"}</span>
           </div>
-          <p class="confirm-note">Call and confirm the deal before visit</p>
+          <p class="confirm-note">*call and confirm the deal before visit</p>
           <div class="actions">
             ${offer.phone ? `<a class="call-link" href="tel:${escapeAttribute(String(offer.phone).replaceAll(" ", ""))}">Call</a>` : `<span></span>`}
             <a class="map-link"
@@ -787,17 +787,20 @@
       const phone = button.getAttribute("data-phone") || "";
       const map = button.getAttribute("data-map") || "";
       const site = "https://centralmarketplace.in";
-      const details = [
+      const shareText = [
         business ? "*" + business + "*" : "",
         "*" + title + "*",
         description,
         validity ? "Validity: " + validity : "",
+        "",
         location ? "Location: " + location : "",
         phone ? "Call: " + phone : "",
-        "Map: " + (map || "")
-      ].filter(Boolean).join("\n");
-
-      const shareText = details + "\n\nCall and confirm the deal before visit\n\nFor more deals visit: centralmarketplace.in";
+        "Call and confirm the deal before visit",
+        "",
+        "Map: " + (map || ""),
+        "",
+        "For more deals visit: centralmarketplace.in"
+      ].join("\n");
       const shareData = {
         title: title,
         text: shareText,
