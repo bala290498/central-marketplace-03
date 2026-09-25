@@ -116,6 +116,7 @@
     }
 
     .offer {
+      position: relative;
       border: 1px solid #6b7280;
       border-radius: 18px;
       padding: 14px;
@@ -140,9 +141,14 @@
       gap: 8px;
       flex-wrap: wrap;
       margin-bottom: 6px;
+      padding-right: 88px;
     }
 
     .badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 1;
       display: inline-flex;
       align-items: center;
       padding: 3px 8px;
@@ -397,6 +403,7 @@
         grid-template-columns: 1fr 1fr;
         gap: 16px;
       }
+
     }
   </style>
 </head>
