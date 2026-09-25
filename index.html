@@ -1,495 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Nearby client offers based on your location">
-  <title>Nearby Deals</title>
-  <style>
-    * { box-sizing: border-box; }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Arial, Helvetica, sans-serif;
-      color: #111827;
-      background: #f3f4f6;
-    }
-
-    .site-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: min(430px, 100%);
-      margin: 0 auto;
-      padding: 14px 14px 8px;
-      background: #ffffff;
-    }
-
-    .brand-block {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-    }
-
-    .brand-copy {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .brand-mark {
-      width: 40px;
-      height: 40px;
-      display: grid;
-      place-items: center;
-      border-radius: 12px;
-      background: #f97316;
-      color: #fff;
-      font-weight: 800;
-    }
-
-    .brand-block h1 {
-      margin: 0;
-      font-size: 18px;
-      line-height: 1.15;
-      text-align: left;
-    }
-
-    .brand-block p {
-      margin: 2px 0 0;
-      color: #6b7280;
-      font-size: 12px;
-      line-height: 1.2;
-      text-align: left;
-    }
-
-    .app {
-      width: min(430px, 100%);
-      margin: 0 auto;
-      min-height: 100vh;
-      padding: 14px 14px 28px;
-      background: #ffffff;
-    }
-
-    .topbar,
-    .status {
-      display: none;
-    }
-
-    .topbar p {
-      margin: 0;
-      color: #6b7280;
-      font-size: 13px;
-    }
-
-    .locate {
-      border: 0;
-      border-radius: 999px;
-      padding: 8px 12px;
-      background: #f97316;
-      color: #fff;
-      font-weight: 700;
-      font-size: 12px;
-      cursor: pointer;
-      max-width: 46%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .status {
-      margin: 0 0 12px;
-      color: #6b7280;
-      font-size: 13px;
-    }
-
-    .categories {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 12px;
-    }
-
-    .chip {
-      flex: 0 0 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      min-width: 76px;
-      border: 0;
-      border-radius: 14px;
-      padding: 8px 10px;
-      background: #f3f4f6;
-      color: #374151;
-      font-weight: 700;
-      font-size: 11px;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .chip-icon {
-      font-size: 18px;
-      line-height: 1;
-    }
-
-    .chip.active {
-      background: #f97316;
-      color: #fff;
-    }
-
-    .filters {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-
-    .filters select {
-      width: 100%;
-      padding: 11px 12px;
-      border: 1px solid #111827;
-      border-radius: 14px;
-      background: #fff;
-      color: #111827;
-      font: inherit;
-      font-size: 13px;
-    }
-
-    .offers {
-      display: grid;
-      gap: 12px;
-    }
-
-    .offer {
-      position: relative;
-      border: 1px solid #d1d5db;
-      border-radius: 18px;
-      padding: 14px;
-      background: #fff;
-      box-shadow: 0 1px 2px rgba(17, 24, 39, 0.04);
-    }
-
-    .offer-top {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 72px;
-      gap: 10px;
-      align-items: start;
-    }
-
-    .offer-top.no-image {
-      grid-template-columns: 1fr;
-    }
-
-    .offer-brand {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 6px;
-      padding-right: 88px;
-    }
-
-    .badge {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      z-index: 1;
-      display: inline-flex;
-      align-items: center;
-      padding: 3px 8px;
-      border-radius: 8px;
-      background: #fef3c7;
-      color: #92400e;
-      font-size: 11px;
-      font-weight: 800;
-    }
-
-    .badge.off {
-      background: #ffe4e6;
-      color: #be123c;
-    }
-
-    .badge.c0 { background: #fee2e2; color: #b91c1c; }
-    .badge.c1 { background: #ffedd5; color: #c2410c; }
-    .badge.c2 { background: #fef3c7; color: #b45309; }
-    .badge.c3 { background: #ecfccb; color: #4d7c0f; }
-    .badge.c4 { background: #d1fae5; color: #047857; }
-    .badge.c5 { background: #ccfbf1; color: #0f766e; }
-    .badge.c6 { background: #cffafe; color: #0e7490; }
-    .badge.c7 { background: #dbeafe; color: #1d4ed8; }
-    .badge.c8 { background: #e0e7ff; color: #4338ca; }
-    .badge.c9 { background: #ede9fe; color: #6d28d9; }
-    .badge.c10 { background: #fae8ff; color: #a21caf; }
-    .badge.c11 { background: #fce7f3; color: #be185d; }
-    .badge.c12 { background: #e2e8f0; color: #334155; }
-
-    .business {
-      color: #4b5563;
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .offer h2 {
-      margin: 0 0 4px;
-      font-size: 20px;
-      line-height: 1.2;
-    }
-
-    .offer .desc {
-      margin: 0;
-      color: #6b7280;
-      font-size: 13px;
-      line-height: 1.45;
-    }
-
-    .confirm-note {
-      margin: 10px 0 0;
-      color: #6b7280;
-      font-size: 12px;
-      font-style: italic;
-    }
-
-    .thumb {
-      width: 72px;
-      height: 72px;
-      object-fit: cover;
-      border-radius: 12px;
-      background: #f3f4f6;
-    }
-
-    .offer-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      width: 100%;
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 1px solid #f3f4f6;
-    }
-
-    .area,
-    .distance,
-    .rating,
-    .ends {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex: 0 1 auto;
-      min-height: 32px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .area { background: #fef9c3; color: #854d0e; }
-    .distance { background: #dcfce7; color: #15803d; }
-    .rating { background: transparent; color: #111827; }
-    .ends { background: #ffe4e6; color: #be123c; }
-
-    .actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 8px;
-      margin-top: 12px;
-    }
-
-    .map-link,
-    .call-link,
-    .share-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 8px;
-      border: 0;
-      border-radius: 12px;
-      font-weight: 800;
-      font-size: 13px;
-      text-decoration: none;
-      cursor: pointer;
-      font-family: inherit;
-    }
-
-    .map-link {
-      background: #2563eb;
-      color: #fff;
-    }
-
-    .call-link {
-      background: #16a34a;
-      color: #fff;
-    }
-
-    .share-btn {
-      background: #fff7ed;
-      color: #c2410c;
-      border: 1px solid #f97316;
-    }
-
-    .empty {
-      padding: 36px 16px;
-      text-align: center;
-      color: #6b7280;
-      border: 1px dashed #e5e7eb;
-      border-radius: 16px;
-    }
-
-    .footer {
-      margin-top: 18px;
-      text-align: center;
-      color: #9ca3af;
-      font-size: 12px;
-    }
-
-    .modal {
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-      background: rgba(17, 24, 39, 0.45);
-      z-index: 20;
-    }
-
-    .modal.open { display: flex; }
-
-    .modal-card {
-      width: min(360px, 100%);
-      padding: 20px 18px 16px;
-      border-radius: 16px;
-      background: #fff;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
-    }
-
-    .modal-card h2 {
-      margin: 0 0 8px;
-      font-size: 18px;
-    }
-
-    .modal-card p {
-      margin: 0 0 16px;
-      color: #6b7280;
-      font-size: 14px;
-      line-height: 1.45;
-    }
-
-    .modal-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-
-    .modal-actions button {
-      border: 0;
-      border-radius: 12px;
-      padding: 12px;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .modal-cancel {
-      background: #f3f4f6;
-      color: #111827;
-    }
-
-    .modal-allow {
-      background: #f97316;
-      color: #fff;
-    }
-
-    @media (min-width: 900px) {
-      body {
-        background: #ffffff;
-      }
-
-      .site-header {
-        width: 100%;
-        padding: 18px 28px 10px;
-        background: #ffffff;
-      }
-
-      .brand-mark {
-        width: 44px;
-        height: 44px;
-      }
-
-      .brand-block h1 {
-        font-size: 22px;
-      }
-
-      .brand-block p {
-        font-size: 13px;
-      }
-
-      .app {
-        width: 100%;
-        margin: 0;
-        padding: 12px 28px 40px;
-        border-radius: 0;
-        background: #fff;
-        box-shadow: none;
-      }
-
-      .locate {
-        padding: 10px 16px;
-        font-size: 13px;
-      }
-
-      .filters {
-        max-width: 520px;
-      }
-
-      .categories {
-        flex-wrap: wrap;
-        overflow: visible;
-      }
-
-      .offers {
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-      }
-
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nearby Deals</title>
+<style>
+*{box-sizing:border-box}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+body{margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:#111827;background:#fff}
+.chrome{position:sticky;top:0;z-index:15;background:#fff}
+.sticky-locate{width:min(430px,100%);margin:0 auto;padding:10px 14px 0}
+.locate{border:0;border-radius:999px;padding:8px 12px;background:#f97316;color:#fff;font-weight:700;font-size:12px;cursor:pointer}
+.site-header{display:flex;align-items:center;justify-content:space-between;width:min(430px,100%);margin:0 auto;padding:10px 14px 8px;background:#fff;overflow:hidden;max-height:160px;transition:max-height .2s ease,padding .2s ease,opacity .2s ease}
+.chrome.compact .site-header{max-height:0;padding-top:0;padding-bottom:0;opacity:0;pointer-events:none}
+.brand-link{color:inherit;text-decoration:none}
+.brand-block{display:flex;align-items:flex-start;gap:10px}
+.brand-copy{display:flex;flex-direction:column;align-items:flex-start}
+.brand-mark{width:40px;height:40px;display:grid;place-items:center;border-radius:12px;background:#f97316;color:#fff;font-weight:800}
+.brand-block h1{margin:0;font-size:18px}
+.brand-block p{margin:2px 0 0;color:#6b7280;font-size:12px}
+.header-actions{margin-left:auto}
+.menu-btn{border:1px solid #e5e7eb;background:#fff;width:40px;height:40px;border-radius:12px;font-size:20px;cursor:pointer}
+.site-nav{display:none;flex-direction:column;gap:10px;width:100%;padding:8px 14px 6px}
+.site-nav.open{display:flex}
+.site-nav a{color:#4b5563;font-size:13px;font-weight:700;text-decoration:none}
+.sticky-tools{width:min(430px,100%);margin:0 auto;padding:0 14px 10px;background:#fff}
+.status{display:none}
+.categories{display:flex;gap:8px;overflow-x:auto;padding:8px 0 12px}
+.chip{flex:0 0 auto;border:0;border-radius:16px;padding:8px 10px;background:#f3f4f6;color:#374151;font-weight:700;font-size:12px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px}
+.chip.active{background:#f97316;color:#fff}
+.filters{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.filters select{width:100%;padding:11px 12px;border:1px solid #111827;border-radius:14px;background:#fff;color:#111827;font:inherit;font-size:13px}
+.app{width:min(430px,100%);margin:0 auto;padding:8px 14px 28px}
+.offers{display:grid;gap:12px}
+.offer{position:relative;border:1px solid #d1d5db;border-radius:18px;padding:14px;background:#fff}
+.offer-brand{padding-right:88px;margin-bottom:6px}
+.badge{position:absolute;top:14px;right:14px;padding:3px 8px;border-radius:8px;font-size:11px;font-weight:800}
+.badge.c0{background:#fee2e2;color:#b91c1c}.badge.c1{background:#ffedd5;color:#c2410c}
+.badge.c2{background:#fef3c7;color:#b45309}.badge.c3{background:#ecfccb;color:#4d7c0f}
+.badge.c4{background:#d1fae5;color:#047857}.badge.c5{background:#ccfbf1;color:#0f766e}
+.badge.c6{background:#cffafe;color:#0e7490}.badge.c7{background:#dbeafe;color:#1d4ed8}
+.badge.c8{background:#e0e7ff;color:#4338ca}.badge.c9{background:#ede9fe;color:#6d28d9}
+.badge.c10{background:#fae8ff;color:#a21caf}.badge.c11{background:#fce7f3;color:#be185d}
+.badge.c12{background:#e2e8f0;color:#334155}
+.business{color:#4b5563;font-size:13px;font-weight:600}
+.offer h2{margin:0 0 4px;font-size:20px}
+.offer .desc{margin:0;color:#6b7280;font-size:13px}
+.offer-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid #f3f4f6}
+.area,.distance,.ends{display:inline-flex;align-items:center;min-height:32px;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
+.area{background:#fef9c3;color:#854d0e}.distance{background:#dcfce7;color:#15803d}.ends{background:#ffe4e6;color:#be123c}
+.confirm-note{margin:10px 0 0;color:#6b7280;font-size:12px;font-style:italic}
+.actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px}
+.map-link,.call-link,.share-btn{display:flex;align-items:center;justify-content:center;padding:12px 8px;border:0;border-radius:12px;font-weight:800;font-size:13px;text-decoration:none;cursor:pointer;font-family:inherit}
+.map-link{background:#2563eb;color:#fff}.call-link{background:#16a34a;color:#fff}
+.share-btn{background:#fff7ed;color:#c2410c;border:1px solid #f97316}
+.empty{padding:36px 16px;text-align:center;color:#6b7280}
+.footer{margin-top:18px;text-align:center;color:#9ca3af;font-size:12px}
+.footer a{color:#6b7280;text-decoration:none;font-weight:700}
+@media(min-width:900px){
+.chrome{display:flex;flex-wrap:wrap;align-items:center}
+.site-header{width:auto;flex:1;order:1;max-height:120px;padding:18px 16px 10px 28px;flex-wrap:nowrap}
+.menu-btn{display:none}
+.site-nav,.site-nav.open{display:flex;flex-direction:row;width:auto;gap:14px;padding:0;margin-left:24px}
+.sticky-locate{order:2;width:auto;margin:0 28px 0 auto;padding:18px 0 10px}
+.sticky-tools{order:3;width:100%;padding:0 28px 12px}
+.categories{flex-wrap:wrap;overflow:visible}
+.app{width:100%;padding:8px 28px 40px}
+.offers{grid-template-columns:1fr 1fr;gap:16px}
+.brand-mark{width:44px;height:44px}
+.brand-block h1{font-size:22px}
+}
+</style>
 </head>
 <body>
+<div class="chrome" id="chrome">
+  <div class="sticky-locate"><button class="locate" id="locationButton">Allow location</button></div>
   <header class="site-header">
-    <div class="brand-block">
-      <div class="brand-mark">CM</div>
-      <div class="brand-copy">
-        <h1>Central Marketplace</h1>
-        <p>Local deals around you</p>
+    <a class="brand-link" href="index.html">
+      <div class="brand-block">
+        <div class="brand-mark">CM</div>
+        <div class="brand-copy">
+          <h1>Central Marketplace</h1>
+          <p>Local deals around you</p>
+        </div>
       </div>
-    </div>
-    <button class="locate" id="locationButton">Allow location</button>
+    </a>
+    <nav class="site-nav" id="siteNav">
+      <a href="how-it-works.html">How it works</a>
+      <a href="list-your-business.html">List your business</a>
+      <a href="we-are-hiring.html">We're hiring</a>
+    </nav>
+    <div class="header-actions"><button class="menu-btn" id="menuButton" type="button" aria-label="Menu">☰</button></div>
   </header>
-  <main class="app">
-    <div class="topbar">
-      <p id="headline">Exclusive discounts near you</p>
-    </div>
-    <div id="status" class="status">Allow location access to find nearby deals.</div>
-
+  <div class="sticky-tools">
     <div class="categories" id="categories"></div>
-
     <div class="filters">
       <label class="sr-only" for="locationFilter">Location</label>
-      <select id="locationFilter">
-        <option value="">All locations</option>
-      </select>
+      <select id="locationFilter"><option value="">All locations</option></select>
       <label class="sr-only" for="distanceFilter">Distance</label>
       <select id="distanceFilter">
         <option value="">All distances</option>
@@ -499,396 +106,19 @@
         <option value="20">All distances (&lt; 20 km)</option>
       </select>
     </div>
-
-    <section id="offers" class="offers"></section>
-    <div class="footer">© Central Marketplace</div>
-  </main>
-
-  <div class="modal" id="locationModal" role="dialog" aria-modal="true" aria-labelledby="locationModalTitle">
-    <div class="modal-card">
-      <h2 id="locationModalTitle">Use your location?</h2>
-      <p>Allow location to sort deals by distance and open driving directions. You can cancel and browse without it.</p>
-      <div class="modal-actions">
-        <button type="button" class="modal-cancel" id="locationCancel">Cancel</button>
-        <button type="button" class="modal-allow" id="locationAllow">Allow</button>
-      </div>
-    </div>
   </div>
-
-  <script>
-    let allOffers = [];
-    let userLocation = null;
-    let userAreaLabel = "";
-    let selectedCategory = "";
-
-    const statusEl = document.getElementById("status");
-    const offersEl = document.getElementById("offers");
-    const locationButton = document.getElementById("locationButton");
-    const locationFilter = document.getElementById("locationFilter");
-    const distanceFilter = document.getElementById("distanceFilter");
-    const categoriesEl = document.getElementById("categories");
-    const headlineEl = document.getElementById("headline");
-
-    function displayedKm(km) {
-      return Math.round(km);
-    }
-
-    function offerArea(offer) {
-      return String(offer.location || offer.area || offer.landmark || "").trim();
-    }
-
-    function offerCategory(offer) {
-      return String(offer.category || offer.type || "").trim();
-    }
-
-    function fillLocationFilter() {
-      const current = locationFilter.value;
-      const areas = [...new Set(allOffers.map(offerArea).filter(Boolean))]
-        .sort((a, b) => a.localeCompare(b));
-
-      locationFilter.innerHTML =
-        '<option value="">All locations</option>' +
-        areas.map(area =>
-          `<option value="${escapeAttribute(area)}">${escapeHtml(area)}</option>`
-        ).join("");
-
-      if (areas.includes(current)) locationFilter.value = current;
-    }
-
-    function categoryIcon(name) {
-      const icons = {
-        "All Deals": "✦",
-        "Dining & Cafes": "🍽",
-        "Salon & Spa": "✂",
-        "Grocery": "🛒",
-        "Fashion": "👗",
-        "Electronics": "📱",
-        "Fitness": "💪",
-        "Pharmacy": "💊",
-        "Entertainment": "🎬",
-        "Auto Care": "🚗",
-        "Home & Living": "🏠"
-      };
-      return icons[name] || "●";
-    }
-
-    function fillCategories() {
-      const cats = [...new Set(allOffers.map(offerCategory).filter(Boolean))];
-      const items = ["All Deals"].concat(cats);
-
-      categoriesEl.innerHTML = items.map((name, index) => {
-        const value = index === 0 ? "" : name;
-        const active = selectedCategory === value ? " active" : "";
-        return `<button type="button" class="chip${active}" data-category="${escapeAttribute(value)}"><span class="chip-icon">${categoryIcon(name)}</span><span>${escapeHtml(name)}</span></button>`;
-      }).join("");
-    }
-
-    async function loadOffers() {
-      try {
-        const response = await fetch("./offers.json", { cache: "no-store" });
-        if (!response.ok) throw new Error("Could not load offers.json");
-        allOffers = await response.json();
-        fillLocationFilter();
-        fillCategories();
-        renderOffers();
-      } catch (error) {
-        statusEl.textContent = "Could not load offers. Please check offers.json.";
-        fillCategories();
-        console.error(error);
-      }
-    }
-
-    function distanceKm(lat1, lon1, lat2, lon2) {
-      const R = 6371;
-      const dLat = (lat2 - lat1) * Math.PI / 180;
-      const dLon = (lon2 - lon1) * Math.PI / 180;
-      const a =
-        Math.sin(dLat / 2) ** 2 +
-        Math.cos(lat1 * Math.PI / 180) *
-        Math.cos(lat2 * Math.PI / 180) *
-        Math.sin(dLon / 2) ** 2;
-      return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    }
-
-    function directionsUrl(offer) {
-      const origin = userLocation.latitude + "," + userLocation.longitude;
-      const destination = Number(offer.latitude) + "," + Number(offer.longitude);
-      return "https://www.google.com/maps/dir/?api=1&origin=" +
-        encodeURIComponent(origin) +
-        "&destination=" + encodeURIComponent(destination) +
-        "&travelmode=driving";
-    }
-
-    function distanceLabel(km) {
-      return displayedKm(km) + "+ km away";
-    }
-
-    function renderOffers() {
-      const selectedArea = locationFilter.value;
-      const maxDisplayedKm = Number(distanceFilter.value);
-
-      let nearby = allOffers.filter(offer => {
-        const areaOk = !selectedArea || offerArea(offer) === selectedArea;
-        const catOk = !selectedCategory || offerCategory(offer) === selectedCategory;
-        return areaOk && catOk;
-      });
-
-      if (userLocation) {
-        nearby = nearby
-          .map(offer => ({
-            ...offer,
-            distance: distanceKm(
-              userLocation.latitude,
-              userLocation.longitude,
-              Number(offer.latitude),
-              Number(offer.longitude)
-            )
-          }))
-          .sort((a, b) => a.distance - b.distance);
-
-        if (maxDisplayedKm) {
-          nearby = nearby.filter(offer => displayedKm(offer.distance) <= maxDisplayedKm);
-        }
-
-        headlineEl.textContent = "Exclusive discounts verified near you";
-      } else if (maxDisplayedKm) {
-        statusEl.textContent = "Allow location access to filter by distance.";
-      }
-
-      if (!nearby.length) {
-        offersEl.innerHTML = '<div class="empty">No offers found.</div>';
-        return;
-      }
-
-      offersEl.innerHTML = nearby.map(offer => {
-        const image = offer.image || offer.imageUrl || "";
-        const badge = offer.badge || offer.dealType || "";
-        const business = offer.business || offer.store || offer.merchant || "";
-        const rating = offer.rating ? String(offer.rating) : "";
-        const reviews = offer.reviews ? String(offer.reviews) : "";
-        const ends = offer.validity || offer.ends || offer.expiry || "";
-        const badgeTone = Math.abs(String(offer.id || badge || offer.title).split("").reduce((sum, ch) => sum + ch.charCodeAt(0), 0)) % 13;
-        const badgeClass = "badge c" + badgeTone;
-
-        return `
-        <article class="offer">
-          <div class="offer-top${image ? "" : " no-image"}">
-            <div>
-              <div class="offer-brand">
-                ${badge ? `<span class="${badgeClass}">${escapeHtml(badge)}</span>` : ""}
-                ${business ? `<span class="business">${escapeHtml(business)}</span>` : ""}
-              </div>
-              <h2>${escapeHtml(offer.title)}</h2>
-              <p class="desc">${escapeHtml(offer.description || "")}</p>
-            </div>
-            ${image ? `<img class="thumb" src="${escapeAttribute(image)}" alt="">` : ""}
-          </div>
-          <div class="offer-meta">
-            <span class="area">${offerArea(offer) ? "↗ " + escapeHtml(offerArea(offer)) : "—"}</span>
-            <span class="distance">${userLocation ? distanceLabel(offer.distance) : "km"}</span>
-            <span class="ends">${ends ? escapeHtml(ends) : "—"}</span>
-          </div>
-          <p class="confirm-note">*call and confirm the deal before visit</p>
-          <div class="actions">
-            ${offer.phone ? `<a class="call-link" href="tel:${escapeAttribute(String(offer.phone).replaceAll(" ", ""))}">Call</a>` : `<span></span>`}
-            <a class="map-link"
-               href="${escapeAttribute(userLocation ? directionsUrl(offer) : (offer.mapUrl || "#"))}"
-               target="_blank"
-               rel="noopener noreferrer">
-              Maps
-            </a>
-            <button type="button" class="share-btn"
-              data-title="${escapeAttribute(offer.title || "Deal")}"
-              data-business="${escapeAttribute(business)}"
-              data-description="${escapeAttribute(offer.description || "")}"
-              data-validity="${escapeAttribute(ends)}"
-              data-location="${escapeAttribute(offerArea(offer))}"
-              data-phone="${escapeAttribute(offer.phone || "")}"
-              data-map="${escapeAttribute(userLocation ? directionsUrl(offer) : (offer.mapUrl || ""))}">
-              Share
-            </button>
-          </div>
-        </article>`;
-      }).join("");
-
-      if (userLocation) {
-        statusEl.textContent = userAreaLabel
-          || (userLocation.latitude.toFixed(5) + ", " + userLocation.longitude.toFixed(5));
-      }
-    }
-
-    function setLocationButton(label) {
-      locationButton.textContent = label || "Allow location";
-      locationButton.title = label || "Allow location";
-    }
-
-    function formatUserArea(label) {
-      return label || "";
-    }
-
-    function formatAddress(address) {
-      if (!address) return "";
-      return (
-        address.suburb ||
-        address.city_district ||
-        address.town ||
-        address.city ||
-        address.village ||
-        address.county ||
-        address.state_district ||
-        ""
-      );
-    }
-
-    async function lookupUserArea(latitude, longitude) {
-      try {
-        const osmUrl =
-          "https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=12&addressdetails=1" +
-          "&lat=" + encodeURIComponent(latitude) +
-          "&lon=" + encodeURIComponent(longitude);
-        const osmResponse = await fetch(osmUrl, { headers: { Accept: "application/json" } });
-        if (!osmResponse.ok) throw new Error("OpenStreetMap lookup failed");
-        const data = await osmResponse.json();
-        userAreaLabel = formatUserArea(formatAddress(data.address));
-      } catch (error) {
-        try {
-          const backupUrl =
-            "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=" +
-            encodeURIComponent(latitude) +
-            "&longitude=" + encodeURIComponent(longitude) +
-            "&localityLanguage=en";
-          const backup = await (await fetch(backupUrl)).json();
-          userAreaLabel = formatUserArea(backup.city || backup.principalSubdivision || "");
-        } catch (backupError) {
-          userAreaLabel = "";
-          console.error(error, backupError);
-        }
-      }
-      if (userAreaLabel) {
-        statusEl.textContent = userAreaLabel;
-        setLocationButton(userAreaLabel);
-      } else {
-        setLocationButton("Allow location");
-      }
-    }
-
-    function detectLocation() {
-      if (!navigator.geolocation) {
-        setLocationButton("Allow location");
-        statusEl.textContent = "Geolocation is not supported by this browser.";
-        return;
-      }
-      setLocationButton("Locating...");
-      statusEl.textContent = "Detecting your location...";
-      navigator.geolocation.getCurrentPosition(
-        position => {
-          userLocation = {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
-          };
-          statusEl.textContent = "Finding your area...";
-          renderOffers();
-          lookupUserArea(userLocation.latitude, userLocation.longitude);
-        },
-        error => {
-          setLocationButton("Allow location");
-          const messages = {
-            1: "Location permission was denied. Please allow location access and try again.",
-            2: "Your location could not be determined.",
-            3: "Location detection timed out. Please try again."
-          };
-          statusEl.textContent = messages[error.code] || "Unable to detect your location.";
-        },
-        { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 }
-      );
-    }
-
-    function escapeHtml(value) {
-      return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-    }
-
-    function escapeAttribute(value) {
-      return escapeHtml(value);
-    }
-
-    const locationModal = document.getElementById("locationModal");
-    const locationAllow = document.getElementById("locationAllow");
-    const locationCancel = document.getElementById("locationCancel");
-
-    function closeLocationModal() {
-      locationModal.classList.remove("open");
-    }
-
-    locationAllow.addEventListener("click", () => {
-      closeLocationModal();
-      detectLocation();
-    });
-
-    locationCancel.addEventListener("click", () => {
-      closeLocationModal();
-      statusEl.textContent = "Location skipped. Tap Allow location anytime.";
-    });
-
-    offersEl.addEventListener("click", async event => {
-      const button = event.target.closest(".share-btn");
-      if (!button) return;
-      const title = button.getAttribute("data-title") || "Deal";
-      const business = button.getAttribute("data-business") || "";
-      const description = button.getAttribute("data-description") || "";
-      const validity = button.getAttribute("data-validity") || "";
-      const location = button.getAttribute("data-location") || "";
-      const phone = button.getAttribute("data-phone") || "";
-      const map = button.getAttribute("data-map") || "";
-      const site = "https://centralmarketplace.in";
-      const shareText = [
-        business ? "*" + business + "*" : "",
-        "*" + title + "*",
-        description,
-        validity ? "Validity: " + validity : "",
-        "",
-        location ? "Location: " + location : "",
-        phone ? "Call: " + phone : "",
-        "_call and confirm the deal before visit_",
-        "",
-        "Map: " + (map || ""),
-        "",
-        "For more deals visit: centralmarketplace.in"
-      ].join("\n");
-      const shareData = {
-        title: title,
-        text: shareText
-      };
-      try {
-        if (navigator.share) {
-          await navigator.share(shareData);
-        } else if (navigator.clipboard) {
-          await navigator.clipboard.writeText((shareData.text + " " + shareData.url).trim());
-          statusEl.textContent = "Deal link copied.";
-        }
-      } catch (error) {
-        if (error && error.name === "AbortError") return;
-        console.error(error);
-      }
-    });
-
-    locationButton.addEventListener("click", detectLocation);
-    locationFilter.addEventListener("change", renderOffers);
-    distanceFilter.addEventListener("change", renderOffers);
-    categoriesEl.addEventListener("click", event => {
-      const button = event.target.closest("[data-category]");
-      if (!button) return;
-      selectedCategory = button.getAttribute("data-category") || "";
-      fillCategories();
-      renderOffers();
-    });
-
-    loadOffers();
-    detectLocation();
-  </script>
+</div>
+<main class="app">
+  <p id="headline" class="sr-only">Exclusive discounts near you</p>
+  <div id="status" class="status">Allow location access to find nearby deals.</div>
+  <section id="offers" class="offers"></section>
+  <div class="footer">
+    <a href="how-it-works.html">How it works</a> ·
+    <a href="list-your-business.html">List your business</a> ·
+    <a href="we-are-hiring.html">We're hiring</a>
+    <div>© Central Marketplace</div>
+  </div>
+</main>
+<script src="app.js"></script>
 </body>
 </html>
