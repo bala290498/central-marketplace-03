@@ -36,8 +36,14 @@
 
     .brand-block {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 10px;
+    }
+
+    .brand-copy {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
     }
 
     .brand-mark {
@@ -54,12 +60,16 @@
     .brand-block h1 {
       margin: 0;
       font-size: 18px;
+      line-height: 1.15;
+      text-align: left;
     }
 
     .brand-block p {
       margin: 2px 0 0;
       color: #6b7280;
       font-size: 12px;
+      line-height: 1.2;
+      text-align: left;
     }
 
     .app {
@@ -107,15 +117,26 @@
 
     .chip {
       flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      min-width: 76px;
       border: 0;
-      border-radius: 999px;
-      padding: 8px 14px;
+      border-radius: 14px;
+      padding: 8px 10px;
       background: #f3f4f6;
       color: #374151;
       font-weight: 700;
-      font-size: 13px;
+      font-size: 11px;
       cursor: pointer;
       white-space: nowrap;
+    }
+
+    .chip-icon {
+      font-size: 18px;
+      line-height: 1;
     }
 
     .chip.active {
@@ -133,10 +154,10 @@
     .filters select {
       width: 100%;
       padding: 11px 12px;
-      border: 1px solid #f97316;
+      border: 1px solid #111827;
       border-radius: 14px;
       background: #fff;
-      color: #9a3412;
+      color: #111827;
       font: inherit;
       font-size: 13px;
     }
@@ -388,13 +409,13 @@
 
     @media (min-width: 900px) {
       body {
-        background: #eef2f7;
+        background: #ffffff;
       }
 
       .site-header {
-        width: min(1120px, calc(100% - 48px));
-        padding: 22px 0 8px;
-        background: transparent;
+        width: 100%;
+        padding: 18px 28px 10px;
+        background: #ffffff;
       }
 
       .brand-mark {
@@ -411,12 +432,12 @@
       }
 
       .app {
-        width: min(1120px, calc(100% - 48px));
-        margin: 0 auto 40px;
-        padding: 20px 24px 32px;
-        border-radius: 20px;
+        width: 100%;
+        margin: 0;
+        padding: 12px 28px 40px;
+        border-radius: 0;
         background: #fff;
-        box-shadow: 0 8px 30px rgba(17, 24, 39, 0.06);
+        box-shadow: none;
       }
 
       .locate {
@@ -445,7 +466,7 @@
   <header class="site-header">
     <div class="brand-block">
       <div class="brand-mark">CM</div>
-      <div>
+      <div class="brand-copy">
         <h1>Central Marketplace</h1>
         <p>Local deals around you</p>
       </div>
@@ -530,6 +551,23 @@
       if (areas.includes(current)) locationFilter.value = current;
     }
 
+    function categoryIcon(name) {
+      const icons = {
+        "All Deals": "✦",
+        "Dining & Cafes": "🍽",
+        "Salon & Spa": "✂",
+        "Grocery": "🛒",
+        "Fashion": "👗",
+        "Electronics": "📱",
+        "Fitness": "💪",
+        "Pharmacy": "💊",
+        "Entertainment": "🎬",
+        "Auto Care": "🚗",
+        "Home & Living": "🏠"
+      };
+      return icons[name] || "●";
+    }
+
     function fillCategories() {
       const cats = [...new Set(allOffers.map(offerCategory).filter(Boolean))];
       const items = ["All Deals"].concat(cats);
@@ -537,7 +575,7 @@
       categoriesEl.innerHTML = items.map((name, index) => {
         const value = index === 0 ? "" : name;
         const active = selectedCategory === value ? " active" : "";
-        return `<button type="button" class="chip${active}" data-category="${escapeAttribute(value)}">${escapeHtml(name)}</button>`;
+        return `<button type="button" class="chip${active}" data-category="${escapeAttribute(value)}"><span class="chip-icon">${categoryIcon(name)}</span><span>${escapeHtml(name)}</span></button>`;
       }).join("");
     }
 
@@ -802,7 +840,7 @@
         "",
         location ? "Location: " + location : "",
         phone ? "Call: " + phone : "",
-        "Call and confirm the deal before visit",
+        "_call and confirm the deal before visit_",
         "",
         "Map: " + (map || ""),
         "",
@@ -810,8 +848,7 @@
       ].join("\n");
       const shareData = {
         title: title,
-        text: shareText,
-        url: site
+        text: shareText
       };
       try {
         if (navigator.share) {
