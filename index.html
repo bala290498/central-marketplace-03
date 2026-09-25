@@ -7,7 +7,7 @@
 <style>
 *{box-sizing:border-box}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
-body{margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:#111827;background:#fff}
+body{margin:0;overflow-anchor:none;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:#111827;background:#fff}
 .chrome{position:sticky;top:0;z-index:15;background:#fff}
 .sticky-locate{width:min(430px,100%);margin:0 auto;padding:10px 14px 0}
 .locate{border:0;border-radius:999px;padding:8px 12px;background:#f97316;color:#fff;font-weight:700;font-size:12px;cursor:pointer}.locate.detected{background:transparent;color:#111827;border-radius:0;padding:0;font-size:14px;font-weight:700}
@@ -61,7 +61,7 @@ body{margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:#111
 .footer{margin-top:18px;text-align:center;color:#9ca3af;font-size:12px}
 .footer a{color:#6b7280;text-decoration:none;font-weight:700}
 @media(min-width:900px){
-.chrome{display:flex;flex-wrap:wrap;align-items:center}
+.chrome{display:flex;flex-wrap:wrap;align-items:center;position:relative;overflow-anchor:none}.sticky-tools{position:sticky;top:0;z-index:16}
 .site-header{width:auto;flex:1;order:1;max-height:120px;padding:18px 16px 10px 28px;flex-wrap:nowrap}
 .menu-btn{display:none}
 .nav-backdrop,.nav-close{display:none!important}.site-nav,.site-nav.open{position:static;transform:none;width:auto;height:auto;order:1;justify-content:flex-start;align-items:center;display:flex;flex-direction:row;gap:14px;padding:0;margin:0 16px 0 0;background:transparent}.site-nav a{font-size:13px;font-weight:700}

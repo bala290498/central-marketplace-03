@@ -233,17 +233,24 @@ menuButton.addEventListener("click", () => setMenuOpen(!siteNav.classList.contai
 if (navClose) navClose.addEventListener("click", () => setMenuOpen(false));
 if (navBackdrop) navBackdrop.addEventListener("click", () => setMenuOpen(false));
 let lastScrollY = window.scrollY || 0;
+let upTravel = 0;
 window.addEventListener("scroll", () => {
-  const y = window.scrollY || 0;
+  const y = Math.max(0, window.scrollY || 0);
   const delta = y - lastScrollY;
-  if (Math.abs(delta) < 12) return;
-  if (delta > 0 && y > 80) {
+  lastScrollY = y;
+  if (y < 40) {
+    chromeBar.classList.remove("compact");
+    upTravel = 0;
+    return;
+  }
+  if (delta > 8) {
+    upTravel = 0;
     chromeBar.classList.add("compact");
     setMenuOpen(false);
-  } else if (delta < 0) {
-    chromeBar.classList.remove("compact");
+  } else if (delta < -8) {
+    upTravel += -delta;
+    if (upTravel > 70) chromeBar.classList.remove("compact");
   }
-  lastScrollY = y;
 }, { passive: true });
 
 locationButton.addEventListener("click", detectLocation);
