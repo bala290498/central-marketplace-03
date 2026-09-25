@@ -25,7 +25,41 @@
     }
 
     .site-header {
-      display: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: min(430px, 100%);
+      margin: 0 auto;
+      padding: 14px 14px 8px;
+      background: #ffffff;
+    }
+
+    .brand-block {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: #f97316;
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .brand-block h1 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .brand-block p {
+      margin: 2px 0 0;
+      color: #6b7280;
+      font-size: 12px;
     }
 
     .app {
@@ -36,12 +70,9 @@
       background: #ffffff;
     }
 
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 10px;
+    .topbar,
+    .status {
+      display: none;
     }
 
     .topbar p {
@@ -361,39 +392,21 @@
       }
 
       .site-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
         width: min(1120px, calc(100% - 48px));
-        margin: 0 auto;
         padding: 22px 0 8px;
-      }
-
-      .brand-block {
-        display: flex;
-        align-items: center;
-        gap: 12px;
+        background: transparent;
       }
 
       .brand-mark {
         width: 44px;
         height: 44px;
-        display: grid;
-        place-items: center;
-        border-radius: 12px;
-        background: #f97316;
-        color: #fff;
-        font-weight: 800;
       }
 
       .brand-block h1 {
-        margin: 0;
         font-size: 22px;
       }
 
       .brand-block p {
-        margin: 2px 0 0;
-        color: #6b7280;
         font-size: 13px;
       }
 
@@ -404,12 +417,6 @@
         border-radius: 20px;
         background: #fff;
         box-shadow: 0 8px 30px rgba(17, 24, 39, 0.06);
-      }
-
-      .topbar p {
-        font-size: 16px;
-        color: #111827;
-        font-weight: 700;
       }
 
       .locate {
@@ -443,11 +450,11 @@
         <p>Local deals around you</p>
       </div>
     </div>
+    <button class="locate" id="locationButton">Allow location</button>
   </header>
   <main class="app">
     <div class="topbar">
       <p id="headline">Exclusive discounts near you</p>
-      <button class="locate" id="locationButton">Allow location</button>
     </div>
     <div id="status" class="status">Allow location access to find nearby deals.</div>
 
