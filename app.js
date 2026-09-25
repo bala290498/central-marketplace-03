@@ -131,7 +131,9 @@ function renderOffers() {
 }
 
 function setLocationButton(label) {
-  locationButton.textContent = label || "Allow location";
+  const hasArea = !!(label && label !== "Allow location" && label !== "Locating...");
+  locationButton.classList.toggle("detected", hasArea);
+  locationButton.textContent = hasArea ? ("📍 " + label) : (label || "Allow location");
   locationButton.title = label || "Allow location";
 }
 

@@ -10,7 +10,7 @@
 body{margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:#111827;background:#fff}
 .chrome{position:sticky;top:0;z-index:15;background:#fff}
 .sticky-locate{width:min(430px,100%);margin:0 auto;padding:10px 14px 0}
-.locate{border:0;border-radius:999px;padding:8px 12px;background:#f97316;color:#fff;font-weight:700;font-size:12px;cursor:pointer}
+.locate{border:0;border-radius:999px;padding:8px 12px;background:#f97316;color:#fff;font-weight:700;font-size:12px;cursor:pointer}.locate.detected{background:transparent;color:#111827;border-radius:0;padding:0;font-size:14px;font-weight:700}
 .site-header{display:flex;align-items:center;justify-content:space-between;width:min(430px,100%);margin:0 auto;padding:10px 14px 8px;background:#fff;overflow:hidden;max-height:160px;transition:max-height .2s ease,padding .2s ease,opacity .2s ease}
 .chrome.compact .site-header{max-height:0;padding-top:0;padding-bottom:0;opacity:0;pointer-events:none}
 .brand-link{color:inherit;text-decoration:none}
@@ -23,7 +23,7 @@ body{margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:#111
 .menu-btn{border:0;background:transparent;padding:0;width:auto;height:auto;font-size:28px;line-height:1;cursor:pointer;color:#111827}
 .nav-backdrop{display:none;position:fixed;inset:0;background:rgba(17,24,39,.4);z-index:90}
 .nav-backdrop.open{display:block}
-.site-nav{position:fixed;top:0;left:0;width:min(300px,80vw);height:100dvh;background:#fff;z-index:91;display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;gap:20px;padding:64px 22px 24px;transform:translateX(-100%);transition:transform .25s ease}
+.site-nav{position:fixed;top:0;right:0;left:auto;width:min(300px,80vw);height:100dvh;background:#fff;z-index:91;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:22px;padding:24px;transform:translateX(100%);transition:transform .25s ease;text-align:center}
 .site-nav.open{transform:translateX(0)}
 .site-nav a{color:#111827;font-size:18px;font-weight:800;text-decoration:none}
 .nav-close{position:absolute;top:14px;right:14px;border:0;background:transparent;font-size:34px;line-height:1;cursor:pointer;color:#111827;z-index:92}
