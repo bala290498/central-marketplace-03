@@ -197,6 +197,13 @@
       line-height: 1.45;
     }
 
+    .confirm-note {
+      margin: 10px 0 0;
+      color: #6b7280;
+      font-size: 12px;
+      font-style: italic;
+    }
+
     .thumb {
       width: 72px;
       height: 72px;
@@ -632,6 +639,7 @@
             <span class="distance">${userLocation ? distanceLabel(offer.distance) : "km"}</span>
             <span class="ends">${ends ? escapeHtml(ends) : "—"}</span>
           </div>
+          <p class="confirm-note">Call and confirm the deal before visit</p>
           <div class="actions">
             ${offer.phone ? `<a class="call-link" href="tel:${escapeAttribute(String(offer.phone).replaceAll(" ", ""))}">Call</a>` : `<span></span>`}
             <a class="map-link"
@@ -641,9 +649,13 @@
               Maps
             </a>
             <button type="button" class="share-btn"
-              data-title="${escapeAttribute(offer.title || "")}"
-              data-text="${escapeAttribute((offer.title || "") + (offerArea(offer) ? " — " + offerArea(offer) : "") + (ends ? " (" + ends + ")" : ""))}"
-              data-url="${escapeAttribute(offer.mapUrl || "")}">
+              data-title="${escapeAttribute(offer.title || "Deal")}"
+              data-business="${escapeAttribute(business)}"
+              data-description="${escapeAttribute(offer.description || "")}"
+              data-validity="${escapeAttribute(ends)}"
+              data-location="${escapeAttribute(offerArea(offer))}"
+              data-phone="${escapeAttribute(offer.phone || "")}"
+              data-map="${escapeAttribute(userLocation ? directionsUrl(offer) : (offer.mapUrl || ""))}">
               Share
             </button>
           </div>
@@ -767,10 +779,29 @@
     offersEl.addEventListener("click", async event => {
       const button = event.target.closest(".share-btn");
       if (!button) return;
+      const title = button.getAttribute("data-title") || "Deal";
+      const business = button.getAttribute("data-business") || "";
+      const description = button.getAttribute("data-description") || "";
+      const validity = button.getAttribute("data-validity") || "";
+      const location = button.getAttribute("data-location") || "";
+      const phone = button.getAttribute("data-phone") || "";
+      const map = button.getAttribute("data-map") || "";
+      const site = "https://centralmarketplace.in";
+      const details = [
+        business ? "*" + business + "*" : "",
+        "*" + title + "*",
+        description,
+        validity ? "Validity: " + validity : "",
+        location ? "Location: " + location : "",
+        phone ? "Call: " + phone : "",
+        "Map: " + (map || "")
+      ].filter(Boolean).join("\n");
+
+      const shareText = details + "\n\nCall and confirm the deal before visit\n\nFor more deals visit: centralmarketplace.in";
       const shareData = {
-        title: button.getAttribute("data-title") || "Deal",
-        text: button.getAttribute("data-text") || "",
-        url: button.getAttribute("data-url") || window.location.href
+        title: title,
+        text: shareText,
+        url: site
       };
       try {
         if (navigator.share) {
