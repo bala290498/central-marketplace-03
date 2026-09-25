@@ -54,7 +54,7 @@
       border: 0;
       border-radius: 999px;
       padding: 8px 12px;
-      background: #111827;
+      background: #f97316;
       color: #fff;
       font-weight: 700;
       font-size: 12px;
@@ -88,7 +88,7 @@
     }
 
     .chip.active {
-      background: #111827;
+      background: #f97316;
       color: #fff;
     }
 
@@ -102,10 +102,10 @@
     .filters select {
       width: 100%;
       padding: 11px 12px;
-      border: 1px solid #e5e7eb;
+      border: 1px solid #f97316;
       border-radius: 14px;
       background: #fff;
-      color: #111827;
+      color: #9a3412;
       font: inherit;
       font-size: 13px;
     }
@@ -163,6 +163,20 @@
       background: #ffe4e6;
       color: #be123c;
     }
+
+    .badge.c0 { background: #fee2e2; color: #b91c1c; }
+    .badge.c1 { background: #ffedd5; color: #c2410c; }
+    .badge.c2 { background: #fef3c7; color: #b45309; }
+    .badge.c3 { background: #ecfccb; color: #4d7c0f; }
+    .badge.c4 { background: #d1fae5; color: #047857; }
+    .badge.c5 { background: #ccfbf1; color: #0f766e; }
+    .badge.c6 { background: #cffafe; color: #0e7490; }
+    .badge.c7 { background: #dbeafe; color: #1d4ed8; }
+    .badge.c8 { background: #e0e7ff; color: #4338ca; }
+    .badge.c9 { background: #ede9fe; color: #6d28d9; }
+    .badge.c10 { background: #fae8ff; color: #a21caf; }
+    .badge.c11 { background: #fce7f3; color: #be185d; }
+    .badge.c12 { background: #e2e8f0; color: #334155; }
 
     .business {
       color: #4b5563;
@@ -257,8 +271,9 @@
     }
 
     .share-btn {
-      background: #f3f4f6;
-      color: #111827;
+      background: #fff7ed;
+      color: #c2410c;
+      border: 1px solid #f97316;
     }
 
     .empty {
@@ -329,7 +344,7 @@
     }
 
     .modal-allow {
-      background: #111827;
+      background: #f97316;
       color: #fff;
     }
 
@@ -359,7 +374,7 @@
         display: grid;
         place-items: center;
         border-radius: 12px;
-        background: #111827;
+        background: #f97316;
         color: #fff;
         font-weight: 800;
       }
@@ -397,6 +412,11 @@
 
       .filters {
         max-width: 520px;
+      }
+
+      .categories {
+        flex-wrap: wrap;
+        overflow: visible;
       }
 
       .offers {
@@ -591,7 +611,8 @@
         const rating = offer.rating ? String(offer.rating) : "";
         const reviews = offer.reviews ? String(offer.reviews) : "";
         const ends = offer.validity || offer.ends || offer.expiry || "";
-        const badgeClass = /off|%/i.test(badge) ? "badge off" : "badge";
+        const badgeTone = Math.abs(String(offer.id || badge || offer.title).split("").reduce((sum, ch) => sum + ch.charCodeAt(0), 0)) % 13;
+        const badgeClass = "badge c" + badgeTone;
 
         return `
         <article class="offer">
