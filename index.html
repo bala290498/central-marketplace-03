@@ -19,9 +19,13 @@
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       color: #111827;
       background: #f3f4f6;
+    }
+
+    .site-header {
+      display: none;
     }
 
     .app {
@@ -183,9 +187,10 @@
 
     .offer-meta {
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
+      justify-content: space-between;
       gap: 8px;
+      width: 100%;
       margin-top: 12px;
       padding-top: 12px;
       border-top: 1px solid #f3f4f6;
@@ -197,15 +202,19 @@
     .ends {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
+      flex: 0 1 auto;
+      min-height: 32px;
       padding: 6px 10px;
       border-radius: 999px;
       font-size: 12px;
       font-weight: 700;
+      white-space: nowrap;
     }
 
     .area { background: #fef9c3; color: #854d0e; }
     .distance { background: #dcfce7; color: #15803d; }
-    .rating { background: transparent; color: #111827; margin-left: auto; }
+    .rating { background: transparent; color: #111827; }
     .ends { background: #ffe4e6; color: #be123c; }
 
     .actions {
@@ -317,9 +326,90 @@
       background: #111827;
       color: #fff;
     }
+
+    @media (min-width: 900px) {
+      body {
+        background: #eef2f7;
+      }
+
+      .site-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: min(1120px, calc(100% - 48px));
+        margin: 0 auto;
+        padding: 22px 0 8px;
+      }
+
+      .brand-block {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .brand-mark {
+        width: 44px;
+        height: 44px;
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        background: #111827;
+        color: #fff;
+        font-weight: 800;
+      }
+
+      .brand-block h1 {
+        margin: 0;
+        font-size: 22px;
+      }
+
+      .brand-block p {
+        margin: 2px 0 0;
+        color: #6b7280;
+        font-size: 13px;
+      }
+
+      .app {
+        width: min(1120px, calc(100% - 48px));
+        margin: 0 auto 40px;
+        padding: 20px 24px 32px;
+        border-radius: 20px;
+        background: #fff;
+        box-shadow: 0 8px 30px rgba(17, 24, 39, 0.06);
+      }
+
+      .topbar p {
+        font-size: 16px;
+        color: #111827;
+        font-weight: 700;
+      }
+
+      .locate {
+        padding: 10px 16px;
+        font-size: 13px;
+      }
+
+      .filters {
+        max-width: 520px;
+      }
+
+      .offers {
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+    }
   </style>
 </head>
 <body>
+  <header class="site-header">
+    <div class="brand-block">
+      <div class="brand-mark">CM</div>
+      <div>
+        <h1>Central Marketplace</h1>
+        <p>Local deals around you</p>
+      </div>
+    </div>
+  </header>
   <main class="app">
     <div class="topbar">
       <p id="headline">Exclusive discounts near you</p>
@@ -510,10 +600,9 @@
             ${image ? `<img class="thumb" src="${escapeAttribute(image)}" alt="">` : ""}
           </div>
           <div class="offer-meta">
-            ${offerArea(offer) ? `<span class="area">↗ ${escapeHtml(offerArea(offer))}</span>` : ""}
-            ${userLocation ? `<span class="distance">${distanceLabel(offer.distance)}</span>` : ""}
-            ${rating ? `<span class="rating">★ ${escapeHtml(rating)}${reviews ? " (" + escapeHtml(reviews) + ")" : ""}</span>` : ""}
-            ${ends ? `<span class="ends">⏱ ${escapeHtml(ends)}</span>` : ""}
+            <span class="area">${offerArea(offer) ? "↗ " + escapeHtml(offerArea(offer)) : "—"}</span>
+            <span class="distance">${userLocation ? distanceLabel(offer.distance) : "km"}</span>
+            <span class="ends">${ends ? escapeHtml(ends) : "—"}</span>
           </div>
           <div class="actions">
             ${offer.phone ? `<a class="call-link" href="tel:${escapeAttribute(String(offer.phone).replaceAll(" ", ""))}">Call</a>` : `<span></span>`}
