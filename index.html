@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Nearby client offers based on your location">
+  <title>Nearby Deals</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #111827;
+      background: #f3f4f6;
+    }
+
+    .app {
+      width: min(430px, 100%);
+      margin: 0 auto;
+      min-height: 100vh;
+      padding: 14px 14px 28px;
+      background: #ffffff;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .topbar p {
+      margin: 0;
+      color: #6b7280;
+      font-size: 13px;
+    }
+
+    .locate {
+      border: 0;
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: #111827;
+      color: #fff;
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .status {
+      margin: 0 0 12px;
+      color: #6b7280;
+      font-size: 13px;
+    }
+
+    .categories {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+    }
+
+    .chip {
+      flex: 0 0 auto;
+      border: 0;
+      border-radius: 999px;
+      padding: 8px 14px;
+      background: #f3f4f6;
+      color: #374151;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .chip.active {
+      background: #111827;
+      color: #fff;
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .filters select {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      background: #fff;
+      color: #111827;
+      font: inherit;
+      font-size: 13px;
+    }
+
+    .offers {
+      display: grid;
+      gap: 12px;
+    }
+
+    .offer {
+      border: 1px solid #6b7280;
+      border-radius: 18px;
+      padding: 14px;
+      background: #fff;
+      box-shadow: 0 1px 2px rgba(17, 24, 39, 0.04);
+    }
+
+    .offer-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 72px;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .offer-top.no-image {
+      grid-template-columns: 1fr;
+    }
+
+    .offer-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 8px;
+      border-radius: 8px;
+      background: #fef3c7;
+      color: #92400e;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .badge.off {
+      background: #ffe4e6;
+      color: #be123c;
+    }
+
+    .business {
+      color: #4b5563;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .offer h2 {
+      margin: 0 0 4px;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .offer .desc {
+      margin: 0;
+      color: #6b7280;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .thumb {
+      width: 72px;
+      height: 72px;
+      object-fit: cover;
+      border-radius: 12px;
+      background: #f3f4f6;
+    }
+
+    .offer-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #f3f4f6;
+    }
+
+    .area,
+    .distance,
+    .rating,
+    .ends {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .area { background: #fef9c3; color: #854d0e; }
+    .distance { background: #dcfce7; color: #15803d; }
+    .rating { background: transparent; color: #111827; margin-left: auto; }
+    .ends { background: #ffe4e6; color: #be123c; }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .map-link,
+    .call-link,
+    .share-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 8px;
+      border: 0;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 13px;
+      text-decoration: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .map-link {
+      background: #2563eb;
+      color: #fff;
+    }
+
+    .call-link {
+      background: #16a34a;
+      color: #fff;
+    }
+
+    .share-btn {
+      background: #f3f4f6;
+      color: #111827;
+    }
+
+    .empty {
+      padding: 36px 16px;
+      text-align: center;
+      color: #6b7280;
+      border: 1px dashed #e5e7eb;
+      border-radius: 16px;
+    }
+
+    .footer {
+      margin-top: 18px;
+      text-align: center;
+      color: #9ca3af;
+      font-size: 12px;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background: rgba(17, 24, 39, 0.45);
+      z-index: 20;
+    }
+
+    .modal.open { display: flex; }
+
+    .modal-card {
+      width: min(360px, 100%);
+      padding: 20px 18px 16px;
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-card h2 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .modal-card p {
+      margin: 0 0 16px;
+      color: #6b7280;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .modal-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .modal-actions button {
+      border: 0;
+      border-radius: 12px;
+      padding: 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .modal-cancel {
+      background: #f3f4f6;
+      color: #111827;
+    }
+
+    .modal-allow {
+      background: #111827;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <div class="topbar">
+      <p id="headline">Exclusive discounts near you</p>
+      <button class="locate" id="locationButton">Allow location</button>
+    </div>
+    <div id="status" class="status">Allow location access to find nearby deals.</div>
+
+    <div class="categories" id="categories"></div>
+
+    <div class="filters">
+      <label class="sr-only" for="locationFilter">Location</label>
+      <select id="locationFilter">
+        <option value="">All locations</option>
+      </select>
+      <label class="sr-only" for="distanceFilter">Distance</label>
+      <select id="distanceFilter">
+        <option value="">All distances</option>
+        <option value="5">All distances (&lt; 5 km)</option>
+        <option value="10">All distances (&lt; 10 km)</option>
+        <option value="15">All distances (&lt; 15 km)</option>
+        <option value="20">All distances (&lt; 20 km)</option>
+      </select>
+    </div>
+
+    <section id="offers" class="offers"></section>
+    <div class="footer">© Central Marketplace</div>
+  </main>
+
+  <div class="modal open" id="locationModal" role="dialog" aria-modal="true" aria-labelledby="locationModalTitle">
+    <div class="modal-card">
+      <h2 id="locationModalTitle">Use your location?</h2>
+      <p>Allow location to sort deals by distance and open driving directions. You can cancel and browse without it.</p>
+      <div class="modal-actions">
+        <button type="button" class="modal-cancel" id="locationCancel">Cancel</button>
+        <button type="button" class="modal-allow" id="locationAllow">Allow</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let allOffers = [];
+    let userLocation = null;
+    let userAreaLabel = "";
+    let selectedCategory = "";
+
+    const statusEl = document.getElementById("status");
+    const offersEl = document.getElementById("offers");
+    const locationButton = document.getElementById("locationButton");
+    const locationFilter = document.getElementById("locationFilter");
+    const distanceFilter = document.getElementById("distanceFilter");
+    const categoriesEl = document.getElementById("categories");
+    const headlineEl = document.getElementById("headline");
+
+    function displayedKm(km) {
+      return Math.round(km);
+    }
+
+    function offerArea(offer) {
+      return String(offer.location || offer.area || offer.landmark || "").trim();
+    }
+
+    function offerCategory(offer) {
+      return String(offer.category || offer.type || "").trim();
+    }
+
+    function fillLocationFilter() {
+      const current = locationFilter.value;
+      const areas = [...new Set(allOffers.map(offerArea).filter(Boolean))]
+        .sort((a, b) => a.localeCompare(b));
+
+      locationFilter.innerHTML =
+        '<option value="">All locations</option>' +
+        areas.map(area =>
+          `<option value="${escapeAttribute(area)}">${escapeHtml(area)}</option>`
+        ).join("");
+
+      if (areas.includes(current)) locationFilter.value = current;
+    }
+
+    function fillCategories() {
+      const cats = [...new Set(allOffers.map(offerCategory).filter(Boolean))];
+      const items = ["All Deals"].concat(cats);
+
+      categoriesEl.innerHTML = items.map((name, index) => {
+        const value = index === 0 ? "" : name;
+        const active = selectedCategory === value ? " active" : "";
+        return `<button type="button" class="chip${active}" data-category="${escapeAttribute(value)}">${escapeHtml(name)}</button>`;
+      }).join("");
+    }
+
+    async function loadOffers() {
+      try {
+        const response = await fetch("./offers.json", { cache: "no-store" });
+        if (!response.ok) throw new Error("Could not load offers.json");
+        allOffers = await response.json();
+        fillLocationFilter();
+        fillCategories();
+        renderOffers();
+      } catch (error) {
+        statusEl.textContent = "Could not load offers. Please check offers.json.";
+        fillCategories();
+        console.error(error);
+      }
+    }
+
+    function distanceKm(lat1, lon1, lat2, lon2) {
+      const R = 6371;
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+      const a =
+        Math.sin(dLat / 2) ** 2 +
+        Math.cos(lat1 * Math.PI / 180) *
+        Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) ** 2;
+      return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    }
+
+    function directionsUrl(offer) {
+      const origin = userLocation.latitude + "," + userLocation.longitude;
+      const destination = Number(offer.latitude) + "," + Number(offer.longitude);
+      return "https://www.google.com/maps/dir/?api=1&origin=" +
+        encodeURIComponent(origin) +
+        "&destination=" + encodeURIComponent(destination) +
+        "&travelmode=driving";
+    }
+
+    function distanceLabel(km) {
+      return displayedKm(km) + "+ km away";
+    }
+
+    function renderOffers() {
+      const selectedArea = locationFilter.value;
+      const maxDisplayedKm = Number(distanceFilter.value);
+
+      let nearby = allOffers.filter(offer => {
+        const areaOk = !selectedArea || offerArea(offer) === selectedArea;
+        const catOk = !selectedCategory || offerCategory(offer) === selectedCategory;
+        return areaOk && catOk;
+      });
+
+      if (userLocation) {
+        nearby = nearby
+          .map(offer => ({
+            ...offer,
+            distance: distanceKm(
+              userLocation.latitude,
+              userLocation.longitude,
+              Number(offer.latitude),
+              Number(offer.longitude)
+            )
+          }))
+          .sort((a, b) => a.distance - b.distance);
+
+        if (maxDisplayedKm) {
+          nearby = nearby.filter(offer => displayedKm(offer.distance) <= maxDisplayedKm);
+        }
+
+        headlineEl.textContent = "Exclusive discounts verified near you";
+      } else if (maxDisplayedKm) {
+        statusEl.textContent = "Allow location access to filter by distance.";
+      }
+
+      if (!nearby.length) {
+        offersEl.innerHTML = '<div class="empty">No offers found.</div>';
+        return;
+      }
+
+      offersEl.innerHTML = nearby.map(offer => {
+        const image = offer.image || offer.imageUrl || "";
+        const badge = offer.badge || offer.dealType || "";
+        const business = offer.business || offer.store || offer.merchant || "";
+        const rating = offer.rating ? String(offer.rating) : "";
+        const reviews = offer.reviews ? String(offer.reviews) : "";
+        const ends = offer.validity || offer.ends || offer.expiry || "";
+        const badgeClass = /off|%/i.test(badge) ? "badge off" : "badge";
+
+        return `
+        <article class="offer">
+          <div class="offer-top${image ? "" : " no-image"}">
+            <div>
+              <div class="offer-brand">
+                ${badge ? `<span class="${badgeClass}">${escapeHtml(badge)}</span>` : ""}
+                ${business ? `<span class="business">${escapeHtml(business)}</span>` : ""}
+              </div>
+              <h2>${escapeHtml(offer.title)}</h2>
+              <p class="desc">${escapeHtml(offer.description || "")}</p>
+            </div>
+            ${image ? `<img class="thumb" src="${escapeAttribute(image)}" alt="">` : ""}
+          </div>
+          <div class="offer-meta">
+            ${offerArea(offer) ? `<span class="area">↗ ${escapeHtml(offerArea(offer))}</span>` : ""}
+            ${userLocation ? `<span class="distance">${distanceLabel(offer.distance)}</span>` : ""}
+            ${rating ? `<span class="rating">★ ${escapeHtml(rating)}${reviews ? " (" + escapeHtml(reviews) + ")" : ""}</span>` : ""}
+            ${ends ? `<span class="ends">⏱ ${escapeHtml(ends)}</span>` : ""}
+          </div>
+          <div class="actions">
+            ${offer.phone ? `<a class="call-link" href="tel:${escapeAttribute(String(offer.phone).replaceAll(" ", ""))}">Call</a>` : `<span></span>`}
+            <a class="map-link"
+               href="${escapeAttribute(userLocation ? directionsUrl(offer) : (offer.mapUrl || "#"))}"
+               target="_blank"
+               rel="noopener noreferrer">
+              Maps
+            </a>
+            <button type="button" class="share-btn"
+              data-title="${escapeAttribute(offer.title || "")}"
+              data-text="${escapeAttribute((offer.title || "") + (offerArea(offer) ? " — " + offerArea(offer) : "") + (ends ? " (" + ends + ")" : ""))}"
+              data-url="${escapeAttribute(offer.mapUrl || "")}">
+              Share
+            </button>
+          </div>
+        </article>`;
+      }).join("");
+
+      if (userLocation) {
+        statusEl.textContent = userAreaLabel
+          || (userLocation.latitude.toFixed(5) + ", " + userLocation.longitude.toFixed(5));
+      }
+    }
+
+    function formatUserArea(label) {
+      if (!label) return "";
+      return label.startsWith("You are near ") ? label : "You are near " + label;
+    }
+
+    function formatAddress(address, displayName) {
+      if (!address) return displayName || "";
+      const landmark =
+        address.amenity || address.tourism || address.building ||
+        address.leisure || address.shop || address.road ||
+        address.neighbourhood || address.suburb || address.village ||
+        address.town || address.city_district || address.city;
+      const place = address.city || address.town || address.state;
+      const unique = [...new Set([landmark, place].filter(Boolean))];
+      return unique.join(", ") || displayName || "";
+    }
+
+    async function lookupUserArea(latitude, longitude) {
+      try {
+        const osmUrl =
+          "https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=18&addressdetails=1" +
+          "&lat=" + encodeURIComponent(latitude) +
+          "&lon=" + encodeURIComponent(longitude);
+        const osmResponse = await fetch(osmUrl, { headers: { Accept: "application/json" } });
+        if (!osmResponse.ok) throw new Error("OpenStreetMap lookup failed");
+        const data = await osmResponse.json();
+        userAreaLabel = formatUserArea(formatAddress(data.address, data.display_name));
+      } catch (error) {
+        try {
+          const backupUrl =
+            "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=" +
+            encodeURIComponent(latitude) +
+            "&longitude=" + encodeURIComponent(longitude) +
+            "&localityLanguage=en";
+          const backup = await (await fetch(backupUrl)).json();
+          const label = [backup.locality, backup.city, backup.principalSubdivision]
+            .filter(Boolean)
+            .filter((item, index, list) => list.indexOf(item) === index)
+            .slice(0, 2)
+            .join(", ");
+          userAreaLabel = formatUserArea(label);
+        } catch (backupError) {
+          userAreaLabel = formatUserArea(latitude.toFixed(5) + ", " + longitude.toFixed(5));
+          console.error(error, backupError);
+        }
+      }
+      if (userAreaLabel) statusEl.textContent = userAreaLabel;
+    }
+
+    function detectLocation() {
+      if (!navigator.geolocation) {
+        statusEl.textContent = "Geolocation is not supported by this browser.";
+        return;
+      }
+      statusEl.textContent = "Detecting your location...";
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          userLocation = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          };
+          statusEl.textContent = "Finding your area...";
+          renderOffers();
+          lookupUserArea(userLocation.latitude, userLocation.longitude);
+        },
+        error => {
+          const messages = {
+            1: "Location permission was denied. Please allow location access and try again.",
+            2: "Your location could not be determined.",
+            3: "Location detection timed out. Please try again."
+          };
+          statusEl.textContent = messages[error.code] || "Unable to detect your location.";
+        },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 300000 }
+      );
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function escapeAttribute(value) {
+      return escapeHtml(value);
+    }
+
+    const locationModal = document.getElementById("locationModal");
+    const locationAllow = document.getElementById("locationAllow");
+    const locationCancel = document.getElementById("locationCancel");
+
+    function closeLocationModal() {
+      locationModal.classList.remove("open");
+    }
+
+    locationAllow.addEventListener("click", () => {
+      closeLocationModal();
+      detectLocation();
+    });
+
+    locationCancel.addEventListener("click", () => {
+      closeLocationModal();
+      statusEl.textContent = "Location skipped. Tap Allow location anytime.";
+    });
+
+    offersEl.addEventListener("click", async event => {
+      const button = event.target.closest(".share-btn");
+      if (!button) return;
+      const shareData = {
+        title: button.getAttribute("data-title") || "Deal",
+        text: button.getAttribute("data-text") || "",
+        url: button.getAttribute("data-url") || window.location.href
+      };
+      try {
+        if (navigator.share) {
+          await navigator.share(shareData);
+        } else if (navigator.clipboard) {
+          await navigator.clipboard.writeText((shareData.text + " " + shareData.url).trim());
+          statusEl.textContent = "Deal link copied.";
+        }
+      } catch (error) {
+        if (error && error.name === "AbortError") return;
+        console.error(error);
+      }
+    });
+
+    locationButton.addEventListener("click", detectLocation);
+    locationFilter.addEventListener("change", renderOffers);
+    distanceFilter.addEventListener("change", renderOffers);
+    categoriesEl.addEventListener("click", event => {
+      const button = event.target.closest("[data-category]");
+      if (!button) return;
+      selectedCategory = button.getAttribute("data-category") || "";
+      fillCategories();
+      renderOffers();
+    });
+
+    loadOffers();
+  </script>
+</body>
+</html>
