@@ -232,13 +232,17 @@ function setMenuOpen(open) {
 menuButton.addEventListener("click", () => setMenuOpen(!siteNav.classList.contains("open")));
 if (navClose) navClose.addEventListener("click", () => setMenuOpen(false));
 if (navBackdrop) navBackdrop.addEventListener("click", () => setMenuOpen(false));
-let lastScrollY = 0;
+let lastScrollY = window.scrollY || 0;
 window.addEventListener("scroll", () => {
-  const y = window.scrollY;
-  if (y > lastScrollY && y > 48) {
+  const y = window.scrollY || 0;
+  const delta = y - lastScrollY;
+  if (Math.abs(delta) < 12) return;
+  if (delta > 0 && y > 80) {
     chromeBar.classList.add("compact");
     setMenuOpen(false);
-  } else chromeBar.classList.remove("compact");
+  } else if (delta < 0) {
+    chromeBar.classList.remove("compact");
+  }
   lastScrollY = y;
 }, { passive: true });
 
