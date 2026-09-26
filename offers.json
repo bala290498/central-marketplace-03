@@ -1,6 +1,6 @@
 [
   {
-    "id": "offer-001",
+    "id": "list-001",
     "title": "20% Off at ABC Restaurant",
     "description": "Get 20% off your total bill.",
     "latitude": 12.9165,
@@ -14,7 +14,7 @@
     "validity": "Valid all month"
   },
   {
-    "id": "offer-002",
+    "id": "list-002",
     "title": "Buy 1 Get 1 Free",
     "description": "Selected items only.",
     "latitude": 12.9342,
@@ -28,7 +28,7 @@
     "validity": "Ends Tonight"
   },
   {
-    "id": "offer-003",
+    "id": "list-003",
     "title": "30% Off Salon",
     "description": "Valid on selected services.",
     "latitude": 13.0067,
@@ -42,9 +42,9 @@
     "validity": "Expires in 2d"
   },
   {
-    "id": "offer-004",
+    "id": "list-004",
     "title": "Flat 15% Off Dinner",
-    "description": "Valid on a la carte dinner bills above \u20b9499.",
+    "description": "Valid on a la carte dinner bills above ₹499.",
     "latitude": 13.0418,
     "longitude": 80.2337,
     "location": "T. Nagar",
@@ -56,7 +56,7 @@
     "validity": "8 slots left"
   },
   {
-    "id": "offer-005",
+    "id": "list-005",
     "title": "Haircut + Blow Dry Combo",
     "description": "Combo package on weekdays.",
     "latitude": 13.0604,
@@ -70,21 +70,21 @@
     "validity": "Valid all month"
   },
   {
-    "id": "offer-006",
-    "title": "\u20b9200 Off Grocery Basket",
-    "description": "On orders above \u20b91,000. Fresh produce included.",
+    "id": "list-006",
+    "title": "₹200 Off Grocery Basket",
+    "description": "On orders above ₹1,000. Fresh produce included.",
     "latitude": 12.9818,
     "longitude": 80.2184,
     "location": "Velachery",
     "category": "Grocery",
     "business": "Daily Mart",
-    "badge": "\u20b9200 OFF",
+    "badge": "₹200 OFF",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9818,80.2184",
     "phone": "+91 98765 01006",
     "validity": "Ends Tonight"
   },
   {
-    "id": "offer-007",
+    "id": "list-007",
     "title": "Buy 2 Get 1 on Apparel",
     "description": "Selected ethnic wear and casuals.",
     "latitude": 13.083,
@@ -98,7 +98,7 @@
     "validity": "Expires in 2d"
   },
   {
-    "id": "offer-008",
+    "id": "list-008",
     "title": "10% Off Mobiles & Accessories",
     "description": "In-store billing only this weekend.",
     "latitude": 13.0475,
@@ -112,7 +112,7 @@
     "validity": "8 slots left"
   },
   {
-    "id": "offer-009",
+    "id": "list-009",
     "title": "1 Month Gym Trial",
     "description": "Includes group classes. New members only.",
     "latitude": 12.8996,
@@ -126,7 +126,7 @@
     "validity": "Valid all month"
   },
   {
-    "id": "offer-010",
+    "id": "list-010",
     "title": "12% Off Medicines",
     "description": "On billed medicines excluding scheduled drugs.",
     "latitude": 13.0213,
@@ -140,7 +140,7 @@
     "validity": "Ends Tonight"
   },
   {
-    "id": "offer-011",
+    "id": "list-011",
     "title": "Weekend Movie Combo",
     "description": "Ticket + popcorn combo at a fixed price.",
     "latitude": 13.0827,
@@ -154,7 +154,7 @@
     "validity": "Expires in 2d"
   },
   {
-    "id": "offer-012",
+    "id": "list-012",
     "title": "Oil Change Package",
     "description": "Engine oil + filter at a bundled rate.",
     "latitude": 12.9526,
@@ -168,7 +168,7 @@
     "validity": "8 slots left"
   },
   {
-    "id": "offer-013",
+    "id": "list-013",
     "title": "Free Home Consultation",
     "description": "Interior design visit within city limits.",
     "latitude": 13.0732,
