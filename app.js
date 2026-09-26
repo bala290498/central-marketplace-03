@@ -102,6 +102,7 @@ function renderOffers() {
     const badgeTone = Math.abs(String(offer.id || badge || offer.title).split("").reduce((sum, ch) => sum + ch.charCodeAt(0), 0)) % 13;
     return `
     <article class="offer">
+      <span class="offer-perforation"></span>
       <div class="offer-brand">
         ${badge ? `<span class="badge c${badgeTone}">${escapeHtml(badge)}</span>` : ""}
         ${business ? `<span class="business">${escapeHtml(business)}</span>` : ""}
