@@ -159,9 +159,24 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
     }
   };
 
+  const handleCategorySelect = (cat: string) => {
+    setSelectedCategory(cat);
+    setSearchQuery("");
+  };
+
+  const handleLocationSelect = (loc: string) => {
+    setSelectedLocation(loc);
+    setSearchQuery("");
+  };
+
+  const handleDistanceSelect = (dist: number | null) => {
+    setSelectedDistance(dist);
+    setSearchQuery("");
+  };
+
   return (
     <div className="min-h-screen bg-slate-50/60 text-slate-900 flex flex-col">
-      {/* Sticky Collapsible Header (Navbar + Search Bar inside single transform block) */}
+      {/* Sticky Collapsible Header (Navbar + Desktop Search Bar inside single transform block) */}
       <Navbar
         userLocation={userLocation}
         userAreaLabel={userAreaLabel}
@@ -186,12 +201,12 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
           <ListCategoryBar
             categories={categories}
             selectedCategory={selectedCategory}
-            onSelectCategory={setSelectedCategory}
+            onSelectCategory={handleCategorySelect}
             locations={locations}
             selectedLocation={selectedLocation}
             selectedDistance={selectedDistance}
-            onLocationChange={setSelectedLocation}
-            onDistanceChange={setSelectedDistance}
+            onLocationChange={handleLocationSelect}
+            onDistanceChange={handleDistanceSelect}
           />
         </div>
       </div>
