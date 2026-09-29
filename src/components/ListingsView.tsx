@@ -187,8 +187,8 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
           </span>
         </div>
 
-        {/* Filters Container with ListCategoryBar */}
-        <div className="bg-white rounded-3xl p-4 sm:p-5 border border-slate-200/80 shadow-xs mb-6">
+        {/* Sticky Filters Container with ListCategoryBar */}
+        <div className="sticky top-14 z-30 bg-white/95 backdrop-blur-md rounded-3xl p-4 sm:p-5 border border-slate-200/80 shadow-sm mb-6">
           <ListCategoryBar
             categories={categories}
             selectedCategory={selectedCategory}
