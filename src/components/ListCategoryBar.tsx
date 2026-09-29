@@ -8,6 +8,7 @@ import {
   Scissors,
   ShoppingCart,
   ShoppingBag,
+  Shirt,
   Smartphone,
   Dumbbell,
   Pill,
@@ -100,7 +101,7 @@ export function ListCategoryBar({
       case "Grocery":
         return <ShoppingCart className="w-5 h-5" />;
       case "Fashion":
-        return <ShoppingBag className="w-5 h-5" />;
+        return <Shirt className="w-5 h-5" />;
       case "Electronics":
         return <Cpu className="w-5 h-5" />;
       case "Fitness":
@@ -353,7 +354,7 @@ export function ListCategoryBar({
             className="w-full pl-8 pr-7 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-bold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer truncate"
           >
             <option value="">All validities</option>
-            <option value="Limited Slots">Limited Slots</option>
+            <option value="Limited">Limited</option>
             <option value="Expires Soon">Expires Soon</option>
             <option value="Until Filled">Until Filled</option>
             <option value="Until Found">Until Found</option>

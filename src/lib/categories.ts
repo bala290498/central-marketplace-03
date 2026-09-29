@@ -4,6 +4,7 @@ import {
   Scissors,
   ShoppingCart,
   ShoppingBag,
+  Shirt,
   Smartphone,
   Dumbbell,
   Pill,
@@ -92,7 +93,7 @@ export function getCategoryMeta(categoryName: string, index: number = 0): Catego
   } else if (catLower.includes("grocery")) {
     icon = ShoppingCart;
   } else if (catLower.includes("fashion")) {
-    icon = ShoppingBag;
+    icon = Shirt;
   } else if (catLower.includes("electronic service") || catLower.includes("repair")) {
     icon = Wrench;
   } else if (catLower.includes("electronics")) {

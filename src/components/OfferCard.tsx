@@ -25,6 +25,7 @@ import {
   GraduationCap,
   Scissors,
   Smartphone,
+  Shirt,
   Cpu,
   Dumbbell,
   Pill,
@@ -133,6 +134,13 @@ export function getCategoryIcon(category: string = "", title: string = ""): Luci
     titleLower.includes("beauty")
   ) {
     return Scissors;
+  }
+  if (
+    catLower.includes("fashion") ||
+    catLower.includes("apparel") ||
+    catLower.includes("clothing")
+  ) {
+    return Shirt;
   }
   if (
     catLower.includes("property") ||

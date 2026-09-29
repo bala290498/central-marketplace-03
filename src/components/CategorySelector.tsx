@@ -7,6 +7,7 @@ import {
   Scissors,
   ShoppingCart,
   ShoppingBag,
+  Shirt,
   Smartphone,
   Dumbbell,
   Pill,
@@ -46,7 +47,7 @@ export function CategorySelector({
       case "Grocery":
         return <ShoppingCart className="w-4 h-4 text-emerald-500" />;
       case "Fashion":
-        return <ShoppingBag className="w-4 h-4 text-purple-500" />;
+        return <Shirt className="w-4 h-4 text-purple-500" />;
       case "Electronics":
         return <Cpu className="w-4 h-4 text-blue-500" />;
       case "Fitness":

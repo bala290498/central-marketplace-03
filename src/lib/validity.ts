@@ -30,9 +30,9 @@ export interface ValidityCategoryConfig {
 export const VALIDITY_CATEGORIES: ValidityCategoryConfig[] = [
   {
     key: "limited-slots",
-    label: "Limited Slots",
-    shortLabel: "Limited Slots",
-    badge: "🔥 Limited Slots",
+    label: "Limited",
+    shortLabel: "Limited",
+    badge: "🔥 Limited",
     description: "Exclusive offers with limited spots or slots available",
     iconName: "Flame",
     theme: {
@@ -174,6 +174,9 @@ export function filterOffersByValidityCategory(
     const valText = (offer.validity || offer.ends || offer.expiry || "").toLowerCase().trim();
     const catKey = getOfferValidityCategory(offer);
     const keyLower = categoryKey.toLowerCase().trim();
+    if (keyLower === "limited" || keyLower === "limited-slots") {
+      return catKey === "limited-slots" || valText.includes("limited");
+    }
     return catKey === keyLower || valText === keyLower;
   });
 }

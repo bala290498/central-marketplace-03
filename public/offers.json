@@ -53,7 +53,7 @@
     "badge": "15% OFF",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0418,80.2337",
     "phone": "+91 98765 01004",
-    "validity": "Limited Slots"
+    "validity": "Limited"
   },
   {
     "id": "offer-005",
@@ -109,7 +109,7 @@
     "badge": "10% OFF",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0475,80.2420",
     "phone": "+91 98765 01008",
-    "validity": "Limited Slots"
+    "validity": "Limited"
   },
   {
     "id": "offer-009",
@@ -165,7 +165,7 @@
     "badge": "PACKAGE",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9526,80.1462",
     "phone": "+91 98765 01012",
-    "validity": "Limited Slots"
+    "validity": "Limited"
   },
   {
     "id": "offer-013",
