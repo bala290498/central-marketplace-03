@@ -3,9 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, MapPin, Sparkles, Navigation, Loader2 } from "lucide-react";
+import { Menu, X, MapPin, Navigation, Loader2 } from "lucide-react";
 import { UserLocation } from "@/types/offer";
-import { lookupUserArea } from "@/lib/utils";
 
 interface NavbarProps {
   userLocation?: UserLocation | null;
@@ -24,7 +23,7 @@ export function Navbar({
   const [isOpen, setIsOpen] = useState(false);
   const [isCompact, setIsCompact] = useState(false);
 
-  // Scroll listener for compact chrome
+  // Scroll listener for compact header
   useEffect(() => {
     let lastY = window.scrollY || 0;
     let upTravel = 0;
@@ -65,8 +64,8 @@ export function Navbar({
 
   return (
     <header
-      className={`sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 transition-all duration-300 ${
-        isCompact ? "py-2 shadow-sm" : "py-3 shadow-md"
+      className={`sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 transition-all duration-300 ${
+        isCompact ? "py-2 shadow-xs" : "py-3 shadow-sm"
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -80,10 +79,10 @@ export function Navbar({
               CM
             </div>
             <div className="flex flex-col">
-              <span className="font-extrabold text-slate-900 dark:text-white text-base sm:text-lg tracking-tight group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
+              <span className="font-extrabold text-slate-900 text-base sm:text-lg tracking-tight group-hover:text-orange-600 transition-colors">
                 Central Marketplace
               </span>
-              <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+              <span className="text-xs text-slate-500 font-medium">
                 Local deals around you
               </span>
             </div>
@@ -98,8 +97,8 @@ export function Navbar({
                 disabled={isLocating}
                 className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full font-semibold text-xs sm:text-sm transition-all duration-200 border ${
                   userLocation && userAreaLabel
-                    ? "bg-orange-50 dark:bg-orange-950/50 text-orange-700 dark:text-orange-300 border-orange-200 dark:border-orange-800 hover:bg-orange-100"
-                    : "bg-orange-500 text-white border-transparent hover:bg-orange-600 shadow-sm shadow-orange-500/20"
+                    ? "bg-orange-50 text-orange-700 border-orange-200 hover:bg-orange-100"
+                    : "bg-orange-500 text-white border-transparent hover:bg-orange-600 shadow-xs shadow-orange-500/20"
                 }`}
                 title={userAreaLabel ? `Location: ${userAreaLabel}` : "Allow location access"}
               >
@@ -110,7 +109,7 @@ export function Navbar({
                   </>
                 ) : userLocation && userAreaLabel ? (
                   <>
-                    <MapPin className="w-3.5 h-3.5 text-orange-600 dark:text-orange-400 fill-orange-500/20" />
+                    <MapPin className="w-3.5 h-3.5 text-orange-600 fill-orange-500/20" />
                     <span>📍 {userAreaLabel}</span>
                   </>
                 ) : (
@@ -131,10 +130,10 @@ export function Navbar({
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-colors ${
+                  className={`px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors ${
                     isActive
-                      ? "bg-orange-50 text-orange-600 dark:bg-orange-950/40 dark:text-orange-400"
-                      : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60"
+                      ? "bg-orange-50 text-orange-600"
+                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
                   }`}
                 >
                   {link.label}
@@ -152,7 +151,7 @@ export function Navbar({
                 disabled={isLocating}
                 className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full font-bold text-xs transition-all ${
                   userLocation && userAreaLabel
-                    ? "bg-orange-50 text-orange-700 dark:bg-orange-950/60 dark:text-orange-300 border border-orange-200 dark:border-orange-800"
+                    ? "bg-orange-50 text-orange-700 border border-orange-200"
                     : "bg-orange-500 text-white"
                 }`}
               >
@@ -170,7 +169,7 @@ export function Navbar({
             <button
               type="button"
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none"
+              className="p-2 rounded-xl text-slate-700 hover:bg-slate-100 focus:outline-none"
               aria-label="Toggle menu"
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -179,31 +178,31 @@ export function Navbar({
         </div>
       </div>
 
-      {/* Mobile Slide-over Drawer Backdrop */}
+      {/* Mobile Backdrop */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-40 bg-slate-900/50 backdrop-blur-xs md:hidden"
+          className="fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-xs md:hidden"
           onClick={() => setIsOpen(false)}
         />
       )}
 
       {/* Mobile Menu Drawer */}
       <div
-        className={`fixed top-0 right-0 z-50 w-72 h-full bg-white dark:bg-slate-900 shadow-2xl transform transition-transform duration-300 ease-in-out md:hidden flex flex-col p-6 ${
+        className={`fixed top-0 right-0 z-50 w-72 h-full bg-white shadow-2xl transform transition-transform duration-300 ease-in-out md:hidden flex flex-col p-6 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex items-center justify-between pb-6 border-b border-slate-100 dark:border-slate-800">
+        <div className="flex items-center justify-between pb-6 border-b border-slate-100">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-orange-500 text-white font-extrabold flex items-center justify-center text-sm">
               CM
             </div>
-            <span className="font-bold text-slate-900 dark:text-white">Menu</span>
+            <span className="font-bold text-slate-900">Menu</span>
           </div>
           <button
             type="button"
             onClick={() => setIsOpen(false)}
-            className="p-1.5 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+            className="p-1.5 text-slate-500 hover:text-slate-900"
             aria-label="Close menu"
           >
             <X className="w-6 h-6" />
@@ -220,8 +219,8 @@ export function Navbar({
                 onClick={() => setIsOpen(false)}
                 className={`px-4 py-3 rounded-xl font-bold text-base transition-colors ${
                   isActive
-                    ? "bg-orange-50 dark:bg-orange-950/40 text-orange-600 dark:text-orange-400"
-                    : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
+                    ? "bg-orange-50 text-orange-600"
+                    : "text-slate-700 hover:bg-slate-100"
                 }`}
               >
                 {link.label}
@@ -230,7 +229,7 @@ export function Navbar({
           })}
         </div>
 
-        <div className="mt-auto pt-6 border-t border-slate-100 dark:border-slate-800 text-center text-xs text-slate-400">
+        <div className="mt-auto pt-6 border-t border-slate-100 text-center text-xs text-slate-400">
           © Central Marketplace
         </div>
       </div>

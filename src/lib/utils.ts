@@ -48,18 +48,18 @@ export function getBadgeTone(key: string): string {
   const toneIndex = hash % 12;
 
   const toneClasses = [
-    "bg-red-50 text-red-700 dark:bg-red-950/60 dark:text-red-300 border border-red-200 dark:border-red-800",
-    "bg-orange-50 text-orange-700 dark:bg-orange-950/60 dark:text-orange-300 border border-orange-200 dark:border-orange-800",
-    "bg-amber-50 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-200 dark:border-amber-800",
-    "bg-lime-50 text-lime-700 dark:bg-lime-950/60 dark:text-lime-300 border border-lime-200 dark:border-lime-800",
-    "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800",
-    "bg-teal-50 text-teal-700 dark:bg-teal-950/60 dark:text-teal-300 border border-teal-200 dark:border-teal-800",
-    "bg-cyan-50 text-cyan-700 dark:bg-cyan-950/60 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800",
-    "bg-blue-50 text-blue-700 dark:bg-blue-300 border border-blue-200 dark:border-blue-800",
-    "bg-indigo-50 text-indigo-700 dark:bg-indigo-300 border border-indigo-200 dark:border-indigo-800",
-    "bg-violet-50 text-violet-700 dark:bg-violet-300 border border-violet-200 dark:border-violet-800",
-    "bg-fuchsia-50 text-fuchsia-700 dark:bg-fuchsia-300 border border-fuchsia-200 dark:border-fuchsia-800",
-    "bg-pink-50 text-pink-700 dark:bg-pink-300 border border-pink-200 dark:border-pink-800",
+    "bg-red-50 text-red-700 border border-red-200",
+    "bg-orange-50 text-orange-700 border border-orange-200",
+    "bg-amber-50 text-amber-700 border border-amber-200",
+    "bg-lime-50 text-lime-700 border border-lime-200",
+    "bg-emerald-50 text-emerald-700 border border-emerald-200",
+    "bg-teal-50 text-teal-700 border border-teal-200",
+    "bg-cyan-50 text-cyan-700 border border-cyan-200",
+    "bg-blue-50 text-blue-700 border border-blue-200",
+    "bg-indigo-50 text-indigo-700 border border-indigo-200",
+    "bg-violet-50 text-violet-700 border border-violet-200",
+    "bg-fuchsia-50 text-fuchsia-700 border border-fuchsia-200",
+    "bg-pink-50 text-pink-700 border border-pink-200",
   ];
 
   return toneClasses[toneIndex];

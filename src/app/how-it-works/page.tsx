@@ -39,18 +39,18 @@ export default function HowItWorksPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50/50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col">
+    <div className="min-h-screen bg-slate-50/60 text-slate-900 flex flex-col">
       <Navbar />
 
       <main className="flex-1 max-w-3xl w-full mx-auto px-4 sm:px-6 py-10">
         <div className="text-center mb-10">
-          <span className="px-3.5 py-1.5 rounded-full bg-orange-100 dark:bg-orange-950/60 text-orange-700 dark:text-orange-300 font-bold text-xs uppercase tracking-wider">
+          <span className="px-3.5 py-1.5 rounded-full bg-orange-100 text-orange-700 font-bold text-xs uppercase tracking-wider">
             Guide
           </span>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-3 mb-3 tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 mb-3 tracking-tight">
             How Central Marketplace Works
           </h1>
-          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base max-w-xl mx-auto">
+          <p className="text-slate-600 text-sm sm:text-base max-w-xl mx-auto">
             Connecting neighborhood customers with local merchants through simple, direct, real-time offer cards.
           </p>
         </div>
@@ -62,7 +62,7 @@ export default function HowItWorksPage() {
             return (
               <div
                 key={step.num}
-                className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs flex items-start gap-4 hover:border-orange-200 dark:hover:border-orange-900 transition-all"
+                className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-xs flex items-start gap-4 hover:border-orange-300 transition-all"
               >
                 <div className="w-12 h-12 rounded-xl bg-orange-500 text-white font-extrabold text-lg flex items-center justify-center flex-shrink-0 shadow-md shadow-orange-500/20">
                   {step.num}
@@ -70,11 +70,11 @@ export default function HowItWorksPage() {
                 <div>
                   <div className="flex items-center gap-2 mb-1">
                     <Icon className="w-4 h-4 text-orange-500" />
-                    <h3 className="font-bold text-slate-900 dark:text-white text-base">
+                    <h3 className="font-bold text-slate-900 text-base">
                       {step.title}
                     </h3>
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                     {step.desc}
                   </p>
                 </div>
@@ -84,8 +84,8 @@ export default function HowItWorksPage() {
         </div>
 
         {/* Info Note */}
-        <div className="bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900/60 rounded-2xl p-5 mb-10 text-xs sm:text-sm text-amber-900 dark:text-amber-200 flex items-start gap-3">
-          <CheckCircle2 className="w-5 h-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+        <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 mb-10 text-xs sm:text-sm text-amber-900 flex items-start gap-3">
+          <CheckCircle2 className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
           <div>
             <strong>Note on Distances:</strong> Distances shown on cards are direct estimations. Tapping the Maps button launches Google Maps for exact driving routes, turn-by-turn navigation, and estimated travel time.
           </div>

@@ -78,7 +78,7 @@ export function CategorySelector({
   const allItems = ["All Deals", ...categories];
 
   return (
-    <div className="w-full overflow-x-auto no-scrollbar py-2 px-1 flex items-center gap-2 border-b border-slate-100 dark:border-slate-800">
+    <div className="w-full overflow-x-auto no-scrollbar py-2 px-1 flex items-center gap-2 border-b border-slate-100">
       {allItems.map((name) => {
         const val = name === "All Deals" ? "" : name;
         const isSelected = selectedCategory === val;
@@ -89,13 +89,13 @@ export function CategorySelector({
             onClick={() => onSelectCategory(val)}
             className={`flex-shrink-0 inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl font-bold text-xs sm:text-sm transition-all duration-200 cursor-pointer ${
               isSelected
-                ? "bg-orange-500 text-white shadow-md shadow-orange-500/25 ring-2 ring-orange-500/30 scale-[1.02]"
-                : "bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 hover:bg-slate-200/80 dark:hover:bg-slate-700/80 hover:text-slate-900 border border-slate-200/60 dark:border-slate-700/60"
+                ? "bg-orange-500 text-white shadow-md shadow-orange-500/20 scale-[1.02]"
+                : "bg-slate-100 text-slate-700 hover:bg-slate-200/80 hover:text-slate-900 border border-slate-200/60"
             }`}
           >
             <span
               className={`p-1 rounded-lg transition-colors ${
-                isSelected ? "bg-white/20 text-white" : "bg-white dark:bg-slate-900 shadow-xs"
+                isSelected ? "bg-white/20 text-white" : "bg-white shadow-xs"
               }`}
             >
               {getCategoryIcon(name)}

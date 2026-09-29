@@ -2,9 +2,9 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="mt-16 py-8 border-t border-slate-200 dark:border-slate-800 text-center text-xs text-slate-500 dark:text-slate-400">
+    <footer className="mt-16 py-8 border-t border-slate-200 text-center text-xs text-slate-500 bg-white">
       <div className="max-w-6xl mx-auto px-4 flex flex-col items-center gap-3">
-        <div className="flex flex-wrap justify-center items-center gap-4 font-semibold text-slate-600 dark:text-slate-300">
+        <div className="flex flex-wrap justify-center items-center gap-4 font-semibold text-slate-600">
           <Link href="/" className="hover:text-orange-600 transition-colors">
             Deals
           </Link>

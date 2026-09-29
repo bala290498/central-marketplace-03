@@ -14,7 +14,7 @@ import { Navbar } from "./Navbar";
 import { CategorySelector } from "./CategorySelector";
 import { FilterBar } from "./FilterBar";
 import { OfferCard } from "./OfferCard";
-import { Sparkles, MapPin, CheckCircle2, AlertCircle } from "lucide-react";
+import { Sparkles, CheckCircle2, AlertCircle } from "lucide-react";
 
 interface OfferGridProps {
   initialOffers: Offer[];
@@ -175,7 +175,7 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50/50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col">
+    <div className="min-h-screen bg-slate-50/60 text-slate-900 flex flex-col">
       {/* Sticky Header */}
       <Navbar
         userLocation={userLocation}
@@ -188,7 +188,7 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 pt-4 pb-12">
         {/* Banner / Headline */}
         <div className="mb-4 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300">
+          <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-600">
             <Sparkles className="w-4 h-4 text-orange-500" />
             <span>
               {userLocation
@@ -197,13 +197,13 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
             </span>
           </div>
 
-          <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+          <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-slate-200/80 text-slate-700">
             {processedOffers.length} {processedOffers.length === 1 ? "Deal" : "Deals"}
           </span>
         </div>
 
         {/* Sticky Filters Container */}
-        <div className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md rounded-2xl p-3 sm:p-4 border border-slate-200/80 dark:border-slate-800 shadow-sm mb-6 space-y-2">
+        <div className="bg-white/95 backdrop-blur-md rounded-2xl p-3 sm:p-4 border border-slate-200/80 shadow-xs mb-6 space-y-2">
           {/* Category Chips */}
           <CategorySelector
             categories={categories}
@@ -237,14 +237,14 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
             ))}
           </div>
         ) : (
-          <div className="bg-white dark:bg-slate-900 rounded-3xl p-12 text-center border border-slate-200 dark:border-slate-800 my-8 shadow-xs">
-            <div className="w-16 h-16 rounded-2xl bg-orange-50 dark:bg-orange-950/50 text-orange-500 flex items-center justify-center mx-auto mb-4">
+          <div className="bg-white rounded-3xl p-12 text-center border border-slate-200 my-8 shadow-xs">
+            <div className="w-16 h-16 rounded-2xl bg-orange-50 text-orange-500 flex items-center justify-center mx-auto mb-4">
               <AlertCircle className="w-8 h-8" />
             </div>
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
+            <h3 className="text-lg font-bold text-slate-900 mb-2">
               No matching deals found
             </h3>
-            <p className="text-sm text-slate-500 dark:text-slate-400 max-w-md mx-auto mb-6">
+            <p className="text-sm text-slate-500 max-w-md mx-auto mb-6">
               Try adjusting your category, distance, or location filters to see more offers around you.
             </p>
             <button

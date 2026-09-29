@@ -34,7 +34,7 @@ export function FilterBar({
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
           placeholder="Search offers or shops..."
-          className="w-full pl-9 pr-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white text-xs sm:text-sm font-medium focus:outline-none focus:ring-2 focus:ring-orange-500 shadow-xs"
+          className="w-full pl-9 pr-3 py-2 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs sm:text-sm font-medium focus:outline-none focus:ring-2 focus:ring-orange-500 shadow-xs"
         />
       </div>
 
@@ -44,7 +44,7 @@ export function FilterBar({
         <select
           value={selectedLocation}
           onChange={(e) => onLocationChange(e.target.value)}
-          className="w-full pl-9 pr-8 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white text-xs sm:text-sm font-semibold appearance-none focus:outline-none focus:ring-2 focus:ring-orange-500 shadow-xs"
+          className="w-full pl-9 pr-8 py-2 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs sm:text-sm font-semibold appearance-none focus:outline-none focus:ring-2 focus:ring-orange-500 shadow-xs"
         >
           <option value="">All locations</option>
           {locations.map((loc) => (
@@ -64,7 +64,7 @@ export function FilterBar({
           onChange={(e) =>
             onDistanceChange(e.target.value ? Number(e.target.value) : null)
           }
-          className="w-full pl-9 pr-8 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white text-xs sm:text-sm font-semibold appearance-none focus:outline-none focus:ring-2 focus:ring-orange-500 shadow-xs"
+          className="w-full pl-9 pr-8 py-2 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs sm:text-sm font-semibold appearance-none focus:outline-none focus:ring-2 focus:ring-orange-500 shadow-xs"
         >
           <option value="">All distances</option>
           <option value="5">Within 5 km</option>
