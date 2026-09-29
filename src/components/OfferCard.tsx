@@ -27,7 +27,7 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
   const mapLink = directionsUrl(userLocation, offer);
 
   return (
-    <article className="group relative bg-white rounded-3xl border border-slate-200/90 shadow-xs hover:shadow-xl hover:border-orange-300 transition-all duration-300 flex flex-col justify-between overflow-hidden p-5 sm:p-6">
+    <article className="group relative bg-white rounded-3xl border border-slate-200/90 shadow-xs hover:shadow-xl hover:border-orange-300 transition-all duration-300 flex flex-col justify-between p-5 sm:p-6">
       {/* Top Half of Coupon Card */}
       <div className="flex-1 pb-2">
         {/* Business Header & Badge */}
@@ -60,13 +60,13 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
       {/* Perforated Coupon Divider with Left & Right Notches */}
       <div className="relative my-3 -mx-5 sm:-mx-6 flex items-center justify-center">
         {/* Left Semi-Circular Cutout Notch */}
-        <div className="absolute -left-3.5 w-7 h-7 rounded-full bg-slate-50 border border-slate-200 shadow-inner z-10" />
+        <div className="absolute -left-3.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-slate-50 border-t border-r border-b border-slate-300 z-20" />
         
         {/* Dashed Perforated Line */}
         <div className="w-full border-t-2 border-dashed border-slate-200/90" />
         
         {/* Right Semi-Circular Cutout Notch */}
-        <div className="absolute -right-3.5 w-7 h-7 rounded-full bg-slate-50 border border-slate-200 shadow-inner z-10" />
+        <div className="absolute -right-3.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-slate-50 border-t border-l border-b border-slate-300 z-20" />
       </div>
 
       {/* Bottom Half of Coupon Card */}
