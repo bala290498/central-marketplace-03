@@ -32,33 +32,38 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
 
   // Filter States
   const [selectedCategory, setSelectedCategory] = useState<string>(categoryParam);
-  const [selectedLocation, setSelectedLocation] = useState<string>("");
-  const [selectedDistance, setSelectedDistance] = useState<number | null>(null);
-  const [searchQuery, setSearchQuery] = useState<string>("");
   const [isHeaderHidden, setIsHeaderHidden] = useState<boolean>(false);
 
+  // Throttled flicker-free scroll listener with hysteresis
   useEffect(() => {
-    let lastY = window.scrollY || 0;
+    let lastY = typeof window !== "undefined" ? window.scrollY || 0 : 0;
+    let ticking = false;
 
-    const handleScroll = () => {
-      const y = Math.max(0, window.scrollY || 0);
-      const delta = y - lastY;
-      lastY = y;
+    const updateScroll = () => {
+      const currentY = Math.max(0, window.scrollY || 0);
+      const delta = currentY - lastY;
 
-      if (y < 30) {
+      if (currentY <= 80) {
         setIsHeaderHidden(false);
-        return;
+      } else if (delta > 20) {
+        setIsHeaderHidden(true);
+      } else if (delta < -20) {
+        setIsHeaderHidden(false);
       }
 
-      if (delta > 6) {
-        setIsHeaderHidden(true);
-      } else if (delta < -6) {
-        setIsHeaderHidden(false);
+      lastY = currentY;
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateScroll);
+        ticking = true;
       }
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
@@ -203,12 +208,12 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
     <div className="min-h-screen bg-slate-50/60 text-slate-900 flex flex-col">
       {/* Unified Top Sticky Container (Navbar + Category & Dropdown Filter Bar) */}
       <div className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
-        {/* Collapsible Header (Hides on scroll down, shows on scroll up) */}
+        {/* Collapsible Header (Hides on scroll down, expands on scroll up) */}
         <div
-          className={`transition-all duration-300 ease-in-out overflow-hidden ${
+          className={`transition-all duration-300 ease-out overflow-hidden ${
             isHeaderHidden
               ? "max-h-0 opacity-0 pointer-events-none"
-              : "max-h-56 opacity-100"
+              : "max-h-60 opacity-100"
           }`}
         >
           <Navbar
