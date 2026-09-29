@@ -21,6 +21,7 @@ import {
   Coffee,
   Store,
   Compass,
+  Wrench,
   MapPin,
   Navigation,
   Clock,
@@ -108,10 +109,14 @@ export function ListCategoryBar({
       case "Entertainment":
         return <Film className="w-5 h-5" />;
       case "Auto Care":
+      case "Vehicles":
         return <Car className="w-5 h-5" />;
       case "Home & Living":
+      case "Home Services":
       case "Services":
         return <Home className="w-5 h-5" />;
+      case "Electronic Services":
+        return <Wrench className="w-5 h-5" />;
       case "Recruitment":
         return <Briefcase className="w-5 h-5" />;
       case "Professional":
@@ -162,6 +167,7 @@ export function ListCategoryBar({
           activeText: "text-purple-600 border-purple-500",
         };
       case "Electronics":
+      case "Electronic Services":
         return {
           iconColor: "text-blue-500",
           activeText: "text-blue-600 border-blue-500",
@@ -188,6 +194,7 @@ export function ListCategoryBar({
           activeText: "text-cyan-600 border-cyan-500",
         };
       case "Home & Living":
+      case "Home Services":
       case "Services":
         return {
           iconColor: "text-sky-500",

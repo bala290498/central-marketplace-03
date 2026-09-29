@@ -13,15 +13,15 @@ interface MobileCategoryGridProps {
 }
 
 const DEFAULT_CATEGORIES = [
-  "Auto Care",
   "Daily Needs",
+  "Electronic Services",
   "Electronics",
   "Entertainment",
   "Fashion",
   "Fitness",
   "Food",
   "Grocery",
-  "Home & Living",
+  "Home Services",
   "Pharmacy",
   "Products",
   "Professional",
@@ -29,6 +29,7 @@ const DEFAULT_CATEGORIES = [
   "Property Request",
   "Recruitment",
   "Salon & Spa",
+  "Vehicles",
   "Wholesale",
 ];
 

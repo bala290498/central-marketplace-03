@@ -12,15 +12,15 @@ interface AllCategoriesModalProps {
 }
 
 const DEFAULT_CATEGORY_LIST = [
-  "Auto Care",
   "Daily Needs",
+  "Electronic Services",
   "Electronics",
   "Entertainment",
   "Fashion",
   "Fitness",
   "Food",
   "Grocery",
-  "Home & Living",
+  "Home Services",
   "Pharmacy",
   "Products",
   "Professional",
@@ -28,6 +28,7 @@ const DEFAULT_CATEGORY_LIST = [
   "Property Request",
   "Recruitment",
   "Salon & Spa",
+  "Vehicles",
   "Wholesale",
 ];
 

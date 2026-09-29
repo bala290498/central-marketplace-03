@@ -16,6 +16,7 @@ import {
   Package,
   Store,
   Compass,
+  Wrench,
   LucideIcon,
 } from "lucide-react";
 
@@ -91,6 +92,8 @@ export function getCategoryMeta(categoryName: string, index: number = 0): Catego
     icon = ShoppingCart;
   } else if (catLower.includes("fashion")) {
     icon = ShoppingBag;
+  } else if (catLower.includes("electronic service") || catLower.includes("repair")) {
+    icon = Wrench;
   } else if (catLower.includes("electronics")) {
     icon = Smartphone;
   } else if (catLower.includes("fitness") || catLower.includes("gym")) {
@@ -99,9 +102,9 @@ export function getCategoryMeta(categoryName: string, index: number = 0): Catego
     icon = Pill;
   } else if (catLower.includes("entertainment") || catLower.includes("movie")) {
     icon = Film;
-  } else if (catLower.includes("auto") || catLower.includes("vehicle") || catLower.includes("car")) {
+  } else if (catLower.includes("vehicle") || catLower.includes("auto") || catLower.includes("car")) {
     icon = Car;
-  } else if (catLower.includes("home") || catLower.includes("living") || catLower.includes("service")) {
+  } else if (catLower.includes("home service") || catLower.includes("home") || catLower.includes("living")) {
     icon = HomeIcon;
   } else if (catLower.includes("recruitment") || catLower.includes("job")) {
     icon = Briefcase;
