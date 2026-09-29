@@ -35,6 +35,31 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
   const [selectedLocation, setSelectedLocation] = useState<string>("");
   const [selectedDistance, setSelectedDistance] = useState<number | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [isHeaderHidden, setIsHeaderHidden] = useState<boolean>(false);
+
+  useEffect(() => {
+    let lastY = window.scrollY || 0;
+
+    const handleScroll = () => {
+      const y = Math.max(0, window.scrollY || 0);
+      const delta = y - lastY;
+      lastY = y;
+
+      if (y < 30) {
+        setIsHeaderHidden(false);
+        return;
+      }
+
+      if (delta > 6) {
+        setIsHeaderHidden(true);
+      } else if (delta < -6) {
+        setIsHeaderHidden(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     if (categoryParam) {
@@ -176,38 +201,48 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
 
   return (
     <div className="min-h-screen bg-slate-50/60 text-slate-900 flex flex-col">
-      {/* Sticky Collapsible Header (Navbar + Desktop Search Bar inside single transform block) */}
-      <Navbar
-        userLocation={userLocation}
-        userAreaLabel={userAreaLabel}
-        onDetectLocation={detectLocation}
-        isLocating={isLocating}
-      >
-        <div className="hidden md:flex relative items-center pt-1 pb-0.5">
-          <Search className="absolute left-3.5 w-4 h-4 text-slate-400 pointer-events-none" />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search products, services, listings..."
-            className="w-full pl-9 pr-10 py-2.5 rounded-2xl border border-slate-200 bg-slate-50 focus:bg-white text-slate-900 text-xs sm:text-sm font-medium focus:outline-none focus:ring-2 focus:ring-orange-500 shadow-xs transition-colors"
-          />
-          {searchQuery && (
-            <button
-              type="button"
-              onClick={() => setSearchQuery("")}
-              className="absolute right-3 p-1 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-200/70 transition-all cursor-pointer focus:outline-none"
-              title="Clear search"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          )}
+      {/* Unified Top Sticky Container (Navbar + Category & Dropdown Filter Bar) */}
+      <div className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
+        {/* Collapsible Header (Hides on scroll down, shows on scroll up) */}
+        <div
+          className={`transition-all duration-300 ease-in-out overflow-hidden ${
+            isHeaderHidden
+              ? "max-h-0 opacity-0 pointer-events-none"
+              : "max-h-56 opacity-100"
+          }`}
+        >
+          <Navbar
+            userLocation={userLocation}
+            userAreaLabel={userAreaLabel}
+            onDetectLocation={detectLocation}
+            isLocating={isLocating}
+            isSticky={false}
+          >
+            <div className="hidden md:flex relative items-center pt-1 pb-0.5">
+              <Search className="absolute left-3.5 w-4 h-4 text-slate-400 pointer-events-none" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search products, services, listings..."
+                className="w-full pl-9 pr-10 py-2.5 rounded-2xl border border-slate-200 bg-slate-50 focus:bg-white text-slate-900 text-xs sm:text-sm font-medium focus:outline-none focus:ring-2 focus:ring-orange-500 shadow-xs transition-colors"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-3 p-1 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-200/70 transition-all cursor-pointer focus:outline-none"
+                  title="Clear search"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+          </Navbar>
         </div>
-      </Navbar>
 
-      {/* Sticky Permanent Filters (Category Chips & Dropdowns) */}
-      <div className="sticky top-0 z-30 bg-slate-50/95 backdrop-blur-md pt-2 pb-3 border-b border-slate-200/60 shadow-xs">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        {/* Permanent Category & Dropdown Filter Bar (ALWAYS visible in sticky container) */}
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-2 pb-3 border-t border-slate-100">
           <ListCategoryBar
             categories={categories}
             selectedCategory={selectedCategory}
