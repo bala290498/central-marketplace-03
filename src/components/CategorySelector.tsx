@@ -20,6 +20,7 @@ import {
   Store,
   Compass,
   Wrench,
+  Cpu,
 } from "lucide-react";
 
 interface CategorySelectorProps {
@@ -47,7 +48,7 @@ export function CategorySelector({
       case "Fashion":
         return <ShoppingBag className="w-4 h-4 text-purple-500" />;
       case "Electronics":
-        return <Smartphone className="w-4 h-4 text-blue-500" />;
+        return <Cpu className="w-4 h-4 text-blue-500" />;
       case "Fitness":
         return <Dumbbell className="w-4 h-4 text-red-500" />;
       case "Pharmacy":

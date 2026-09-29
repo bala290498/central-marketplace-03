@@ -17,6 +17,7 @@ import {
   Store,
   Compass,
   Wrench,
+  Cpu,
   LucideIcon,
 } from "lucide-react";
 
@@ -95,7 +96,7 @@ export function getCategoryMeta(categoryName: string, index: number = 0): Catego
   } else if (catLower.includes("electronic service") || catLower.includes("repair")) {
     icon = Wrench;
   } else if (catLower.includes("electronics")) {
-    icon = Smartphone;
+    icon = Cpu;
   } else if (catLower.includes("fitness") || catLower.includes("gym")) {
     icon = Dumbbell;
   } else if (catLower.includes("pharmacy") || catLower.includes("medical")) {

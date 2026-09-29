@@ -22,6 +22,7 @@ import {
   Store,
   Compass,
   Wrench,
+  Cpu,
   MapPin,
   Navigation,
   Clock,
@@ -101,7 +102,7 @@ export function ListCategoryBar({
       case "Fashion":
         return <ShoppingBag className="w-5 h-5" />;
       case "Electronics":
-        return <Smartphone className="w-5 h-5" />;
+        return <Cpu className="w-5 h-5" />;
       case "Fitness":
         return <Dumbbell className="w-5 h-5" />;
       case "Pharmacy":
