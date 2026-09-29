@@ -270,6 +270,7 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
   const businessName = offer.business || offer.store || offer.merchant || "";
   const areaName = offerArea(offer) || "Medavakkam";
   const categoryName = offer.category || "";
+  const validityText = offer.validity || offer.ends || offer.expiry || "Available";
   const theme = getCardTheme(offer.id || offer.title || badgeText);
   const CategoryIcon = getCategoryIcon(categoryName, offer.title);
 
@@ -328,7 +329,7 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
           </p>
         )}
 
-        {/* Bottom Info Row (MapPin | Distance | Available) */}
+        {/* Bottom Info Row (MapPin | Distance | Validity Status) */}
         <div className="flex items-center flex-wrap gap-2 text-xs font-bold text-slate-700 mb-5">
           {/* Location Pin */}
           <div className="flex items-center gap-1">
@@ -346,10 +347,10 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
 
           <span className="text-slate-300 font-light select-none">|</span>
 
-          {/* Status */}
+          {/* Validity Status */}
           <div className="flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 flex-shrink-0 animate-pulse" />
-            <span className="text-emerald-700 font-extrabold">Available</span>
+            <span className="text-emerald-700 font-extrabold truncate max-w-[140px]">{validityText}</span>
           </div>
         </div>
       </div>
