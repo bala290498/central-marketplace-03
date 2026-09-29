@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import {
   Home,
   ListFilter,
-  Plus,
+  PlusCircle,
   ShieldAlert,
   Grid,
 } from "lucide-react";
@@ -19,6 +19,7 @@ export function BottomNav() {
   const [isReportOpen, setIsReportOpen] = useState(false);
 
   const isHome = pathname === "/";
+  const isPost = pathname === "/list-your-business";
 
   return (
     <>
@@ -51,16 +52,18 @@ export function BottomNav() {
             <span className="text-[10px] font-semibold">List</span>
           </Link>
 
-          {/* Tab 3: Center Post Action Button */}
-          <div className="relative -top-4 flex items-center justify-center">
-            <Link
-              href="/list-your-business"
-              className="w-13 h-13 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center shadow-lg shadow-blue-600/35 border-4 border-white transition-transform active:scale-95"
-              title="Post a Listing"
-            >
-              <Plus className="w-7 h-7 stroke-[2.5]" />
-            </Link>
-          </div>
+          {/* Tab 3: Post */}
+          <Link
+            href="/list-your-business"
+            className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-colors ${
+              isPost && !isMoreOpen && !isReportOpen
+                ? "text-blue-600 font-extrabold"
+                : "text-slate-500 hover:text-slate-900"
+            }`}
+          >
+            <PlusCircle className="w-5 h-5 mb-0.5" />
+            <span className="text-[10px] font-semibold">Post</span>
+          </Link>
 
           {/* Tab 4: Report */}
           <button
@@ -74,7 +77,7 @@ export function BottomNav() {
             <span className="text-[10px] font-semibold">Report</span>
           </button>
 
-          {/* Tab 5: More (Replaced Profile with suitable Grid icon) */}
+          {/* Tab 5: More */}
           <button
             type="button"
             onClick={() => setIsMoreOpen(true)}

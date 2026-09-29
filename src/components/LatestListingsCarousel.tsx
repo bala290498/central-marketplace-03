@@ -18,8 +18,8 @@ export function LatestListingsCarousel({
 }: LatestListingsCarouselProps) {
   if (!offers || offers.length === 0) return null;
 
-  // Take top 8 latest listings for carousel
-  const latestItems = offers.slice(0, 8);
+  // Take last 5 entries for latest listings carousel
+  const latestItems = offers.slice(-5).reverse();
 
   return (
     <section className="mb-8">
