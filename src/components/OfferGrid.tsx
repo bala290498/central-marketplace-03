@@ -130,20 +130,13 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
           onSeeAll={handleSeeAll}
         />
 
-        {/* 3. Validity Headings Categories Filter Bar */}
-        <ValidityCategoryBar
-          offers={offers}
-          selectedValidity={selectedValidity}
-          onSelectValidity={(key) => setSelectedValidity(key)}
-        />
-
-        {/* 4. Validity Headings Sections / Grid */}
+        {/* 3. Validity Headings Sections / Carousels */}
         <ValiditySections
           offers={offers}
           userLocation={userLocation}
           selectedValidity={selectedValidity}
           onShare={handleShare}
-          onSeeAllValidity={(key) => setSelectedValidity(key)}
+          onSeeAllValidity={(key) => router.push(`/list?validity=${encodeURIComponent(key)}`)}
         />
       </main>
 

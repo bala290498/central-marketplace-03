@@ -82,32 +82,18 @@ export function ValiditySections({
 
     return (
       <section className="space-y-4 mb-10">
-        <div className="flex items-center justify-between bg-white p-4 sm:p-5 rounded-3xl border border-slate-200/80 shadow-xs">
-          <div className="flex items-center gap-3">
-            <div
-              className={`w-10 h-10 rounded-2xl ${
-                activeConfig?.theme.accentBg || "bg-orange-500"
-              } text-white flex items-center justify-center shadow-md`}
-            >
-              <Icon className="w-5 h-5" />
-            </div>
-            <div>
-              <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight">
-                {activeConfig?.label || "Validity Section"}
-              </h2>
-              <p className="text-xs text-slate-500">
-                {activeConfig?.description || "Filtered offers"}
-              </p>
-            </div>
-          </div>
-
-          <span
-            className={`px-3 py-1 rounded-full text-xs font-black ${
-              activeConfig?.theme.badgeBg || "bg-orange-100 text-orange-700"
-            }`}
+        <div className="flex items-center justify-between mb-3 px-1">
+          <h2 className="text-lg font-extrabold text-slate-900 tracking-tight">
+            {activeConfig?.label || "Validity Section"}
+          </h2>
+          <button
+            type="button"
+            onClick={() => onSeeAllValidity("all")}
+            className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 hover:text-blue-700 transition-colors cursor-pointer"
           >
-            {categoryOffers.length} Deals
-          </span>
+            <span>View All</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
         </div>
 
         {categoryOffers.length === 0 ? (
@@ -143,35 +129,15 @@ export function ValiditySections({
 
         return (
           <section key={catConfig.key} className="space-y-4">
-            {/* Section Header Banner */}
-            <div className="flex items-center justify-between px-1">
-              <div className="flex items-center gap-2.5">
-                <div
-                  className={`w-8 h-8 rounded-xl ${catConfig.theme.accentBg} text-white flex items-center justify-center shadow-xs flex-shrink-0`}
-                >
-                  <Icon className="w-4 h-4" />
-                </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <h3 className="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight">
-                      {catConfig.label}
-                    </h3>
-                    <span
-                      className={`px-2 py-0.5 rounded-full text-[10px] font-black ${catConfig.theme.badgeBg}`}
-                    >
-                      {catOffers.length}
-                    </span>
-                  </div>
-                  <p className="text-xs text-slate-500 hidden sm:block">
-                    {catConfig.description}
-                  </p>
-                </div>
-              </div>
-
+            {/* Section Header */}
+            <div className="flex items-center justify-between mb-3 px-1">
+              <h2 className="text-lg font-extrabold text-slate-900 tracking-tight">
+                {catConfig.label}
+              </h2>
               <button
                 type="button"
                 onClick={() => onSeeAllValidity(catConfig.key)}
-                className="inline-flex items-center gap-1 text-xs font-extrabold text-blue-600 hover:text-blue-700 transition-colors"
+                className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 hover:text-blue-700 transition-colors cursor-pointer"
               >
                 <span>View Category</span>
                 <ArrowRight className="w-3.5 h-3.5" />

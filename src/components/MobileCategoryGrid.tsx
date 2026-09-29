@@ -66,9 +66,8 @@ export function MobileCategoryGrid({
       <div className="w-full mb-6 transition-all duration-300">
         {/* Popular Categories Title */}
         <div className="mb-3.5 flex items-center justify-between px-1">
-          <h2 className="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
-            <Sparkles className="w-4.5 h-4.5 text-orange-500" />
-            <span>Popular Categories</span>
+          <h2 className="text-lg font-extrabold text-slate-900 tracking-tight">
+            Popular Categories
           </h2>
           <button
             type="button"
