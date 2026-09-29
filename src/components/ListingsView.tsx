@@ -32,6 +32,9 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
 
   // Filter States
   const [selectedCategory, setSelectedCategory] = useState<string>(categoryParam);
+  const [selectedLocation, setSelectedLocation] = useState<string>("");
+  const [selectedDistance, setSelectedDistance] = useState<number | null>(null);
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [isHeaderHidden, setIsHeaderHidden] = useState<boolean>(false);
 
   // Throttled flicker-free scroll listener with hysteresis
