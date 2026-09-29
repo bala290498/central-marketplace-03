@@ -4,10 +4,17 @@ import React from "react";
 import { Offer } from "@/types/offer";
 import {
   VALIDITY_CATEGORIES,
-  ValidityCategoryKey,
   getOfferValidityCategory,
 } from "@/lib/validity";
-import { Flame, Hourglass, UserCheck, CheckCircle2, Sparkles } from "lucide-react";
+import {
+  Flame,
+  Hourglass,
+  UserCheck,
+  Search,
+  CheckCircle2,
+  Calendar,
+  Sparkles,
+} from "lucide-react";
 
 interface ValidityCategoryBarProps {
   offers: Offer[];
@@ -25,9 +32,11 @@ export function ValidityCategoryBar({
     const acc: Record<string, number> = {
       all: offers.length,
       "limited-slots": 0,
-      "expires-in-days": 0,
+      "expires-soon": 0,
       "until-filled": 0,
+      "until-found": 0,
       available: 0,
+      "valid-all-days": 0,
     };
 
     offers.forEach((offer) => {
@@ -46,6 +55,10 @@ export function ValidityCategoryBar({
         return Hourglass;
       case "UserCheck":
         return UserCheck;
+      case "Search":
+        return Search;
+      case "Calendar":
+        return Calendar;
       case "CheckCircle2":
         return CheckCircle2;
       default:

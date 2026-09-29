@@ -346,9 +346,11 @@ export function ListCategoryBar({
             <option value="">All validities</option>
             <optgroup label="Validity Headings">
               <option value="limited-slots">🔥 Limited Slots</option>
-              <option value="expires-in-days">⏳ Expires in Days</option>
+              <option value="expires-soon">⏳ Expires Soon</option>
               <option value="until-filled">🎯 Until Filled</option>
+              <option value="until-found">🔍 Until Found</option>
               <option value="available">✅ Available</option>
+              <option value="valid-all-days">📅 Valid All Days</option>
             </optgroup>
             {validities && validities.length > 0 && (
               <optgroup label="Specific Statuses">

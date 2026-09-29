@@ -8,7 +8,15 @@ import {
   getOfferValidityCategory,
 } from "@/lib/validity";
 import { OfferCard } from "./OfferCard";
-import { Flame, Hourglass, UserCheck, CheckCircle2, ArrowRight } from "lucide-react";
+import {
+  Flame,
+  Hourglass,
+  UserCheck,
+  Search,
+  CheckCircle2,
+  Calendar,
+  ArrowRight,
+} from "lucide-react";
 
 interface ValiditySectionsProps {
   offers: Offer[];
@@ -33,6 +41,10 @@ export function ValiditySections({
         return Hourglass;
       case "UserCheck":
         return UserCheck;
+      case "Search":
+        return Search;
+      case "Calendar":
+        return Calendar;
       case "CheckCircle2":
         return CheckCircle2;
       default:
@@ -44,9 +56,11 @@ export function ValiditySections({
   const groupedOffers = React.useMemo(() => {
     const map: Record<ValidityCategoryKey, Offer[]> = {
       "limited-slots": [],
-      "expires-in-days": [],
+      "expires-soon": [],
       "until-filled": [],
+      "until-found": [],
       available: [],
+      "valid-all-days": [],
     };
 
     offers.forEach((offer) => {

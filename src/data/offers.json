@@ -11,7 +11,7 @@
     "badge": "20% OFF",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01001",
-    "validity": "Valid all month"
+    "validity": "Valid All Days"
   },
   {
     "id": "offer-002",
@@ -25,7 +25,7 @@
     "badge": "BOGO DEAL",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9342,80.2150",
     "phone": "+91 98765 01002",
-    "validity": "Ends Tonight"
+    "validity": "Expires Soon"
   },
   {
     "id": "offer-003",
@@ -39,7 +39,7 @@
     "badge": "30% OFF",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0067,80.2572",
     "phone": "+91 98765 01003",
-    "validity": "Expires in 2d"
+    "validity": "Expires Soon"
   },
   {
     "id": "offer-004",
@@ -53,7 +53,7 @@
     "badge": "15% OFF",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0418,80.2337",
     "phone": "+91 98765 01004",
-    "validity": "8 slots left"
+    "validity": "Limited Slots"
   },
   {
     "id": "offer-005",
@@ -67,7 +67,7 @@
     "badge": "COMBO",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0604,80.2496",
     "phone": "+91 98765 01005",
-    "validity": "Valid all month"
+    "validity": "Valid All Days"
   },
   {
     "id": "offer-006",
@@ -81,7 +81,7 @@
     "badge": "₹200 OFF",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9818,80.2184",
     "phone": "+91 98765 01006",
-    "validity": "Ends Tonight"
+    "validity": "Expires Soon"
   },
   {
     "id": "offer-007",
@@ -95,7 +95,7 @@
     "badge": "B2G1",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0830,80.2707",
     "phone": "+91 98765 01007",
-    "validity": "Expires in 2d"
+    "validity": "Expires Soon"
   },
   {
     "id": "offer-008",
@@ -109,7 +109,7 @@
     "badge": "10% OFF",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0475,80.2420",
     "phone": "+91 98765 01008",
-    "validity": "8 slots left"
+    "validity": "Limited Slots"
   },
   {
     "id": "offer-009",
@@ -123,7 +123,7 @@
     "badge": "TRIAL",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.8996,80.2279",
     "phone": "+91 98765 01009",
-    "validity": "Valid all month"
+    "validity": "Valid All Days"
   },
   {
     "id": "offer-010",
@@ -137,7 +137,7 @@
     "badge": "12% OFF",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0213,80.1850",
     "phone": "+91 98765 01010",
-    "validity": "Ends Tonight"
+    "validity": "Expires Soon"
   },
   {
     "id": "offer-011",
@@ -151,7 +151,7 @@
     "badge": "COMBO",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0827,80.2707",
     "phone": "+91 98765 01011",
-    "validity": "Expires in 2d"
+    "validity": "Expires Soon"
   },
   {
     "id": "offer-012",
@@ -165,7 +165,7 @@
     "badge": "PACKAGE",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9526,80.1462",
     "phone": "+91 98765 01012",
-    "validity": "8 slots left"
+    "validity": "Limited Slots"
   },
   {
     "id": "offer-013",
@@ -179,7 +179,7 @@
     "badge": "FREE VISIT",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0732,80.2210",
     "phone": "+91 98765 01013",
-    "validity": "Valid all month"
+    "validity": "Valid All Days"
   },
   {
     "id": "list-001",
@@ -193,7 +193,7 @@
     "badge": "Hiring",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01001",
-    "validity": "Open until filled"
+    "validity": "Until Filled"
   },
   {
     "id": "list-002",
@@ -235,7 +235,7 @@
     "badge": "Wanted",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01004",
-    "validity": "Open until found"
+    "validity": "Until Found"
   },
   {
     "id": "list-005",
@@ -249,7 +249,7 @@
     "badge": "Wanted",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01005",
-    "validity": "Open until found"
+    "validity": "Until Found"
   },
   {
     "id": "list-006",
