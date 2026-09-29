@@ -1,9 +1,17 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { MapPin, Navigation, Loader2 } from "lucide-react";
+import {
+  MapPin,
+  Navigation,
+  Loader2,
+  ChevronDown,
+  HelpCircle,
+  Users,
+  ShieldAlert,
+} from "lucide-react";
 import { UserLocation } from "@/types/offer";
 
 interface NavbarProps {
@@ -26,6 +34,19 @@ export function Navbar({
   const pathname = usePathname();
   const [isHidden, setIsHidden] = useState(false);
   const [isCompact, setIsCompact] = useState(false);
+  const [isMoreDropdownOpen, setIsMoreDropdownOpen] = useState(false);
+  const timeoutId = useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnter = () => {
+    if (timeoutId.current) clearTimeout(timeoutId.current);
+    setIsMoreDropdownOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutId.current = setTimeout(() => {
+      setIsMoreDropdownOpen(false);
+    }, 150);
+  };
 
   // Scroll listener for hide-on-scroll-down and show-on-scroll-up header (only if isSticky is true)
   useEffect(() => {
@@ -56,12 +77,16 @@ export function Navbar({
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isSticky]);
 
-  const navLinks = [
+  const mainNavLinks = [
     { href: "/", label: "Home" },
     { href: "/list", label: "List" },
-    { href: "/how-it-works", label: "How it works" },
     { href: "/list-your-business", label: "Post" },
-    { href: "/we-are-hiring", label: "We're hiring" },
+  ];
+
+  const moreSubLinks = [
+    { href: "/how-it-works", label: "How it works", icon: HelpCircle },
+    { href: "/we-are-hiring", label: "We're hiring", icon: Users },
+    { href: "/report-an-issue", label: "Report an issue", icon: ShieldAlert },
   ];
 
   return (
@@ -87,13 +112,8 @@ export function Navbar({
               CM
             </div>
             <div className="flex flex-col justify-center leading-tight">
-              <div className="font-extrabold text-slate-900 text-sm sm:text-base tracking-tight group-hover:text-orange-600 transition-colors">
-                <span className="hidden md:inline-block leading-tight">
-                  Central <br /> Marketplace
-                </span>
-                <span className="inline-block md:hidden">
-                  Central Marketplace
-                </span>
+              <div className="font-extrabold text-slate-900 text-sm sm:text-base tracking-tight group-hover:text-orange-600 transition-colors leading-tight">
+                Central <br /> Marketplace
               </div>
             </div>
           </Link>
@@ -132,15 +152,15 @@ export function Navbar({
             </div>
           )}
 
-          {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center space-x-1 sm:space-x-2">
-            {navLinks.map((link) => {
+          {/* Desktop Nav Links with More Hover Dropdown */}
+          <nav className="hidden md:flex items-center space-x-1 sm:space-x-1.5">
+            {mainNavLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors ${
+                  className={`px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-colors ${
                     isActive
                       ? "bg-orange-50 text-orange-600"
                       : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
@@ -150,6 +170,55 @@ export function Navbar({
                 </Link>
               );
             })}
+
+            {/* Desktop More Hover Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              <button
+                type="button"
+                onClick={() => setIsMoreDropdownOpen(!isMoreDropdownOpen)}
+                className={`inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-colors cursor-pointer ${
+                  moreSubLinks.some((l) => pathname === l.href) || isMoreDropdownOpen
+                    ? "bg-orange-50 text-orange-600"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                }`}
+              >
+                <span>More</span>
+                <ChevronDown
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                    isMoreDropdownOpen ? "transform rotate-180 text-orange-600" : ""
+                  }`}
+                />
+              </button>
+
+              {/* Collapsible Dropdown Menu */}
+              {isMoreDropdownOpen && (
+                <div className="absolute right-0 top-full mt-1 w-52 bg-white/95 backdrop-blur-md rounded-2xl p-1.5 shadow-xl border border-slate-200/90 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                  {moreSubLinks.map((sub) => {
+                    const SubIcon = sub.icon;
+                    const isSubActive = pathname === sub.href;
+                    return (
+                      <Link
+                        key={sub.href}
+                        href={sub.href}
+                        onClick={() => setIsMoreDropdownOpen(false)}
+                        className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition-all ${
+                          isSubActive
+                            ? "bg-orange-50 text-orange-600"
+                            : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+                        }`}
+                      >
+                        <SubIcon className="w-4 h-4 text-slate-500" />
+                        <span>{sub.label}</span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
           </nav>
 
           {/* Mobile Location Header Button */}

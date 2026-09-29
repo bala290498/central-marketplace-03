@@ -92,8 +92,8 @@ export function MobileCategoryGrid({
 
   return (
     <>
-      <div className="w-full bg-white rounded-3xl p-4 border border-slate-200/80 shadow-xs mb-6">
-        <div className="grid grid-cols-3 gap-3">
+      <div className="w-full mb-6">
+        <div className="grid grid-cols-3 gap-y-4 gap-x-2">
           {gridCategories.map((item, idx) => {
             const Icon = item.icon;
             const isSelected = selectedCategory === item.categoryValue;
@@ -102,18 +102,22 @@ export function MobileCategoryGrid({
                 key={idx}
                 type="button"
                 onClick={() => handleSelect(item.categoryValue)}
-                className={`flex flex-col items-center justify-center p-2.5 rounded-2xl transition-all ${
-                  isSelected
-                    ? "ring-2 ring-blue-600 bg-blue-50/50 scale-105"
-                    : "hover:bg-slate-50 border border-slate-100/80"
-                }`}
+                className="flex flex-col items-center justify-center py-1.5 px-1 transition-all cursor-pointer group focus:outline-none"
               >
                 <div
-                  className={`w-11 h-11 rounded-2xl flex items-center justify-center mb-1.5 shadow-xs transition-transform ${item.bgColor}`}
+                  className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-1.5 shadow-2xs group-hover:scale-105 transition-transform ${
+                    isSelected ? "ring-2 ring-blue-600 scale-105" : ""
+                  } ${item.bgColor}`}
                 >
-                  <Icon className="w-5 h-5 stroke-[2.2]" />
+                  <Icon className="w-6 h-6 stroke-[2.2]" />
                 </div>
-                <span className="text-[11px] font-bold text-slate-800 text-center leading-tight">
+                <span
+                  className={`text-[11px] text-center leading-tight transition-colors ${
+                    isSelected
+                      ? "font-extrabold text-blue-600"
+                      : "font-bold text-slate-800 group-hover:text-slate-900"
+                  }`}
+                >
                   {item.name}
                 </span>
               </button>
@@ -124,10 +128,10 @@ export function MobileCategoryGrid({
           <button
             type="button"
             onClick={() => setIsModalOpen(true)}
-            className="flex flex-col items-center justify-center p-2.5 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-slate-100 transition-all group"
+            className="flex flex-col items-center justify-center py-1.5 px-1 transition-all cursor-pointer group focus:outline-none"
           >
-            <div className="w-11 h-11 rounded-2xl bg-slate-200/80 text-slate-700 flex items-center justify-center mb-1.5 shadow-xs group-hover:scale-105 transition-transform">
-              <Grid className="w-5 h-5 stroke-[2.2]" />
+            <div className="w-12 h-12 rounded-2xl bg-slate-200/80 text-slate-700 flex items-center justify-center mb-1.5 shadow-2xs group-hover:scale-105 transition-transform">
+              <Grid className="w-6 h-6 stroke-[2.2]" />
             </div>
             <span className="text-[11px] font-extrabold text-blue-600 text-center leading-tight">
               View All
