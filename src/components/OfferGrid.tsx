@@ -11,10 +11,12 @@ import {
   lookupUserArea,
 } from "@/lib/utils";
 import { Navbar } from "./Navbar";
+import { HeroBanner } from "./HeroBanner";
+import { MobileCategoryGrid } from "./MobileCategoryGrid";
+import { LatestListingsCarousel } from "./LatestListingsCarousel";
 import { CategorySelector } from "./CategorySelector";
 import { FilterBar } from "./FilterBar";
 import { OfferCard } from "./OfferCard";
-import { MobileCategoryGrid } from "./MobileCategoryGrid";
 import { Sparkles, CheckCircle2, AlertCircle } from "lucide-react";
 
 interface OfferGridProps {
@@ -132,6 +134,13 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
     return list;
   }, [offers, selectedCategory, selectedLocation, selectedDistance, searchQuery, userLocation]);
 
+  const scrollToOffers = () => {
+    const el = document.getElementById("offers-section");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   // Handle Share functionality
   const handleShare = async (offer: Offer) => {
     const title = offer.title || "Deal";
@@ -187,56 +196,72 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
 
       {/* Main Deals Container */}
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 pt-4 pb-16">
-        {/* Mobile Category App Grid */}
-        <div className="block md:hidden">
+        {/* 1. Hero Banner with Search Bar */}
+        <HeroBanner
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+        />
+
+        {/* 2. Categories Section (3x3 grid with View All tile) */}
+        <div className="mb-2">
           <MobileCategoryGrid
             selectedCategory={selectedCategory}
             onSelectCategory={setSelectedCategory}
           />
         </div>
 
-        {/* Banner / Headline */}
-        <div className="mb-4 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-600">
-            <Sparkles className="w-4 h-4 text-orange-500" />
-            <span>
-              {userLocation
-                ? "Exclusive verified discounts near you"
-                : "Browse local deals across Chennai"}
+        {/* 3. Latest Listings Horizontal Carousel */}
+        <LatestListingsCarousel
+          offers={processedOffers}
+          userLocation={userLocation}
+          onSeeAll={scrollToOffers}
+        />
+
+        {/* 4. Full Filtered Offers Section */}
+        <div id="offers-section">
+          {/* Banner / Headline */}
+          <div className="mb-3 flex items-center justify-between">
+            <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-600">
+              <Sparkles className="w-4 h-4 text-orange-500" />
+              <span>
+                {selectedCategory
+                  ? `Showing results for "${selectedCategory}"`
+                  : userLocation
+                  ? "Exclusive verified discounts near you"
+                  : "Browse local deals across Chennai"}
+              </span>
+            </div>
+
+            <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-slate-200/80 text-slate-700">
+              {processedOffers.length} {processedOffers.length === 1 ? "Listing" : "Listings"}
             </span>
           </div>
 
-          <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-slate-200/80 text-slate-700">
-            {processedOffers.length} {processedOffers.length === 1 ? "Deal" : "Deals"}
-          </span>
-        </div>
+          {/* Filters Container */}
+          <div className="bg-white/95 backdrop-blur-md rounded-2xl p-3 sm:p-4 border border-slate-200/80 shadow-xs mb-6 space-y-2">
+            {/* Category Chips (Desktop & Tablet) */}
+            <div className="hidden md:block">
+              <CategorySelector
+                categories={categories}
+                selectedCategory={selectedCategory}
+                onSelectCategory={setSelectedCategory}
+              />
+            </div>
 
-        {/* Filters Container */}
-        <div className="bg-white/95 backdrop-blur-md rounded-2xl p-3 sm:p-4 border border-slate-200/80 shadow-xs mb-6 space-y-2">
-          {/* Category Chips (Desktop & Tablet) */}
-          <div className="hidden md:block">
-            <CategorySelector
-              categories={categories}
-              selectedCategory={selectedCategory}
-              onSelectCategory={setSelectedCategory}
+            {/* Location & Distance Dropdowns */}
+            <FilterBar
+              locations={locations}
+              selectedLocation={selectedLocation}
+              selectedDistance={selectedDistance}
+              searchQuery={searchQuery}
+              onLocationChange={setSelectedLocation}
+              onDistanceChange={setSelectedDistance}
+              onSearchChange={setSearchQuery}
+              hasUserLocation={!!userLocation}
             />
           </div>
 
-          {/* Location & Distance Dropdowns */}
-          <FilterBar
-            locations={locations}
-            selectedLocation={selectedLocation}
-            selectedDistance={selectedDistance}
-            searchQuery={searchQuery}
-            onLocationChange={setSelectedLocation}
-            onDistanceChange={setSelectedDistance}
-            onSearchChange={setSearchQuery}
-            hasUserLocation={!!userLocation}
-          />
-        </div>
-
-        {/* Offers Grid */}
-        <div id="offers-section">
+          {/* Offers Grid */}
           {processedOffers.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               {processedOffers.map((offer) => (
