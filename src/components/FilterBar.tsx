@@ -44,7 +44,7 @@ export function FilterBar({
         <select
           value={selectedLocation}
           onChange={(e) => onLocationChange(e.target.value)}
-          className="w-full pl-9 pr-8 py-2 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs sm:text-sm font-semibold appearance-none focus:outline-none focus:ring-2 focus:ring-orange-500 shadow-xs"
+          className="w-full pl-9 pr-8 py-2 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs sm:text-sm font-semibold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer"
         >
           <option value="">All locations</option>
           {locations.map((loc) => (
@@ -64,7 +64,7 @@ export function FilterBar({
           onChange={(e) =>
             onDistanceChange(e.target.value ? Number(e.target.value) : null)
           }
-          className="w-full pl-9 pr-8 py-2 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs sm:text-sm font-semibold appearance-none focus:outline-none focus:ring-2 focus:ring-orange-500 shadow-xs"
+          className="w-full pl-9 pr-8 py-2 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs sm:text-sm font-semibold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer"
         >
           <option value="">All distances</option>
           <option value="5">Within 5 km</option>

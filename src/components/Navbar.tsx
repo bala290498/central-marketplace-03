@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   MapPin,
   Navigation,
@@ -11,6 +11,8 @@ import {
   HelpCircle,
   Users,
   ShieldAlert,
+  Search,
+  X,
 } from "lucide-react";
 import { UserLocation } from "@/types/offer";
 
@@ -32,10 +34,22 @@ export function Navbar({
   isSticky = true,
 }: NavbarProps) {
   const pathname = usePathname();
+  const router = useRouter();
   const [isHidden, setIsHidden] = useState(false);
   const [isCompact, setIsCompact] = useState(false);
   const [isMoreDropdownOpen, setIsMoreDropdownOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const timeoutId = useRef<NodeJS.Timeout | null>(null);
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/list?search=${encodeURIComponent(searchQuery.trim())}`);
+    } else {
+      router.push("/list");
+    }
+  };
 
   const handleMouseEnter = () => {
     if (timeoutId.current) clearTimeout(timeoutId.current);
@@ -155,8 +169,45 @@ export function Navbar({
             )}
           </div>
 
-          {/* Desktop Nav Links with More Hover Dropdown */}
+          {/* Desktop Nav Links with Search Icon before Home & More Hover Dropdown */}
           <nav className="hidden md:flex items-center space-x-1 sm:space-x-1.5">
+            {/* Search Icon / Input immediately BEFORE Home page link */}
+            <div className="relative flex items-center mr-0.5 sm:mr-1">
+              {isSearchOpen ? (
+                <form onSubmit={handleSearchSubmit} className="relative flex items-center">
+                  <input
+                    type="text"
+                    placeholder="Search deals..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    autoFocus
+                    className="w-40 sm:w-52 pl-8 pr-7 py-1.5 rounded-xl text-xs sm:text-sm bg-slate-100 border border-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-500 font-medium text-slate-800 transition-all"
+                  />
+                  <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 pointer-events-none" />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsSearchOpen(false);
+                      setSearchQuery("");
+                    }}
+                    className="absolute right-2 text-slate-400 hover:text-slate-600 p-0.5 rounded-full cursor-pointer"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                </form>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setIsSearchOpen(true)}
+                  className="p-2 rounded-xl text-slate-600 hover:text-orange-600 hover:bg-orange-50 transition-colors cursor-pointer flex items-center justify-center"
+                  title="Search deals"
+                  aria-label="Search deals"
+                >
+                  <Search className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+                </button>
+              )}
+            </div>
+
             {mainNavLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
