@@ -9,7 +9,6 @@ import {
   Package,
   Wrench,
   UtensilsCrossed,
-  CookingPot,
   Car,
   ShoppingCart,
   Scissors,
@@ -20,6 +19,7 @@ import {
   ChevronDown,
   ChevronUp,
   Sparkles,
+  ArrowRight,
 } from "lucide-react";
 import { AllCategoriesModal } from "./AllCategoriesModal";
 
@@ -27,6 +27,37 @@ interface MobileCategoryGridProps {
   selectedCategory?: string;
   onSelectCategory?: (cat: string) => void;
 }
+
+const CATEGORY_THEMES = [
+  {
+    bg: "bg-[#FFF4F6]",
+    border: "border-[#FDE2E7]",
+    iconBg: "bg-[#E63956]",
+    textColor: "text-[#D81B43]",
+    badgeBg: "bg-[#FDE2E8]",
+  },
+  {
+    bg: "bg-[#F0F6FF]",
+    border: "border-[#DCE8FE]",
+    iconBg: "bg-[#1E75EB]",
+    textColor: "text-[#1D4ED8]",
+    badgeBg: "bg-[#DBEAFE]",
+  },
+  {
+    bg: "bg-[#FFF8EE]",
+    border: "border-[#FDEBD0]",
+    iconBg: "bg-[#F97316]",
+    textColor: "text-[#C2410C]",
+    badgeBg: "bg-[#FFEDD5]",
+  },
+  {
+    bg: "bg-[#F0FDF4]",
+    border: "border-[#DCFCE7]",
+    iconBg: "bg-[#10B981]",
+    textColor: "text-[#15803D]",
+    badgeBg: "bg-[#DCFCE7]",
+  },
+];
 
 export function MobileCategoryGrid({
   selectedCategory = "",
@@ -41,79 +72,66 @@ export function MobileCategoryGrid({
       name: "Property",
       categoryValue: "Property",
       icon: Home,
-      bgColor: "bg-orange-100/90 text-orange-600",
     },
     {
       name: "Recruitment",
       categoryValue: "Recruitment",
       icon: Briefcase,
-      bgColor: "bg-blue-100/90 text-blue-600",
     },
     {
       name: "Professionals",
       categoryValue: "Professional",
       icon: UserCheck,
-      bgColor: "bg-purple-100/90 text-purple-600",
     },
     {
       name: "Products",
       categoryValue: "Products",
       icon: Package,
-      bgColor: "bg-amber-100/90 text-amber-600",
     },
     {
       name: "Services",
       categoryValue: "Home & Living",
       icon: Wrench,
-      bgColor: "bg-sky-100/90 text-sky-600",
     },
     {
       name: "Food",
-      categoryValue: "Dining & Cafes",
+      categoryValue: "Food",
       icon: UtensilsCrossed,
-      bgColor: "bg-orange-100/90 text-orange-600",
     },
     {
       name: "Vehicles",
       categoryValue: "Auto Care",
       icon: Car,
-      bgColor: "bg-blue-100/90 text-blue-600",
     },
     {
       name: "Daily Needs",
       categoryValue: "Daily Needs",
       icon: ShoppingCart,
-      bgColor: "bg-emerald-100/90 text-emerald-600",
     },
     {
       name: "Salon & Spa",
       categoryValue: "Salon & Spa",
       icon: Scissors,
-      bgColor: "bg-pink-100/90 text-pink-600",
     },
     {
       name: "Electronics",
       categoryValue: "Electronics",
       icon: Smartphone,
-      bgColor: "bg-blue-100/90 text-blue-600",
     },
     {
       name: "Fitness",
       categoryValue: "Fitness",
       icon: Dumbbell,
-      bgColor: "bg-red-100/90 text-red-600",
     },
     {
       name: "Pharmacy",
       categoryValue: "Pharmacy",
       icon: Pill,
-      bgColor: "bg-teal-100/90 text-teal-600",
     },
     {
       name: "Entertainment",
       categoryValue: "Entertainment",
       icon: Film,
-      bgColor: "bg-indigo-100/90 text-indigo-600",
     },
   ];
 
@@ -128,9 +146,6 @@ export function MobileCategoryGrid({
     }
   };
 
-  // Filter category items depending on collapse vs expand state:
-  // Filter category items depending on collapse vs expand state:
-  // 6 items + More/Less button when collapsed.
   const desktopVisible = isExpanded ? allCategories : allCategories.slice(0, 6);
   const mobileVisible = isExpanded ? allCategories : allCategories.slice(0, 5);
 
@@ -138,113 +153,120 @@ export function MobileCategoryGrid({
     <>
       <div className="w-full mb-6 transition-all duration-300">
         {/* Popular Categories Title */}
-        <div className="mb-3 flex items-center justify-between">
-          <h2 className="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-orange-500" />
+        <div className="mb-3.5 flex items-center justify-between px-1">
+          <h2 className="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
+            <Sparkles className="w-4.5 h-4.5 text-orange-500" />
             <span>Popular Categories</span>
           </h2>
+          <button
+            type="button"
+            onClick={() => setIsModalOpen(true)}
+            className="text-xs font-extrabold text-blue-600 hover:text-blue-700 transition-colors inline-flex items-center gap-1 cursor-pointer"
+          >
+            <span>All Categories</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
         </div>
 
-        {/* Desktop View: 6 items + More/Less button in 1 single row (7 columns) when collapsed */}
-        <div className="hidden md:grid grid-cols-7 gap-y-4 gap-x-3">
+        {/* Desktop Grid (Latest Listings Card Style) */}
+        <div className="hidden md:grid grid-cols-7 gap-3">
           {desktopVisible.map((item, idx) => {
             const Icon = item.icon;
             const isSelected = selectedCategory === item.categoryValue;
+            const theme = CATEGORY_THEMES[idx % CATEGORY_THEMES.length];
+
             return (
-              <button
+              <div
                 key={idx}
-                type="button"
                 onClick={() => handleSelect(item.categoryValue)}
-                className="flex flex-col items-center justify-center py-1.5 px-1 transition-all cursor-pointer group focus:outline-none"
+                className={`p-3.5 rounded-3xl border ${theme.bg} ${theme.border} ${
+                  isSelected ? "ring-2 ring-orange-500 shadow-md scale-102" : "shadow-2xs hover:shadow-md"
+                } transition-all duration-200 cursor-pointer flex flex-col justify-between group h-28`}
               >
-                <div
-                  className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-1.5 shadow-2xs group-hover:scale-105 transition-transform ${
-                    isSelected ? "ring-2 ring-orange-500 scale-105" : ""
-                  } ${item.bgColor}`}
-                >
-                  <Icon className="w-6 h-6 stroke-[2.2]" />
+                <div className="flex items-center justify-between gap-1 mb-2">
+                  <div className={`w-8 h-8 rounded-xl ${theme.iconBg} text-white flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-105 transition-transform`}>
+                    <Icon className="w-4 h-4 stroke-[2.2]" />
+                  </div>
+                  <span className={`px-1.5 py-0.5 rounded-full text-[9px] font-black ${theme.badgeBg} ${theme.textColor} uppercase tracking-wider`}>
+                    Browse
+                  </span>
                 </div>
-                <span
-                  className={`text-[11px] text-center leading-tight transition-colors ${
-                    isSelected
-                      ? "font-extrabold text-orange-600"
-                      : "font-bold text-slate-800 group-hover:text-slate-900"
-                  }`}
-                >
+                <span className="text-xs font-extrabold text-slate-900 line-clamp-1 group-hover:text-slate-800 tracking-tight">
                   {item.name}
                 </span>
-              </button>
+              </div>
             );
           })}
 
-          {/* Desktop Expander / Collapser Button */}
-          <button
-            type="button"
+          {/* Desktop Expander / Collapser Tile */}
+          <div
             onClick={() => setIsExpanded(!isExpanded)}
-            className="flex flex-col items-center justify-center py-1.5 px-1 transition-all cursor-pointer group focus:outline-none"
+            className="p-3.5 rounded-3xl border border-slate-200 bg-slate-100/80 hover:bg-slate-200/80 shadow-2xs hover:shadow-md transition-all duration-200 cursor-pointer flex flex-col justify-between group h-28"
           >
-            <div className="w-12 h-12 rounded-2xl bg-slate-200/80 text-slate-700 flex items-center justify-center mb-1.5 shadow-2xs group-hover:scale-105 transition-transform">
-              {isExpanded ? (
-                <ChevronUp className="w-6 h-6 stroke-[2.5]" />
-              ) : (
-                <ChevronDown className="w-6 h-6 stroke-[2.5]" />
-              )}
+            <div className="flex items-center justify-between gap-1 mb-2">
+              <div className="w-8 h-8 rounded-xl bg-orange-500 text-white flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-105 transition-transform">
+                {isExpanded ? (
+                  <ChevronUp className="w-4 h-4 stroke-[2.5]" />
+                ) : (
+                  <ChevronDown className="w-4 h-4 stroke-[2.5]" />
+                )}
+              </div>
+              <span className="px-1.5 py-0.5 rounded-full text-[9px] font-black bg-orange-100 text-orange-700 uppercase tracking-wider">
+                {isExpanded ? "Less" : "More"}
+              </span>
             </div>
-            <span className="text-[11px] font-extrabold text-orange-600 text-center leading-tight">
-              {isExpanded ? "Less" : "More"}
+            <span className="text-xs font-extrabold text-orange-600 line-clamp-1 tracking-tight">
+              {isExpanded ? "Show Less" : "Show More"}
             </span>
-          </button>
+          </div>
         </div>
 
-        {/* Mobile View: 3 columns grid (5 items + 1 More/Less button = 6 tiles collapsed) */}
-        <div className="grid md:hidden grid-cols-3 gap-y-4 gap-x-2">
+        {/* Mobile View: 3 columns grid (Latest Listings Card Style) */}
+        <div className="grid md:hidden grid-cols-3 gap-2.5">
           {mobileVisible.map((item, idx) => {
             const Icon = item.icon;
             const isSelected = selectedCategory === item.categoryValue;
+            const theme = CATEGORY_THEMES[idx % CATEGORY_THEMES.length];
+
             return (
-              <button
+              <div
                 key={idx}
-                type="button"
                 onClick={() => handleSelect(item.categoryValue)}
-                className="flex flex-col items-center justify-center py-1.5 px-1 transition-all cursor-pointer group focus:outline-none"
+                className={`p-3 rounded-2xl border ${theme.bg} ${theme.border} ${
+                  isSelected ? "ring-2 ring-orange-500 shadow-md scale-102" : "shadow-2xs hover:shadow-md"
+                } transition-all duration-200 cursor-pointer flex flex-col justify-between group h-24`}
               >
-                <div
-                  className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-1.5 shadow-2xs group-hover:scale-105 transition-transform ${
-                    isSelected ? "ring-2 ring-orange-500 scale-105" : ""
-                  } ${item.bgColor}`}
-                >
-                  <Icon className="w-6 h-6 stroke-[2.2]" />
+                <div className="flex items-center justify-between gap-1 mb-1">
+                  <div className={`w-7 h-7 rounded-lg ${theme.iconBg} text-white flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-105 transition-transform`}>
+                    <Icon className="w-3.5 h-3.5 stroke-[2.2]" />
+                  </div>
+                  <ArrowRight className={`w-3 h-3 ${theme.textColor} opacity-60 group-hover:opacity-100 transition-opacity`} />
                 </div>
-                <span
-                  className={`text-[11px] text-center leading-tight transition-colors ${
-                    isSelected
-                      ? "font-extrabold text-orange-600"
-                      : "font-bold text-slate-800 group-hover:text-slate-900"
-                  }`}
-                >
+                <span className="text-[11px] font-extrabold text-slate-900 line-clamp-1 group-hover:text-slate-800 tracking-tight">
                   {item.name}
                 </span>
-              </button>
+              </div>
             );
           })}
 
-          {/* Mobile Expander / Collapser Button */}
-          <button
-            type="button"
+          {/* Mobile Expander / Collapser Tile */}
+          <div
             onClick={() => setIsExpanded(!isExpanded)}
-            className="flex flex-col items-center justify-center py-1.5 px-1 transition-all cursor-pointer group focus:outline-none"
+            className="p-3 rounded-2xl border border-slate-200 bg-slate-100/80 hover:bg-slate-200/80 shadow-2xs hover:shadow-md transition-all duration-200 cursor-pointer flex flex-col justify-between group h-24"
           >
-            <div className="w-12 h-12 rounded-2xl bg-slate-200/80 text-slate-700 flex items-center justify-center mb-1.5 shadow-2xs group-hover:scale-105 transition-transform">
-              {isExpanded ? (
-                <ChevronUp className="w-6 h-6 stroke-[2.5]" />
-              ) : (
-                <ChevronDown className="w-6 h-6 stroke-[2.5]" />
-              )}
+            <div className="flex items-center justify-between gap-1 mb-1">
+              <div className="w-7 h-7 rounded-lg bg-orange-500 text-white flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-105 transition-transform">
+                {isExpanded ? (
+                  <ChevronUp className="w-3.5 h-3.5 stroke-[2.5]" />
+                ) : (
+                  <ChevronDown className="w-3.5 h-3.5 stroke-[2.5]" />
+                )}
+              </div>
             </div>
-            <span className="text-[11px] font-extrabold text-orange-600 text-center leading-tight">
+            <span className="text-[11px] font-extrabold text-orange-600 line-clamp-1 tracking-tight">
               {isExpanded ? "Less" : "More"}
             </span>
-          </button>
+          </div>
         </div>
       </div>
 
@@ -257,4 +279,3 @@ export function MobileCategoryGrid({
     </>
   );
 }
-

@@ -3,7 +3,7 @@
 import React from "react";
 import {
   Sparkles,
-  Utensils,
+  UtensilsCrossed,
   Scissors,
   ShoppingCart,
   ShoppingBag,
@@ -17,7 +17,6 @@ import {
   UserCheck,
   Building,
   Package,
-  Coffee,
   Store,
   Compass,
 } from "lucide-react";
@@ -37,8 +36,9 @@ export function CategorySelector({
     switch (name) {
       case "All Deals":
         return <Sparkles className="w-4 h-4 text-orange-500" />;
+      case "Food":
       case "Dining & Cafes":
-        return <Utensils className="w-4 h-4 text-amber-500" />;
+        return <UtensilsCrossed className="w-4 h-4 text-amber-500" />;
       case "Salon & Spa":
         return <Scissors className="w-4 h-4 text-pink-500" />;
       case "Grocery":
@@ -66,8 +66,6 @@ export function CategorySelector({
         return <Building className="w-4 h-4 text-sky-600" />;
       case "Products":
         return <Package className="w-4 h-4 text-orange-600" />;
-      case "Food":
-        return <Coffee className="w-4 h-4 text-amber-600" />;
       case "Wholesale":
         return <Store className="w-4 h-4 text-violet-600" />;
       default:

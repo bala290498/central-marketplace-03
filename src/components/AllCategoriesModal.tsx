@@ -41,7 +41,7 @@ export function AllCategoriesModal({
     { name: "Professionals", value: "Professional", icon: UserCheck, bg: "bg-purple-100 text-purple-600" },
     { name: "Products", value: "Products", icon: Package, bg: "bg-amber-100 text-amber-600" },
     { name: "Services", value: "Home & Living", icon: Wrench, bg: "bg-sky-100 text-sky-600" },
-    { name: "Food & Dining", value: "Dining & Cafes", icon: Utensils, bg: "bg-orange-100 text-orange-600" },
+    { name: "Food", value: "Food", icon: Utensils, bg: "bg-orange-100 text-orange-600" },
     { name: "Salon & Spa", value: "Salon & Spa", icon: Scissors, bg: "bg-pink-100 text-pink-600" },
     { name: "Electronics", value: "Electronics", icon: Smartphone, bg: "bg-blue-100 text-blue-600" },
     { name: "Fitness", value: "Fitness", icon: Dumbbell, bg: "bg-red-100 text-red-600" },

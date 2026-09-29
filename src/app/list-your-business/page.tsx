@@ -77,7 +77,7 @@ export default function ListYourBusinessPage() {
           <ul className="space-y-3 text-xs sm:text-sm text-slate-600 mb-6">
             <li className="flex items-start gap-2">
               <span className="text-orange-500 font-bold">•</span>
-              <span><strong>Business Name & Category:</strong> E.g. ABC Restaurant (Dining & Cafes)</span>
+              <span><strong>Business Name & Category:</strong> E.g. ABC Restaurant (Food)</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-orange-500 font-bold">•</span>
