@@ -226,7 +226,7 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
 
         {/* Offers Grid */}
         {processedOffers.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             {processedOffers.map((offer) => (
               <OfferCard
                 key={offer.id}
