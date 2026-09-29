@@ -14,8 +14,8 @@ import {
 import { Navbar } from "./Navbar";
 import { ListCategoryBar } from "./ListCategoryBar";
 import { OfferCard } from "./OfferCard";
-import { getOfferValidityCategory } from "@/lib/validity";
-import { CheckCircle2, AlertCircle, Search, X } from "lucide-react";
+import { getOfferValidityCategory, normalizeValidity } from "@/lib/validity";
+import { CheckCircle2, AlertCircle } from "lucide-react";
 
 interface ListingsViewProps {
   initialOffers: Offer[];
@@ -37,7 +37,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>(categoryParam);
   const [selectedLocation, setSelectedLocation] = useState<string>("");
   const [selectedDistance, setSelectedDistance] = useState<number | null>(null);
-  const [selectedValidity, setSelectedValidity] = useState<string>(validityParam);
+  const [selectedValidity, setSelectedValidity] = useState<string>(normalizeValidity(validityParam));
   const [searchQuery, setSearchQuery] = useState<string>(searchParam);
   const [isHeaderHidden, setIsHeaderHidden] = useState<boolean>(false);
 
@@ -99,7 +99,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
 
   useEffect(() => {
     if (validityParam) {
-      setSelectedValidity(validityParam);
+      setSelectedValidity(normalizeValidity(validityParam));
     }
   }, [validityParam]);
 
@@ -155,12 +155,13 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
     let list = offers.filter((offer) => {
       const areaOk = !selectedLocation || offerArea(offer) === selectedLocation;
       const catOk = !selectedCategory || offerCategory(offer) === selectedCategory;
+      const offerValNorm = normalizeValidity(getOfferValidityCategory(offer)).toLowerCase();
+      const selValNorm = normalizeValidity(selectedValidity).toLowerCase();
       const valText = (offer.validity || offer.ends || offer.expiry || "").toLowerCase().trim();
-      const selValLower = selectedValidity.toLowerCase().trim();
       const validityOk =
         !selectedValidity ||
-        getOfferValidityCategory(offer) === selectedValidity ||
-        valText === selValLower;
+        offerValNorm === selValNorm ||
+        valText === selValNorm;
 
       const searchLower = searchQuery.toLowerCase().trim();
       const searchOk =

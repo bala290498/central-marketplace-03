@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { Offer, UserLocation } from "@/types/offer";
-import { lookupUserArea } from "@/lib/utils";
+import { lookupUserArea, distanceKm } from "@/lib/utils";
 import { Navbar } from "./Navbar";
 import { MobileCategoryGrid } from "./MobileCategoryGrid";
 import { LatestListingsCarousel } from "./LatestListingsCarousel";
@@ -32,7 +32,7 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
     setTimeout(() => setToastMessage(null), 3000);
   };
 
-  // Trigger geolocation detection
+  // Trigger geolocation detection with fallback
   const detectLocation = useCallback(() => {
     if (typeof window === "undefined" || !navigator.geolocation) {
       triggerToast("Geolocation is not supported by your browser");
@@ -41,26 +41,36 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
 
     setIsLocating(true);
 
-    navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        const coords = {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        };
-        setUserLocation(coords);
-        setIsLocating(false);
+    const handleSuccess = async (position: GeolocationPosition) => {
+      const coords = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+      };
+      setUserLocation(coords);
+      setIsLocating(false);
 
-        // Reverse lookup area label
-        const areaLabel = await lookupUserArea(coords.latitude, coords.longitude);
-        if (areaLabel) {
-          setUserAreaLabel(areaLabel);
-        }
-      },
-      (error) => {
-        setIsLocating(false);
-        triggerToast("Could not detect location. Showing all deals.");
-      },
-      { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 }
+      const areaLabel = await lookupUserArea(coords.latitude, coords.longitude);
+      if (areaLabel) {
+        setUserAreaLabel(areaLabel);
+      }
+    };
+
+    const handleError = () => {
+      // Retry with enableHighAccuracy: false if high accuracy fails
+      navigator.geolocation.getCurrentPosition(
+        handleSuccess,
+        () => {
+          setIsLocating(false);
+          triggerToast("Could not detect location. Showing all deals.");
+        },
+        { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 }
+      );
+    };
+
+    navigator.geolocation.getCurrentPosition(
+      handleSuccess,
+      handleError,
+      { enableHighAccuracy: true, timeout: 6000, maximumAge: 60000 }
     );
   }, []);
 
@@ -99,6 +109,20 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
     ).sort() as string[];
   }, [offers]);
 
+  // Compute distance for all offers when userLocation exists
+  const offersWithDistance = React.useMemo(() => {
+    if (!userLocation) return offers;
+    return offers.map((offer) => ({
+      ...offer,
+      distance: distanceKm(
+        userLocation.latitude,
+        userLocation.longitude,
+        Number(offer.latitude),
+        Number(offer.longitude)
+      ),
+    }));
+  }, [offers, userLocation]);
+
   return (
     <div className="min-h-screen bg-slate-50/60 text-slate-900 flex flex-col">
       {/* Sticky Header */}
@@ -125,14 +149,14 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
 
         {/* 2. Latest Listings Horizontal Carousel */}
         <LatestListingsCarousel
-          offers={offers}
+          offers={offersWithDistance}
           userLocation={userLocation}
           onSeeAll={handleSeeAll}
         />
 
         {/* 3. Validity Headings Sections / Carousels */}
         <ValiditySections
-          offers={offers}
+          offers={offersWithDistance}
           userLocation={userLocation}
           selectedValidity={selectedValidity}
           onShare={handleShare}

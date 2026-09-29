@@ -25,13 +25,16 @@ export function LatestListingsCarousel({
     <section className="mb-8">
       {/* Header Row with Title & See All Button */}
       <div className="flex items-center justify-between mb-3 px-1">
-        <h2 className="text-lg font-extrabold text-slate-900 tracking-tight">
+        <h2
+          onClick={onSeeAll}
+          className="text-lg font-extrabold text-slate-900 tracking-tight cursor-pointer hover:text-blue-600 transition-colors"
+        >
           Latest Listings
         </h2>
         <button
           type="button"
           onClick={onSeeAll}
-          className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 hover:text-blue-700 transition-colors"
+          className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 hover:text-blue-700 transition-colors cursor-pointer"
         >
           <span>See All</span>
           <ArrowRight className="w-3.5 h-3.5" />

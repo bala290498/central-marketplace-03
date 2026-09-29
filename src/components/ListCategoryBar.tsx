@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
+import { formatCategoryLabel } from "@/lib/categories";
 import {
   Sparkles,
   UtensilsCrossed,
@@ -278,13 +279,13 @@ export function ListCategoryBar({
                   {getCategoryIcon(name)}
                 </div>
                 <span
-                  className={`text-[11px] tracking-tight whitespace-nowrap transition-colors ${
+                  className={`text-[11px] tracking-tight text-center leading-tight whitespace-pre-line transition-colors ${
                     isSelected
                       ? `font-extrabold ${colors.activeText} border-b-2 pb-0.5`
                       : "font-semibold text-slate-600 group-hover:text-slate-900"
                   }`}
                 >
-                  {name}
+                  {formatCategoryLabel(name)}
                 </span>
               </button>
             );

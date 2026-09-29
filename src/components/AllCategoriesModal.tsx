@@ -2,7 +2,7 @@
 
 import React from "react";
 import { X, Tag } from "lucide-react";
-import { getCategoryMeta } from "@/lib/categories";
+import { getCategoryMeta, formatCategoryLabel } from "@/lib/categories";
 
 interface AllCategoriesModalProps {
   isOpen: boolean;
@@ -96,8 +96,8 @@ export function AllCategoriesModal({
                   <div className={`w-11 h-11 rounded-2xl flex items-center justify-center mb-1.5 shadow-xs ${item.theme.iconBg} text-white`}>
                     <Icon className="w-5 h-5 stroke-[2.2]" />
                   </div>
-                  <span className="text-[11px] font-extrabold text-slate-800 text-center leading-tight group-hover:text-blue-600 truncate max-w-full">
-                    {item.name}
+                  <span className="text-[11px] font-extrabold text-slate-800 text-center leading-tight whitespace-pre-line group-hover:text-blue-600 max-w-full">
+                    {formatCategoryLabel(item.name)}
                   </span>
                 </button>
               );

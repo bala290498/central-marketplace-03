@@ -129,3 +129,15 @@ export function getCategoryMeta(categoryName: string, index: number = 0): Catego
     theme,
   };
 }
+
+export function formatCategoryLabel(name: string): string {
+  if (!name) return "";
+  const parts = name.trim().split(/\s+/);
+  if (parts.length === 2) {
+    return `${parts[0]}\n${parts[1]}`;
+  }
+  if (parts.length === 3 && (parts[1] === "&" || parts[1] === "and")) {
+    return `${parts[0]} &\n${parts[2]}`;
+  }
+  return name;
+}

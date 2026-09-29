@@ -4,7 +4,7 @@ import React, { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronDown, ChevronUp, Sparkles, ArrowRight } from "lucide-react";
 import { AllCategoriesModal } from "./AllCategoriesModal";
-import { getCategoryMeta } from "@/lib/categories";
+import { getCategoryMeta, formatCategoryLabel } from "@/lib/categories";
 
 interface MobileCategoryGridProps {
   categories?: string[];
@@ -67,7 +67,10 @@ export function MobileCategoryGrid({
       <div className="w-full mb-6 transition-all duration-300">
         {/* Popular Categories Title */}
         <div className="mb-3.5 flex items-center justify-between px-1">
-          <h2 className="text-lg font-extrabold text-slate-900 tracking-tight">
+          <h2
+            onClick={() => router.push("/list")}
+            className="text-lg font-extrabold text-slate-900 tracking-tight cursor-pointer hover:text-blue-600 transition-colors"
+          >
             Popular Categories
           </h2>
           <button
@@ -103,8 +106,8 @@ export function MobileCategoryGrid({
                     Browse
                   </span>
                 </div>
-                <span className="text-xs font-extrabold text-slate-900 line-clamp-1 group-hover:text-slate-800 tracking-tight">
-                  {item.name}
+                <span className="text-xs font-extrabold text-slate-900 line-clamp-2 leading-tight whitespace-pre-line group-hover:text-slate-800 tracking-tight">
+                  {formatCategoryLabel(item.name)}
                 </span>
               </div>
             );
@@ -154,8 +157,8 @@ export function MobileCategoryGrid({
                   </div>
                   <ArrowRight className={`w-3 h-3 ${theme.textColor} opacity-60 group-hover:opacity-100 transition-opacity`} />
                 </div>
-                <span className="text-[11px] font-extrabold text-slate-900 line-clamp-1 group-hover:text-slate-800 tracking-tight">
-                  {item.name}
+                <span className="text-[11px] font-extrabold text-slate-900 line-clamp-2 leading-tight whitespace-pre-line group-hover:text-slate-800 tracking-tight">
+                  {formatCategoryLabel(item.name)}
                 </span>
               </div>
             );

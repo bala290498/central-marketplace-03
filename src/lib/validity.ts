@@ -165,18 +165,27 @@ export function getOfferValidityCategory(offer: Offer): ValidityCategoryKey {
   return "available";
 }
 
+export function normalizeValidity(val: string): string {
+  if (!val) return "";
+  const vLower = val.toLowerCase().trim();
+  if (vLower === "limited-slots" || vLower === "limited") return "Limited";
+  if (vLower === "expires-soon" || vLower === "expires soon") return "Expires Soon";
+  if (vLower === "until-filled" || vLower === "until filled") return "Until Filled";
+  if (vLower === "until-found" || vLower === "until found") return "Until Found";
+  if (vLower === "available") return "Available";
+  if (vLower === "valid-all-days" || vLower === "valid all days") return "Valid All Days";
+  return val;
+}
+
 export function filterOffersByValidityCategory(
   offers: Offer[],
   categoryKey: ValidityCategoryKey | "all" | string
 ): Offer[] {
   if (!categoryKey || categoryKey === "all") return offers;
+  const targetNorm = normalizeValidity(categoryKey);
   return offers.filter((offer) => {
-    const valText = (offer.validity || offer.ends || offer.expiry || "").toLowerCase().trim();
-    const catKey = getOfferValidityCategory(offer);
-    const keyLower = categoryKey.toLowerCase().trim();
-    if (keyLower === "limited" || keyLower === "limited-slots") {
-      return catKey === "limited-slots" || valText.includes("limited");
-    }
-    return catKey === keyLower || valText === keyLower;
+    const catNorm = normalizeValidity(getOfferValidityCategory(offer));
+    return catNorm === targetNorm;
   });
 }
+

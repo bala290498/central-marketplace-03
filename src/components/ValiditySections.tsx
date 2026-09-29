@@ -131,12 +131,15 @@ export function ValiditySections({
           <section key={catConfig.key} className="space-y-4">
             {/* Section Header */}
             <div className="flex items-center justify-between mb-3 px-1">
-              <h2 className="text-lg font-extrabold text-slate-900 tracking-tight">
+              <h2
+                onClick={() => onSeeAllValidity(catConfig.label)}
+                className="text-lg font-extrabold text-slate-900 tracking-tight cursor-pointer hover:text-blue-600 transition-colors"
+              >
                 {catConfig.label}
               </h2>
               <button
                 type="button"
-                onClick={() => onSeeAllValidity(catConfig.key)}
+                onClick={() => onSeeAllValidity(catConfig.label)}
                 className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 hover:text-blue-700 transition-colors cursor-pointer"
               >
                 <span>View Category</span>

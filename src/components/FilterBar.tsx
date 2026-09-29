@@ -1,16 +1,14 @@
 "use client";
 
 import React from "react";
-import { MapPin, Navigation, Search } from "lucide-react";
+import { MapPin, Navigation } from "lucide-react";
 
 interface FilterBarProps {
   locations: string[];
   selectedLocation: string;
   selectedDistance: number | null;
-  searchQuery: string;
   onLocationChange: (loc: string) => void;
   onDistanceChange: (dist: number | null) => void;
-  onSearchChange: (query: string) => void;
   hasUserLocation: boolean;
 }
 
@@ -18,25 +16,12 @@ export function FilterBar({
   locations,
   selectedLocation,
   selectedDistance,
-  searchQuery,
   onLocationChange,
   onDistanceChange,
-  onSearchChange,
   hasUserLocation,
 }: FilterBarProps) {
   return (
-    <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-2.5 py-3">
-      {/* Search Input */}
-      <div className="relative flex items-center">
-        <Search className="absolute left-3.5 w-4 h-4 text-slate-400 pointer-events-none" />
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={(e) => onSearchChange(e.target.value)}
-          placeholder="Search offers or shops..."
-          className="w-full pl-9 pr-3 py-2 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs sm:text-sm font-medium focus:outline-none focus:ring-2 focus:ring-orange-500 shadow-xs"
-        />
-      </div>
+    <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-2.5 py-3">
 
       {/* Location Filter */}
       <div className="relative flex items-center">

@@ -11,8 +11,6 @@ import {
   HelpCircle,
   Users,
   ShieldAlert,
-  Search,
-  X,
 } from "lucide-react";
 import { UserLocation } from "@/types/offer";
 
@@ -25,139 +23,7 @@ interface NavbarProps {
   isSticky?: boolean;
 }
 
-function SearchControls() {
-  const pathname = usePathname();
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const searchParam = searchParams ? searchParams.get("search") || "" : "";
 
-  const [isSearchOpen, setIsSearchOpen] = useState(Boolean(searchParam));
-  const [searchQuery, setSearchQuery] = useState(searchParam);
-
-  useEffect(() => {
-    if (searchParam) {
-      setSearchQuery(searchParam);
-      setIsSearchOpen(true);
-    }
-  }, [searchParam]);
-
-  const updateSearchRoute = (val: string) => {
-    const q = val.trim();
-    if (pathname === "/list") {
-      const params = new URLSearchParams(searchParams ? searchParams.toString() : "");
-      if (q) {
-        params.set("search", q);
-      } else {
-        params.delete("search");
-      }
-      const newUrl = params.toString() ? `/list?${params.toString()}` : "/list";
-      router.replace(newUrl);
-    } else if (q) {
-      router.push(`/list?search=${encodeURIComponent(q)}`);
-    }
-  };
-
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    updateSearchRoute(searchQuery);
-  };
-
-  const handleSearchChange = (val: string) => {
-    setSearchQuery(val);
-    updateSearchRoute(val);
-  };
-
-  const handleCloseSearch = () => {
-    setIsSearchOpen(false);
-    setSearchQuery("");
-    if (pathname === "/list" && searchParam) {
-      const params = new URLSearchParams(searchParams ? searchParams.toString() : "");
-      params.delete("search");
-      const newUrl = params.toString() ? `/list?${params.toString()}` : "/list";
-      router.replace(newUrl);
-    }
-  };
-
-  return (
-    <>
-      {/* Desktop Search Icon / Form */}
-      <div className="hidden md:flex relative items-center mr-0.5 sm:mr-1">
-        {isSearchOpen ? (
-          <form onSubmit={handleSearchSubmit} className="relative flex items-center">
-            <input
-              type="text"
-              placeholder="Search deals..."
-              value={searchQuery}
-              onChange={(e) => handleSearchChange(e.target.value)}
-              autoFocus
-              className="w-40 sm:w-56 pl-8 pr-7 py-1.5 rounded-xl text-xs sm:text-sm bg-slate-100 border border-orange-200 outline-none focus:outline-none focus:ring-0 font-medium text-slate-800 transition-all shadow-2xs"
-            />
-            <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 pointer-events-none" />
-            <button
-              type="button"
-              onClick={handleCloseSearch}
-              className="absolute right-2 text-slate-400 hover:text-slate-600 p-0.5 rounded-full cursor-pointer"
-            >
-              <X className="w-3.5 h-3.5" />
-            </button>
-          </form>
-        ) : (
-          <button
-            type="button"
-            onClick={() => setIsSearchOpen(true)}
-            className="p-2 rounded-xl text-slate-600 hover:text-orange-600 hover:bg-orange-50 transition-colors cursor-pointer flex items-center justify-center"
-            title="Search deals"
-            aria-label="Search deals"
-          >
-            <Search className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
-          </button>
-        )}
-      </div>
-
-      {/* Mobile Search Icon / Form */}
-      <div className="flex md:hidden items-center">
-        {isSearchOpen ? (
-          <form onSubmit={handleSearchSubmit} className="relative flex items-center">
-            <input
-              type="text"
-              placeholder="Search deals..."
-              value={searchQuery}
-              onChange={(e) => handleSearchChange(e.target.value)}
-              autoFocus
-              className="w-32 sm:w-40 pl-7 pr-6 py-1 rounded-xl text-xs bg-slate-100 border border-orange-200 outline-none font-medium text-slate-800"
-            />
-            <Search className="w-3 h-3 text-slate-400 absolute left-2 pointer-events-none" />
-            <button
-              type="button"
-              onClick={handleCloseSearch}
-              className="absolute right-1.5 text-slate-400 hover:text-slate-600 p-0.5"
-            >
-              <X className="w-3 h-3" />
-            </button>
-          </form>
-        ) : (
-          <button
-            type="button"
-            onClick={() => setIsSearchOpen(true)}
-            className="p-1.5 rounded-xl text-slate-600 hover:text-orange-600 hover:bg-orange-50 transition-colors cursor-pointer"
-            title="Search deals"
-            aria-label="Search deals"
-          >
-            <Search className="w-4 h-4" />
-          </button>
-        )}
-      </div>
-    </>
-  );
-}
-
-function SearchControlsFallback() {
-  return (
-    <div className="p-2 rounded-xl text-slate-400 flex items-center justify-center">
-      <Search className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
-    </div>
-  );
-}
 
 export function Navbar({
   userLocation,
@@ -293,12 +159,8 @@ export function Navbar({
             )}
           </div>
 
-          {/* Desktop Nav Links with Search Icon before Home & More Hover Dropdown */}
+          {/* Desktop Nav Links & More Hover Dropdown */}
           <nav className="hidden md:flex items-center space-x-1 sm:space-x-1.5">
-            {/* Search Controls wrapped in Suspense */}
-            <Suspense fallback={<SearchControlsFallback />}>
-              <SearchControls />
-            </Suspense>
 
             {mainNavLinks.map((link) => {
               const isActive = pathname === link.href;
@@ -367,11 +229,8 @@ export function Navbar({
             </div>
           </nav>
 
-          {/* Mobile Header Right Section: Search + Location Button */}
+          {/* Mobile Header Right Section: Location Button */}
           <div className="flex md:hidden items-center gap-2">
-            <Suspense fallback={<SearchControlsFallback />}>
-              <SearchControls />
-            </Suspense>
 
             {onDetectLocation && (
               <button

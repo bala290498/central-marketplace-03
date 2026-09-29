@@ -84,11 +84,17 @@ export async function lookupUserArea(latitude: number, longitude: number): Promi
     const osmUrl = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=16&addressdetails=1&lat=${encodeURIComponent(
       latitude
     )}&lon=${encodeURIComponent(longitude)}`;
-    const res = await fetch(osmUrl, { headers: { Accept: "application/json" } });
-    if (!res.ok) throw new Error("OSM Geocode failed");
-    const data = await res.json();
-    const area = formatAddress(data.address);
-    if (area) return area;
+    const res = await fetch(osmUrl, {
+      headers: {
+        Accept: "application/json",
+        "User-Agent": "CentralMarketplace/1.0",
+      },
+    });
+    if (res.ok) {
+      const data = await res.json();
+      const area = formatAddress(data.address);
+      if (area) return area;
+    }
   } catch (err) {
     // Fallback geocoding provider
   }
