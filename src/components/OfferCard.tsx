@@ -8,7 +8,7 @@ import {
   directionsUrl,
   getBadgeTone,
 } from "@/lib/utils";
-import { Phone, MapPin, Share2, Compass, Clock, Building2 } from "lucide-react";
+import { Phone, MapPin, Share2, Compass, Clock, Building2, Scissors } from "lucide-react";
 
 interface OfferCardProps {
   offer: Offer;
@@ -27,13 +27,15 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
   const mapLink = directionsUrl(userLocation, offer);
 
   return (
-    <article className="group relative bg-white rounded-3xl border border-slate-200/90 shadow-xs hover:shadow-xl hover:border-orange-300 transition-all duration-300 flex flex-col justify-between p-5 sm:p-6">
+    <article className="group relative bg-white rounded-3xl border border-slate-200/90 shadow-xs hover:shadow-xl hover:border-orange-300 transition-all duration-300 flex flex-col justify-between overflow-hidden">
       {/* Top Half of Coupon Card */}
-      <div className="flex-1 pb-2">
+      <div className="bg-gradient-to-b from-orange-50/40 via-white to-white p-5 sm:p-6 pb-3 flex-1">
         {/* Business Header & Badge */}
         <div className="flex items-start justify-between gap-3 mb-2.5">
           <div className="flex items-center gap-1.5 text-xs font-bold text-slate-500 uppercase tracking-wider">
-            <Building2 className="w-3.5 h-3.5 text-orange-500 flex-shrink-0" />
+            <div className="w-6 h-6 rounded-lg bg-orange-100 text-orange-600 flex items-center justify-center flex-shrink-0">
+              <Building2 className="w-3.5 h-3.5" />
+            </div>
             <span className="truncate">{businessName}</span>
           </div>
 
@@ -57,20 +59,24 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
         )}
       </div>
 
-      {/* Perforated Coupon Divider with Left & Right Notches */}
-      <div className="relative my-3 -mx-5 sm:-mx-6 flex items-center justify-center">
+      {/* Perforated Coupon Tear Line with Side Notches */}
+      <div className="relative my-0 flex items-center justify-center">
         {/* Left Semi-Circular Cutout Notch */}
-        <div className="absolute -left-3.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-slate-50 border-t border-r border-b border-slate-300 z-20" />
+        <div className="absolute -left-3.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-slate-50/95 border-t border-r border-b border-slate-300/90 shadow-inner z-20" />
         
-        {/* Dashed Perforated Line */}
-        <div className="w-full border-t-2 border-dashed border-slate-200/90" />
+        {/* Dashed Perforated Line with Center Scissors Icon */}
+        <div className="w-full border-t-2 border-dashed border-slate-300/80 relative flex items-center justify-center">
+          <div className="absolute bg-white px-2 py-0.5 rounded-full border border-slate-200/60 shadow-2xs">
+            <Scissors className="w-3.5 h-3.5 text-slate-400 transform -rotate-90" />
+          </div>
+        </div>
         
         {/* Right Semi-Circular Cutout Notch */}
-        <div className="absolute -right-3.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-slate-50 border-t border-l border-b border-slate-300 z-20" />
+        <div className="absolute -right-3.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-slate-50/95 border-t border-l border-b border-slate-300/90 shadow-inner z-20" />
       </div>
 
       {/* Bottom Half of Coupon Card */}
-      <div className="pt-2">
+      <div className="p-5 sm:p-6 pt-3 bg-white">
         {/* Meta Info Pill Chips */}
         <div className="flex flex-wrap items-center gap-2 text-xs font-semibold mb-3">
           {areaName && (
