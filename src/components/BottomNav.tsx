@@ -27,7 +27,7 @@ export function BottomNav() {
             href="/list-your-business"
             className={`flex flex-col items-center justify-center py-1 px-4 rounded-xl transition-colors ${
               isPost && !isMoreOpen
-                ? "text-blue-600 font-extrabold"
+                ? "text-orange-600 font-extrabold"
                 : "text-slate-500 hover:text-slate-900"
             }`}
           >
@@ -35,16 +35,16 @@ export function BottomNav() {
             <span className="text-[10px] font-bold">Post</span>
           </Link>
 
-          {/* Tab 2: List (Raised Floating Blue Circular Action Button matching reference image) */}
+          {/* Tab 2: List (Raised Floating Orange Circular Action Button) */}
           <div className="relative -top-4 flex flex-col items-center justify-center">
             <Link
               href="/list"
-              className="w-13 h-13 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center shadow-lg shadow-blue-600/35 border-4 border-white transition-transform active:scale-95"
+              className="w-13 h-13 rounded-full bg-orange-500 hover:bg-orange-600 text-white flex items-center justify-center shadow-lg shadow-orange-500/35 border-4 border-white transition-transform active:scale-95"
               title="All Listings"
             >
               <ListFilter className="w-6 h-6 stroke-[2.5]" />
             </Link>
-            <span className="text-[10px] font-black text-blue-600 mt-0.5 tracking-tight">List</span>
+            <span className="text-[10px] font-black text-orange-600 mt-0.5 tracking-tight">List</span>
           </div>
 
           {/* Tab 3: More (3 dots icon) */}

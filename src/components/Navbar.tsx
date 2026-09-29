@@ -72,7 +72,7 @@ export function Navbar({
             href="/"
             className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-orange-500 rounded-xl p-1 -ml-1 transition-all"
           >
-            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-orange-500 via-amber-500 to-orange-600 flex items-center justify-center text-white font-black text-lg shadow-md shadow-orange-500/25 group-hover:scale-105 transition-transform duration-200">
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-orange-500 flex items-center justify-center text-white font-black text-lg shadow-md shadow-orange-500/25 group-hover:scale-105 transition-transform duration-200">
               CM
             </div>
             <div className="flex flex-col">

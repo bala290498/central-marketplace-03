@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   Sparkles,
   Utensils,
@@ -22,6 +22,8 @@ import {
   Compass,
   MapPin,
   Navigation,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 interface ListCategoryBarProps {
@@ -45,6 +47,37 @@ export function ListCategoryBar({
   onLocationChange,
   onDistanceChange,
 }: ListCategoryBarProps) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const updateScrollButtons = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 5);
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 5);
+  };
+
+  useEffect(() => {
+    updateScrollButtons();
+    const el = scrollRef.current;
+    if (el) {
+      el.addEventListener("scroll", updateScrollButtons, { passive: true });
+      window.addEventListener("resize", updateScrollButtons, { passive: true });
+    }
+    return () => {
+      if (el) el.removeEventListener("scroll", updateScrollButtons);
+      window.removeEventListener("resize", updateScrollButtons);
+    };
+  }, [categories]);
+
+  const handleScroll = (direction: "left" | "right") => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const distance = direction === "left" ? -280 : 280;
+    el.scrollBy({ left: distance, behavior: "smooth" });
+  };
+
   const getCategoryIcon = (name: string) => {
     switch (name) {
       case "All":
@@ -93,39 +126,66 @@ export function ListCategoryBar({
 
   return (
     <div className="w-full space-y-3">
-      {/* Single Row Scrollable Category Chips (Icon on top, Text next line - NO chip container box) */}
-      <div className="w-full overflow-x-auto no-scrollbar py-1 flex items-center gap-4">
-        {allItems.map((name) => {
-          const val = name === "All" ? "" : name;
-          const isSelected = selectedCategory === val;
-          return (
-            <button
-              key={name}
-              type="button"
-              onClick={() => onSelectCategory(val)}
-              className="flex-shrink-0 flex flex-col items-center justify-center py-1 transition-all cursor-pointer group focus:outline-none min-w-[56px]"
-            >
-              <div
-                className={`mb-1 transition-all duration-200 ${
-                  isSelected
-                    ? "text-blue-600 scale-110"
-                    : "text-slate-400 group-hover:text-slate-600"
-                }`}
+      {/* Single Row Scrollable Category Chips with Desktop Controls */}
+      <div className="relative flex items-center">
+        {canScrollLeft && (
+          <button
+            type="button"
+            onClick={() => handleScroll("left")}
+            className="hidden md:flex absolute left-0 z-20 items-center justify-center w-8 h-8 rounded-full bg-white shadow-md border border-slate-200 text-slate-700 hover:bg-slate-100 hover:text-orange-600 transition-all -ml-2"
+            title="Scroll left"
+          >
+            <ChevronLeft className="w-4 h-4 stroke-[2.5]" />
+          </button>
+        )}
+
+        <div
+          ref={scrollRef}
+          className="w-full overflow-x-auto no-scrollbar py-1 flex items-center gap-4 scroll-smooth"
+        >
+          {allItems.map((name) => {
+            const val = name === "All" ? "" : name;
+            const isSelected = selectedCategory === val;
+            return (
+              <button
+                key={name}
+                type="button"
+                onClick={() => onSelectCategory(val)}
+                className="flex-shrink-0 flex flex-col items-center justify-center py-1 transition-all cursor-pointer group focus:outline-none min-w-[56px]"
               >
-                {getCategoryIcon(name)}
-              </div>
-              <span
-                className={`text-[11px] tracking-tight whitespace-nowrap transition-colors ${
-                  isSelected
-                    ? "font-extrabold text-blue-600 border-b-2 border-blue-600 pb-0.5"
-                    : "font-semibold text-slate-600 group-hover:text-slate-900"
-                }`}
-              >
-                {name}
-              </span>
-            </button>
-          );
-        })}
+                <div
+                  className={`mb-1 transition-all duration-200 ${
+                    isSelected
+                      ? "text-orange-500 scale-110"
+                      : "text-slate-400 group-hover:text-slate-600"
+                  }`}
+                >
+                  {getCategoryIcon(name)}
+                </div>
+                <span
+                  className={`text-[11px] tracking-tight whitespace-nowrap transition-colors ${
+                    isSelected
+                      ? "font-extrabold text-orange-600 border-b-2 border-orange-500 pb-0.5"
+                      : "font-semibold text-slate-600 group-hover:text-slate-900"
+                  }`}
+                >
+                  {name}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {canScrollRight && (
+          <button
+            type="button"
+            onClick={() => handleScroll("right")}
+            className="hidden md:flex absolute right-0 z-20 items-center justify-center w-8 h-8 rounded-full bg-white shadow-md border border-slate-200 text-slate-700 hover:bg-slate-100 hover:text-orange-600 transition-all -mr-2"
+            title="Scroll right"
+          >
+            <ChevronRight className="w-4 h-4 stroke-[2.5]" />
+          </button>
+        )}
       </div>
 
       {/* Two Parallel Dropdown Selectors in a Single Row */}
@@ -136,7 +196,7 @@ export function ListCategoryBar({
           <select
             value={selectedLocation}
             onChange={(e) => onLocationChange(e.target.value)}
-            className="w-full pl-8 pr-7 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-bold appearance-none focus:outline-none focus:ring-2 focus:ring-blue-600 shadow-xs"
+            className="w-full pl-8 pr-7 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-bold appearance-none focus:outline-none focus:ring-2 focus:ring-orange-500 shadow-xs"
           >
             <option value="">All locations</option>
             {locations.map((loc) => (
@@ -156,7 +216,7 @@ export function ListCategoryBar({
             onChange={(e) =>
               onDistanceChange(e.target.value ? Number(e.target.value) : null)
             }
-            className="w-full pl-8 pr-7 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-bold appearance-none focus:outline-none focus:ring-2 focus:ring-blue-600 shadow-xs"
+            className="w-full pl-8 pr-7 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-bold appearance-none focus:outline-none focus:ring-2 focus:ring-orange-500 shadow-xs"
           >
             <option value="">All distances</option>
             <option value="5">Within 5 km</option>
