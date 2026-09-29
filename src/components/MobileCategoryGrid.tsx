@@ -8,7 +8,8 @@ import {
   UserCheck,
   Package,
   Wrench,
-  Utensils,
+  UtensilsCrossed,
+  CookingPot,
   Car,
   ShoppingCart,
   Scissors,
@@ -69,7 +70,7 @@ export function MobileCategoryGrid({
     {
       name: "Food",
       categoryValue: "Dining & Cafes",
-      icon: Utensils,
+      icon: UtensilsCrossed,
       bgColor: "bg-orange-100/90 text-orange-600",
     },
     {

@@ -3,7 +3,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import {
   Sparkles,
-  Utensils,
+  UtensilsCrossed,
+  CookingPot,
   Scissors,
   ShoppingCart,
   ShoppingBag,
@@ -91,7 +92,7 @@ export function ListCategoryBar({
       case "All Deals":
         return <Sparkles className="w-5 h-5" />;
       case "Dining & Cafes":
-        return <Utensils className="w-5 h-5" />;
+        return <UtensilsCrossed className="w-5 h-5" />;
       case "Salon & Spa":
         return <Scissors className="w-5 h-5" />;
       case "Grocery":
@@ -121,7 +122,7 @@ export function ListCategoryBar({
       case "Products":
         return <Package className="w-5 h-5" />;
       case "Food":
-        return <Coffee className="w-5 h-5" />;
+        return <CookingPot className="w-5 h-5" />;
       case "Wholesale":
         return <Store className="w-5 h-5" />;
       default:

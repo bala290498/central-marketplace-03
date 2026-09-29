@@ -17,7 +17,8 @@ import {
   UserCheck,
   Package,
   Wrench,
-  Utensils,
+  UtensilsCrossed,
+  CookingPot,
   Car,
   ShoppingCart,
   Store,
@@ -121,7 +122,7 @@ export function getCategoryIcon(category: string = "", title: string = ""): Luci
     titleLower.includes("dinner") ||
     titleLower.includes("food")
   ) {
-    return Utensils;
+    return UtensilsCrossed;
   }
   if (
     catLower.includes("salon") ||
