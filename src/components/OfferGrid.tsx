@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { Offer, UserLocation } from "@/types/offer";
 import {
   offerArea,
@@ -24,6 +25,7 @@ interface OfferGridProps {
 }
 
 export function OfferGrid({ initialOffers }: OfferGridProps) {
+  const router = useRouter();
   const [offers] = useState<Offer[]>(initialOffers);
   const [userLocation, setUserLocation] = useState<UserLocation | null>(null);
   const [userAreaLabel, setUserAreaLabel] = useState<string>("");
@@ -134,10 +136,11 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
     return list;
   }, [offers, selectedCategory, selectedLocation, selectedDistance, searchQuery, userLocation]);
 
-  const scrollToOffers = () => {
-    const el = document.getElementById("offers-section");
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+  const handleSeeAll = () => {
+    if (selectedCategory) {
+      router.push(`/list?category=${encodeURIComponent(selectedCategory)}`);
+    } else {
+      router.push("/list");
     }
   };
 
@@ -199,22 +202,30 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
         {/* 1. Hero Banner with Search Bar */}
         <HeroBanner
           searchQuery={searchQuery}
-          onSearchChange={setSearchQuery}
+          onSearchChange={(q) => {
+            setSearchQuery(q);
+            if (q.trim()) {
+              router.push(`/list?search=${encodeURIComponent(q)}`);
+            }
+          }}
         />
 
         {/* 2. Categories Section (3x3 grid with View All tile) */}
         <div className="mb-2">
           <MobileCategoryGrid
             selectedCategory={selectedCategory}
-            onSelectCategory={setSelectedCategory}
+            onSelectCategory={(cat) => {
+              setSelectedCategory(cat);
+              router.push(`/list?category=${encodeURIComponent(cat)}`);
+            }}
           />
         </div>
 
         {/* 3. Latest Listings Horizontal Carousel */}
         <LatestListingsCarousel
-          offers={processedOffers}
+          offers={offers}
           userLocation={userLocation}
-          onSeeAll={scrollToOffers}
+          onSeeAll={handleSeeAll}
         />
 
         {/* 4. Full Filtered Offers Section */}

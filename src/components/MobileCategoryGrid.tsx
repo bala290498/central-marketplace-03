@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   Home,
   Briefcase,
@@ -15,14 +16,15 @@ import {
 import { AllCategoriesModal } from "./AllCategoriesModal";
 
 interface MobileCategoryGridProps {
-  selectedCategory: string;
-  onSelectCategory: (cat: string) => void;
+  selectedCategory?: string;
+  onSelectCategory?: (cat: string) => void;
 }
 
 export function MobileCategoryGrid({
-  selectedCategory,
+  selectedCategory = "",
   onSelectCategory,
 }: MobileCategoryGridProps) {
+  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // 3x3 grid: 8 categories + 1 "View All" button
@@ -78,10 +80,13 @@ export function MobileCategoryGrid({
   ];
 
   const handleSelect = (catValue: string) => {
-    onSelectCategory(catValue);
-    const el = document.getElementById("offers-section");
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+    if (onSelectCategory) {
+      onSelectCategory(catValue);
+    }
+    if (catValue) {
+      router.push(`/list?category=${encodeURIComponent(catValue)}`);
+    } else {
+      router.push("/list");
     }
   };
 

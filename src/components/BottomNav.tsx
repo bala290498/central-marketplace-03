@@ -17,6 +17,7 @@ export function BottomNav() {
   const [isMoreOpen, setIsMoreOpen] = useState(false);
 
   const isHome = pathname === "/";
+  const isList = pathname === "/list";
   const isPost = pathname === "/list-your-business";
   const isReport = pathname === "/report-an-issue";
 
@@ -40,12 +41,12 @@ export function BottomNav() {
 
           {/* Tab 2: List */}
           <Link
-            href="/"
-            onClick={() => {
-              const el = document.getElementById("offers-section");
-              if (el) el.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="flex flex-col items-center justify-center py-1 px-2.5 rounded-xl text-slate-500 hover:text-slate-900 transition-colors"
+            href="/list"
+            className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-colors ${
+              isList && !isMoreOpen
+                ? "text-blue-600 font-extrabold"
+                : "text-slate-500 hover:text-slate-900"
+            }`}
           >
             <ListFilter className="w-5 h-5 mb-0.5" />
             <span className="text-[10px] font-semibold">List</span>
