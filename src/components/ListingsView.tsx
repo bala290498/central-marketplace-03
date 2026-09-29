@@ -12,10 +12,9 @@ import {
   lookupUserArea,
 } from "@/lib/utils";
 import { Navbar } from "./Navbar";
-import { CategorySelector } from "./CategorySelector";
-import { FilterBar } from "./FilterBar";
+import { ListCategoryBar } from "./ListCategoryBar";
 import { OfferCard } from "./OfferCard";
-import { Sparkles, CheckCircle2, AlertCircle } from "lucide-react";
+import { CheckCircle2, AlertCircle } from "lucide-react";
 
 interface ListingsViewProps {
   initialOffers: Offer[];
@@ -170,7 +169,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
       />
 
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 pt-4 pb-16">
-        {/* Page Header matching Screen 2 All Listings */}
+        {/* Page Header */}
         <div className="mb-4 flex items-center justify-between">
           <div>
             <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
@@ -188,15 +187,12 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
           </span>
         </div>
 
-        {/* Filters Container */}
-        <div className="bg-white rounded-2xl p-3 sm:p-4 border border-slate-200/80 shadow-xs mb-6 space-y-2">
-          <CategorySelector
+        {/* Filters Container with ListCategoryBar */}
+        <div className="bg-white rounded-3xl p-4 sm:p-5 border border-slate-200/80 shadow-xs mb-6">
+          <ListCategoryBar
             categories={categories}
             selectedCategory={selectedCategory}
             onSelectCategory={setSelectedCategory}
-          />
-
-          <FilterBar
             locations={locations}
             selectedLocation={selectedLocation}
             selectedDistance={selectedDistance}
@@ -204,7 +200,6 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
             onLocationChange={setSelectedLocation}
             onDistanceChange={setSelectedDistance}
             onSearchChange={setSearchQuery}
-            hasUserLocation={!!userLocation}
           />
         </div>
 
