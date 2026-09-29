@@ -344,23 +344,12 @@ export function ListCategoryBar({
             className="w-full pl-8 pr-7 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-bold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer truncate"
           >
             <option value="">All validities</option>
-            <optgroup label="Validity Headings">
-              <option value="limited-slots">🔥 Limited Slots</option>
-              <option value="expires-soon">⏳ Expires Soon</option>
-              <option value="until-filled">🎯 Until Filled</option>
-              <option value="until-found">🔍 Until Found</option>
-              <option value="available">✅ Available</option>
-              <option value="valid-all-days">📅 Valid All Days</option>
-            </optgroup>
-            {validities && validities.length > 0 && (
-              <optgroup label="Specific Statuses">
-                {validities.map((val) => (
-                  <option key={val} value={val}>
-                    {val}
-                  </option>
-                ))}
-              </optgroup>
-            )}
+            <option value="Limited Slots">Limited Slots</option>
+            <option value="Expires Soon">Expires Soon</option>
+            <option value="Until Filled">Until Filled</option>
+            <option value="Until Found">Until Found</option>
+            <option value="Available">Available</option>
+            <option value="Valid All Days">Valid All Days</option>
           </select>
           <div className="absolute right-3 pointer-events-none text-slate-400 text-xs">▼</div>
         </div>
