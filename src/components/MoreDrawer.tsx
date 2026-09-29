@@ -10,18 +10,14 @@ import {
   Users,
   ShieldAlert,
   ChevronRight,
-  PlusCircle,
-  Building2,
-  Compass,
 } from "lucide-react";
 
 interface MoreDrawerProps {
   isOpen: boolean;
   onClose: () => void;
-  onOpenReport: () => void;
 }
 
-export function MoreDrawer({ isOpen, onClose, onOpenReport }: MoreDrawerProps) {
+export function MoreDrawer({ isOpen, onClose }: MoreDrawerProps) {
   if (!isOpen) return null;
 
   const menuItems = [
@@ -52,6 +48,13 @@ export function MoreDrawer({ isOpen, onClose, onOpenReport }: MoreDrawerProps) {
       desc: "Join our team in bringing local deals",
       icon: Users,
       color: "bg-purple-100 text-purple-600",
+    },
+    {
+      href: "/report-an-issue",
+      label: "Report an Issue",
+      desc: "Report inappropriate or fake listings",
+      icon: ShieldAlert,
+      color: "bg-red-100 text-red-600",
     },
   ];
 
@@ -113,29 +116,6 @@ export function MoreDrawer({ isOpen, onClose, onOpenReport }: MoreDrawerProps) {
               </Link>
             );
           })}
-
-          {/* Report an Issue Item */}
-          <button
-            type="button"
-            onClick={() => {
-              onClose();
-              onOpenReport();
-            }}
-            className="w-full flex items-center justify-between p-3.5 rounded-2xl border border-slate-100 hover:border-red-200 hover:bg-red-50/50 transition-all group text-left"
-          >
-            <div className="flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-xl bg-red-100 text-red-600 flex items-center justify-center flex-shrink-0">
-                <ShieldAlert className="w-5 h-5" />
-              </div>
-              <div>
-                <h4 className="font-bold text-slate-900 text-sm group-hover:text-red-600 transition-colors">
-                  Report an Issue
-                </h4>
-                <p className="text-xs text-slate-500">Report fake listings or content</p>
-              </div>
-            </div>
-            <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-red-600 transition-colors" />
-          </button>
         </div>
       </div>
     </div>

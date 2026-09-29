@@ -11,15 +11,14 @@ import {
   Grid,
 } from "lucide-react";
 import { MoreDrawer } from "./MoreDrawer";
-import { ReportModal } from "./ReportModal";
 
 export function BottomNav() {
   const pathname = usePathname();
   const [isMoreOpen, setIsMoreOpen] = useState(false);
-  const [isReportOpen, setIsReportOpen] = useState(false);
 
   const isHome = pathname === "/";
   const isPost = pathname === "/list-your-business";
+  const isReport = pathname === "/report-an-issue";
 
   return (
     <>
@@ -30,7 +29,7 @@ export function BottomNav() {
           <Link
             href="/"
             className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-colors ${
-              isHome && !isMoreOpen && !isReportOpen
+              isHome && !isMoreOpen
                 ? "text-blue-600 font-extrabold"
                 : "text-slate-500 hover:text-slate-900"
             }`}
@@ -56,7 +55,7 @@ export function BottomNav() {
           <Link
             href="/list-your-business"
             className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-colors ${
-              isPost && !isMoreOpen && !isReportOpen
+              isPost && !isMoreOpen
                 ? "text-blue-600 font-extrabold"
                 : "text-slate-500 hover:text-slate-900"
             }`}
@@ -65,17 +64,18 @@ export function BottomNav() {
             <span className="text-[10px] font-semibold">Post</span>
           </Link>
 
-          {/* Tab 4: Report */}
-          <button
-            type="button"
-            onClick={() => setIsReportOpen(true)}
+          {/* Tab 4: Report Page Link */}
+          <Link
+            href="/report-an-issue"
             className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-colors ${
-              isReportOpen ? "text-red-600 font-extrabold" : "text-slate-500 hover:text-slate-900"
+              isReport && !isMoreOpen
+                ? "text-red-600 font-extrabold"
+                : "text-slate-500 hover:text-slate-900"
             }`}
           >
             <ShieldAlert className="w-5 h-5 mb-0.5" />
             <span className="text-[10px] font-semibold">Report</span>
-          </button>
+          </Link>
 
           {/* Tab 5: More */}
           <button
@@ -95,13 +95,6 @@ export function BottomNav() {
       <MoreDrawer
         isOpen={isMoreOpen}
         onClose={() => setIsMoreOpen(false)}
-        onOpenReport={() => setIsReportOpen(true)}
-      />
-
-      {/* Report Modal */}
-      <ReportModal
-        isOpen={isReportOpen}
-        onClose={() => setIsReportOpen(false)}
       />
     </>
   );
