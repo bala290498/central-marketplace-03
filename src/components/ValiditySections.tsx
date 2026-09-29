@@ -117,12 +117,13 @@ export function ValiditySections({
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <div className="flex gap-3.5 overflow-x-auto no-scrollbar snap-x py-1 px-1 -mx-1">
             {categoryOffers.map((offer) => (
               <ShortOfferCard
                 key={offer.id}
                 offer={offer}
                 userLocation={userLocation}
+                className="w-64 flex-shrink-0 snap-start"
               />
             ))}
           </div>
@@ -177,13 +178,14 @@ export function ValiditySections({
               </button>
             </div>
 
-            {/* Grid of Offers for this Validity Heading */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {/* Horizontal Carousel of Offers for this Validity Heading */}
+            <div className="flex gap-3.5 overflow-x-auto no-scrollbar snap-x py-1 px-1 -mx-1">
               {catOffers.map((offer) => (
                 <ShortOfferCard
                   key={offer.id}
                   offer={offer}
                   userLocation={userLocation}
+                  className="w-64 flex-shrink-0 snap-start"
                 />
               ))}
             </div>

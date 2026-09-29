@@ -25,6 +25,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get("category") || "";
   const validityParam = searchParams.get("validity") || "";
+  const searchParam = searchParams.get("search") || "";
 
   const [offers] = useState<Offer[]>(initialOffers);
   const [userLocation, setUserLocation] = useState<UserLocation | null>(null);
@@ -37,7 +38,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
   const [selectedLocation, setSelectedLocation] = useState<string>("");
   const [selectedDistance, setSelectedDistance] = useState<number | null>(null);
   const [selectedValidity, setSelectedValidity] = useState<string>(validityParam);
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string>(searchParam);
   const [isHeaderHidden, setIsHeaderHidden] = useState<boolean>(false);
 
   // Stable, flicker-free scroll listener with transition lock
@@ -101,6 +102,10 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
       setSelectedValidity(validityParam);
     }
   }, [validityParam]);
+
+  useEffect(() => {
+    setSearchQuery(searchParam);
+  }, [searchParam]);
 
   const triggerToast = (msg: string) => {
     setToastMessage(msg);
@@ -269,28 +274,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
             onDetectLocation={detectLocation}
             isLocating={isLocating}
             isSticky={false}
-          >
-            <div className="hidden md:flex relative items-center pt-1 pb-0.5">
-              <Search className="absolute left-3.5 w-4 h-4 text-slate-400 pointer-events-none" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search products, services, listings..."
-                className="w-full pl-9 pr-10 py-2.5 rounded-2xl border border-slate-200 bg-slate-50 focus:bg-white text-slate-900 text-xs sm:text-sm font-medium outline-none focus:outline-none focus:ring-0 shadow-xs transition-colors"
-              />
-              {searchQuery && (
-                <button
-                  type="button"
-                  onClick={() => setSearchQuery("")}
-                  className="absolute right-3 p-1 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-200/70 transition-all cursor-pointer focus:outline-none"
-                  title="Clear search"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              )}
-            </div>
-          </Navbar>
+          />
         </div>
 
         {/* Permanent Category & Dropdown Filter Bar (ALWAYS visible, NO OVERLAPPING) */}
