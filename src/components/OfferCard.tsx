@@ -389,9 +389,9 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
         <button
           type="button"
           onClick={() => onShare(offer)}
-          className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-2xl bg-white hover:bg-slate-50 text-slate-800 border border-slate-200/90 font-extrabold text-xs sm:text-sm shadow-2xs transition-all duration-200 active:scale-95 cursor-pointer"
+          className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-2xl bg-pink-600 hover:bg-pink-700 text-white font-extrabold text-xs sm:text-sm shadow-xs transition-all duration-200 active:scale-95 cursor-pointer"
         >
-          <Share2 className="w-3.5 h-3.5 text-slate-600" />
+          <Share2 className="w-3.5 h-3.5" />
           <span>Share</span>
         </button>
       </div>

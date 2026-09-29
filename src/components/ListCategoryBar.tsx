@@ -127,89 +127,89 @@ export function ListCategoryBar({
       case "All":
       case "All Deals":
         return {
-          bgColor: "bg-orange-100/90 text-orange-600",
+          iconColor: "text-orange-500",
           activeText: "text-orange-600 border-orange-500",
         };
       case "Dining & Cafes":
       case "Food":
         return {
-          bgColor: "bg-amber-100/90 text-amber-600",
+          iconColor: "text-amber-500",
           activeText: "text-amber-600 border-amber-500",
         };
       case "Salon & Spa":
         return {
-          bgColor: "bg-pink-100/90 text-pink-600",
+          iconColor: "text-pink-500",
           activeText: "text-pink-600 border-pink-500",
         };
       case "Grocery":
       case "Daily Needs":
         return {
-          bgColor: "bg-emerald-100/90 text-emerald-600",
+          iconColor: "text-emerald-500",
           activeText: "text-emerald-600 border-emerald-500",
         };
       case "Fashion":
       case "Products":
         return {
-          bgColor: "bg-purple-100/90 text-purple-600",
+          iconColor: "text-purple-500",
           activeText: "text-purple-600 border-purple-500",
         };
       case "Electronics":
         return {
-          bgColor: "bg-blue-100/90 text-blue-600",
+          iconColor: "text-blue-500",
           activeText: "text-blue-600 border-blue-500",
         };
       case "Fitness":
         return {
-          bgColor: "bg-red-100/90 text-red-600",
+          iconColor: "text-red-500",
           activeText: "text-red-600 border-red-500",
         };
       case "Pharmacy":
         return {
-          bgColor: "bg-teal-100/90 text-teal-600",
+          iconColor: "text-teal-500",
           activeText: "text-teal-600 border-teal-500",
         };
       case "Entertainment":
         return {
-          bgColor: "bg-indigo-100/90 text-indigo-600",
+          iconColor: "text-indigo-500",
           activeText: "text-indigo-600 border-indigo-500",
         };
       case "Auto Care":
       case "Vehicles":
         return {
-          bgColor: "bg-cyan-100/90 text-cyan-600",
+          iconColor: "text-cyan-500",
           activeText: "text-cyan-600 border-cyan-500",
         };
       case "Home & Living":
       case "Services":
         return {
-          bgColor: "bg-sky-100/90 text-sky-600",
+          iconColor: "text-sky-500",
           activeText: "text-sky-600 border-sky-500",
         };
       case "Recruitment":
         return {
-          bgColor: "bg-violet-100/90 text-violet-600",
+          iconColor: "text-violet-500",
           activeText: "text-violet-600 border-violet-500",
         };
       case "Professional":
       case "Professionals":
         return {
-          bgColor: "bg-fuchsia-100/90 text-fuchsia-600",
+          iconColor: "text-fuchsia-500",
           activeText: "text-fuchsia-600 border-fuchsia-500",
         };
       case "Property":
       case "Property Request":
         return {
-          bgColor: "bg-orange-100/90 text-orange-600",
+          iconColor: "text-orange-500",
           activeText: "text-orange-600 border-orange-500",
         };
       case "Wholesale":
         return {
-          bgColor: "bg-rose-100/90 text-rose-600",
+          iconColor: "text-rose-500",
           activeText: "text-rose-600 border-rose-500",
         };
       default:
         return {
-          bgColor: "bg-slate-100 text-slate-700",
+          iconColor: "text-slate-500",
           activeText: "text-slate-900 border-slate-700",
         };
     }
@@ -238,7 +238,7 @@ export function ListCategoryBar({
         {/* Scrollable Chips Container */}
         <div
           ref={scrollRef}
-          className="flex-1 overflow-x-auto no-scrollbar py-1 flex items-center gap-3.5 scroll-smooth"
+          className="flex-1 overflow-x-auto no-scrollbar py-1 flex items-center gap-4 scroll-smooth"
         >
           {allItems.map((name) => {
             const val = name === "All" ? "" : name;
@@ -249,13 +249,13 @@ export function ListCategoryBar({
                 key={name}
                 type="button"
                 onClick={() => onSelectCategory(val)}
-                className="flex-shrink-0 flex flex-col items-center justify-center py-1 transition-all cursor-pointer group focus:outline-none min-w-[58px]"
+                className="flex-shrink-0 flex flex-col items-center justify-center py-1 transition-all cursor-pointer group focus:outline-none min-w-[56px]"
               >
                 <div
-                  className={`w-10 h-10 sm:w-11 sm:h-11 rounded-2xl flex items-center justify-center mb-1.5 shadow-2xs group-hover:scale-105 transition-all duration-200 ${
+                  className={`mb-1 transition-all duration-200 ${
                     isSelected
-                      ? `${colors.bgColor} ring-2 ring-orange-500 scale-105 shadow-md`
-                      : `${colors.bgColor} opacity-85 group-hover:opacity-100`
+                      ? `${colors.iconColor} scale-110`
+                      : `${colors.iconColor} opacity-75 group-hover:opacity-100 group-hover:scale-105`
                   }`}
                 >
                   {getCategoryIcon(name)}
@@ -264,7 +264,7 @@ export function ListCategoryBar({
                   className={`text-[11px] tracking-tight whitespace-nowrap transition-colors ${
                     isSelected
                       ? `font-extrabold ${colors.activeText} border-b-2 pb-0.5`
-                      : "font-semibold text-slate-700 group-hover:text-slate-900"
+                      : "font-semibold text-slate-600 group-hover:text-slate-900"
                   }`}
                 >
                   {name}

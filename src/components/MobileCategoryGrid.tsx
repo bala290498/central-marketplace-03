@@ -18,6 +18,7 @@ import {
   Film,
   ChevronDown,
   ChevronUp,
+  Sparkles,
 } from "lucide-react";
 import { AllCategoriesModal } from "./AllCategoriesModal";
 
@@ -127,14 +128,22 @@ export function MobileCategoryGrid({
   };
 
   // Filter category items depending on collapse vs expand state:
-  // On Desktop: 6 items in 1 row when collapsed.
-  // On Mobile: 8 items in 3x3 grid when collapsed.
+  // Filter category items depending on collapse vs expand state:
+  // 6 items + More/Less button when collapsed.
   const desktopVisible = isExpanded ? allCategories : allCategories.slice(0, 6);
-  const mobileVisible = isExpanded ? allCategories : allCategories.slice(0, 8);
+  const mobileVisible = isExpanded ? allCategories : allCategories.slice(0, 5);
 
   return (
     <>
       <div className="w-full mb-6 transition-all duration-300">
+        {/* Popular Categories Title */}
+        <div className="mb-3 flex items-center justify-between">
+          <h2 className="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
+            <Sparkles className="w-4 h-4 text-orange-500" />
+            <span>Popular Categories</span>
+          </h2>
+        </div>
+
         {/* Desktop View: 6 items + More/Less button in 1 single row (7 columns) when collapsed */}
         <div className="hidden md:grid grid-cols-7 gap-y-4 gap-x-3">
           {desktopVisible.map((item, idx) => {
@@ -149,7 +158,7 @@ export function MobileCategoryGrid({
               >
                 <div
                   className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-1.5 shadow-2xs group-hover:scale-105 transition-transform ${
-                    isSelected ? "ring-2 ring-blue-600 scale-105" : ""
+                    isSelected ? "ring-2 ring-orange-500 scale-105" : ""
                   } ${item.bgColor}`}
                 >
                   <Icon className="w-6 h-6 stroke-[2.2]" />
@@ -157,7 +166,7 @@ export function MobileCategoryGrid({
                 <span
                   className={`text-[11px] text-center leading-tight transition-colors ${
                     isSelected
-                      ? "font-extrabold text-blue-600"
+                      ? "font-extrabold text-orange-600"
                       : "font-bold text-slate-800 group-hover:text-slate-900"
                   }`}
                 >
@@ -180,13 +189,13 @@ export function MobileCategoryGrid({
                 <ChevronDown className="w-6 h-6 stroke-[2.5]" />
               )}
             </div>
-            <span className="text-[11px] font-extrabold text-blue-600 text-center leading-tight">
+            <span className="text-[11px] font-extrabold text-orange-600 text-center leading-tight">
               {isExpanded ? "Less" : "More"}
             </span>
           </button>
         </div>
 
-        {/* Mobile View: 3 columns grid */}
+        {/* Mobile View: 3 columns grid (5 items + 1 More/Less button = 6 tiles collapsed) */}
         <div className="grid md:hidden grid-cols-3 gap-y-4 gap-x-2">
           {mobileVisible.map((item, idx) => {
             const Icon = item.icon;
@@ -200,7 +209,7 @@ export function MobileCategoryGrid({
               >
                 <div
                   className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-1.5 shadow-2xs group-hover:scale-105 transition-transform ${
-                    isSelected ? "ring-2 ring-blue-600 scale-105" : ""
+                    isSelected ? "ring-2 ring-orange-500 scale-105" : ""
                   } ${item.bgColor}`}
                 >
                   <Icon className="w-6 h-6 stroke-[2.2]" />
@@ -208,7 +217,7 @@ export function MobileCategoryGrid({
                 <span
                   className={`text-[11px] text-center leading-tight transition-colors ${
                     isSelected
-                      ? "font-extrabold text-blue-600"
+                      ? "font-extrabold text-orange-600"
                       : "font-bold text-slate-800 group-hover:text-slate-900"
                   }`}
                 >
@@ -231,7 +240,7 @@ export function MobileCategoryGrid({
                 <ChevronDown className="w-6 h-6 stroke-[2.5]" />
               )}
             </div>
-            <span className="text-[11px] font-extrabold text-blue-600 text-center leading-tight">
+            <span className="text-[11px] font-extrabold text-orange-600 text-center leading-tight">
               {isExpanded ? "Less" : "More"}
             </span>
           </button>

@@ -121,7 +121,7 @@ export function Navbar({
           <div className="flex items-center gap-3">
             <Link
               href="/"
-              className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-orange-500 rounded-xl p-1 -ml-1 transition-all"
+              className="flex items-center gap-3 group outline-none focus:outline-none focus:ring-0 rounded-xl p-1 -ml-1 transition-all"
             >
               <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-orange-500 flex items-center justify-center text-white font-black text-lg shadow-md shadow-orange-500/25 group-hover:scale-105 transition-transform duration-200">
                 CM
@@ -181,7 +181,7 @@ export function Navbar({
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     autoFocus
-                    className="w-40 sm:w-52 pl-8 pr-7 py-1.5 rounded-xl text-xs sm:text-sm bg-slate-100 border border-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-500 font-medium text-slate-800 transition-all"
+                    className="w-40 sm:w-52 pl-8 pr-7 py-1.5 rounded-xl text-xs sm:text-sm bg-slate-100 border border-orange-200 outline-none focus:outline-none focus:ring-0 font-medium text-slate-800 transition-all"
                   />
                   <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 pointer-events-none" />
                   <button
