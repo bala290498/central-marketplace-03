@@ -57,7 +57,8 @@ export function Navbar({
   }, [isSticky]);
 
   const navLinks = [
-    { href: "/", label: "Deals" },
+    { href: "/", label: "Home" },
+    { href: "/list", label: "List" },
     { href: "/how-it-works", label: "How it works" },
     { href: "/list-your-business", label: "List your business" },
     { href: "/we-are-hiring", label: "We're hiring" },
@@ -85,13 +86,15 @@ export function Navbar({
             <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-orange-500 flex items-center justify-center text-white font-black text-lg shadow-md shadow-orange-500/25 group-hover:scale-105 transition-transform duration-200">
               CM
             </div>
-            <div className="flex flex-col">
-              <span className="font-extrabold text-slate-900 text-base sm:text-lg tracking-tight group-hover:text-orange-600 transition-colors">
-                Central Marketplace
-              </span>
-              <span className="text-xs text-slate-500 font-medium">
-                Local deals around you
-              </span>
+            <div className="flex flex-col justify-center leading-tight">
+              <div className="font-extrabold text-slate-900 text-sm sm:text-base tracking-tight group-hover:text-orange-600 transition-colors">
+                <span className="hidden md:inline-block leading-tight">
+                  Central <br /> Marketplace
+                </span>
+                <span className="inline-block md:hidden">
+                  Central Marketplace
+                </span>
+              </div>
             </div>
           </Link>
 

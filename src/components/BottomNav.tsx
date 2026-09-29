@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
+  Home,
   ListFilter,
   PlusCircle,
   MoreHorizontal,
@@ -14,49 +15,66 @@ export function BottomNav() {
   const pathname = usePathname();
   const [isMoreOpen, setIsMoreOpen] = useState(false);
 
+  const isHome = pathname === "/";
   const isList = pathname === "/list";
   const isPost = pathname === "/list-your-business";
 
   return (
     <>
-      {/* Mobile Fixed Bottom Navigation Bar (Post | Raised List Button | More) */}
-      <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 py-1.5 px-4 md:hidden shadow-lg shadow-slate-900/10">
-        <div className="max-w-md mx-auto flex items-center justify-around relative">
-          {/* Tab 1: Post */}
+      {/* Mobile Fixed Bottom Navigation Bar (Home | List | Post | More) */}
+      <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 py-1.5 px-3 md:hidden shadow-lg shadow-slate-900/10">
+        <div className="max-w-md mx-auto grid grid-cols-4 items-center justify-between text-center relative">
+          {/* Tab 1: Home */}
+          <Link
+            href="/"
+            className={`flex flex-col items-center justify-center py-1 rounded-xl transition-colors ${
+              isHome && !isMoreOpen
+                ? "text-orange-600 font-extrabold"
+                : "text-slate-500 hover:text-slate-900 font-medium"
+            }`}
+          >
+            <Home className="w-5 h-5 mb-0.5" />
+            <span className="text-[10px] tracking-tight">Home</span>
+          </Link>
+
+          {/* Tab 2: List */}
+          <Link
+            href="/list"
+            className={`flex flex-col items-center justify-center py-1 rounded-xl transition-colors ${
+              isList && !isMoreOpen
+                ? "text-orange-600 font-extrabold"
+                : "text-slate-500 hover:text-slate-900 font-medium"
+            }`}
+          >
+            <ListFilter className="w-5 h-5 mb-0.5" />
+            <span className="text-[10px] tracking-tight">List</span>
+          </Link>
+
+          {/* Tab 3: Post */}
           <Link
             href="/list-your-business"
-            className={`flex flex-col items-center justify-center py-1 px-4 rounded-xl transition-colors ${
+            className={`flex flex-col items-center justify-center py-1 rounded-xl transition-colors ${
               isPost && !isMoreOpen
                 ? "text-orange-600 font-extrabold"
-                : "text-slate-500 hover:text-slate-900"
+                : "text-slate-500 hover:text-slate-900 font-medium"
             }`}
           >
             <PlusCircle className="w-5 h-5 mb-0.5" />
-            <span className="text-[10px] font-bold">Post</span>
+            <span className="text-[10px] tracking-tight">Post</span>
           </Link>
 
-          {/* Tab 2: List (Raised Floating Orange Circular Action Button) */}
-          <div className="relative -top-4 flex flex-col items-center justify-center">
-            <Link
-              href="/list"
-              className="w-13 h-13 rounded-full bg-orange-500 hover:bg-orange-600 text-white flex items-center justify-center shadow-lg shadow-orange-500/35 border-4 border-white transition-transform active:scale-95"
-              title="All Listings"
-            >
-              <ListFilter className="w-6 h-6 stroke-[2.5]" />
-            </Link>
-            <span className="text-[10px] font-black text-orange-600 mt-0.5 tracking-tight">List</span>
-          </div>
-
-          {/* Tab 3: More (3 dots icon) */}
+          {/* Tab 4: More */}
           <button
             type="button"
             onClick={() => setIsMoreOpen(true)}
-            className={`flex flex-col items-center justify-center py-1 px-4 rounded-xl transition-colors ${
-              isMoreOpen ? "text-orange-600 font-extrabold" : "text-slate-500 hover:text-slate-900"
+            className={`flex flex-col items-center justify-center py-1 rounded-xl transition-colors cursor-pointer ${
+              isMoreOpen
+                ? "text-orange-600 font-extrabold"
+                : "text-slate-500 hover:text-slate-900 font-medium"
             }`}
           >
             <MoreHorizontal className="w-5 h-5 mb-0.5" />
-            <span className="text-[10px] font-bold">More</span>
+            <span className="text-[10px] tracking-tight">More</span>
           </button>
         </div>
       </nav>
