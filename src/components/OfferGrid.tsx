@@ -92,6 +92,13 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
     }
   };
 
+  // Compute dynamic categories list from offers
+  const categories = React.useMemo(() => {
+    return Array.from(
+      new Set(offers.map((o) => o.category).filter(Boolean))
+    ).sort() as string[];
+  }, [offers]);
+
   return (
     <div className="min-h-screen bg-slate-50/60 text-slate-900 flex flex-col">
       {/* Sticky Header */}
@@ -107,6 +114,7 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
         {/* 1. Business Categories Grid */}
         <div className="mb-4">
           <MobileCategoryGrid
+            categories={categories}
             selectedCategory={selectedCategory}
             onSelectCategory={(cat) => {
               setSelectedCategory(cat);

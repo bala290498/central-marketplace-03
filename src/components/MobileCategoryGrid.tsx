@@ -1,65 +1,39 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import {
-  Home,
-  Briefcase,
-  UserCheck,
-  Package,
-  Wrench,
-  UtensilsCrossed,
-  Car,
-  ShoppingCart,
-  Scissors,
-  Smartphone,
-  Dumbbell,
-  Pill,
-  Film,
-  ChevronDown,
-  ChevronUp,
-  Sparkles,
-  ArrowRight,
-} from "lucide-react";
+import { ChevronDown, ChevronUp, Sparkles, ArrowRight } from "lucide-react";
 import { AllCategoriesModal } from "./AllCategoriesModal";
+import { getCategoryMeta } from "@/lib/categories";
 
 interface MobileCategoryGridProps {
+  categories?: string[];
   selectedCategory?: string;
   onSelectCategory?: (cat: string) => void;
 }
 
-const CATEGORY_THEMES = [
-  {
-    bg: "bg-[#FFF4F6]",
-    border: "border-[#FDE2E7]",
-    iconBg: "bg-[#E63956]",
-    textColor: "text-[#D81B43]",
-    badgeBg: "bg-[#FDE2E8]",
-  },
-  {
-    bg: "bg-[#F0F6FF]",
-    border: "border-[#DCE8FE]",
-    iconBg: "bg-[#1E75EB]",
-    textColor: "text-[#1D4ED8]",
-    badgeBg: "bg-[#DBEAFE]",
-  },
-  {
-    bg: "bg-[#FFF8EE]",
-    border: "border-[#FDEBD0]",
-    iconBg: "bg-[#F97316]",
-    textColor: "text-[#C2410C]",
-    badgeBg: "bg-[#FFEDD5]",
-  },
-  {
-    bg: "bg-[#F0FDF4]",
-    border: "border-[#DCFCE7]",
-    iconBg: "bg-[#10B981]",
-    textColor: "text-[#15803D]",
-    badgeBg: "bg-[#DCFCE7]",
-  },
+const DEFAULT_CATEGORIES = [
+  "Auto Care",
+  "Daily Needs",
+  "Electronics",
+  "Entertainment",
+  "Fashion",
+  "Fitness",
+  "Food",
+  "Grocery",
+  "Home & Living",
+  "Pharmacy",
+  "Products",
+  "Professional",
+  "Property",
+  "Property Request",
+  "Recruitment",
+  "Salon & Spa",
+  "Wholesale",
 ];
 
 export function MobileCategoryGrid({
+  categories,
   selectedCategory = "",
   onSelectCategory,
 }: MobileCategoryGridProps) {
@@ -67,73 +41,11 @@ export function MobileCategoryGrid({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const allCategories = [
-    {
-      name: "Property",
-      categoryValue: "Property",
-      icon: Home,
-    },
-    {
-      name: "Recruitment",
-      categoryValue: "Recruitment",
-      icon: Briefcase,
-    },
-    {
-      name: "Professionals",
-      categoryValue: "Professional",
-      icon: UserCheck,
-    },
-    {
-      name: "Products",
-      categoryValue: "Products",
-      icon: Package,
-    },
-    {
-      name: "Services",
-      categoryValue: "Home & Living",
-      icon: Wrench,
-    },
-    {
-      name: "Food",
-      categoryValue: "Food",
-      icon: UtensilsCrossed,
-    },
-    {
-      name: "Vehicles",
-      categoryValue: "Auto Care",
-      icon: Car,
-    },
-    {
-      name: "Daily Needs",
-      categoryValue: "Daily Needs",
-      icon: ShoppingCart,
-    },
-    {
-      name: "Salon & Spa",
-      categoryValue: "Salon & Spa",
-      icon: Scissors,
-    },
-    {
-      name: "Electronics",
-      categoryValue: "Electronics",
-      icon: Smartphone,
-    },
-    {
-      name: "Fitness",
-      categoryValue: "Fitness",
-      icon: Dumbbell,
-    },
-    {
-      name: "Pharmacy",
-      categoryValue: "Pharmacy",
-      icon: Pill,
-    },
-    {
-      name: "Entertainment",
-      categoryValue: "Entertainment",
-      icon: Film,
-    },
-  ];
+  const rawList = categories && categories.length > 0 ? categories : DEFAULT_CATEGORIES;
+
+  const categoryMetas = useMemo(() => {
+    return rawList.map((catName, idx) => getCategoryMeta(catName, idx));
+  }, [rawList]);
 
   const handleSelect = (catValue: string) => {
     if (onSelectCategory) {
@@ -146,8 +58,8 @@ export function MobileCategoryGrid({
     }
   };
 
-  const desktopVisible = isExpanded ? allCategories : allCategories.slice(0, 6);
-  const mobileVisible = isExpanded ? allCategories : allCategories.slice(0, 5);
+  const desktopVisible = isExpanded ? categoryMetas : categoryMetas.slice(0, 6);
+  const mobileVisible = isExpanded ? categoryMetas : categoryMetas.slice(0, 5);
 
   return (
     <>
@@ -172,13 +84,13 @@ export function MobileCategoryGrid({
         <div className="hidden md:grid grid-cols-7 gap-3">
           {desktopVisible.map((item, idx) => {
             const Icon = item.icon;
-            const isSelected = selectedCategory === item.categoryValue;
-            const theme = CATEGORY_THEMES[idx % CATEGORY_THEMES.length];
+            const isSelected = selectedCategory === item.value;
+            const theme = item.theme;
 
             return (
               <div
                 key={idx}
-                onClick={() => handleSelect(item.categoryValue)}
+                onClick={() => handleSelect(item.value)}
                 className={`p-3.5 rounded-3xl border ${theme.bg} ${theme.border} ${
                   isSelected ? "ring-2 ring-orange-500 shadow-md scale-102" : "shadow-2xs hover:shadow-md"
                 } transition-all duration-200 cursor-pointer flex flex-col justify-between group h-28`}
@@ -225,13 +137,13 @@ export function MobileCategoryGrid({
         <div className="grid md:hidden grid-cols-3 gap-2.5">
           {mobileVisible.map((item, idx) => {
             const Icon = item.icon;
-            const isSelected = selectedCategory === item.categoryValue;
-            const theme = CATEGORY_THEMES[idx % CATEGORY_THEMES.length];
+            const isSelected = selectedCategory === item.value;
+            const theme = item.theme;
 
             return (
               <div
                 key={idx}
-                onClick={() => handleSelect(item.categoryValue)}
+                onClick={() => handleSelect(item.value)}
                 className={`p-3 rounded-2xl border ${theme.bg} ${theme.border} ${
                   isSelected ? "ring-2 ring-orange-500 shadow-md scale-102" : "shadow-2xs hover:shadow-md"
                 } transition-all duration-200 cursor-pointer flex flex-col justify-between group h-24`}
