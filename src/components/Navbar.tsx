@@ -60,7 +60,7 @@ export function Navbar({
     { href: "/", label: "Home" },
     { href: "/list", label: "List" },
     { href: "/how-it-works", label: "How it works" },
-    { href: "/list-your-business", label: "List your business" },
+    { href: "/list-your-business", label: "Post" },
     { href: "/we-are-hiring", label: "We're hiring" },
   ];
 

@@ -14,7 +14,7 @@ export function Footer() {
           </Link>
           <span>·</span>
           <Link href="/list-your-business" className="hover:text-orange-600 transition-colors">
-            List your business
+            Post
           </Link>
           <span>·</span>
           <Link href="/we-are-hiring" className="hover:text-orange-600 transition-colors">

@@ -37,7 +37,7 @@ export function MoreDrawer({ isOpen, onClose }: MoreDrawerProps) {
     },
     {
       href: "/list-your-business",
-      label: "Post a Listing / List Business",
+      label: "Post",
       desc: "Showcase your shop or service to local buyers",
       icon: Briefcase,
       color: "bg-emerald-100 text-emerald-600",
