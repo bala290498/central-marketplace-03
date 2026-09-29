@@ -127,21 +127,25 @@ export function ListCategoryBar({
   return (
     <div className="w-full space-y-3">
       {/* Single Row Scrollable Category Chips with Desktop Controls */}
-      <div className="relative flex items-center">
-        {canScrollLeft && (
+      <div className="flex items-center gap-2">
+        {/* Left Arrow Button */}
+        {canScrollLeft ? (
           <button
             type="button"
             onClick={() => handleScroll("left")}
-            className="hidden md:flex absolute left-0 z-20 items-center justify-center w-8 h-8 rounded-full bg-white shadow-md border border-slate-200 text-slate-700 hover:bg-slate-100 hover:text-orange-600 transition-all -ml-2"
+            className="hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-white shadow-xs border border-slate-200 text-slate-700 hover:bg-slate-100 hover:text-orange-600 transition-all flex-shrink-0 cursor-pointer"
             title="Scroll left"
           >
             <ChevronLeft className="w-4 h-4 stroke-[2.5]" />
           </button>
+        ) : (
+          <div className="hidden md:block w-8 flex-shrink-0" />
         )}
 
+        {/* Scrollable Chips Container */}
         <div
           ref={scrollRef}
-          className="w-full overflow-x-auto no-scrollbar py-1 flex items-center gap-4 scroll-smooth"
+          className="flex-1 overflow-x-auto no-scrollbar py-1 flex items-center gap-4 scroll-smooth"
         >
           {allItems.map((name) => {
             const val = name === "All" ? "" : name;
@@ -176,15 +180,18 @@ export function ListCategoryBar({
           })}
         </div>
 
-        {canScrollRight && (
+        {/* Right Arrow Button */}
+        {canScrollRight ? (
           <button
             type="button"
             onClick={() => handleScroll("right")}
-            className="hidden md:flex absolute right-0 z-20 items-center justify-center w-8 h-8 rounded-full bg-white shadow-md border border-slate-200 text-slate-700 hover:bg-slate-100 hover:text-orange-600 transition-all -mr-2"
+            className="hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-white shadow-xs border border-slate-200 text-slate-700 hover:bg-slate-100 hover:text-orange-600 transition-all flex-shrink-0 cursor-pointer"
             title="Scroll right"
           >
             <ChevronRight className="w-4 h-4 stroke-[2.5]" />
           </button>
+        ) : (
+          <div className="hidden md:block w-8 flex-shrink-0" />
         )}
       </div>
 

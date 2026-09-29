@@ -12,6 +12,22 @@
   }
 }
 
+/* Hide main browser scrollbar indicator globally on desktop & mobile */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+html,
+body,
+* {
+  -ms-overflow-style: none !important;  /* IE and Edge */
+  scrollbar-width: none !important;  /* Firefox */
+}
+
 :root {
   color-scheme: light;
   --background: #f8fafc;
@@ -34,4 +50,5 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading), "Outfit", var(--font-sans), system-ui, sans-serif;
 }
+
 
