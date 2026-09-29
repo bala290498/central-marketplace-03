@@ -168,40 +168,20 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
         isLocating={isLocating}
       />
 
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 pt-4 pb-16">
-        {/* Page Header */}
-        <div className="mb-4 flex items-center justify-between">
-          <div>
-            <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-              All Listings
-            </h1>
-            <p className="text-xs text-slate-500">
-              {selectedCategory
-                ? `Filtered by "${selectedCategory}"`
-                : "Explore all products, properties, services, and deals"}
-            </p>
-          </div>
-
-          <span className="text-xs font-bold px-3 py-1 rounded-full bg-blue-100 text-blue-700">
-            {processedOffers.length} {processedOffers.length === 1 ? "Item" : "Items"}
-          </span>
-        </div>
-
-        {/* Sticky Filters Container with ListCategoryBar */}
-        <div className="sticky top-14 z-30 bg-white/95 backdrop-blur-md rounded-3xl p-4 sm:p-5 border border-slate-200/80 shadow-sm mb-6">
-          <ListCategoryBar
-            categories={categories}
-            selectedCategory={selectedCategory}
-            onSelectCategory={setSelectedCategory}
-            locations={locations}
-            selectedLocation={selectedLocation}
-            selectedDistance={selectedDistance}
-            searchQuery={searchQuery}
-            onLocationChange={setSelectedLocation}
-            onDistanceChange={setSelectedDistance}
-            onSearchChange={setSearchQuery}
-          />
-        </div>
+      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 pt-2 pb-16 space-y-4">
+        {/* Unboxed Filters & Category Bar */}
+        <ListCategoryBar
+          categories={categories}
+          selectedCategory={selectedCategory}
+          onSelectCategory={setSelectedCategory}
+          locations={locations}
+          selectedLocation={selectedLocation}
+          selectedDistance={selectedDistance}
+          searchQuery={searchQuery}
+          onLocationChange={setSelectedLocation}
+          onDistanceChange={setSelectedDistance}
+          onSearchChange={setSearchQuery}
+        />
 
         {/* Listings Grid */}
         {processedOffers.length > 0 ? (

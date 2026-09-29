@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Sparkles,
   Utensils,
@@ -50,6 +50,32 @@ export function ListCategoryBar({
   onDistanceChange,
   onSearchChange,
 }: ListCategoryBarProps) {
+  const [isSearchHidden, setIsSearchHidden] = useState(false);
+
+  useEffect(() => {
+    let lastY = window.scrollY || 0;
+
+    const handleScroll = () => {
+      const y = Math.max(0, window.scrollY || 0);
+      const delta = y - lastY;
+      lastY = y;
+
+      if (y < 30) {
+        setIsSearchHidden(false);
+        return;
+      }
+
+      if (delta > 6) {
+        setIsSearchHidden(true);
+      } else if (delta < -6) {
+        setIsSearchHidden(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const getCategoryIcon = (name: string) => {
     switch (name) {
       case "All":
@@ -98,20 +124,28 @@ export function ListCategoryBar({
 
   return (
     <div className="w-full space-y-3">
-      {/* Search Bar */}
-      <div className="relative flex items-center">
-        <Search className="absolute left-3.5 w-4 h-4 text-slate-400 pointer-events-none" />
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={(e) => onSearchChange(e.target.value)}
-          placeholder="Search products, services, listings..."
-          className="w-full pl-9 pr-3 py-2.5 rounded-2xl border border-slate-200 bg-white text-slate-900 text-xs sm:text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-600 shadow-xs"
-        />
+      {/* Search Bar - Hides on scroll down, shows on scroll up */}
+      <div
+        className={`sticky top-14 z-30 pt-1 pb-1 transition-all duration-300 ${
+          isSearchHidden
+            ? "-translate-y-24 opacity-0 pointer-events-none"
+            : "translate-y-0 opacity-100"
+        }`}
+      >
+        <div className="relative flex items-center">
+          <Search className="absolute left-3.5 w-4 h-4 text-slate-400 pointer-events-none" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => onSearchChange(e.target.value)}
+            placeholder="Search products, services, listings..."
+            className="w-full pl-9 pr-3 py-2.5 rounded-2xl border border-slate-200 bg-white text-slate-900 text-xs sm:text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-600 shadow-xs"
+          />
+        </div>
       </div>
 
-      {/* Single Row Scrollable Category Chips (Icon on top, Text next line) */}
-      <div className="w-full overflow-x-auto no-scrollbar py-1 flex items-center gap-2.5">
+      {/* Single Row Scrollable Category Chips (Icon on top, Text next line - NO chip container box) */}
+      <div className="w-full overflow-x-auto no-scrollbar py-1 flex items-center gap-4">
         {allItems.map((name) => {
           const val = name === "All" ? "" : name;
           const isSelected = selectedCategory === val;
@@ -120,20 +154,24 @@ export function ListCategoryBar({
               key={name}
               type="button"
               onClick={() => onSelectCategory(val)}
-              className={`flex-shrink-0 flex flex-col items-center justify-center px-4 py-2 rounded-2xl transition-all cursor-pointer min-w-[70px] ${
-                isSelected
-                  ? "bg-blue-600 text-white shadow-md shadow-blue-600/25 ring-2 ring-blue-600/30 scale-[1.02]"
-                  : "bg-slate-100/90 text-slate-700 hover:bg-slate-200/80 border border-slate-200/60"
-              }`}
+              className="flex-shrink-0 flex flex-col items-center justify-center py-1 transition-all cursor-pointer group focus:outline-none min-w-[56px]"
             >
               <div
-                className={`mb-1 transition-transform ${
-                  isSelected ? "text-white scale-110" : "text-blue-600"
+                className={`mb-1 transition-all duration-200 ${
+                  isSelected
+                    ? "text-blue-600 scale-110"
+                    : "text-slate-400 group-hover:text-slate-600"
                 }`}
               >
                 {getCategoryIcon(name)}
               </div>
-              <span className="text-[11px] font-bold tracking-tight whitespace-nowrap">
+              <span
+                className={`text-[11px] tracking-tight whitespace-nowrap transition-colors ${
+                  isSelected
+                    ? "font-extrabold text-blue-600 border-b-2 border-blue-600 pb-0.5"
+                    : "font-semibold text-slate-600 group-hover:text-slate-900"
+                }`}
+              >
                 {name}
               </span>
             </button>

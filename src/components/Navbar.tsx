@@ -20,32 +20,29 @@ export function Navbar({
   isLocating = false,
 }: NavbarProps) {
   const pathname = usePathname();
+  const [isHidden, setIsHidden] = useState(false);
   const [isCompact, setIsCompact] = useState(false);
 
-  // Scroll listener for compact header
+  // Scroll listener for hide-on-scroll-down and show-on-scroll-up header
   useEffect(() => {
     let lastY = window.scrollY || 0;
-    let upTravel = 0;
 
     const handleScroll = () => {
       const y = Math.max(0, window.scrollY || 0);
       const delta = y - lastY;
       lastY = y;
 
-      if (y < 40) {
+      if (y < 30) {
+        setIsHidden(false);
         setIsCompact(false);
-        upTravel = 0;
         return;
       }
 
-      if (delta > 10) {
-        upTravel = 0;
+      if (delta > 6) {
+        setIsHidden(true);
         setIsCompact(true);
-      } else if (delta < -10) {
-        upTravel += -delta;
-        if (upTravel > 60) {
-          setIsCompact(false);
-        }
+      } else if (delta < -6) {
+        setIsHidden(false);
       }
     };
 
@@ -63,8 +60,8 @@ export function Navbar({
   return (
     <header
       className={`sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 transition-all duration-300 ${
-        isCompact ? "py-2 shadow-xs" : "py-3 shadow-sm"
-      }`}
+        isHidden ? "-translate-y-full opacity-0 pointer-events-none" : "translate-y-0 opacity-100"
+      } ${isCompact ? "py-2 shadow-xs" : "py-3 shadow-sm"}`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between gap-4">
