@@ -168,7 +168,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
         onDetectLocation={detectLocation}
         isLocating={isLocating}
       >
-        <div className="relative flex items-center pt-1 pb-0.5">
+        <div className="hidden md:flex relative items-center pt-1 pb-0.5">
           <Search className="absolute left-3.5 w-4 h-4 text-slate-400 pointer-events-none" />
           <input
             type="text"
