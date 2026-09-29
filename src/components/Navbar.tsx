@@ -107,7 +107,7 @@ export function Navbar({
                 ) : userLocation && userAreaLabel ? (
                   <>
                     <MapPin className="w-3.5 h-3.5 text-orange-600 fill-orange-500/20" />
-                    <span>📍 {userAreaLabel}</span>
+                    <span>{userAreaLabel}</span>
                   </>
                 ) : (
                   <>
