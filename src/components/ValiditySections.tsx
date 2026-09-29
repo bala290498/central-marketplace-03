@@ -7,7 +7,7 @@ import {
   ValidityCategoryKey,
   getOfferValidityCategory,
 } from "@/lib/validity";
-import { OfferCard } from "./OfferCard";
+import { ShortOfferCard } from "./ShortOfferCard";
 import {
   Flame,
   Hourglass,
@@ -117,13 +117,12 @@ export function ValiditySections({
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {categoryOffers.map((offer) => (
-              <OfferCard
+              <ShortOfferCard
                 key={offer.id}
                 offer={offer}
                 userLocation={userLocation}
-                onShare={onShare}
               />
             ))}
           </div>
@@ -179,13 +178,12 @@ export function ValiditySections({
             </div>
 
             {/* Grid of Offers for this Validity Heading */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {catOffers.map((offer) => (
-                <OfferCard
+                <ShortOfferCard
                   key={offer.id}
                   offer={offer}
                   userLocation={userLocation}
-                  onShare={onShare}
                 />
               ))}
             </div>
