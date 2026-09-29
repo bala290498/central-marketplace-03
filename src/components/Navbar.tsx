@@ -103,54 +103,57 @@ export function Navbar({
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-2.5">
         <div className="flex items-center justify-between gap-4">
-          {/* Brand Logo & Title */}
-          <Link
-            href="/"
-            className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-orange-500 rounded-xl p-1 -ml-1 transition-all"
-          >
-            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-orange-500 flex items-center justify-center text-white font-black text-lg shadow-md shadow-orange-500/25 group-hover:scale-105 transition-transform duration-200">
-              CM
-            </div>
-            <div className="flex flex-col justify-center leading-tight">
-              <div className="font-extrabold text-slate-900 text-sm sm:text-base tracking-tight group-hover:text-orange-600 transition-colors leading-tight">
-                Central <br /> Marketplace
+          {/* Brand Logo & Title + Location (Desktop Header Group) */}
+          <div className="flex items-center gap-3">
+            <Link
+              href="/"
+              className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-orange-500 rounded-xl p-1 -ml-1 transition-all"
+            >
+              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-orange-500 flex items-center justify-center text-white font-black text-lg shadow-md shadow-orange-500/25 group-hover:scale-105 transition-transform duration-200">
+                CM
               </div>
-            </div>
-          </Link>
+              <div className="flex flex-col justify-center leading-tight">
+                <div className="font-extrabold text-slate-900 text-sm sm:text-base tracking-tight group-hover:text-orange-600 transition-colors leading-tight">
+                  Central <br /> Marketplace
+                </div>
+              </div>
+            </Link>
 
-          {/* Location Button (Desktop Header) */}
-          {onDetectLocation && (
-            <div className="hidden md:flex items-center">
-              <button
-                type="button"
-                onClick={onDetectLocation}
-                disabled={isLocating}
-                className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full font-semibold text-xs sm:text-sm transition-all duration-200 border ${
-                  userLocation && userAreaLabel
-                    ? "bg-orange-50 text-orange-700 border-orange-200 hover:bg-orange-100"
-                    : "bg-orange-500 text-white border-transparent hover:bg-orange-600 shadow-xs shadow-orange-500/20"
-                }`}
-                title={userAreaLabel ? `Location: ${userAreaLabel}` : "Allow location access"}
-              >
-                {isLocating ? (
-                  <>
-                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                    <span>Locating...</span>
-                  </>
-                ) : userLocation && userAreaLabel ? (
-                  <>
-                    <MapPin className="w-3.5 h-3.5 text-orange-600 fill-orange-500/20" />
-                    <span>{userAreaLabel}</span>
-                  </>
-                ) : (
-                  <>
-                    <Navigation className="w-3.5 h-3.5" />
-                    <span>Allow location</span>
-                  </>
-                )}
-              </button>
-            </div>
-          )}
+            {/* Vertical Divider Line & Location Button (Desktop Header) */}
+            {onDetectLocation && (
+              <div className="hidden md:flex items-center gap-3">
+                <div className="h-7 w-px bg-slate-200/90 select-none" />
+                <button
+                  type="button"
+                  onClick={onDetectLocation}
+                  disabled={isLocating}
+                  className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full font-semibold text-xs sm:text-sm transition-all duration-200 border cursor-pointer ${
+                    userLocation && userAreaLabel
+                      ? "bg-orange-50 text-orange-700 border-orange-200 hover:bg-orange-100"
+                      : "bg-orange-500 text-white border-transparent hover:bg-orange-600 shadow-xs shadow-orange-500/20"
+                  }`}
+                  title={userAreaLabel ? `Location: ${userAreaLabel}` : "Allow location access"}
+                >
+                  {isLocating ? (
+                    <>
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                      <span>Locating...</span>
+                    </>
+                  ) : userLocation && userAreaLabel ? (
+                    <>
+                      <MapPin className="w-3.5 h-3.5 text-orange-600 fill-orange-500/20" />
+                      <span>{userAreaLabel}</span>
+                    </>
+                  ) : (
+                    <>
+                      <Navigation className="w-3.5 h-3.5" />
+                      <span>Allow location</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            )}
+          </div>
 
           {/* Desktop Nav Links with More Hover Dropdown */}
           <nav className="hidden md:flex items-center space-x-1 sm:space-x-1.5">

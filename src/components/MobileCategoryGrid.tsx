@@ -11,7 +11,13 @@ import {
   Utensils,
   Car,
   ShoppingCart,
-  Grid,
+  Scissors,
+  Smartphone,
+  Dumbbell,
+  Pill,
+  Film,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 import { AllCategoriesModal } from "./AllCategoriesModal";
 
@@ -26,9 +32,9 @@ export function MobileCategoryGrid({
 }: MobileCategoryGridProps) {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
-  // 3x3 grid: 8 categories + 1 "View All" button
-  const gridCategories = [
+  const allCategories = [
     {
       name: "Property",
       categoryValue: "Property",
@@ -77,6 +83,36 @@ export function MobileCategoryGrid({
       icon: ShoppingCart,
       bgColor: "bg-emerald-100/90 text-emerald-600",
     },
+    {
+      name: "Salon & Spa",
+      categoryValue: "Salon & Spa",
+      icon: Scissors,
+      bgColor: "bg-pink-100/90 text-pink-600",
+    },
+    {
+      name: "Electronics",
+      categoryValue: "Electronics",
+      icon: Smartphone,
+      bgColor: "bg-blue-100/90 text-blue-600",
+    },
+    {
+      name: "Fitness",
+      categoryValue: "Fitness",
+      icon: Dumbbell,
+      bgColor: "bg-red-100/90 text-red-600",
+    },
+    {
+      name: "Pharmacy",
+      categoryValue: "Pharmacy",
+      icon: Pill,
+      bgColor: "bg-teal-100/90 text-teal-600",
+    },
+    {
+      name: "Entertainment",
+      categoryValue: "Entertainment",
+      icon: Film,
+      bgColor: "bg-indigo-100/90 text-indigo-600",
+    },
   ];
 
   const handleSelect = (catValue: string) => {
@@ -90,11 +126,18 @@ export function MobileCategoryGrid({
     }
   };
 
+  // Filter category items depending on collapse vs expand state:
+  // On Desktop: 6 items in 1 row when collapsed.
+  // On Mobile: 8 items in 3x3 grid when collapsed.
+  const desktopVisible = isExpanded ? allCategories : allCategories.slice(0, 6);
+  const mobileVisible = isExpanded ? allCategories : allCategories.slice(0, 8);
+
   return (
     <>
-      <div className="w-full mb-6">
-        <div className="grid grid-cols-3 gap-y-4 gap-x-2">
-          {gridCategories.map((item, idx) => {
+      <div className="w-full mb-6 transition-all duration-300">
+        {/* Desktop View: 6 items + More/Less button in 1 single row (7 columns) when collapsed */}
+        <div className="hidden md:grid grid-cols-7 gap-y-4 gap-x-3">
+          {desktopVisible.map((item, idx) => {
             const Icon = item.icon;
             const isSelected = selectedCategory === item.categoryValue;
             return (
@@ -124,17 +167,72 @@ export function MobileCategoryGrid({
             );
           })}
 
-          {/* 9th Slot: View All Categories Tile */}
+          {/* Desktop Expander / Collapser Button */}
           <button
             type="button"
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => setIsExpanded(!isExpanded)}
             className="flex flex-col items-center justify-center py-1.5 px-1 transition-all cursor-pointer group focus:outline-none"
           >
             <div className="w-12 h-12 rounded-2xl bg-slate-200/80 text-slate-700 flex items-center justify-center mb-1.5 shadow-2xs group-hover:scale-105 transition-transform">
-              <Grid className="w-6 h-6 stroke-[2.2]" />
+              {isExpanded ? (
+                <ChevronUp className="w-6 h-6 stroke-[2.5]" />
+              ) : (
+                <ChevronDown className="w-6 h-6 stroke-[2.5]" />
+              )}
             </div>
             <span className="text-[11px] font-extrabold text-blue-600 text-center leading-tight">
-              View All
+              {isExpanded ? "Less" : "More"}
+            </span>
+          </button>
+        </div>
+
+        {/* Mobile View: 3 columns grid */}
+        <div className="grid md:hidden grid-cols-3 gap-y-4 gap-x-2">
+          {mobileVisible.map((item, idx) => {
+            const Icon = item.icon;
+            const isSelected = selectedCategory === item.categoryValue;
+            return (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => handleSelect(item.categoryValue)}
+                className="flex flex-col items-center justify-center py-1.5 px-1 transition-all cursor-pointer group focus:outline-none"
+              >
+                <div
+                  className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-1.5 shadow-2xs group-hover:scale-105 transition-transform ${
+                    isSelected ? "ring-2 ring-blue-600 scale-105" : ""
+                  } ${item.bgColor}`}
+                >
+                  <Icon className="w-6 h-6 stroke-[2.2]" />
+                </div>
+                <span
+                  className={`text-[11px] text-center leading-tight transition-colors ${
+                    isSelected
+                      ? "font-extrabold text-blue-600"
+                      : "font-bold text-slate-800 group-hover:text-slate-900"
+                  }`}
+                >
+                  {item.name}
+                </span>
+              </button>
+            );
+          })}
+
+          {/* Mobile Expander / Collapser Button */}
+          <button
+            type="button"
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="flex flex-col items-center justify-center py-1.5 px-1 transition-all cursor-pointer group focus:outline-none"
+          >
+            <div className="w-12 h-12 rounded-2xl bg-slate-200/80 text-slate-700 flex items-center justify-center mb-1.5 shadow-2xs group-hover:scale-105 transition-transform">
+              {isExpanded ? (
+                <ChevronUp className="w-6 h-6 stroke-[2.5]" />
+              ) : (
+                <ChevronDown className="w-6 h-6 stroke-[2.5]" />
+              )}
+            </div>
+            <span className="text-[11px] font-extrabold text-blue-600 text-center leading-tight">
+              {isExpanded ? "Less" : "More"}
             </span>
           </button>
         </div>
@@ -149,3 +247,4 @@ export function MobileCategoryGrid({
     </>
   );
 }
+
