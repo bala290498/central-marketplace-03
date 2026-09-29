@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import { BottomNav } from "@/components/BottomNav";
 import "./globals.css";
 
 const inter = Inter({
@@ -24,7 +25,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
-  themeColor: "#f97316",
+  themeColor: "#2563eb",
 };
 
 export default function RootLayout({
@@ -34,8 +35,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-sans bg-slate-50/60 text-slate-900">
+      <body className="min-h-full flex flex-col font-sans bg-slate-50/60 text-slate-900 pb-16 md:pb-0">
         {children}
+        <BottomNav />
       </body>
     </html>
   );

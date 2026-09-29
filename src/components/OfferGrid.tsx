@@ -14,6 +14,7 @@ import { Navbar } from "./Navbar";
 import { CategorySelector } from "./CategorySelector";
 import { FilterBar } from "./FilterBar";
 import { OfferCard } from "./OfferCard";
+import { MobileCategoryGrid } from "./MobileCategoryGrid";
 import { Sparkles, CheckCircle2, AlertCircle } from "lucide-react";
 
 interface OfferGridProps {
@@ -185,7 +186,15 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
       />
 
       {/* Main Deals Container */}
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 pt-4 pb-12">
+      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 pt-4 pb-16">
+        {/* Mobile Category App Grid */}
+        <div className="block md:hidden">
+          <MobileCategoryGrid
+            selectedCategory={selectedCategory}
+            onSelectCategory={setSelectedCategory}
+          />
+        </div>
+
         {/* Banner / Headline */}
         <div className="mb-4 flex items-center justify-between">
           <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-600">
@@ -202,14 +211,16 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
           </span>
         </div>
 
-        {/* Sticky Filters Container */}
+        {/* Filters Container */}
         <div className="bg-white/95 backdrop-blur-md rounded-2xl p-3 sm:p-4 border border-slate-200/80 shadow-xs mb-6 space-y-2">
-          {/* Category Chips */}
-          <CategorySelector
-            categories={categories}
-            selectedCategory={selectedCategory}
-            onSelectCategory={setSelectedCategory}
-          />
+          {/* Category Chips (Desktop & Tablet) */}
+          <div className="hidden md:block">
+            <CategorySelector
+              categories={categories}
+              selectedCategory={selectedCategory}
+              onSelectCategory={setSelectedCategory}
+            />
+          </div>
 
           {/* Location & Distance Dropdowns */}
           <FilterBar
@@ -225,47 +236,49 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
         </div>
 
         {/* Offers Grid */}
-        {processedOffers.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-            {processedOffers.map((offer) => (
-              <OfferCard
-                key={offer.id}
-                offer={offer}
-                userLocation={userLocation}
-                onShare={handleShare}
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="bg-white rounded-3xl p-12 text-center border border-slate-200 my-8 shadow-xs">
-            <div className="w-16 h-16 rounded-2xl bg-orange-50 text-orange-500 flex items-center justify-center mx-auto mb-4">
-              <AlertCircle className="w-8 h-8" />
+        <div id="offers-section">
+          {processedOffers.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+              {processedOffers.map((offer) => (
+                <OfferCard
+                  key={offer.id}
+                  offer={offer}
+                  userLocation={userLocation}
+                  onShare={handleShare}
+                />
+              ))}
             </div>
-            <h3 className="text-lg font-bold text-slate-900 mb-2">
-              No matching deals found
-            </h3>
-            <p className="text-sm text-slate-500 max-w-md mx-auto mb-6">
-              Try adjusting your category, distance, or location filters to see more offers around you.
-            </p>
-            <button
-              type="button"
-              onClick={() => {
-                setSelectedCategory("");
-                setSelectedLocation("");
-                setSelectedDistance(null);
-                setSearchQuery("");
-              }}
-              className="px-4 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm shadow-md transition-colors"
-            >
-              Reset Filters
-            </button>
-          </div>
-        )}
+          ) : (
+            <div className="bg-white rounded-3xl p-12 text-center border border-slate-200 my-8 shadow-xs">
+              <div className="w-16 h-16 rounded-2xl bg-orange-50 text-orange-500 flex items-center justify-center mx-auto mb-4">
+                <AlertCircle className="w-8 h-8" />
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 mb-2">
+                No matching deals found
+              </h3>
+              <p className="text-sm text-slate-500 max-w-md mx-auto mb-6">
+                Try adjusting your category, distance, or location filters to see more offers around you.
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  setSelectedCategory("");
+                  setSelectedLocation("");
+                  setSelectedDistance(null);
+                  setSearchQuery("");
+                }}
+                className="px-4 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm shadow-md transition-colors"
+              >
+                Reset Filters
+              </button>
+            </div>
+          )}
+        </div>
       </main>
 
       {/* Floating Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 rounded-2xl bg-slate-900 text-white text-xs sm:text-sm font-semibold shadow-xl border border-slate-800 animate-bounce">
+        <div className="fixed bottom-20 right-6 z-50 flex items-center gap-2 px-4 py-3 rounded-2xl bg-slate-900 text-white text-xs sm:text-sm font-semibold shadow-xl border border-slate-800 animate-bounce">
           <CheckCircle2 className="w-4 h-4 text-emerald-400" />
           <span>{toastMessage}</span>
         </div>
