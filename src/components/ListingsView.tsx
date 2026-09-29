@@ -96,6 +96,12 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
     }
   }, [categoryParam]);
 
+  useEffect(() => {
+    if (validityParam) {
+      setSelectedValidity(validityParam);
+    }
+  }, [validityParam]);
+
   const triggerToast = (msg: string) => {
     setToastMessage(msg);
     setTimeout(() => setToastMessage(null), 3000);
@@ -144,11 +150,12 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
     let list = offers.filter((offer) => {
       const areaOk = !selectedLocation || offerArea(offer) === selectedLocation;
       const catOk = !selectedCategory || offerCategory(offer) === selectedCategory;
-      const valText = offer.validity || offer.ends || offer.expiry || "";
+      const valText = (offer.validity || offer.ends || offer.expiry || "").toLowerCase().trim();
+      const selValLower = selectedValidity.toLowerCase().trim();
       const validityOk =
         !selectedValidity ||
         getOfferValidityCategory(offer) === selectedValidity ||
-        valText === selectedValidity;
+        valText === selValLower;
 
       const searchLower = searchQuery.toLowerCase().trim();
       const searchOk =
@@ -182,7 +189,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
     }
 
     return list;
-  }, [offers, selectedCategory, selectedLocation, selectedDistance, searchQuery, userLocation]);
+  }, [offers, selectedCategory, selectedLocation, selectedDistance, selectedValidity, searchQuery, userLocation]);
 
   const handleShare = async (offer: Offer) => {
     const title = offer.title || "Deal";
