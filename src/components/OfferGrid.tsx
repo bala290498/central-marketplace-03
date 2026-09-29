@@ -7,6 +7,8 @@ import { lookupUserArea } from "@/lib/utils";
 import { Navbar } from "./Navbar";
 import { MobileCategoryGrid } from "./MobileCategoryGrid";
 import { LatestListingsCarousel } from "./LatestListingsCarousel";
+import { ValidityCategoryBar } from "./ValidityCategoryBar";
+import { ValiditySections } from "./ValiditySections";
 import { CheckCircle2 } from "lucide-react";
 
 interface OfferGridProps {
@@ -23,6 +25,7 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
 
   // Filter States
   const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [selectedValidity, setSelectedValidity] = useState<string>("all");
 
   const triggerToast = (msg: string) => {
     setToastMessage(msg);
@@ -74,6 +77,21 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
     }
   };
 
+  const handleShare = (offer: Offer) => {
+    if (typeof window !== "undefined" && navigator.share) {
+      navigator
+        .share({
+          title: offer.title,
+          text: `${offer.title} at ${offer.business || offer.location || "Central Marketplace"}`,
+          url: window.location.href,
+        })
+        .catch(() => {});
+    } else if (typeof window !== "undefined") {
+      navigator.clipboard.writeText(window.location.href);
+      triggerToast("Link copied to clipboard!");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-50/60 text-slate-900 flex flex-col">
       {/* Sticky Header */}
@@ -86,10 +104,8 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
 
       {/* Main Deals Container */}
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 pt-4 pb-16">
-        {/* 1. Categories Section (3x3 grid with View All tile) */}
-
-        {/* 2. Categories Section (3x3 grid with View All tile) */}
-        <div className="mb-2">
+        {/* 1. Business Categories Grid */}
+        <div className="mb-4">
           <MobileCategoryGrid
             selectedCategory={selectedCategory}
             onSelectCategory={(cat) => {
@@ -99,11 +115,27 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
           />
         </div>
 
-        {/* 3. Latest Listings Horizontal Carousel */}
+        {/* 2. Latest Listings Horizontal Carousel */}
         <LatestListingsCarousel
           offers={offers}
           userLocation={userLocation}
           onSeeAll={handleSeeAll}
+        />
+
+        {/* 3. Validity Headings Categories Filter Bar */}
+        <ValidityCategoryBar
+          offers={offers}
+          selectedValidity={selectedValidity}
+          onSelectValidity={(key) => setSelectedValidity(key)}
+        />
+
+        {/* 4. Validity Headings Sections / Grid */}
+        <ValiditySections
+          offers={offers}
+          userLocation={userLocation}
+          selectedValidity={selectedValidity}
+          onShare={handleShare}
+          onSeeAllValidity={(key) => setSelectedValidity(key)}
         />
       </main>
 

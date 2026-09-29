@@ -14,6 +14,7 @@ import {
 import { Navbar } from "./Navbar";
 import { ListCategoryBar } from "./ListCategoryBar";
 import { OfferCard } from "./OfferCard";
+import { getOfferValidityCategory } from "@/lib/validity";
 import { CheckCircle2, AlertCircle, Search, X } from "lucide-react";
 
 interface ListingsViewProps {
@@ -23,6 +24,7 @@ interface ListingsViewProps {
 export function ListingsView({ initialOffers }: ListingsViewProps) {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get("category") || "";
+  const validityParam = searchParams.get("validity") || "";
 
   const [offers] = useState<Offer[]>(initialOffers);
   const [userLocation, setUserLocation] = useState<UserLocation | null>(null);
@@ -34,6 +36,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>(categoryParam);
   const [selectedLocation, setSelectedLocation] = useState<string>("");
   const [selectedDistance, setSelectedDistance] = useState<number | null>(null);
+  const [selectedValidity, setSelectedValidity] = useState<string>(validityParam);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [isHeaderHidden, setIsHeaderHidden] = useState<boolean>(false);
 
@@ -131,10 +134,21 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
     return Array.from(new Set(offers.map(offerArea).filter(Boolean))).sort();
   }, [offers]);
 
+  const validities = useMemo(() => {
+    return Array.from(
+      new Set(offers.map((o) => o.validity || o.ends || o.expiry).filter(Boolean))
+    ).sort() as string[];
+  }, [offers]);
+
   const processedOffers = useMemo(() => {
     let list = offers.filter((offer) => {
       const areaOk = !selectedLocation || offerArea(offer) === selectedLocation;
       const catOk = !selectedCategory || offerCategory(offer) === selectedCategory;
+      const valText = offer.validity || offer.ends || offer.expiry || "";
+      const validityOk =
+        !selectedValidity ||
+        getOfferValidityCategory(offer) === selectedValidity ||
+        valText === selectedValidity;
 
       const searchLower = searchQuery.toLowerCase().trim();
       const searchOk =
@@ -144,7 +158,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
         (offer.business && offer.business.toLowerCase().includes(searchLower)) ||
         (offer.location && offer.location.toLowerCase().includes(searchLower));
 
-      return areaOk && catOk && searchOk;
+      return areaOk && catOk && validityOk && searchOk;
     });
 
     if (userLocation) {
@@ -225,6 +239,11 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
     setSearchQuery("");
   };
 
+  const handleValiditySelect = (val: string) => {
+    setSelectedValidity(val);
+    setSearchQuery("");
+  };
+
   return (
     <div className="min-h-screen bg-slate-50/60 text-slate-900 flex flex-col">
       {/* Unified Top Sticky Container */}
@@ -276,8 +295,11 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
             locations={locations}
             selectedLocation={selectedLocation}
             selectedDistance={selectedDistance}
+            selectedValidity={selectedValidity}
+            validities={validities}
             onLocationChange={handleLocationSelect}
             onDistanceChange={handleDistanceSelect}
+            onValidityChange={handleValiditySelect}
           />
         </div>
       </div>
@@ -313,6 +335,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
                 setSelectedCategory("");
                 setSelectedLocation("");
                 setSelectedDistance(null);
+                setSelectedValidity("");
                 setSearchQuery("");
               }}
               className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-md transition-colors"

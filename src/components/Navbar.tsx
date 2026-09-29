@@ -94,7 +94,7 @@ export function Navbar({
   const mainNavLinks = [
     { href: "/", label: "Home" },
     { href: "/list", label: "List" },
-    { href: "/list-your-business", label: "Post" },
+    { href: "/list-your-business", label: "Free Listing" },
   ];
 
   const moreSubLinks = [
@@ -123,9 +123,11 @@ export function Navbar({
               href="/"
               className="flex items-center gap-3 group outline-none focus:outline-none focus:ring-0 rounded-xl p-1 -ml-1 transition-all"
             >
-              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-orange-500 flex items-center justify-center text-white font-black text-lg shadow-md shadow-orange-500/25 group-hover:scale-105 transition-transform duration-200">
-                CM
-              </div>
+              <img
+                src="/logo/cm-icon.svg"
+                alt="Central Marketplace Logo"
+                className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl shadow-md shadow-orange-500/25 group-hover:scale-105 transition-transform duration-200 object-cover"
+              />
               <div className="flex flex-col justify-center leading-tight">
                 <div className="font-extrabold text-slate-900 text-sm sm:text-base tracking-tight group-hover:text-orange-600 transition-colors leading-tight">
                   Central <br /> Marketplace

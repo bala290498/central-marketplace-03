@@ -37,7 +37,7 @@ export function MoreDrawer({ isOpen, onClose }: MoreDrawerProps) {
     },
     {
       href: "/list-your-business",
-      label: "Post",
+      label: "Free Listing",
       desc: "Showcase your shop or service to local buyers",
       icon: Briefcase,
       color: "bg-emerald-100 text-emerald-600",
@@ -71,9 +71,11 @@ export function MoreDrawer({ isOpen, onClose }: MoreDrawerProps) {
         {/* Modal Header */}
         <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-xl bg-orange-500 text-white font-black flex items-center justify-center text-xs">
-              CM
-            </div>
+            <img
+              src="/logo/cm-icon.svg"
+              alt="Central Marketplace Logo"
+              className="w-8 h-8 rounded-xl object-cover shadow-xs"
+            />
             <div>
               <h3 className="font-extrabold text-slate-900 text-base">Explore Marketplace</h3>
               <p className="text-[11px] text-slate-500">Quick access to all pages & services</p>

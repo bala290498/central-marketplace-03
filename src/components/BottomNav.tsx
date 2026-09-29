@@ -50,7 +50,7 @@ export function BottomNav() {
             <span className="text-[10px] tracking-tight">List</span>
           </Link>
 
-          {/* Tab 3: Post */}
+          {/* Tab 3: Free Listing */}
           <Link
             href="/list-your-business"
             className={`flex flex-col items-center justify-center py-1 rounded-xl transition-colors ${
@@ -60,7 +60,7 @@ export function BottomNav() {
             }`}
           >
             <PlusCircle className="w-5 h-5 mb-0.5" />
-            <span className="text-[10px] tracking-tight">Post</span>
+            <span className="text-[9px] tracking-tight font-semibold leading-none">Free Listing</span>
           </Link>
 
           {/* Tab 4: More */}

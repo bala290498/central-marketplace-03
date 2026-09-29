@@ -22,6 +22,7 @@ import {
   Compass,
   MapPin,
   Navigation,
+  Clock,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
@@ -33,8 +34,11 @@ interface ListCategoryBarProps {
   locations: string[];
   selectedLocation: string;
   selectedDistance: number | null;
+  selectedValidity: string;
+  validities?: string[];
   onLocationChange: (loc: string) => void;
   onDistanceChange: (dist: number | null) => void;
+  onValidityChange: (val: string) => void;
 }
 
 export function ListCategoryBar({
@@ -44,8 +48,11 @@ export function ListCategoryBar({
   locations,
   selectedLocation,
   selectedDistance,
+  selectedValidity,
+  validities = [],
   onLocationChange,
   onDistanceChange,
+  onValidityChange,
 }: ListCategoryBarProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -289,15 +296,15 @@ export function ListCategoryBar({
         )}
       </div>
 
-      {/* Two Parallel Dropdown Selectors in a Single Row */}
-      <div className="grid grid-cols-2 gap-2.5 pt-0.5">
-        {/* All Locations Dropdown */}
+      {/* Three Parallel Dropdown Selectors: Location, Distance, Validity */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-2.5 pt-0.5">
+        {/* Dropdown 1: All Locations */}
         <div className="relative flex items-center">
           <MapPin className="absolute left-3 w-4 h-4 text-slate-400 pointer-events-none" />
           <select
             value={selectedLocation}
             onChange={(e) => onLocationChange(e.target.value)}
-            className="w-full pl-8 pr-7 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-bold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer"
+            className="w-full pl-8 pr-7 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-bold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer truncate"
           >
             <option value="">All locations</option>
             {locations.map((loc) => (
@@ -309,7 +316,7 @@ export function ListCategoryBar({
           <div className="absolute right-3 pointer-events-none text-slate-400 text-xs">▼</div>
         </div>
 
-        {/* All Distances Dropdown */}
+        {/* Dropdown 2: All Distances */}
         <div className="relative flex items-center">
           <Navigation className="absolute left-3 w-4 h-4 text-slate-400 pointer-events-none" />
           <select
@@ -317,13 +324,41 @@ export function ListCategoryBar({
             onChange={(e) =>
               onDistanceChange(e.target.value ? Number(e.target.value) : null)
             }
-            className="w-full pl-8 pr-7 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-bold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer"
+            className="w-full pl-8 pr-7 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-bold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer truncate"
           >
             <option value="">All distances</option>
             <option value="5">Within 5 km</option>
             <option value="10">Within 10 km</option>
             <option value="15">Within 15 km</option>
             <option value="20">Within 20 km</option>
+          </select>
+          <div className="absolute right-3 pointer-events-none text-slate-400 text-xs">▼</div>
+        </div>
+
+        {/* Dropdown 3: All Validities */}
+        <div className="relative flex items-center">
+          <Clock className="absolute left-3 w-4 h-4 text-slate-400 pointer-events-none" />
+          <select
+            value={selectedValidity}
+            onChange={(e) => onValidityChange(e.target.value)}
+            className="w-full pl-8 pr-7 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-bold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer truncate"
+          >
+            <option value="">All validities</option>
+            <optgroup label="Validity Headings">
+              <option value="limited-slots">🔥 Limited Slots</option>
+              <option value="expires-in-days">⏳ Expires in Days</option>
+              <option value="until-filled">🎯 Until Filled</option>
+              <option value="available">✅ Available</option>
+            </optgroup>
+            {validities && validities.length > 0 && (
+              <optgroup label="Specific Statuses">
+                {validities.map((val) => (
+                  <option key={val} value={val}>
+                    {val}
+                  </option>
+                ))}
+              </optgroup>
+            )}
           </select>
           <div className="absolute right-3 pointer-events-none text-slate-400 text-xs">▼</div>
         </div>
