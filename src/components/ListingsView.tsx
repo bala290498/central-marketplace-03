@@ -14,7 +14,7 @@ import {
 import { Navbar } from "./Navbar";
 import { ListCategoryBar } from "./ListCategoryBar";
 import { OfferCard } from "./OfferCard";
-import { CheckCircle2, AlertCircle } from "lucide-react";
+import { CheckCircle2, AlertCircle, Search } from "lucide-react";
 
 interface ListingsViewProps {
   initialOffers: Offer[];
@@ -161,27 +161,42 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
 
   return (
     <div className="min-h-screen bg-slate-50/60 text-slate-900 flex flex-col">
+      {/* Sticky Collapsible Header (Navbar + Search Bar inside single transform block) */}
       <Navbar
         userLocation={userLocation}
         userAreaLabel={userAreaLabel}
         onDetectLocation={detectLocation}
         isLocating={isLocating}
-      />
+      >
+        <div className="relative flex items-center pt-1 pb-0.5">
+          <Search className="absolute left-3.5 w-4 h-4 text-slate-400 pointer-events-none" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search products, services, listings..."
+            className="w-full pl-9 pr-3 py-2.5 rounded-2xl border border-slate-200 bg-slate-50 focus:bg-white text-slate-900 text-xs sm:text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-600 shadow-xs transition-colors"
+          />
+        </div>
+      </Navbar>
 
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 pt-2 pb-16 space-y-4">
-        {/* Unboxed Filters & Category Bar */}
-        <ListCategoryBar
-          categories={categories}
-          selectedCategory={selectedCategory}
-          onSelectCategory={setSelectedCategory}
-          locations={locations}
-          selectedLocation={selectedLocation}
-          selectedDistance={selectedDistance}
-          searchQuery={searchQuery}
-          onLocationChange={setSelectedLocation}
-          onDistanceChange={setSelectedDistance}
-          onSearchChange={setSearchQuery}
-        />
+      {/* Sticky Permanent Filters (Category Chips & Dropdowns) */}
+      <div className="sticky top-0 z-30 bg-slate-50/95 backdrop-blur-md pt-2 pb-3 border-b border-slate-200/60 shadow-xs">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <ListCategoryBar
+            categories={categories}
+            selectedCategory={selectedCategory}
+            onSelectCategory={setSelectedCategory}
+            locations={locations}
+            selectedLocation={selectedLocation}
+            selectedDistance={selectedDistance}
+            onLocationChange={setSelectedLocation}
+            onDistanceChange={setSelectedDistance}
+          />
+        </div>
+      </div>
+
+      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 pt-4 pb-16">
 
         {/* Listings Grid */}
         {processedOffers.length > 0 ? (

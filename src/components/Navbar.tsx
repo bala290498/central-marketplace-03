@@ -11,6 +11,7 @@ interface NavbarProps {
   userAreaLabel?: string;
   onDetectLocation?: () => void;
   isLocating?: boolean;
+  children?: React.ReactNode;
 }
 
 export function Navbar({
@@ -18,6 +19,7 @@ export function Navbar({
   userAreaLabel = "",
   onDetectLocation,
   isLocating = false,
+  children,
 }: NavbarProps) {
   const pathname = usePathname();
   const [isHidden, setIsHidden] = useState(false);
@@ -63,7 +65,7 @@ export function Navbar({
         isHidden ? "-translate-y-full opacity-0 pointer-events-none" : "translate-y-0 opacity-100"
       } ${isCompact ? "py-2 shadow-xs" : "py-3 shadow-sm"}`}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-2.5">
         <div className="flex items-center justify-between gap-4">
           {/* Brand Logo & Title */}
           <Link
@@ -162,6 +164,7 @@ export function Navbar({
             </div>
           )}
         </div>
+        {children}
       </div>
     </header>
   );

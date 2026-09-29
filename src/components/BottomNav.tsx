@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import {
   ListFilter,
   PlusCircle,
-  Grid,
+  MoreHorizontal,
 } from "lucide-react";
 import { MoreDrawer } from "./MoreDrawer";
 
@@ -47,7 +47,7 @@ export function BottomNav() {
             <span className="text-[10px] font-black text-blue-600 mt-0.5 tracking-tight">List</span>
           </div>
 
-          {/* Tab 3: More */}
+          {/* Tab 3: More (3 dots icon) */}
           <button
             type="button"
             onClick={() => setIsMoreOpen(true)}
@@ -55,7 +55,7 @@ export function BottomNav() {
               isMoreOpen ? "text-orange-600 font-extrabold" : "text-slate-500 hover:text-slate-900"
             }`}
           >
-            <Grid className="w-5 h-5 mb-0.5" />
+            <MoreHorizontal className="w-5 h-5 mb-0.5" />
             <span className="text-[10px] font-bold">More</span>
           </button>
         </div>
