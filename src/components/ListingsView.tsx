@@ -37,37 +37,55 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [isHeaderHidden, setIsHeaderHidden] = useState<boolean>(false);
 
-  // Throttled flicker-free scroll listener with hysteresis
+  // Stable, flicker-free scroll listener with transition lock
   useEffect(() => {
     let lastY = typeof window !== "undefined" ? window.scrollY || 0 : 0;
-    let ticking = false;
+    let isLocked = false;
 
-    const updateScroll = () => {
+    const handleScroll = () => {
+      if (isLocked) return;
       const currentY = Math.max(0, window.scrollY || 0);
       const delta = currentY - lastY;
 
-      if (currentY <= 80) {
-        setIsHeaderHidden(false);
-      } else if (delta > 20) {
+      // At top of page (< 50px), always show header
+      if (currentY <= 50) {
+        if (isHeaderHidden) {
+          setIsHeaderHidden(false);
+        }
+        lastY = currentY;
+        return;
+      }
+
+      // Scroll Down -> Hide Navbar Header (scroll delta > 30px)
+      if (delta > 30 && !isHeaderHidden) {
         setIsHeaderHidden(true);
-      } else if (delta < -20) {
+        isLocked = true;
+        lastY = currentY;
+        setTimeout(() => {
+          isLocked = false;
+          lastY = Math.max(0, window.scrollY || 0);
+        }, 320);
+        return;
+      }
+
+      // Scroll Up -> Show Navbar Header (scroll delta < -30px)
+      if (delta < -30 && isHeaderHidden) {
         setIsHeaderHidden(false);
+        isLocked = true;
+        lastY = currentY;
+        setTimeout(() => {
+          isLocked = false;
+          lastY = Math.max(0, window.scrollY || 0);
+        }, 320);
+        return;
       }
 
       lastY = currentY;
-      ticking = false;
     };
 
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(updateScroll);
-        ticking = true;
-      }
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isHeaderHidden]);
 
   useEffect(() => {
     if (categoryParam) {
@@ -209,14 +227,14 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
 
   return (
     <div className="min-h-screen bg-slate-50/60 text-slate-900 flex flex-col">
-      {/* Unified Top Sticky Container (Navbar + Category & Dropdown Filter Bar) */}
+      {/* Unified Top Sticky Container */}
       <div className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
-        {/* Collapsible Header (Hides on scroll down, expands on scroll up) */}
+        {/* Collapsible Navbar Header Section */}
         <div
-          className={`transition-all duration-300 ease-out overflow-hidden ${
+          className={`transition-all duration-300 ease-in-out overflow-hidden ${
             isHeaderHidden
               ? "max-h-0 opacity-0 pointer-events-none"
-              : "max-h-60 opacity-100"
+              : "max-h-96 opacity-100"
           }`}
         >
           <Navbar
@@ -249,8 +267,8 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
           </Navbar>
         </div>
 
-        {/* Permanent Category & Dropdown Filter Bar (ALWAYS visible in sticky container) */}
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-2 pb-3 border-t border-slate-100">
+        {/* Permanent Category & Dropdown Filter Bar (ALWAYS visible, NO OVERLAPPING) */}
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-2.5 bg-white border-t border-slate-100">
           <ListCategoryBar
             categories={categories}
             selectedCategory={selectedCategory}
