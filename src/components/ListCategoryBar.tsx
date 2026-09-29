@@ -126,10 +126,10 @@ export function ListCategoryBar({
     <div className="w-full space-y-3">
       {/* Search Bar - Hides on scroll down, shows on scroll up */}
       <div
-        className={`transition-all duration-300 ${
+        className={`transition-all duration-300 ease-in-out transform overflow-hidden ${
           isSearchHidden
-            ? "-translate-y-12 opacity-0 pointer-events-none hidden"
-            : "translate-y-0 opacity-100 mb-2"
+            ? "max-h-0 opacity-0 -translate-y-4 py-0 mb-0 pointer-events-none"
+            : "max-h-20 opacity-100 translate-y-0 py-1 mb-2"
         }`}
       >
         <div className="relative flex items-center">
