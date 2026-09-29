@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, MapPin, Navigation, Loader2 } from "lucide-react";
+import { MapPin, Navigation, Loader2 } from "lucide-react";
 import { UserLocation } from "@/types/offer";
 
 interface NavbarProps {
@@ -20,7 +20,6 @@ export function Navbar({
   isLocating = false,
 }: NavbarProps) {
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
   const [isCompact, setIsCompact] = useState(false);
 
   // Scroll listener for compact header
@@ -42,7 +41,6 @@ export function Navbar({
       if (delta > 10) {
         upTravel = 0;
         setIsCompact(true);
-        setIsOpen(false);
       } else if (delta < -10) {
         upTravel += -delta;
         if (upTravel > 60) {
@@ -88,7 +86,7 @@ export function Navbar({
             </div>
           </Link>
 
-          {/* Location Button (Desktop & Header) */}
+          {/* Location Button (Desktop Header) */}
           {onDetectLocation && (
             <div className="hidden md:flex items-center">
               <button
@@ -142,9 +140,9 @@ export function Navbar({
             })}
           </nav>
 
-          {/* Mobile Menu Button */}
-          <div className="flex md:hidden items-center gap-2">
-            {onDetectLocation && (
+          {/* Mobile Location Header Button */}
+          {onDetectLocation && (
+            <div className="flex md:hidden items-center">
               <button
                 type="button"
                 onClick={onDetectLocation}
@@ -160,77 +158,12 @@ export function Navbar({
                 ) : (
                   <MapPin className="w-3.5 h-3.5" />
                 )}
-                <span className="max-w-[100px] truncate">
+                <span className="max-w-[110px] truncate">
                   {isLocating ? "Locating..." : userAreaLabel ? userAreaLabel : "Location"}
                 </span>
               </button>
-            )}
-
-            <button
-              type="button"
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-xl text-slate-700 hover:bg-slate-100 focus:outline-none"
-              aria-label="Toggle menu"
-            >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Backdrop */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-xs md:hidden"
-          onClick={() => setIsOpen(false)}
-        />
-      )}
-
-      {/* Mobile Menu Drawer */}
-      <div
-        className={`fixed top-0 right-0 z-50 w-72 h-full bg-white shadow-2xl transform transition-transform duration-300 ease-in-out md:hidden flex flex-col p-6 ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        <div className="flex items-center justify-between pb-6 border-b border-slate-100">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-orange-500 text-white font-extrabold flex items-center justify-center text-sm">
-              CM
             </div>
-            <span className="font-bold text-slate-900">Menu</span>
-          </div>
-          <button
-            type="button"
-            onClick={() => setIsOpen(false)}
-            className="p-1.5 text-slate-500 hover:text-slate-900"
-            aria-label="Close menu"
-          >
-            <X className="w-6 h-6" />
-          </button>
-        </div>
-
-        <div className="flex flex-col gap-3 py-6">
-          {navLinks.map((link) => {
-            const isActive = pathname === link.href;
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className={`px-4 py-3 rounded-xl font-bold text-base transition-colors ${
-                  isActive
-                    ? "bg-orange-50 text-orange-600"
-                    : "text-slate-700 hover:bg-slate-100"
-                }`}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
-        </div>
-
-        <div className="mt-auto pt-6 border-t border-slate-100 text-center text-xs text-slate-400">
-          © Central Marketplace
+          )}
         </div>
       </div>
     </header>
