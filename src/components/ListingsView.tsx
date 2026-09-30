@@ -39,55 +39,6 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
   const [selectedDistance, setSelectedDistance] = useState<number | null>(null);
   const [selectedValidity, setSelectedValidity] = useState<string>(normalizeValidity(validityParam));
   const [searchQuery, setSearchQuery] = useState<string>(searchParam);
-  const [isHeaderHidden, setIsHeaderHidden] = useState<boolean>(false);
-
-  // Stable, flicker-free scroll listener with transition lock
-  useEffect(() => {
-    let lastY = typeof window !== "undefined" ? window.scrollY || 0 : 0;
-    let ticking = false;
-
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const currentY = Math.max(0, window.scrollY || 0);
-          const delta = currentY - lastY;
-
-          // On Desktop (width >= 768px), ALWAYS show header to prevent any layout flicker
-          if (window.innerWidth >= 768) {
-            if (isHeaderHidden) setIsHeaderHidden(false);
-            lastY = currentY;
-            ticking = false;
-            return;
-          }
-
-          // At top of page (< 60px), always show header
-          if (currentY <= 60) {
-            if (isHeaderHidden) setIsHeaderHidden(false);
-            lastY = currentY;
-            ticking = false;
-            return;
-          }
-
-          // Scroll Down -> Hide Navbar Header on mobile (scroll delta > 35px & scrolled > 100px)
-          if (delta > 35 && currentY > 100 && !isHeaderHidden) {
-            setIsHeaderHidden(true);
-            lastY = currentY;
-          }
-          // Scroll Up -> Show Navbar Header on mobile (scroll delta < -35px)
-          else if (delta < -35 && isHeaderHidden) {
-            setIsHeaderHidden(false);
-            lastY = currentY;
-          }
-
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isHeaderHidden]);
 
   useEffect(() => {
     if (categoryParam) {
@@ -282,22 +233,13 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
     <div className="min-h-screen bg-slate-50/60 text-slate-900 flex flex-col">
       {/* Unified Top Sticky Container */}
       <div ref={stickyHeaderRef} className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
-        {/* Collapsible Navbar Header Section */}
-        <div
-          className={`transition-all duration-300 ease-in-out overflow-hidden ${
-            isHeaderHidden
-              ? "max-h-0 opacity-0 pointer-events-none md:max-h-96 md:opacity-100 md:pointer-events-auto"
-              : "max-h-96 opacity-100"
-          }`}
-        >
-          <Navbar
-            userLocation={userLocation}
-            userAreaLabel={userAreaLabel}
-            onDetectLocation={detectLocation}
-            isLocating={isLocating}
-            isSticky={false}
-          />
-        </div>
+        <Navbar
+          userLocation={userLocation}
+          userAreaLabel={userAreaLabel}
+          onDetectLocation={detectLocation}
+          isLocating={isLocating}
+          isSticky={false}
+        />
 
         {/* Permanent Category & Dropdown Filter Bar (ALWAYS visible, NO OVERLAPPING) */}
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-2.5 bg-white border-t border-slate-100">

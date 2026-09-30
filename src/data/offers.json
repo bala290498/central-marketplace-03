@@ -404,5 +404,62 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01015",
     "validity": "Available"
+  },
+  {
+    "id": "list-016",
+    "title": "Tamirabarani Special Meals & Dining",
+    "description": "Traditional South Indian authentic meals & thali with local spices.",
+    "latitude": 8.7178,
+    "longitude": 77.3841,
+    "location": "Vickramasingapuram",
+    "category": "Dining & Cafes",
+    "business": "Agasthiyar Mess",
+    "badge": "25% OFF",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=8.7178,77.3841",
+    "phone": "+91 94431 08717",
+    "validity": "Valid All Days"
+  },
+  {
+    "id": "list-017",
+    "title": "Complete Auto Care & Water Wash",
+    "description": "Full vehicle detailing, foam wash, interior cleaning & general service.",
+    "latitude": 8.7178,
+    "longitude": 77.3841,
+    "location": "Vickramasingapuram",
+    "category": "Auto Care",
+    "business": "VK Puram Auto Works",
+    "badge": "20% OFF",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=8.7178,77.3841",
+    "phone": "+91 94432 08718",
+    "validity": "Expires Soon"
+  },
+  {
+    "id": "list-018",
+    "title": "Fresh Organic Grocery & Spices",
+    "description": "Farm fresh vegetables, hill fruits, organic grains and native spices.",
+    "latitude": 8.7178,
+    "longitude": 77.3841,
+    "location": "Vickramasingapuram",
+    "category": "Grocery",
+    "business": "Papanasam Super Stores",
+    "badge": "₹150 OFF",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=8.7178,77.3841",
+    "phone": "+91 94433 08719",
+    "validity": "Limited"
+  },
+  {
+    "id": "list-019",
+    "title": "Home Electrical & RO Service",
+    "description": "Fast home service for electrical repairs, RO filter cleaning & wiring.",
+    "latitude": 8.7178,
+    "longitude": 77.3841,
+    "location": "Vickramasingapuram",
+    "category": "Electronic Services",
+    "business": "Western Ghats Electricals",
+    "badge": "BEST PRICE",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=8.7178,77.3841",
+    "phone": "+91 94434 08720",
+    "validity": "Available"
   }
 ]
+

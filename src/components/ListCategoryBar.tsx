@@ -126,7 +126,7 @@ export function ListCategoryBar({
         {/* Scrollable Chips Container */}
         <div
           ref={scrollRef}
-          className="flex-1 overflow-x-auto no-scrollbar py-1 flex items-center gap-4 scroll-smooth"
+          className="flex-1 overflow-x-auto no-scrollbar py-1 flex items-start gap-4 scroll-smooth"
         >
           {allItems.map((name) => {
             const val = name === "All" ? "" : name;
@@ -137,10 +137,10 @@ export function ListCategoryBar({
                 key={name}
                 type="button"
                 onClick={() => onSelectCategory(val)}
-                className="flex-shrink-0 flex flex-col items-center justify-center py-1 transition-all cursor-pointer group focus:outline-none min-w-[56px]"
+                className="flex-shrink-0 flex flex-col items-center justify-start py-1 transition-all cursor-pointer group focus:outline-none min-w-[56px]"
               >
                 <div
-                  className={`mb-1 transition-all duration-200 ${
+                  className={`h-6 flex items-center justify-center mb-1 transition-all duration-200 ${
                     isSelected
                       ? `${colors.iconColor} scale-110`
                       : `${colors.iconColor} opacity-75 group-hover:opacity-100 group-hover:scale-105`

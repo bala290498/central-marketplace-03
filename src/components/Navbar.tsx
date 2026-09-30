@@ -34,8 +34,6 @@ export function Navbar({
   isSticky = true,
 }: NavbarProps) {
   const pathname = usePathname();
-  const [isHidden, setIsHidden] = useState(false);
-  const [isCompact, setIsCompact] = useState(false);
   const [isMoreDropdownOpen, setIsMoreDropdownOpen] = useState(false);
   const timeoutId = useRef<NodeJS.Timeout | null>(null);
 
@@ -49,56 +47,6 @@ export function Navbar({
       setIsMoreDropdownOpen(false);
     }, 150);
   };
-
-  // Scroll listener for hide-on-scroll-down and show-on-scroll-up header (only if isSticky is true)
-  useEffect(() => {
-    if (!isSticky) return;
-
-    let lastY = typeof window !== "undefined" ? window.scrollY || 0 : 0;
-    let ticking = false;
-
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const y = Math.max(0, window.scrollY || 0);
-          const delta = y - lastY;
-
-          // On desktop (md: width >= 768px), keep header always visible and steady
-          if (window.innerWidth >= 768) {
-            setIsHidden(false);
-            setIsCompact(y > 40);
-            lastY = y;
-            ticking = false;
-            return;
-          }
-
-          if (y < 40) {
-            setIsHidden(false);
-            setIsCompact(false);
-            lastY = y;
-            ticking = false;
-            return;
-          }
-
-          if (delta > 25 && y > 100) {
-            setIsHidden(true);
-            setIsCompact(true);
-            lastY = y;
-          } else if (delta < -25) {
-            setIsHidden(false);
-            setIsCompact(y > 40);
-            lastY = y;
-          }
-
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isSticky]);
 
   const mainNavLinks = [
     { href: "/", label: "Home" },
@@ -115,16 +63,8 @@ export function Navbar({
   return (
     <header
       className={`${
-        isSticky
-          ? `sticky top-0 z-40 transition-all duration-300 ${
-              isHidden
-                ? "-translate-y-full opacity-0 pointer-events-none md:translate-y-0 md:opacity-100 md:pointer-events-auto"
-                : "translate-y-0 opacity-100"
-            }`
-          : ""
-      } bg-white/95 backdrop-blur-md border-b border-slate-200/80 ${
-        isCompact ? "py-2 shadow-xs" : "py-3 shadow-sm"
-      }`}
+        isSticky ? "sticky top-0 z-40" : ""
+      } bg-white/95 backdrop-blur-md border-b border-slate-200/80 py-3 shadow-xs`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-2.5">
         <div className="flex items-center justify-between gap-3 sm:gap-4">
