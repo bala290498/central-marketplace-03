@@ -128,12 +128,6 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
     <article
       className={`group relative rounded-none border ${theme.cardBg} ${theme.cardBorder} p-5 sm:p-6 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col justify-between overflow-hidden`}
     >
-      {/* Large Low-Intensity Watermark Category Icon on Right Side */}
-      <div className="absolute -right-4 -top-3 sm:-right-6 sm:-top-4 pointer-events-none select-none z-0 transition-all duration-300 group-hover:scale-105">
-        <CategoryIcon
-          className={`w-32 h-32 sm:w-40 sm:h-40 stroke-[1.4] opacity-[0.16] ${theme.pinColor}`}
-        />
-      </div>
 
       <div className="relative z-10">
         {/* Top Header Row */}
