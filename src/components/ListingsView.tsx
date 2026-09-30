@@ -188,21 +188,29 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
 
   const stickyHeaderRef = useRef<HTMLDivElement>(null);
   const mainContentRef = useRef<HTMLDivElement>(null);
+  const cardsGridRef = useRef<HTMLDivElement>(null);
 
   const scrollToTopCard = useCallback(() => {
     if (typeof window === "undefined") return;
-    window.requestAnimationFrame(() => {
-      const headerEl = stickyHeaderRef.current;
-      const headerHeight = headerEl ? headerEl.getBoundingClientRect().height : 140;
-      if (mainContentRef.current) {
-        const mainTop = mainContentRef.current.getBoundingClientRect().top + window.scrollY;
-        const targetScroll = Math.max(0, mainTop - headerHeight - 12);
-        window.scrollTo({
-          top: targetScroll,
-          behavior: "smooth",
-        });
-      }
-    });
+    // Blur any active element (like select inputs) on mobile to dismiss native pickers/keyboards
+    if (document.activeElement && typeof (document.activeElement as HTMLElement).blur === "function") {
+      (document.activeElement as HTMLElement).blur();
+    }
+    setTimeout(() => {
+      window.requestAnimationFrame(() => {
+        const headerEl = stickyHeaderRef.current;
+        const headerHeight = headerEl ? headerEl.getBoundingClientRect().height : 140;
+        const targetEl = cardsGridRef.current || mainContentRef.current;
+        if (targetEl) {
+          const targetTop = targetEl.getBoundingClientRect().top + window.scrollY;
+          const targetScroll = Math.max(0, targetTop - headerHeight - 20);
+          window.scrollTo({
+            top: targetScroll,
+            behavior: "smooth",
+          });
+        }
+      });
+    }, 120);
   }, []);
 
   const handleCategorySelect = (cat: string) => {
@@ -265,7 +273,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
 
         {/* Listings Grid */}
         {processedOffers.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+          <div ref={cardsGridRef} className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             {processedOffers.map((offer) => (
               <OfferCard
                 key={offer.id}

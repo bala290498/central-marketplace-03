@@ -68,7 +68,7 @@ export function Navbar({
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-2.5">
         <div className="flex items-center justify-between gap-3 sm:gap-4">
-          {/* Brand Title + Vertical Line + Location (Desktop & Mobile) */}
+          {/* Brand Title (Left Side on Desktop & Mobile) */}
           <div className="flex items-center gap-3 sm:gap-3.5 min-w-0">
             <Link
               href="/"
@@ -81,13 +81,14 @@ export function Navbar({
 
             {onDetectLocation && (
               <>
-                <div className="h-5 sm:h-5.5 w-px bg-slate-300 flex-shrink-0 select-none" />
+                <div className="hidden md:block h-5.5 w-px bg-slate-300 flex-shrink-0 select-none" />
 
+                {/* Location Button on Desktop (Next to title with vertical line) */}
                 <button
                   type="button"
                   onClick={onDetectLocation}
                   disabled={isLocating}
-                  className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-slate-700 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 truncate"
+                  className="hidden md:inline-flex items-center gap-1.5 text-sm font-bold text-slate-700 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 truncate"
                   title={userAreaLabel ? `Location: ${userAreaLabel}` : "Allow location access"}
                 >
                   {isLocating ? (
@@ -98,7 +99,7 @@ export function Navbar({
                   ) : userLocation && userAreaLabel ? (
                     <>
                       <MapPin className="w-4 h-4 text-orange-500 flex-shrink-0" />
-                      <span className="text-slate-800 font-bold truncate max-w-[130px] xs:max-w-[170px] sm:max-w-[220px] md:max-w-none">
+                      <span className="text-slate-800 font-bold truncate">
                         {userAreaLabel}
                       </span>
                     </>
@@ -114,6 +115,38 @@ export function Navbar({
               </>
             )}
           </div>
+
+          {/* Location Button on Mobile (Pushed to Right Side, No Vertical Line) */}
+          {onDetectLocation && (
+            <button
+              type="button"
+              onClick={onDetectLocation}
+              disabled={isLocating}
+              className="md:hidden inline-flex items-center gap-1 text-xs font-bold text-slate-700 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 truncate ml-auto"
+              title={userAreaLabel ? `Location: ${userAreaLabel}` : "Allow location access"}
+            >
+              {isLocating ? (
+                <>
+                  <Loader2 className="w-3.5 h-3.5 animate-spin text-orange-500 flex-shrink-0" />
+                  <span className="text-slate-500 truncate">Locating...</span>
+                </>
+              ) : userLocation && userAreaLabel ? (
+                <>
+                  <MapPin className="w-3.5 h-3.5 text-orange-500 flex-shrink-0" />
+                  <span className="text-slate-800 font-bold truncate max-w-[140px] xs:max-w-[180px]">
+                    {userAreaLabel}
+                  </span>
+                </>
+              ) : (
+                <>
+                  <MapPin className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
+                  <span className="text-slate-600 hover:text-slate-900 truncate">
+                    Allow location
+                  </span>
+                </>
+              )}
+            </button>
+          )}
 
           {/* Desktop Nav Links & More Hover Dropdown */}
           <nav className="hidden md:flex items-center space-x-1 sm:space-x-1.5">
@@ -160,7 +193,7 @@ export function Navbar({
 
               {/* Collapsible Dropdown Menu */}
               {isMoreDropdownOpen && (
-                <div className="absolute right-0 top-full mt-1 w-52 bg-white/95 backdrop-blur-md rounded-2xl p-1.5 shadow-xl border border-slate-200/90 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                <div className="absolute right-0 top-full mt-1 w-max min-w-[220px] bg-white/95 backdrop-blur-md rounded-2xl p-1.5 shadow-xl border border-slate-200/90 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                   {moreSubLinks.map((sub) => {
                     const SubIcon = sub.icon;
                     const isSubActive = pathname === sub.href;
@@ -169,14 +202,14 @@ export function Navbar({
                         key={sub.href}
                         href={sub.href}
                         onClick={() => setIsMoreDropdownOpen(false)}
-                        className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition-all ${
+                        className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
                           isSubActive
                             ? "bg-orange-50 text-orange-600"
                             : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
                         }`}
                       >
-                        <SubIcon className="w-4 h-4 text-slate-500" />
-                        <span>{sub.label}</span>
+                        <SubIcon className="w-4 h-4 text-slate-500 shrink-0" />
+                        <span className="whitespace-nowrap">{sub.label}</span>
                       </Link>
                     );
                   })}
