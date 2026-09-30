@@ -14,6 +14,7 @@ import {
   Map,
   Share2,
   Navigation,
+  Timer,
   Home,
   Briefcase,
   UserCheck,
@@ -178,7 +179,7 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
         <div className="flex items-center flex-wrap gap-2 text-xs font-bold text-slate-700 mb-5">
           {/* Location Pin */}
           <div className="flex items-center gap-1">
-            <MapPin className="w-4 h-4 text-rose-500 fill-rose-500/20 flex-shrink-0" />
+            <MapPin className="w-4 h-4 text-orange-500 fill-orange-500/20 flex-shrink-0" />
             <span className="truncate max-w-[120px]">{areaName}</span>
           </div>
 
@@ -197,8 +198,8 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
 
           {/* Validity Status */}
           <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 flex-shrink-0 animate-pulse" />
-            <span className="text-emerald-700 font-extrabold truncate max-w-[140px]">{validityText}</span>
+            <Timer className="w-3.5 h-3.5 text-rose-600 flex-shrink-0" />
+            <span className="text-slate-800 font-extrabold truncate max-w-[140px]">{validityText}</span>
           </div>
         </div>
       </div>

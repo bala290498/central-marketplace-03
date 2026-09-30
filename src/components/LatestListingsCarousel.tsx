@@ -48,7 +48,7 @@ export function LatestListingsCarousel({
             key={offer.id}
             offer={offer}
             userLocation={userLocation}
-            className="w-64 flex-shrink-0 snap-start"
+            className="w-72 sm:w-80 flex-shrink-0 snap-start"
           />
         ))}
       </div>

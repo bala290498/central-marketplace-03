@@ -4,7 +4,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { Offer, UserLocation } from "@/types/offer";
 import { offerArea, distanceLabel } from "@/lib/utils";
-import { MapPin, Navigation } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { getCategoryIcon, getCategoryColors } from "@/lib/categories";
 
 interface ShortOfferCardProps {
@@ -104,18 +104,12 @@ export function ShortOfferCard({
         )}
       </div>
 
-      {/* Location & Distance Footer */}
-      <div className="flex items-center justify-between text-[11px] font-bold text-slate-600 mt-3 pt-2.5 border-t border-slate-200/50">
+      {/* Location Footer */}
+      <div className="flex items-center justify-start text-[11px] font-bold text-slate-600 mt-3 pt-2.5 border-t border-slate-200/50">
         <span className="inline-flex items-center gap-1 truncate">
-          <MapPin className="w-3.5 h-3.5 text-rose-500 fill-rose-500/20 flex-shrink-0" />
+          <MapPin className="w-3.5 h-3.5 text-orange-500 fill-orange-500/20 flex-shrink-0" />
           <span className="truncate">{areaName}</span>
         </span>
-        {offer.latitude != null && offer.longitude != null && (
-          <span className="inline-flex items-center gap-0.5 text-slate-500 font-semibold">
-            <Navigation className="w-2.5 h-2.5 transform rotate-45" />
-            <span>{userLocation ? distanceLabel(offer.distance) : "393+ km away"}</span>
-          </span>
-        )}
       </div>
     </div>
   );
