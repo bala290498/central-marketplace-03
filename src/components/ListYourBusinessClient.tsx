@@ -39,14 +39,8 @@ export function ListYourBusinessClient() {
     {
       stepLabel: "Step 2",
       title: "Free Listing",
-      description: "Add all the details",
-      icon: ClipboardList,
-    },
-    {
-      stepLabel: "Step 3",
-      title: "Contact",
       description: "Get listed",
-      icon: PhoneCall,
+      icon: ClipboardList,
     },
   ];
 

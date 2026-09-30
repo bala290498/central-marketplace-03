@@ -5,9 +5,9 @@ import { Footer } from "@/components/Footer";
 import { MapPin, Phone, Share2, Compass, CheckCircle2, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "How it works | Central Marketplace",
+  title: "Why Central Marketplace | Central Marketplace",
   description:
-    "Learn how to find and claim nearby local deals using location sorting, direct store calls, and map navigation on Central Marketplace.",
+    "Learn why Central Marketplace connects neighborhood customers with local merchants through simple, direct, real-time offer cards.",
 };
 
 export default function HowItWorksPage() {
@@ -45,10 +45,10 @@ export default function HowItWorksPage() {
       <main className="flex-1 max-w-3xl w-full mx-auto px-4 sm:px-6 py-10">
         <div className="text-center mb-10">
           <span className="px-3.5 py-1.5 rounded-full bg-orange-100 text-orange-700 font-bold text-xs uppercase tracking-wider">
-            Guide
+            About Us
           </span>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 mb-3 tracking-tight">
-            How Central Marketplace Works
+            Why Central Marketplace
           </h1>
           <p className="text-slate-600 text-sm sm:text-base max-w-xl mx-auto">
             Connecting neighborhood customers with local merchants through simple, direct, real-time offer cards.

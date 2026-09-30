@@ -30,7 +30,7 @@ export function MoreDrawer({ isOpen, onClose }: MoreDrawerProps) {
     },
     {
       href: "/how-it-works",
-      label: "How It Works",
+      label: "Why Central Marketplace",
       desc: "Learn how to discover, call and navigate",
       icon: HelpCircle,
       color: "bg-blue-100 text-blue-600",

@@ -55,7 +55,7 @@ export function Navbar({
   ];
 
   const moreSubLinks = [
-    { href: "/how-it-works", label: "How it works", icon: HelpCircle },
+    { href: "/how-it-works", label: "Why Central Marketplace", icon: HelpCircle },
     { href: "/we-are-hiring", label: "We're hiring", icon: Users },
     { href: "/report-an-issue", label: "Report an issue", icon: ShieldAlert },
   ];
