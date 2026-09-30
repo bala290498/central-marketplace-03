@@ -63,8 +63,8 @@ export function ShortOfferCard({
     >
       <div>
         {/* Header Row: Category Icon + Business/Area Name + Badge */}
-        <div className="flex items-center justify-between gap-2 mb-2">
-          <div className="flex items-center gap-1.5 text-[11px] font-extrabold text-slate-700 truncate">
+        <div className="flex items-start justify-between gap-2 mb-2">
+          <div className="flex items-center gap-1.5 text-[11px] font-extrabold text-slate-700 min-w-0 flex-1 pt-0.5">
             <div
               className={`w-5 h-5 rounded-md ${categoryColors.iconBg} text-white flex items-center justify-center flex-shrink-0`}
             >
@@ -75,7 +75,7 @@ export function ShortOfferCard({
 
           {badgeText && (
             <span
-              className={`px-2 py-0.5 rounded-full text-[10px] font-black tracking-wide flex-shrink-0 ${theme.badgeBg} ${theme.badgeText}`}
+              className={`px-2 py-0.5 rounded-full text-[10px] font-black tracking-wide flex-shrink-0 ml-auto ${theme.badgeBg} ${theme.badgeText}`}
             >
               {badgeText}
             </span>
@@ -101,10 +101,12 @@ export function ShortOfferCard({
           <MapPin className={`w-3 h-3 ${theme.pinColor} flex-shrink-0`} />
           <span className="truncate">{areaName}</span>
         </span>
-        <span className="inline-flex items-center gap-0.5 text-slate-500 font-semibold">
-          <Navigation className="w-2.5 h-2.5 transform rotate-45" />
-          <span>{userLocation ? distanceLabel(offer.distance) : "393+ km away"}</span>
-        </span>
+        {offer.latitude != null && offer.longitude != null && (
+          <span className="inline-flex items-center gap-0.5 text-slate-500 font-semibold">
+            <Navigation className="w-2.5 h-2.5 transform rotate-45" />
+            <span>{userLocation ? distanceLabel(offer.distance) : "393+ km away"}</span>
+          </span>
+        )}
       </div>
     </div>
   );

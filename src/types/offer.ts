@@ -2,8 +2,8 @@ export interface Offer {
   id: string;
   title: string;
   description?: string;
-  latitude: number;
-  longitude: number;
+  latitude?: number | null;
+  longitude?: number | null;
   location?: string;
   area?: string;
   category?: string;
@@ -12,7 +12,7 @@ export interface Offer {
   merchant?: string;
   badge?: string;
   dealType?: string;
-  mapUrl?: string;
+  mapUrl?: string | null;
   phone?: string;
   validity?: string;
   ends?: string;

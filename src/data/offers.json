@@ -460,6 +460,34 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=8.7178,77.3841",
     "phone": "+91 94434 08720",
     "validity": "Available"
+  },
+  {
+    "id": "list-020",
+    "title": "Legal & Tax Advisory Services",
+    "description": "Experienced legal consultation, GST filing, auditor & income tax advisory for local businesses.",
+    "latitude": null,
+    "longitude": null,
+    "location": "Vickramasingapuram",
+    "category": "Professionals",
+    "business": "Apex Legal & Tax Consultancy",
+    "badge": "FREE CONSULT",
+    "mapUrl": null,
+    "phone": "+91 94435 08721",
+    "validity": "Available"
+  },
+  {
+    "id": "list-021",
+    "title": "Urgent Requirement: Retail Store Staff & Accountant",
+    "description": "Hiring energetic sales executives and billing accountants for leading supermarket.",
+    "latitude": null,
+    "longitude": null,
+    "location": "Vickramasingapuram",
+    "category": "Recruitment",
+    "business": "Papanasam HR Solutions",
+    "badge": "HIRING NOW",
+    "mapUrl": null,
+    "phone": "+91 94436 08722",
+    "validity": "Until Filled"
   }
 ]
 

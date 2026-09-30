@@ -18,27 +18,48 @@ export function distanceLabel(km?: number): string {
   return `${displayedKm(km)}+ km away`;
 }
 
-export function distanceKm(lat1: number, lon1: number, lat2: number, lon2: number): number {
+export function distanceKm(
+  lat1: number,
+  lon1: number,
+  lat2?: number | null,
+  lon2?: number | null
+): number {
+  if (
+    lat2 === null ||
+    lat2 === undefined ||
+    lon2 === null ||
+    lon2 === undefined ||
+    isNaN(Number(lat2)) ||
+    isNaN(Number(lon2))
+  ) {
+    return 9999;
+  }
+  const nLat2 = Number(lat2);
+  const nLon2 = Number(lon2);
   const R = 6371; // Earth's radius in km
-  const dLat = ((lat2 - lat1) * Math.PI) / 180;
-  const dLon = ((lon2 - lon1) * Math.PI) / 180;
+  const dLat = ((nLat2 - lat1) * Math.PI) / 180;
+  const dLon = ((nLon2 - lon1) * Math.PI) / 180;
   const a =
     Math.sin(dLat / 2) ** 2 +
     Math.cos((lat1 * Math.PI) / 180) *
-      Math.cos((lat2 * Math.PI) / 180) *
+      Math.cos((nLat2 * Math.PI) / 180) *
       Math.sin(dLon / 2) ** 2;
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
 export function directionsUrl(userLocation: UserLocation | null, offer: Offer): string {
-  if (userLocation) {
-    const origin = `${userLocation.latitude},${userLocation.longitude}`;
-    const destination = `${offer.latitude},${offer.longitude}`;
-    return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(
-      origin
-    )}&destination=${encodeURIComponent(destination)}&travelmode=driving`;
+  if (offer.mapUrl) return offer.mapUrl;
+  if (offer.latitude != null && offer.longitude != null) {
+    if (userLocation) {
+      const origin = `${userLocation.latitude},${userLocation.longitude}`;
+      const destination = `${offer.latitude},${offer.longitude}`;
+      return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(
+        origin
+      )}&destination=${encodeURIComponent(destination)}&travelmode=driving`;
+    }
+    return `https://www.google.com/maps/search/?api=1&query=${offer.latitude},${offer.longitude}`;
   }
-  return offer.mapUrl || `https://www.google.com/maps/search/?api=1&query=${offer.latitude},${offer.longitude}`;
+  return "";
 }
 
 export function getBadgeTone(key: string): string {
