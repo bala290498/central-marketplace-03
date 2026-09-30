@@ -1,19 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, Outfit } from "next/font/google";
+import { Be_Vietnam_Pro } from "next/font/google";
 import { BottomNav } from "@/components/BottomNav";
 import "./globals.css";
 
-const plusJakarta = Plus_Jakarta_Sans({
+const beVietnamPro = Be_Vietnam_Pro({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700", "800", "900"],
   variable: "--font-sans",
-  display: "swap",
-});
-
-const outfit = Outfit({
-  subsets: ["latin"],
-  weight: ["500", "600", "700", "800", "900"],
-  variable: "--font-heading",
   display: "swap",
 });
 
@@ -56,7 +49,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${plusJakarta.variable} ${outfit.variable} h-full antialiased`}>
+    <html lang="en" className={`${beVietnamPro.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans bg-slate-50/60 text-slate-900 pb-16 md:pb-0">
         {children}
         <BottomNav />
