@@ -34,6 +34,7 @@ import {
   Clock,
   ChevronLeft,
   ChevronRight,
+  Filter,
 } from "lucide-react";
 
 interface ListCategoryBarProps {
@@ -177,43 +178,52 @@ export function ListCategoryBar({
         )}
       </div>
 
-      {/* Two Equal-Width Parallel Dropdown Selectors: Location, Validity */}
-      <div className="grid grid-cols-2 gap-2 sm:gap-2.5 pt-0.5 pb-0.5 sm:pb-0 w-full">
-        {/* Dropdown 1: All Locations */}
-        <div className="relative flex items-center w-full">
-          <MapPin className="absolute left-3 w-4 h-4 text-slate-400 pointer-events-none" />
-          <select
-            value={selectedLocation}
-            onChange={(e) => onLocationChange(e.target.value)}
-            className="w-full pl-8 pr-7 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-bold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer truncate"
-          >
-            <option value="">All locations</option>
-            {locations.map((loc) => (
-              <option key={loc} value={loc}>
-                {loc}
-              </option>
-            ))}
-          </select>
-          <div className="absolute right-3 pointer-events-none text-slate-400 text-xs">▼</div>
+      {/* Dropdown Selectors Row: Left Aligned on Desktop with "Filter By:" text */}
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-2 sm:gap-3.5 pt-0.5 pb-0.5 sm:pb-0">
+        {/* Desktop "Filter By:" Label */}
+        <div className="hidden sm:flex items-center gap-1.5 text-xs font-extrabold text-slate-700 whitespace-nowrap select-none">
+          <Filter className="w-3.5 h-3.5 text-orange-500" />
+          <span>Filter By:</span>
         </div>
 
-        {/* Dropdown 2: All Validities */}
-        <div className="relative flex items-center w-full">
-          <Clock className="absolute left-3 w-4 h-4 text-slate-400 pointer-events-none" />
-          <select
-            value={selectedValidity}
-            onChange={(e) => onValidityChange(e.target.value)}
-            className="w-full pl-8 pr-7 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-bold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer truncate"
-          >
-            <option value="">All validities</option>
-            <option value="Limited">Limited</option>
-            <option value="Expires Soon">Expires Soon</option>
-            <option value="Until Filled">Until Filled</option>
-            <option value="Until Found">Until Found</option>
-            <option value="Available">Available</option>
-            <option value="Valid All Days">Valid All Days</option>
-          </select>
-          <div className="absolute right-3 pointer-events-none text-slate-400 text-xs">▼</div>
+        {/* Container for Dropdowns (Grid 2-cols on Mobile, Left-aligned compact Flex on Desktop) */}
+        <div className="grid grid-cols-2 sm:flex sm:items-center gap-2 sm:gap-3 w-full sm:w-auto">
+          {/* Dropdown 1: All Locations */}
+          <div className="relative flex items-center w-full sm:w-48">
+            <MapPin className="absolute left-3 w-4 h-4 text-slate-400 pointer-events-none" />
+            <select
+              value={selectedLocation}
+              onChange={(e) => onLocationChange(e.target.value)}
+              className="w-full pl-8 pr-7 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-bold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer truncate"
+            >
+              <option value="">All locations</option>
+              {locations.map((loc) => (
+                <option key={loc} value={loc}>
+                  {loc}
+                </option>
+              ))}
+            </select>
+            <div className="absolute right-3 pointer-events-none text-slate-400 text-xs">▼</div>
+          </div>
+
+          {/* Dropdown 2: All Validities */}
+          <div className="relative flex items-center w-full sm:w-48">
+            <Clock className="absolute left-3 w-4 h-4 text-slate-400 pointer-events-none" />
+            <select
+              value={selectedValidity}
+              onChange={(e) => onValidityChange(e.target.value)}
+              className="w-full pl-8 pr-7 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-bold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer truncate"
+            >
+              <option value="">All validities</option>
+              <option value="Limited">Limited</option>
+              <option value="Expires Soon">Expires Soon</option>
+              <option value="Until Filled">Until Filled</option>
+              <option value="Until Found">Until Found</option>
+              <option value="Available">Available</option>
+              <option value="Valid All Days">Valid All Days</option>
+            </select>
+            <div className="absolute right-3 pointer-events-none text-slate-400 text-xs">▼</div>
+          </div>
         </div>
       </div>
     </div>
