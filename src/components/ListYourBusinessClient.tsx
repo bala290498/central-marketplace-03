@@ -33,19 +33,19 @@ export function ListYourBusinessClient() {
     {
       stepLabel: "Step 1",
       title: "Register",
-      description: "Create your business profile in seconds",
+      description: "Create your profile",
       icon: UserPlus,
     },
     {
       stepLabel: "Step 2",
       title: "Free Listing",
-      description: "Add your shop details & discount deals",
+      description: "Add all the details",
       icon: ClipboardList,
     },
     {
       stepLabel: "Step 3",
       title: "Contact",
-      description: "Connect directly with local neighborhood buyers",
+      description: "Get listed",
       icon: PhoneCall,
     },
   ];
