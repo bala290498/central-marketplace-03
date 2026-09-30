@@ -6,19 +6,16 @@ import { Footer } from "@/components/Footer";
 import {
   UserPlus,
   ClipboardList,
-  MapPin,
+  PhoneCall,
   CheckCircle2,
-  MessageCircle,
   X,
   Send,
   Store,
-  Sparkles,
-  ChevronLeft,
-  ChevronRight,
+  ArrowRight,
+  ArrowDown,
 } from "lucide-react";
 
 export function ListYourBusinessClient() {
-  const [activeStep, setActiveStep] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -35,31 +32,23 @@ export function ListYourBusinessClient() {
   const steps = [
     {
       stepLabel: "Step 1",
-      title: "Register Your Service",
-      description: "Complete your profile and register your business in minutes.",
+      title: "Register",
+      description: "Create your business profile in seconds",
       icon: UserPlus,
     },
     {
       stepLabel: "Step 2",
-      title: "List Your Shop & Deals",
-      description: "Add your shop details, photos, and exclusive discount offers for local buyers.",
+      title: "Free Listing",
+      description: "Add your shop details & discount deals",
       icon: ClipboardList,
     },
     {
       stepLabel: "Step 3",
-      title: "Reach Members Nearby",
-      description: "Get discovered directly within your district by thousands of neighborhood shoppers.",
-      icon: MapPin,
+      title: "Contact",
+      description: "Connect directly with local neighborhood buyers",
+      icon: PhoneCall,
     },
   ];
-
-  const handleNextStep = () => {
-    setActiveStep((prev) => (prev + 1) % steps.length);
-  };
-
-  const handlePrevStep = () => {
-    setActiveStep((prev) => (prev - 1 + steps.length) % steps.length);
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -78,114 +67,95 @@ export function ListYourBusinessClient() {
     }, 2500);
   };
 
-  const currentStepData = steps[activeStep];
-  const StepIcon = currentStepData.icon;
-
   return (
-    <div className="min-h-screen bg-slate-50/60 text-slate-900 flex flex-col">
+    <div className="min-h-screen bg-slate-50/60 text-slate-900 flex flex-col justify-between">
       <Navbar />
 
-      <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12">
-        {/* Top Warm Pastel Gradient Banner (Matches Reference UI) */}
-        <div className="bg-gradient-to-r from-amber-200/70 via-orange-100/90 to-pink-200/70 border border-orange-200/50 p-6 sm:p-10 rounded-3xl text-center shadow-xs mb-8">
-          <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
-            Service Providers & Vendors
-          </h1>
-          <p className="text-xs sm:text-base font-semibold text-slate-700 max-w-2xl mx-auto leading-relaxed">
-            District-wise local vendors with lowest price guaranteed. Promote your shop, service, restaurant, or business to nearby buyers with zero listing fees.
-          </p>
+      <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-12 sm:py-20 flex flex-col items-center justify-center text-center">
+        {/* Desktop View: 3 Steps Directly in a Horizontal Row with Horizontal Arrows */}
+        <div className="hidden md:flex items-center justify-center gap-6 py-6 mb-10 w-full">
+          {steps.map((step, idx) => {
+            const Icon = step.icon;
+            const isLast = idx === steps.length - 1;
+            return (
+              <React.Fragment key={idx}>
+                {/* Step Item */}
+                <div className="flex-1 text-center flex flex-col items-center justify-center px-2">
+                  <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center text-white mb-3 shadow-lg shadow-orange-500/25 transition-transform duration-300 hover:scale-105">
+                    <Icon className="w-8 h-8" />
+                  </div>
+                  <span className="text-orange-500 font-extrabold text-xs uppercase tracking-wider mb-1">
+                    {step.stepLabel}
+                  </span>
+                  <h3 className="text-xl font-extrabold text-slate-900 mb-1 tracking-tight">
+                    {step.title}
+                  </h3>
+                  <p className="text-xs text-slate-600 max-w-[200px] leading-relaxed mx-auto">
+                    {step.description}
+                  </p>
+                </div>
+
+                {/* Horizontal Arrow Pointing to Next Step */}
+                {!isLast && (
+                  <div className="flex-shrink-0 flex items-center justify-center self-center px-1">
+                    <ArrowRight className="w-7 h-7 text-orange-500 stroke-[2.5]" />
+                  </div>
+                )}
+              </React.Fragment>
+            );
+          })}
         </div>
 
-        {/* 3-Step Interactive Steps Card (Matches Reference UI) */}
-        <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-md text-center max-w-2xl mx-auto mb-8 relative overflow-hidden">
-          {/* Top Left / Right Touch Nav Arrows */}
-          <button
-            type="button"
-            onClick={handlePrevStep}
-            className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center hover:bg-slate-200 transition-colors cursor-pointer"
-            title="Previous Step"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-          <button
-            type="button"
-            onClick={handleNextStep}
-            className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center hover:bg-slate-200 transition-colors cursor-pointer"
-            title="Next Step"
-          >
-            <ChevronRight className="w-4 h-4" />
-          </button>
+        {/* Mobile View: 3 Steps Vertically Stacked with Vertical Arrows */}
+        <div className="flex md:hidden flex-col items-center justify-center gap-6 py-4 mb-10 w-full">
+          {steps.map((step, idx) => {
+            const Icon = step.icon;
+            const isLast = idx === steps.length - 1;
+            return (
+              <React.Fragment key={idx}>
+                {/* Step Item */}
+                <div className="text-center flex flex-col items-center justify-center px-4 max-w-xs mx-auto">
+                  <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center text-white mb-2.5 shadow-lg shadow-orange-500/25">
+                    <Icon className="w-8 h-8" />
+                  </div>
+                  <span className="text-orange-500 font-extrabold text-xs uppercase tracking-wider mb-1">
+                    {step.stepLabel}
+                  </span>
+                  <h3 className="text-xl font-extrabold text-slate-900 mb-1 tracking-tight">
+                    {step.title}
+                  </h3>
+                  <p className="text-xs text-slate-600 leading-relaxed mx-auto">
+                    {step.description}
+                  </p>
+                </div>
 
-          {/* Red Circular Icon */}
-          <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#FF5A5F] rounded-full flex items-center justify-center text-white mx-auto mb-4 shadow-lg shadow-[#FF5A5F]/25 transition-transform duration-300 transform hover:scale-105">
-            <StepIcon className="w-8 h-8 sm:w-10 sm:h-10" />
-          </div>
+                {/* Vertical Arrow Pointing Down to Next Step */}
+                {!isLast && (
+                  <div className="py-1">
+                    <ArrowDown className="w-6 h-6 text-orange-500 stroke-[2.5]" />
+                  </div>
+                )}
+              </React.Fragment>
+            );
+          })}
+        </div>
 
-          {/* Step Counter Label */}
-          <span className="text-[#FF5A5F] font-extrabold text-xs sm:text-sm uppercase tracking-wider mb-2 block">
-            {currentStepData.stepLabel}
-          </span>
-
-          {/* Step Title */}
-          <h2 className="text-xl sm:text-3xl font-extrabold text-slate-900 mb-2 tracking-tight">
-            {currentStepData.title}
-          </h2>
-
-          {/* Step Description */}
-          <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto mb-6 leading-relaxed">
-            {currentStepData.description}
-          </p>
-
-          {/* Pagination Dots */}
-          <div className="flex items-center justify-center gap-2 mb-7">
-            {steps.map((_, idx) => (
-              <button
-                key={idx}
-                type="button"
-                onClick={() => setActiveStep(idx)}
-                className={`transition-all duration-300 rounded-full cursor-pointer ${
-                  activeStep === idx
-                    ? "w-7 h-2.5 bg-[#FF5A5F]"
-                    : "w-2.5 h-2.5 bg-slate-200 hover:bg-slate-300"
-                }`}
-                title={`Go to step ${idx + 1}`}
-              />
-            ))}
-          </div>
-
-          {/* Bright Coral Call-To-Action Button */}
+        {/* Centered CTA Register Button */}
+        <div className="text-center w-full flex justify-center">
           <button
             type="button"
             onClick={() => setIsModalOpen(true)}
-            className="w-full sm:w-auto px-10 py-3.5 rounded-2xl bg-[#FF5A5F] hover:bg-[#E0484D] text-white font-extrabold text-base shadow-lg shadow-[#FF5A5F]/30 transition-all duration-200 cursor-pointer transform hover:scale-[1.02]"
+            className="w-full sm:w-auto px-12 py-4 rounded-2xl bg-orange-500 hover:bg-orange-600 text-white font-extrabold text-base sm:text-lg shadow-xl shadow-orange-500/25 transition-all duration-200 cursor-pointer transform hover:scale-[1.02]"
           >
             Register Now
           </button>
-        </div>
-
-        {/* Feature Pill Badges Row (Matches Reference UI) */}
-        <div className="flex items-center justify-center gap-3 overflow-x-auto no-scrollbar py-2 mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-emerald-500 text-emerald-700 bg-emerald-50/70 font-extrabold text-xs sm:text-sm whitespace-nowrap shadow-xs">
-            <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-            <span>Best Price Guaranteed</span>
-          </div>
-
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500 text-blue-700 bg-blue-50/70 font-extrabold text-xs sm:text-sm whitespace-nowrap shadow-xs">
-            <MessageCircle className="w-4 h-4 text-blue-500 flex-shrink-0" />
-            <span>Direct Customer Contact</span>
-          </div>
-
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-amber-500 text-amber-700 bg-amber-50/70 font-extrabold text-xs sm:text-sm whitespace-nowrap shadow-xs">
-            <MapPin className="w-4 h-4 text-amber-500 flex-shrink-0" />
-            <span>District-Wide Reach</span>
-          </div>
         </div>
       </main>
 
       {/* Registration Modal Popup */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200">
-          <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 relative animate-in zoom-in-95 duration-150">
+          <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 relative animate-in zoom-in-95 duration-150 text-left">
             <button
               type="button"
               onClick={() => setIsModalOpen(false)}
@@ -209,7 +179,7 @@ export function ListYourBusinessClient() {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="w-10 h-10 rounded-2xl bg-[#FF5A5F]/10 text-[#FF5A5F] flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-2xl bg-orange-50 text-orange-500 flex items-center justify-center">
                     <Store className="w-5 h-5" />
                   </div>
                   <div>
@@ -234,7 +204,7 @@ export function ListYourBusinessClient() {
                       setFormData({ ...formData, businessName: e.target.value })
                     }
                     placeholder="E.g. Agasthiyar Mess & Restaurant"
-                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm font-semibold outline-none focus:border-[#FF5A5F] focus:ring-1 focus:ring-[#FF5A5F]"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm font-semibold outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
                   />
                 </div>
 
@@ -248,7 +218,7 @@ export function ListYourBusinessClient() {
                       onChange={(e) =>
                         setFormData({ ...formData, category: e.target.value })
                       }
-                      className="w-full px-3 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-bold outline-none focus:border-[#FF5A5F]"
+                      className="w-full px-3 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-bold outline-none focus:border-orange-500"
                     >
                       <option value="Dining & Cafes">Dining & Cafes</option>
                       <option value="Salon & Spa">Salon & Spa</option>
@@ -273,7 +243,7 @@ export function ListYourBusinessClient() {
                         setFormData({ ...formData, location: e.target.value })
                       }
                       placeholder="E.g. Vickramasingapuram"
-                      className="w-full px-3 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-bold outline-none focus:border-[#FF5A5F]"
+                      className="w-full px-3 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-bold outline-none focus:border-orange-500"
                     />
                   </div>
                 </div>
@@ -290,7 +260,7 @@ export function ListYourBusinessClient() {
                       setFormData({ ...formData, phone: e.target.value })
                     }
                     placeholder="+91 94431 00000"
-                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm font-semibold outline-none focus:border-[#FF5A5F]"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm font-semibold outline-none focus:border-orange-500"
                   />
                 </div>
 
@@ -306,7 +276,7 @@ export function ListYourBusinessClient() {
                       setFormData({ ...formData, offerTitle: e.target.value })
                     }
                     placeholder="E.g. 20% Off Lunch Thali Meals"
-                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm font-semibold outline-none focus:border-[#FF5A5F]"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm font-semibold outline-none focus:border-orange-500"
                   />
                 </div>
 
@@ -321,13 +291,13 @@ export function ListYourBusinessClient() {
                       setFormData({ ...formData, description: e.target.value })
                     }
                     placeholder="Brief details about your shop or discount deal..."
-                    className="w-full px-4 py-2 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-medium outline-none focus:border-[#FF5A5F]"
+                    className="w-full px-4 py-2 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-medium outline-none focus:border-orange-500"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 rounded-2xl bg-[#FF5A5F] hover:bg-[#E0484D] text-white font-extrabold text-sm shadow-md shadow-[#FF5A5F]/30 transition-all cursor-pointer flex items-center justify-center gap-2 mt-2"
+                  className="w-full py-3.5 rounded-2xl bg-orange-500 hover:bg-orange-600 text-white font-extrabold text-sm shadow-md shadow-orange-500/25 transition-all cursor-pointer flex items-center justify-center gap-2 mt-2"
                 >
                   <Send className="w-4 h-4" />
                   <span>Submit Free Listing Request</span>
