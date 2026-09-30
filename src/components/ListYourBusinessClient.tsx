@@ -83,41 +83,22 @@ export function ListYourBusinessClient() {
                 </h1>
               </div>
 
-              {/* Row 1: Post Name & Title */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                <div>
-                  <label className="block text-xs font-extrabold text-slate-700 mb-1.5 flex items-center gap-1.5">
-                    <Store className="w-3.5 h-3.5 text-orange-500" />
-                    <span>Post Name *</span>
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.business}
-                    onChange={(e) =>
-                      setFormData({ ...formData, business: e.target.value })
-                    }
-                    placeholder="E.g. Agasthiyar Mess & Restaurant"
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm font-semibold outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 shadow-xs"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-extrabold text-slate-700 mb-1.5 flex items-center gap-1.5">
-                    <Tag className="w-3.5 h-3.5 text-orange-500" />
-                    <span>Title *</span>
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.title}
-                    onChange={(e) =>
-                      setFormData({ ...formData, title: e.target.value })
-                    }
-                    placeholder="E.g. 20% Off Lunch Thali Meals"
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm font-semibold outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 shadow-xs"
-                  />
-                </div>
+              {/* Title Field */}
+              <div>
+                <label className="block text-xs font-extrabold text-slate-700 mb-1.5 flex items-center gap-1.5">
+                  <Tag className="w-3.5 h-3.5 text-orange-500" />
+                  <span>Title *</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={formData.title}
+                  onChange={(e) =>
+                    setFormData({ ...formData, title: e.target.value })
+                  }
+                  placeholder="E.g. 20% Off Lunch Thali Meals"
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm font-semibold outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 shadow-xs"
+                />
               </div>
 
               {/* Row 2: Description (Optional) */}
