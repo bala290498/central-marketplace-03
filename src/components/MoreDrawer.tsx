@@ -29,14 +29,14 @@ export function MoreDrawer({ isOpen, onClose }: MoreDrawerProps) {
       color: "bg-orange-100 text-orange-600",
     },
     {
-      href: "/how-it-works",
+      href: "/about-us",
       label: "Why Central Marketplace",
       desc: "Learn how to discover, call and navigate",
       icon: HelpCircle,
       color: "bg-blue-100 text-blue-600",
     },
     {
-      href: "/list-your-business",
+      href: "/register",
       label: "Free Listing",
       desc: "Showcase your shop or service to local buyers",
       icon: Briefcase,

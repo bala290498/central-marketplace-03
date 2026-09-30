@@ -51,11 +51,11 @@ export function Navbar({
   const mainNavLinks = [
     { href: "/", label: "Home" },
     { href: "/list", label: "List" },
-    { href: "/list-your-business", label: "Free Listing" },
+    { href: "/register", label: "Free Listing" },
   ];
 
   const moreSubLinks = [
-    { href: "/how-it-works", label: "Why Central Marketplace", icon: HelpCircle },
+    { href: "/about-us", label: "Why Central Marketplace", icon: HelpCircle },
     { href: "/we-are-hiring", label: "We're hiring", icon: Users },
     { href: "/report-an-issue", label: "Report an issue", icon: ShieldAlert },
   ];
@@ -64,47 +64,47 @@ export function Navbar({
     <header
       className={`relative z-50 ${
         isSticky ? "sticky top-0" : ""
-      } bg-white/95 backdrop-blur-md border-b border-slate-200/80 py-3 shadow-xs`}
+      } bg-white/95 backdrop-blur-md border-b border-slate-200/80 py-3.5 sm:py-3 shadow-xs`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-2.5">
         <div className="flex items-center justify-between gap-3 sm:gap-4">
           {/* Brand Title + Vertical Line + Location (Desktop & Mobile) */}
-          <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
+          <div className="flex items-center gap-3 sm:gap-3.5 min-w-0">
             <Link
               href="/"
               className="inline-flex items-center outline-none focus:outline-none focus:ring-0 rounded-lg transition-colors group flex-shrink-0"
             >
-              <span className="font-extrabold text-orange-500 text-sm sm:text-base tracking-tight hover:text-orange-600 transition-colors whitespace-nowrap">
+              <span className="font-extrabold text-orange-500 text-base sm:text-lg tracking-tight hover:text-orange-600 transition-colors whitespace-nowrap">
                 Central Marketplace
               </span>
             </Link>
 
             {onDetectLocation && (
               <>
-                <div className="h-4 sm:h-5 w-px bg-slate-300 flex-shrink-0 select-none" />
+                <div className="h-5 sm:h-5.5 w-px bg-slate-300 flex-shrink-0 select-none" />
 
                 <button
                   type="button"
                   onClick={onDetectLocation}
                   disabled={isLocating}
-                  className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-slate-700 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 truncate"
+                  className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-slate-700 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 truncate"
                   title={userAreaLabel ? `Location: ${userAreaLabel}` : "Allow location access"}
                 >
                   {isLocating ? (
                     <>
-                      <Loader2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-spin text-orange-500 flex-shrink-0" />
+                      <Loader2 className="w-4 h-4 animate-spin text-orange-500 flex-shrink-0" />
                       <span className="text-slate-500 truncate">Locating...</span>
                     </>
                   ) : userLocation && userAreaLabel ? (
                     <>
-                      <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-orange-500 flex-shrink-0" />
-                      <span className="text-slate-800 font-semibold truncate max-w-[120px] xs:max-w-[160px] sm:max-w-[220px] md:max-w-none">
+                      <MapPin className="w-4 h-4 text-orange-500 flex-shrink-0" />
+                      <span className="text-slate-800 font-bold truncate max-w-[130px] xs:max-w-[170px] sm:max-w-[220px] md:max-w-none">
                         {userAreaLabel}
                       </span>
                     </>
                   ) : (
                     <>
-                      <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-400 flex-shrink-0" />
+                      <MapPin className="w-4 h-4 text-slate-400 flex-shrink-0" />
                       <span className="text-slate-600 hover:text-slate-900 truncate">
                         Allow location
                       </span>

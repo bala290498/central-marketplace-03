@@ -9,11 +9,11 @@ export function Footer() {
             Deals
           </Link>
           <span>·</span>
-          <Link href="/how-it-works" className="hover:text-orange-600 transition-colors">
+          <Link href="/about-us" className="hover:text-orange-600 transition-colors">
             Why Central Marketplace
           </Link>
           <span>·</span>
-          <Link href="/list-your-business" className="hover:text-orange-600 transition-colors">
+          <Link href="/register" className="hover:text-orange-600 transition-colors">
             Free Listing
           </Link>
           <span>·</span>

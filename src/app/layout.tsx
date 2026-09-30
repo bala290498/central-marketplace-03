@@ -50,7 +50,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-sans bg-slate-50/60 text-slate-900 pb-16 md:pb-0">
+      <body className="min-h-full flex flex-col font-sans bg-slate-50/60 text-slate-900 pb-20 md:pb-0">
         {children}
         <BottomNav />
       </body>

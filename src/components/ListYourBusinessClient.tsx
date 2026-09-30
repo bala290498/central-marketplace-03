@@ -139,7 +139,7 @@ export function ListYourBusinessClient() {
           <button
             type="button"
             onClick={() => setIsModalOpen(true)}
-            className="w-full sm:w-auto px-12 py-4 rounded-2xl bg-orange-500 hover:bg-orange-600 text-white font-extrabold text-base sm:text-lg shadow-xl shadow-orange-500/25 transition-all duration-200 cursor-pointer transform hover:scale-[1.02]"
+            className="w-auto px-8 sm:px-12 py-3.5 sm:py-4 rounded-2xl bg-orange-500 hover:bg-orange-600 text-white font-extrabold text-base sm:text-lg shadow-xl shadow-orange-500/25 transition-all duration-200 cursor-pointer transform hover:scale-[1.02]"
           >
             Register Now
           </button>
