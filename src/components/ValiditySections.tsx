@@ -120,7 +120,7 @@ export function ValiditySections({
 
   // Render all Validity Headings as distinct home sections
   return (
-    <div className="space-y-10 mb-12">
+    <div className="space-y-6 sm:space-y-10 mb-2 sm:mb-8">
       {VALIDITY_CATEGORIES.map((catConfig) => {
         const catOffers = groupedOffers[catConfig.key] || [];
         if (catOffers.length === 0) return null;

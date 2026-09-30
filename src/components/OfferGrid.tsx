@@ -9,6 +9,7 @@ import { MobileCategoryGrid } from "./MobileCategoryGrid";
 import { LatestListingsCarousel } from "./LatestListingsCarousel";
 import { ValidityCategoryBar } from "./ValidityCategoryBar";
 import { ValiditySections } from "./ValiditySections";
+import { Footer } from "./Footer";
 import { CheckCircle2, AlertCircle } from "lucide-react";
 
 interface OfferGridProps {
@@ -124,7 +125,7 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
   }, [offers, userLocation]);
 
   return (
-    <div className="min-h-screen bg-slate-50/60 text-slate-900 flex flex-col">
+    <div className="min-h-screen bg-slate-50/60 text-slate-900 flex flex-col justify-between">
       {/* Sticky Header */}
       <Navbar
         userLocation={userLocation}
@@ -134,7 +135,7 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
       />
 
       {/* Main Deals Container */}
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 pt-4 pb-16">
+      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 pt-3 sm:pt-4 pb-2 sm:pb-6">
         {/* 1. Business Categories Grid */}
         <div className="mb-4">
           <MobileCategoryGrid
@@ -163,6 +164,9 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
           onSeeAllValidity={(key) => router.push(`/list?validity=${encodeURIComponent(key)}`)}
         />
       </main>
+
+      {/* Desktop Footer (Hidden on mobile) */}
+      <Footer />
 
       {/* Floating Toast Notification */}
       {toastMessage && (
