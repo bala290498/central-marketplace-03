@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Offer, UserLocation } from "@/types/offer";
 import { offerArea, distanceLabel } from "@/lib/utils";
 import { MapPin, Navigation } from "lucide-react";
-import { getCategoryIcon } from "./OfferCard";
+import { getCategoryIcon, getCategoryColors } from "@/lib/categories";
 
 interface ShortOfferCardProps {
   offer: Offer;
@@ -54,6 +54,7 @@ export function ShortOfferCard({
   const areaName = offerArea(offer) || "Medavakkam";
   const theme = getShortTheme(offer.id || offer.title || badgeText);
   const CategoryIcon = getCategoryIcon(offer.category, offer.title);
+  const categoryColors = getCategoryColors(offer.category);
 
   return (
     <div
@@ -65,7 +66,7 @@ export function ShortOfferCard({
         <div className="flex items-center justify-between gap-2 mb-2">
           <div className="flex items-center gap-1.5 text-[11px] font-extrabold text-slate-700 truncate">
             <div
-              className={`w-5 h-5 rounded-md ${theme.iconBg} text-white flex items-center justify-center flex-shrink-0`}
+              className={`w-5 h-5 rounded-md ${categoryColors.iconBg} text-white flex items-center justify-center flex-shrink-0`}
             >
               <CategoryIcon className="w-3 h-3 stroke-[2.2]" />
             </div>

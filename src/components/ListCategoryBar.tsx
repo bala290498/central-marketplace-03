@@ -1,7 +1,11 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import { formatCategoryLabel } from "@/lib/categories";
+import {
+  formatCategoryLabel,
+  getCategoryIcon as getLibCategoryIcon,
+  getCategoryColors as getLibCategoryColors,
+} from "@/lib/categories";
 import {
   Sparkles,
   UtensilsCrossed,
@@ -90,147 +94,13 @@ export function ListCategoryBar({
     el.scrollBy({ left: distance, behavior: "smooth" });
   };
 
-  const getCategoryIcon = (name: string) => {
-    switch (name) {
-      case "All":
-      case "All Deals":
-        return <Sparkles className="w-5 h-5" />;
-      case "Dining & Cafes":
-        return <UtensilsCrossed className="w-5 h-5" />;
-      case "Salon & Spa":
-        return <Scissors className="w-5 h-5" />;
-      case "Grocery":
-        return <ShoppingCart className="w-5 h-5" />;
-      case "Fashion":
-        return <Shirt className="w-5 h-5" />;
-      case "Electronics":
-        return <Cpu className="w-5 h-5" />;
-      case "Fitness":
-        return <Dumbbell className="w-5 h-5" />;
-      case "Pharmacy":
-        return <Pill className="w-5 h-5" />;
-      case "Entertainment":
-        return <Film className="w-5 h-5" />;
-      case "Auto Care":
-      case "Vehicles":
-        return <Car className="w-5 h-5" />;
-      case "Home & Living":
-      case "Home Services":
-      case "Services":
-        return <Home className="w-5 h-5" />;
-      case "Electronic Services":
-        return <Wrench className="w-5 h-5" />;
-      case "Recruitment":
-        return <Briefcase className="w-5 h-5" />;
-      case "Professional":
-        return <UserCheck className="w-5 h-5" />;
-      case "Property":
-      case "Property Request":
-        return <Building className="w-5 h-5" />;
-      case "Products":
-        return <Package className="w-5 h-5" />;
-      case "Food":
-        return <CookingPot className="w-5 h-5" />;
-      case "Wholesale":
-        return <Store className="w-5 h-5" />;
-      default:
-        return <Compass className="w-5 h-5" />;
-    }
+  const renderCategoryIcon = (name: string) => {
+    const Icon = getLibCategoryIcon(name);
+    return <Icon className="w-5 h-5" />;
   };
 
   const getCategoryColors = (name: string) => {
-    switch (name) {
-      case "All":
-      case "All Deals":
-        return {
-          iconColor: "text-orange-500",
-          activeText: "text-orange-600 border-orange-500",
-        };
-      case "Dining & Cafes":
-      case "Food":
-        return {
-          iconColor: "text-amber-500",
-          activeText: "text-amber-600 border-amber-500",
-        };
-      case "Salon & Spa":
-        return {
-          iconColor: "text-pink-500",
-          activeText: "text-pink-600 border-pink-500",
-        };
-      case "Grocery":
-      case "Daily Needs":
-        return {
-          iconColor: "text-emerald-500",
-          activeText: "text-emerald-600 border-emerald-500",
-        };
-      case "Fashion":
-      case "Products":
-        return {
-          iconColor: "text-purple-500",
-          activeText: "text-purple-600 border-purple-500",
-        };
-      case "Electronics":
-      case "Electronic Services":
-        return {
-          iconColor: "text-blue-500",
-          activeText: "text-blue-600 border-blue-500",
-        };
-      case "Fitness":
-        return {
-          iconColor: "text-red-500",
-          activeText: "text-red-600 border-red-500",
-        };
-      case "Pharmacy":
-        return {
-          iconColor: "text-teal-500",
-          activeText: "text-teal-600 border-teal-500",
-        };
-      case "Entertainment":
-        return {
-          iconColor: "text-indigo-500",
-          activeText: "text-indigo-600 border-indigo-500",
-        };
-      case "Auto Care":
-      case "Vehicles":
-        return {
-          iconColor: "text-cyan-500",
-          activeText: "text-cyan-600 border-cyan-500",
-        };
-      case "Home & Living":
-      case "Home Services":
-      case "Services":
-        return {
-          iconColor: "text-sky-500",
-          activeText: "text-sky-600 border-sky-500",
-        };
-      case "Recruitment":
-        return {
-          iconColor: "text-violet-500",
-          activeText: "text-violet-600 border-violet-500",
-        };
-      case "Professional":
-      case "Professionals":
-        return {
-          iconColor: "text-fuchsia-500",
-          activeText: "text-fuchsia-600 border-fuchsia-500",
-        };
-      case "Property":
-      case "Property Request":
-        return {
-          iconColor: "text-orange-500",
-          activeText: "text-orange-600 border-orange-500",
-        };
-      case "Wholesale":
-        return {
-          iconColor: "text-rose-500",
-          activeText: "text-rose-600 border-rose-500",
-        };
-      default:
-        return {
-          iconColor: "text-slate-500",
-          activeText: "text-slate-900 border-slate-700",
-        };
-    }
+    return getLibCategoryColors(name);
   };
 
   const allItems = ["All", ...categories];
@@ -276,7 +146,7 @@ export function ListCategoryBar({
                       : `${colors.iconColor} opacity-75 group-hover:opacity-100 group-hover:scale-105`
                   }`}
                 >
-                  {getCategoryIcon(name)}
+                  {renderCategoryIcon(name)}
                 </div>
                 <span
                   className={`text-[11px] tracking-tight text-center leading-tight whitespace-pre-line transition-colors ${

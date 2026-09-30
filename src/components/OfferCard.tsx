@@ -7,6 +7,7 @@ import {
   distanceLabel,
   directionsUrl,
 } from "@/lib/utils";
+import { getCategoryIcon, getCategoryColors } from "@/lib/categories";
 import {
   Phone,
   MapPin,
@@ -235,6 +236,7 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
   const validityText = offer.validity || offer.ends || offer.expiry || "Available";
   const theme = getCardTheme(offer.id || offer.title || badgeText);
   const CategoryIcon = getCategoryIcon(categoryName, offer.title);
+  const categoryColors = getCategoryColors(categoryName);
 
   const cleanPhone = offer.phone ? offer.phone.replace(/\s+/g, "") : "";
   const mapLink = directionsUrl(userLocation, offer);
@@ -259,7 +261,7 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
             {/* Header Icon + Business/Area Name */}
             <div className="flex items-center gap-1.5">
               <div
-                className={`w-6 h-6 rounded-lg ${theme.headerIconBg} ${theme.headerIconColor} flex items-center justify-center flex-shrink-0 shadow-2xs`}
+                className={`w-6 h-6 rounded-lg ${categoryColors.iconBg} text-white flex items-center justify-center flex-shrink-0 shadow-2xs`}
               >
                 <CategoryIcon className="w-3.5 h-3.5 stroke-[2.2]" />
               </div>
