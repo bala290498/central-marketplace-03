@@ -20,6 +20,10 @@ export function Footer() {
           <Link href="/we-are-hiring" className="hover:text-orange-600 transition-colors">
             We&apos;re hiring
           </Link>
+          <span>·</span>
+          <Link href="/terms" className="hover:text-orange-600 transition-colors">
+            Terms &amp; Conditions
+          </Link>
         </div>
         <p>© Central Marketplace · Local deals around you</p>
       </div>

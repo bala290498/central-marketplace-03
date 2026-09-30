@@ -9,6 +9,7 @@ import {
   Briefcase,
   Users,
   ShieldAlert,
+  FileText,
   ChevronRight,
 } from "lucide-react";
 
@@ -41,6 +42,13 @@ export function MoreDrawer({ isOpen, onClose }: MoreDrawerProps) {
       desc: "Report inappropriate or fake listings",
       icon: ShieldAlert,
       color: "bg-red-100 text-red-600",
+    },
+    {
+      href: "/terms",
+      label: "Terms & Conditions",
+      desc: "Read platform rules and legal terms",
+      icon: FileText,
+      color: "bg-emerald-100 text-emerald-600",
     },
   ];
 

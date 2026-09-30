@@ -11,6 +11,7 @@ import {
   HelpCircle,
   Users,
   ShieldAlert,
+  FileText,
 } from "lucide-react";
 import { UserLocation } from "@/types/offer";
 
@@ -58,6 +59,7 @@ export function Navbar({
     { href: "/about-us", label: "Why Central Marketplace", icon: HelpCircle },
     { href: "/we-are-hiring", label: "We're hiring", icon: Users },
     { href: "/report-an-issue", label: "Report an issue", icon: ShieldAlert },
+    { href: "/terms", label: "Terms & Conditions", icon: FileText },
   ];
 
   return (
