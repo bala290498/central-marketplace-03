@@ -332,7 +332,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
             ))}
           </div>
         ) : (
-          <div className="bg-white rounded-3xl p-12 text-center border border-slate-200 my-8 shadow-xs">
+          <div className="bg-white rounded-none p-12 text-center border border-slate-200 my-8 shadow-xs">
             <div className="w-16 h-16 rounded-2xl bg-orange-50 text-orange-500 flex items-center justify-center mx-auto mb-4">
               <AlertCircle className="w-8 h-8" />
             </div>

@@ -94,7 +94,7 @@ export function MobileCategoryGrid({
               <div
                 key={idx}
                 onClick={() => handleSelect(item.value)}
-                className={`p-3.5 rounded-3xl border ${theme.bg} ${theme.border} ${
+                className={`p-3.5 rounded-none border ${theme.bg} ${theme.border} ${
                   isSelected ? "ring-2 ring-orange-500 shadow-md scale-102" : "shadow-2xs hover:shadow-md"
                 } transition-all duration-200 cursor-pointer flex flex-col justify-between group h-28`}
               >
@@ -116,7 +116,7 @@ export function MobileCategoryGrid({
           {/* Desktop Expander / Collapser Tile */}
           <div
             onClick={() => setIsExpanded(!isExpanded)}
-            className="p-3.5 rounded-3xl border border-slate-200 bg-slate-100/80 hover:bg-slate-200/80 shadow-2xs hover:shadow-md transition-all duration-200 cursor-pointer flex flex-col justify-between group h-28"
+            className="p-3.5 rounded-none border border-slate-200 bg-slate-100/80 hover:bg-slate-200/80 shadow-2xs hover:shadow-md transition-all duration-200 cursor-pointer flex flex-col justify-between group h-28"
           >
             <div className="flex items-center justify-between gap-1 mb-2">
               <div className="w-8 h-8 rounded-xl bg-orange-500 text-white flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-105 transition-transform">
@@ -147,7 +147,7 @@ export function MobileCategoryGrid({
               <div
                 key={idx}
                 onClick={() => handleSelect(item.value)}
-                className={`p-3 rounded-2xl border ${theme.bg} ${theme.border} ${
+                className={`p-3 rounded-none border ${theme.bg} ${theme.border} ${
                   isSelected ? "ring-2 ring-orange-500 shadow-md scale-102" : "shadow-2xs hover:shadow-md"
                 } transition-all duration-200 cursor-pointer flex flex-col justify-between group h-24`}
               >
@@ -167,7 +167,7 @@ export function MobileCategoryGrid({
           {/* Mobile Expander / Collapser Tile */}
           <div
             onClick={() => setIsExpanded(!isExpanded)}
-            className="p-3 rounded-2xl border border-slate-200 bg-slate-100/80 hover:bg-slate-200/80 shadow-2xs hover:shadow-md transition-all duration-200 cursor-pointer flex flex-col justify-between group h-24"
+            className="p-3 rounded-none border border-slate-200 bg-slate-100/80 hover:bg-slate-200/80 shadow-2xs hover:shadow-md transition-all duration-200 cursor-pointer flex flex-col justify-between group h-24"
           >
             <div className="flex items-center justify-between gap-1 mb-1">
               <div className="w-7 h-7 rounded-lg bg-orange-500 text-white flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-105 transition-transform">

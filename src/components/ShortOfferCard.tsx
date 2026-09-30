@@ -59,7 +59,7 @@ export function ShortOfferCard({
   return (
     <div
       onClick={handleClick}
-      className={`${theme.bg} rounded-3xl p-4 border ${theme.border} shadow-2xs hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group ${className}`}
+      className={`${theme.bg} rounded-none p-4 border ${theme.border} shadow-2xs hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group ${className}`}
     >
       <div>
         {/* Header Row: Category Icon + Business/Area Name + Badge */}

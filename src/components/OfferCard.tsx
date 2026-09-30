@@ -126,7 +126,7 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
 
   return (
     <article
-      className={`group relative rounded-3xl border ${theme.cardBg} ${theme.cardBorder} p-5 sm:p-6 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col justify-between overflow-hidden`}
+      className={`group relative rounded-none border ${theme.cardBg} ${theme.cardBorder} p-5 sm:p-6 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col justify-between overflow-hidden`}
     >
       {/* Large Low-Intensity Watermark Category Icon on Right Side */}
       <div className="absolute -right-4 -top-3 sm:-right-6 sm:-top-4 pointer-events-none select-none z-0 transition-all duration-300 group-hover:scale-105">

@@ -97,7 +97,7 @@ export function ValiditySections({
         </div>
 
         {categoryOffers.length === 0 ? (
-          <div className="bg-white rounded-3xl p-8 text-center border border-slate-200">
+          <div className="bg-white rounded-none p-8 text-center border border-slate-200">
             <p className="text-sm font-semibold text-slate-600">
               No offers found under this validity heading right now.
             </p>
