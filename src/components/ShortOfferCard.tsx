@@ -14,17 +14,17 @@ interface ShortOfferCardProps {
   onClick?: () => void;
 }
 
-const LIGHT_ORANGE_SHORT_THEME = {
-  bg: "bg-[#FFF8EE]",
-  border: "border-[#FDEBD0]",
+const WHITE_SHORT_THEME = {
+  bg: "bg-white",
+  border: "border-slate-200",
   iconBg: "bg-[#F97316]",
-  badgeBg: "bg-[#FFEDD5]",
-  badgeText: "text-[#C2410C]",
-  pinColor: "text-[#F97316]",
+  badgeBg: "bg-orange-50",
+  badgeText: "text-orange-700",
+  pinColor: "text-slate-400",
 };
 
 export function getShortTheme(key?: string) {
-  return LIGHT_ORANGE_SHORT_THEME;
+  return WHITE_SHORT_THEME;
 }
 
 export function ShortOfferCard({

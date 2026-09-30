@@ -54,24 +54,22 @@ interface ThemeConfig {
   arrowColor: string;
 }
 
-const LIGHT_ORANGE_THEME: ThemeConfig = {
-  cardBg: "bg-[#FFF8EE]",
-  cardBorder: "border-[#FDEBD0]",
+const WHITE_CARD_THEME: ThemeConfig = {
+  cardBg: "bg-white",
+  cardBorder: "border-slate-200",
   headerIconBg: "bg-[#F97316]",
   headerIconColor: "text-white",
-  badgeBg: "bg-[#FFEDD5]",
-  badgeTextColor: "text-[#C2410C]",
-  circleBg: "bg-[#FFEDD5]",
+  badgeBg: "bg-orange-50",
+  badgeTextColor: "text-orange-700",
+  circleBg: "bg-orange-50",
   sparkColor: "#F97316",
   storePrimary: "#F97316",
-  pinColor: "text-[#F97316]",
-  arrowColor: "text-[#F97316]",
+  pinColor: "text-slate-400",
+  arrowColor: "text-orange-500",
 };
 
-
-
 function getCardTheme(key?: string): ThemeConfig {
-  return LIGHT_ORANGE_THEME;
+  return WHITE_CARD_THEME;
 }
 
 function StoreGraphic({ primaryColor }: { primaryColor: string }) {

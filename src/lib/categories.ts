@@ -35,15 +35,15 @@ export interface CategoryMeta {
   };
 }
 
-export const LIGHT_ORANGE_CATEGORY_THEME = {
-  bg: "bg-[#FFF8EE]",
-  border: "border-[#FDEBD0]",
+export const WHITE_CATEGORY_THEME = {
+  bg: "bg-white",
+  border: "border-slate-200",
   iconBg: "bg-[#F97316]",
-  textColor: "text-[#C2410C]",
-  badgeBg: "bg-[#FFEDD5]",
+  textColor: "text-slate-800",
+  badgeBg: "bg-orange-50",
 };
 
-export const CATEGORY_THEME_PALETTE = [LIGHT_ORANGE_CATEGORY_THEME];
+export const CATEGORY_THEME_PALETTE = [WHITE_CATEGORY_THEME];
 
 export function getCategoryIcon(categoryName: string = "", title: string = ""): LucideIcon {
   const catLower = (categoryName || "").toLowerCase().trim();
@@ -166,11 +166,11 @@ export function getCategoryMeta(categoryName: string, index: number = 0): Catego
     value: categoryName,
     icon,
     theme: {
-      bg: "bg-[#FFF8EE]",
-      border: "border-[#FDEBD0]",
+      bg: "bg-white",
+      border: "border-slate-200",
       iconBg: colors.iconBg,
-      textColor: "text-[#C2410C]",
-      badgeBg: "bg-[#FFEDD5]",
+      textColor: "text-slate-800",
+      badgeBg: "bg-orange-50",
     },
   };
 }
