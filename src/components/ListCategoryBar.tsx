@@ -42,11 +42,11 @@ interface ListCategoryBarProps {
   onSelectCategory: (cat: string) => void;
   locations: string[];
   selectedLocation: string;
-  selectedDistance: number | null;
+  selectedDistance?: number | null;
   selectedValidity: string;
   validities?: string[];
   onLocationChange: (loc: string) => void;
-  onDistanceChange: (dist: number | null) => void;
+  onDistanceChange?: (dist: number | null) => void;
   onValidityChange: (val: string) => void;
 }
 
@@ -177,7 +177,7 @@ export function ListCategoryBar({
         )}
       </div>
 
-      {/* Three Parallel Dropdown Selectors in a Single Scrollable Row on Mobile: Location, Distance, Validity */}
+      {/* Two Parallel Dropdown Selectors in a Single Scrollable Row on Mobile: Location, Validity */}
       <div className="flex items-center gap-2 sm:gap-2.5 pt-0.5 overflow-x-auto no-scrollbar scroll-smooth pb-0.5 sm:pb-0">
         {/* Dropdown 1: All Locations */}
         <div className="relative flex items-center flex-shrink-0 min-w-[140px] sm:min-w-0 sm:flex-1">
@@ -197,26 +197,7 @@ export function ListCategoryBar({
           <div className="absolute right-3 pointer-events-none text-slate-400 text-xs">▼</div>
         </div>
 
-        {/* Dropdown 2: All Distances */}
-        <div className="relative flex items-center flex-shrink-0 min-w-[140px] sm:min-w-0 sm:flex-1">
-          <Navigation className="absolute left-3 w-4 h-4 text-slate-400 pointer-events-none" />
-          <select
-            value={selectedDistance !== null ? selectedDistance : ""}
-            onChange={(e) =>
-              onDistanceChange(e.target.value ? Number(e.target.value) : null)
-            }
-            className="w-full pl-8 pr-7 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-bold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer truncate"
-          >
-            <option value="">All distances</option>
-            <option value="5">Within 5 km</option>
-            <option value="10">Within 10 km</option>
-            <option value="15">Within 15 km</option>
-            <option value="20">Within 20 km</option>
-          </select>
-          <div className="absolute right-3 pointer-events-none text-slate-400 text-xs">▼</div>
-        </div>
-
-        {/* Dropdown 3: All Validities */}
+        {/* Dropdown 2: All Validities */}
         <div className="relative flex items-center flex-shrink-0 min-w-[140px] sm:min-w-0 sm:flex-1">
           <Clock className="absolute left-3 w-4 h-4 text-slate-400 pointer-events-none" />
           <select
