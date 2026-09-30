@@ -12,7 +12,7 @@ import {
   Dumbbell,
   Pill,
   Film,
-  Car,
+  Truck,
   Home,
   Briefcase,
   UserCheck,
@@ -58,7 +58,7 @@ export function CategorySelector({
         return <Film className="w-4 h-4 text-indigo-500" />;
       case "Auto Care":
       case "Vehicles":
-        return <Car className="w-4 h-4 text-cyan-500" />;
+        return <Truck className="w-4 h-4 text-cyan-500" />;
       case "Home & Living":
       case "Home Services":
         return <Home className="w-4 h-4 text-rose-500" />;

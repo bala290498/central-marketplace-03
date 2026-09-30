@@ -9,7 +9,7 @@ import {
   Dumbbell,
   Pill,
   Film,
-  Car,
+  Truck,
   Home as HomeIcon,
   Briefcase,
   UserCheck,
@@ -78,7 +78,7 @@ export function getCategoryIcon(categoryName: string = "", title: string = ""): 
     return Film;
   }
   if (catLower.includes("vehicle") || catLower.includes("auto") || catLower.includes("car")) {
-    return Car;
+    return Truck;
   }
   if (catLower.includes("home service") || catLower.includes("home") || catLower.includes("living")) {
     return HomeIcon;

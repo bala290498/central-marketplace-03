@@ -18,7 +18,7 @@ import {
   Dumbbell,
   Pill,
   Film,
-  Car,
+  Truck,
   Home,
   Briefcase,
   UserCheck,

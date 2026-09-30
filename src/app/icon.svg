@@ -1,5 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
   <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@800;900&amp;display=swap');
+      .cm-logo-text {
+        font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+      }
+    </style>
     <!-- Background Gradient -->
     <linearGradient id="cmBgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#FF6B00" />
@@ -36,12 +44,15 @@
   <!-- Glass Light Overlay -->
   <path d="M 24 128 C 24 70.6 70.6 24 128 24 L 384 24 C 441.4 24 488 70.6 488 128 L 488 230 C 350 240 160 250 24 230 Z" fill="url(#topGlass)" />
 
-  <!-- CM Stylized Emblem Group -->
-  <g filter="url(#textGlow)" fill="url(#cmTextGradient)">
-    <!-- Letter C -->
-    <path d="M 196 160 C 126 160 81 200 81 256 C 81 312 126 352 196 352 C 221 352 239 344 249 333 C 254 328 252 319 245 315 L 223 301 C 218 298 211 299 206 303 C 201 308 191 312 182 312 C 149 312 125 288 125 256 C 125 224 149 200 182 200 C 191 200 201 204 206 209 C 211 213 218 214 223 211 L 245 197 C 252 193 254 184 249 179 C 239 168 221 160 196 160 Z" />
-
-    <!-- Letter M -->
-    <path d="M 266 166 C 260 166 256 170 256 176 L 256 336 C 256 342 260 346 266 346 L 292 346 C 298 346 302 342 302 336 L 302 246 L 329 303 C 331 308 336 311 341 311 L 347 311 C 352 311 357 308 359 303 L 386 246 L 386 336 C 386 342 390 346 396 346 L 422 346 C 428 346 432 342 432 336 L 432 176 C 432 170 428 166 422 166 L 398 166 C 392 166 387 169 385 174 L 344 256 L 303 174 C 301 169 296 166 290 166 Z" />
+  <!-- CM Stylized Emblem in Be Vietnam Pro Bold -->
+  <g filter="url(#textGlow)">
+    <text
+      x="256"
+      y="320"
+      text-anchor="middle"
+      fill="url(#cmTextGradient)"
+      font-size="210"
+      class="cm-logo-text"
+    >CM</text>
   </g>
 </svg>
