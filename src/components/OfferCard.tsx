@@ -179,7 +179,7 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
         <div className="flex items-center flex-wrap gap-2 text-xs font-bold text-slate-700 mb-5">
           {/* Location Pin */}
           <div className="flex items-center gap-1">
-            <MapPin className="w-4 h-4 text-orange-500 fill-orange-500/20 flex-shrink-0" />
+            <MapPin className="w-4 h-4 text-red-500 fill-red-500/20 flex-shrink-0" />
             <span className="truncate max-w-[120px]">{areaName}</span>
           </div>
 
@@ -188,7 +188,7 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
               <span className="text-slate-300 font-light select-none">|</span>
               {/* Distance */}
               <div className="flex items-center gap-1">
-                <Navigation className={`w-3.5 h-3.5 ${theme.arrowColor} fill-current transform rotate-45 flex-shrink-0`} />
+                <Navigation className={`w-4 h-4 ${theme.arrowColor} fill-current transform rotate-45 flex-shrink-0`} />
                 <span>{distanceStr}</span>
               </div>
             </>
@@ -198,8 +198,8 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
 
           {/* Validity Status */}
           <div className="flex items-center gap-1.5">
-            <Timer className="w-3.5 h-3.5 text-rose-600 flex-shrink-0" />
-            <span className="text-slate-800 font-extrabold truncate max-w-[140px]">{validityText}</span>
+            <Timer className="w-4 h-4 text-rose-600 flex-shrink-0" />
+            <span className="truncate max-w-[140px]">{validityText}</span>
           </div>
         </div>
       </div>
@@ -211,7 +211,7 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
             href={`tel:${cleanPhone}`}
             className="flex-[1.5] flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-none bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs sm:text-sm shadow-xs transition-all duration-200 active:scale-95"
           >
-            <Phone className="w-3.5 h-3.5 fill-current" />
+            <Phone className="w-4 h-4 fill-current" />
             <span>Call</span>
           </a>
         ) : (
@@ -220,7 +220,7 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
             onClick={(e) => e.preventDefault()}
             className="flex-[1.5] flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-none bg-emerald-600/80 text-white font-extrabold text-xs sm:text-sm shadow-xs transition-all duration-200 cursor-not-allowed opacity-90"
           >
-            <Phone className="w-3.5 h-3.5 fill-current" />
+            <Phone className="w-4 h-4 fill-current" />
             <span>Call</span>
           </a>
         )}
@@ -232,7 +232,7 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
             rel="noopener noreferrer"
             className="flex-1 flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-none bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200/80 font-extrabold text-xs sm:text-sm shadow-2xs transition-all duration-200 active:scale-95"
           >
-            <Map className="w-3.5 h-3.5 text-blue-600" />
+            <Map className="w-4 h-4 text-blue-600" />
             <span>Maps</span>
           </a>
         ) : (
@@ -241,7 +241,7 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
             disabled
             className="flex-1 flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-none bg-slate-100 text-slate-400 border border-slate-200/60 font-bold text-xs sm:text-sm cursor-not-allowed opacity-70"
           >
-            <Map className="w-3.5 h-3.5 text-slate-400" />
+            <Map className="w-4 h-4 text-slate-400" />
             <span>No Map</span>
           </button>
         )}
@@ -251,7 +251,7 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
           onClick={() => onShare(offer)}
           className="flex-1 flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-none bg-pink-50 hover:bg-pink-100 text-pink-700 border border-pink-200/80 font-extrabold text-xs sm:text-sm shadow-2xs transition-all duration-200 active:scale-95 cursor-pointer"
         >
-          <Share2 className="w-3.5 h-3.5 text-pink-600" />
+          <Share2 className="w-4 h-4 text-pink-600" />
           <span>Share</span>
         </button>
       </div>

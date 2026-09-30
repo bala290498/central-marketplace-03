@@ -66,9 +66,9 @@ export function ShortOfferCard({
         <div className="flex items-start justify-between gap-2 mb-2">
           <div className="flex items-center gap-1.5 min-w-0 flex-1">
             <div
-              className={`w-6 h-6 rounded-md ${categoryColors.iconBg} text-white flex items-center justify-center flex-shrink-0 mt-0.5`}
+              className={`w-6.5 h-6.5 rounded-md ${categoryColors.iconBg} text-white flex items-center justify-center flex-shrink-0 mt-0.5`}
             >
-              <CategoryIcon className="w-3.5 h-3.5 stroke-[2.2]" />
+              <CategoryIcon className="w-4 h-4 stroke-[2.2]" />
             </div>
             <div className="flex flex-col text-left min-w-0">
               <span className="text-[11px] font-extrabold text-slate-700 truncate leading-tight">
@@ -107,7 +107,7 @@ export function ShortOfferCard({
       {/* Location Footer */}
       <div className="flex items-center justify-start text-[11px] font-bold text-slate-600 mt-3 pt-2.5 border-t border-slate-200/50">
         <span className="inline-flex items-center gap-1 truncate">
-          <MapPin className="w-3.5 h-3.5 text-orange-500 fill-orange-500/20 flex-shrink-0" />
+          <MapPin className="w-4 h-4 text-red-500 fill-red-500/20 flex-shrink-0" />
           <span className="truncate">{areaName}</span>
         </span>
       </div>
