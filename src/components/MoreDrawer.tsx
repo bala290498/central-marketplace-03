@@ -22,25 +22,11 @@ export function MoreDrawer({ isOpen, onClose }: MoreDrawerProps) {
 
   const menuItems = [
     {
-      href: "/",
-      label: "All Deals & Listings",
-      desc: "Browse verified local offers near you",
-      icon: Sparkles,
-      color: "bg-orange-100 text-orange-600",
-    },
-    {
       href: "/about-us",
       label: "Why Central Marketplace",
       desc: "Learn how to discover, call and navigate",
       icon: HelpCircle,
       color: "bg-blue-100 text-blue-600",
-    },
-    {
-      href: "/register",
-      label: "Free Listing",
-      desc: "Showcase your shop or service to local buyers",
-      icon: Briefcase,
-      color: "bg-emerald-100 text-emerald-600",
     },
     {
       href: "/we-are-hiring",
