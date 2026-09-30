@@ -233,16 +233,18 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
     <div className="min-h-screen bg-slate-50/60 text-slate-900 flex flex-col">
       {/* Unified Top Sticky Container */}
       <div ref={stickyHeaderRef} className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
-        <Navbar
-          userLocation={userLocation}
-          userAreaLabel={userAreaLabel}
-          onDetectLocation={detectLocation}
-          isLocating={isLocating}
-          isSticky={false}
-        />
+        <div className="relative z-50">
+          <Navbar
+            userLocation={userLocation}
+            userAreaLabel={userAreaLabel}
+            onDetectLocation={detectLocation}
+            isLocating={isLocating}
+            isSticky={false}
+          />
+        </div>
 
         {/* Permanent Category & Dropdown Filter Bar (ALWAYS visible, NO OVERLAPPING) */}
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-2.5 bg-white border-t border-slate-100">
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-2.5 bg-white border-t border-slate-100">
           <ListCategoryBar
             categories={categories}
             selectedCategory={selectedCategory}

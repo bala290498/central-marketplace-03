@@ -62,8 +62,8 @@ export function Navbar({
 
   return (
     <header
-      className={`${
-        isSticky ? "sticky top-0 z-40" : ""
+      className={`relative z-50 ${
+        isSticky ? "sticky top-0" : ""
       } bg-white/95 backdrop-blur-md border-b border-slate-200/80 py-3 shadow-xs`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-2.5">
