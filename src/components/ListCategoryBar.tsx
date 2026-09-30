@@ -177,10 +177,10 @@ export function ListCategoryBar({
         )}
       </div>
 
-      {/* Two Parallel Dropdown Selectors in a Single Scrollable Row on Mobile: Location, Validity */}
-      <div className="flex items-center gap-2 sm:gap-2.5 pt-0.5 overflow-x-auto no-scrollbar scroll-smooth pb-0.5 sm:pb-0">
+      {/* Two Equal-Width Parallel Dropdown Selectors: Location, Validity */}
+      <div className="grid grid-cols-2 gap-2 sm:gap-2.5 pt-0.5 pb-0.5 sm:pb-0 w-full">
         {/* Dropdown 1: All Locations */}
-        <div className="relative flex items-center flex-shrink-0 min-w-[140px] sm:min-w-0 sm:flex-1">
+        <div className="relative flex items-center w-full">
           <MapPin className="absolute left-3 w-4 h-4 text-slate-400 pointer-events-none" />
           <select
             value={selectedLocation}
@@ -198,7 +198,7 @@ export function ListCategoryBar({
         </div>
 
         {/* Dropdown 2: All Validities */}
-        <div className="relative flex items-center flex-shrink-0 min-w-[140px] sm:min-w-0 sm:flex-1">
+        <div className="relative flex items-center w-full">
           <Clock className="absolute left-3 w-4 h-4 text-slate-400 pointer-events-none" />
           <select
             value={selectedValidity}
