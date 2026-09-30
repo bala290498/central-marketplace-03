@@ -127,58 +127,51 @@ export function Navbar({
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-2.5">
-        <div className="flex items-center justify-between gap-4">
-          {/* Brand Logo & Title + Location (Desktop Header Group) */}
-          <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between gap-3 sm:gap-4">
+          {/* Brand Title + Vertical Line + Location (Desktop & Mobile) */}
+          <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
             <Link
               href="/"
-              className="flex items-center gap-3 group outline-none focus:outline-none focus:ring-0 rounded-xl p-1 -ml-1 transition-all"
+              className="inline-flex items-center outline-none focus:outline-none focus:ring-0 rounded-lg transition-colors group flex-shrink-0"
             >
-              <img
-                src="/logo/logo.svg"
-                alt="Central Marketplace Logo"
-                className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl shadow-md shadow-orange-500/25 group-hover:scale-105 transition-transform duration-200 object-cover"
-              />
-              <div className="flex flex-col justify-center leading-tight">
-                <div className="font-extrabold text-slate-900 text-sm sm:text-base tracking-tight group-hover:text-orange-600 transition-colors leading-tight">
-                  Central <br /> Marketplace
-                </div>
-              </div>
+              <span className="font-extrabold text-orange-500 text-sm sm:text-base tracking-tight hover:text-orange-600 transition-colors whitespace-nowrap">
+                Central Marketplace
+              </span>
             </Link>
 
-            {/* Vertical Divider Line & Location Button (Desktop Header) */}
             {onDetectLocation && (
-              <div className="hidden md:flex items-center gap-3">
-                <div className="h-7 w-px bg-slate-200/90 select-none" />
+              <>
+                <div className="h-4 sm:h-5 w-px bg-slate-300 flex-shrink-0 select-none" />
+
                 <button
                   type="button"
                   onClick={onDetectLocation}
                   disabled={isLocating}
-                  className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full font-semibold text-xs sm:text-sm transition-all duration-200 border cursor-pointer ${
-                    userLocation && userAreaLabel
-                      ? "bg-orange-50 text-orange-700 border-orange-200 hover:bg-orange-100"
-                      : "bg-orange-500 text-white border-transparent hover:bg-orange-600 shadow-xs shadow-orange-500/20"
-                  }`}
+                  className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-slate-700 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 truncate"
                   title={userAreaLabel ? `Location: ${userAreaLabel}` : "Allow location access"}
                 >
                   {isLocating ? (
                     <>
-                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                      <span>Locating...</span>
+                      <Loader2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-spin text-orange-500 flex-shrink-0" />
+                      <span className="text-slate-500 truncate">Locating...</span>
                     </>
                   ) : userLocation && userAreaLabel ? (
                     <>
-                      <MapPin className="w-3.5 h-3.5 text-orange-600 fill-orange-500/20" />
-                      <span>{userAreaLabel}</span>
+                      <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-orange-500 flex-shrink-0" />
+                      <span className="text-slate-800 font-semibold truncate max-w-[120px] xs:max-w-[160px] sm:max-w-[220px] md:max-w-none">
+                        {userAreaLabel}
+                      </span>
                     </>
                   ) : (
                     <>
-                      <Navigation className="w-3.5 h-3.5" />
-                      <span>Allow location</span>
+                      <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-400 flex-shrink-0" />
+                      <span className="text-slate-600 hover:text-slate-900 truncate">
+                        Allow location
+                      </span>
                     </>
                   )}
                 </button>
-              </div>
+              </>
             )}
           </div>
 
@@ -251,32 +244,6 @@ export function Navbar({
               )}
             </div>
           </nav>
-
-          {/* Mobile Header Right Section: Location Button */}
-          <div className="flex md:hidden items-center gap-2">
-
-            {onDetectLocation && (
-              <button
-                type="button"
-                onClick={onDetectLocation}
-                disabled={isLocating}
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full font-bold text-xs transition-all ${
-                  userLocation && userAreaLabel
-                    ? "bg-orange-50 text-orange-700 border border-orange-200"
-                    : "bg-orange-500 text-white"
-                }`}
-              >
-                {isLocating ? (
-                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                ) : (
-                  <MapPin className="w-3.5 h-3.5" />
-                )}
-                <span className="max-w-[100px] truncate">
-                  {isLocating ? "Locating..." : userAreaLabel ? userAreaLabel : "Location"}
-                </span>
-              </button>
-            )}
-          </div>
         </div>
         {children}
       </div>
