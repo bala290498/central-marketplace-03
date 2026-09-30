@@ -35,50 +35,15 @@ export interface CategoryMeta {
   };
 }
 
-export const CATEGORY_THEME_PALETTE = [
-  {
-    bg: "bg-[#FFF4F6]",
-    border: "border-[#FDE2E7]",
-    iconBg: "bg-[#E63956]",
-    textColor: "text-[#D81B43]",
-    badgeBg: "bg-[#FDE2E8]",
-  },
-  {
-    bg: "bg-[#F0F6FF]",
-    border: "border-[#DCE8FE]",
-    iconBg: "bg-[#1E75EB]",
-    textColor: "text-[#1D4ED8]",
-    badgeBg: "bg-[#DBEAFE]",
-  },
-  {
-    bg: "bg-[#FFF8EE]",
-    border: "border-[#FDEBD0]",
-    iconBg: "bg-[#F97316]",
-    textColor: "text-[#C2410C]",
-    badgeBg: "bg-[#FFEDD5]",
-  },
-  {
-    bg: "bg-[#F0FDF4]",
-    border: "border-[#DCFCE7]",
-    iconBg: "bg-[#10B981]",
-    textColor: "text-[#15803D]",
-    badgeBg: "bg-[#DCFCE7]",
-  },
-  {
-    bg: "bg-[#FAF5FF]",
-    border: "border-[#F3E8FF]",
-    iconBg: "bg-[#A855F7]",
-    textColor: "text-[#7E22CE]",
-    badgeBg: "bg-[#F3E8FF]",
-  },
-  {
-    bg: "bg-[#F0FDFA]",
-    border: "border-[#CCFBF1]",
-    iconBg: "bg-[#14B8A6]",
-    textColor: "text-[#0F766E]",
-    badgeBg: "bg-[#CCFBF1]",
-  },
-];
+export const LIGHT_ORANGE_CATEGORY_THEME = {
+  bg: "bg-[#FFF8EE]",
+  border: "border-[#FDEBD0]",
+  iconBg: "bg-[#F97316]",
+  textColor: "text-[#C2410C]",
+  badgeBg: "bg-[#FFEDD5]",
+};
+
+export const CATEGORY_THEME_PALETTE = [LIGHT_ORANGE_CATEGORY_THEME];
 
 export function getCategoryMeta(categoryName: string, index: number = 0): CategoryMeta {
   const catLower = categoryName.toLowerCase().trim();
