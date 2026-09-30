@@ -220,14 +220,14 @@ export function ListYourBusinessClient() {
                 />
               </div>
 
-              {/* Full Width Submit Button */}
-              <div className="pt-3">
+              {/* Submit Button (Auto width, text "Submit") */}
+              <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full py-4 rounded-2xl bg-orange-500 hover:bg-orange-600 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-orange-500/25 transition-all cursor-pointer flex items-center justify-center gap-2"
+                  className="w-auto px-8 sm:px-10 py-3 sm:py-3.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-extrabold text-sm sm:text-base shadow-md shadow-orange-500/25 transition-all cursor-pointer inline-flex items-center justify-center gap-2"
                 >
                   <Send className="w-4 h-4" />
-                  <span>Submit Free Listing Request</span>
+                  <span>Submit</span>
                 </button>
               </div>
             </form>
