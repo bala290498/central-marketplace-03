@@ -17,15 +17,15 @@ import {
 export function ListYourBusinessClient() {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Form State matching offers.json fields (excluding category, latitude, longitude, mapUrl)
+  // Form State matching offers.json fields
   const [formData, setFormData] = useState({
     business: "",
     title: "",
-    badge: "",
-    location: "Vickramasingapuram",
-    phone: "",
-    validity: "Valid All Days",
     description: "",
+    phone: "",
+    badge: "",
+    validity: "Valid All Days",
+    location: "Vickramasingapuram",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -38,11 +38,11 @@ export function ListYourBusinessClient() {
     setFormData({
       business: "",
       title: "",
-      badge: "",
-      location: "Vickramasingapuram",
-      phone: "",
-      validity: "Valid All Days",
       description: "",
+      phone: "",
+      badge: "",
+      validity: "Valid All Days",
+      location: "Vickramasingapuram",
     });
   };
 
@@ -62,7 +62,7 @@ export function ListYourBusinessClient() {
                 Registration Received!
               </h2>
               <p className="text-sm sm:text-base text-slate-600 max-w-md mx-auto leading-relaxed">
-                Thank you! Our onboarding team will verify your shop & offer details and publish your free listing shortly.
+                Thank you! Our onboarding team will verify your details and publish your listing shortly.
               </p>
               <div className="pt-4">
                 <button
@@ -77,26 +77,18 @@ export function ListYourBusinessClient() {
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Form Header */}
-              <div className="flex items-center gap-3.5 pb-5 border-b border-slate-100">
-                <div className="w-12 h-12 rounded-2xl bg-orange-50 text-orange-500 flex items-center justify-center flex-shrink-0">
-                  <Store className="w-6 h-6" />
-                </div>
-                <div>
-                  <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 leading-tight">
-                    Free Business Listing
-                  </h1>
-                  <p className="text-xs sm:text-sm text-slate-500">
-                    Fill in your shop and discount offer details below to publish your listing
-                  </p>
-                </div>
+              <div className="pb-4 border-b border-slate-100">
+                <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 leading-tight">
+                  Post Details
+                </h1>
               </div>
 
-              {/* Grid Section 1: Business Name & Offer Title */}
+              {/* Row 1: Post Name & Title */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 <div>
                   <label className="block text-xs font-extrabold text-slate-700 mb-1.5 flex items-center gap-1.5">
                     <Store className="w-3.5 h-3.5 text-orange-500" />
-                    <span>Business / Shop Name (business) *</span>
+                    <span>Post Name *</span>
                   </label>
                   <input
                     type="text"
@@ -113,7 +105,7 @@ export function ListYourBusinessClient() {
                 <div>
                   <label className="block text-xs font-extrabold text-slate-700 mb-1.5 flex items-center gap-1.5">
                     <Tag className="w-3.5 h-3.5 text-orange-500" />
-                    <span>Offer Title (title) *</span>
+                    <span>Title *</span>
                   </label>
                   <input
                     type="text"
@@ -128,46 +120,29 @@ export function ListYourBusinessClient() {
                 </div>
               </div>
 
-              {/* Grid Section 2: Badge, Location, Phone, Validity */}
+              {/* Row 2: Description (Optional) */}
+              <div>
+                <label className="block text-xs font-extrabold text-slate-700 mb-1.5 flex items-center gap-1.5">
+                  <FileText className="w-3.5 h-3.5 text-orange-500" />
+                  <span>Description</span>
+                </label>
+                <textarea
+                  rows={3}
+                  value={formData.description}
+                  onChange={(e) =>
+                    setFormData({ ...formData, description: e.target.value })
+                  }
+                  placeholder="Enter additional details, offer terms, working hours, or shop notes..."
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs sm:text-sm font-medium outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 shadow-xs"
+                />
+              </div>
+
+              {/* Row 3: Phone / WhatsApp (Required), Badge (Optional), Validity (Optional), Location / Area (Optional) */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                 <div>
                   <label className="block text-xs font-extrabold text-slate-700 mb-1.5 flex items-center gap-1.5">
-                    <Tag className="w-3.5 h-3.5 text-orange-500" />
-                    <span>Discount Tag / Badge (badge) *</span>
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.badge}
-                    onChange={(e) =>
-                      setFormData({ ...formData, badge: e.target.value })
-                    }
-                    placeholder="E.g. 20% OFF, BOGO DEAL"
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm font-semibold outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 shadow-xs"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-extrabold text-slate-700 mb-1.5 flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-orange-500" />
-                    <span>Location / Area (location) *</span>
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.location}
-                    onChange={(e) =>
-                      setFormData({ ...formData, location: e.target.value })
-                    }
-                    placeholder="E.g. Vickramasingapuram"
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm font-semibold outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 shadow-xs"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-extrabold text-slate-700 mb-1.5 flex items-center gap-1.5">
                     <Phone className="w-3.5 h-3.5 text-orange-500" />
-                    <span>Phone / WhatsApp (phone) *</span>
+                    <span>Phone / WhatsApp *</span>
                   </label>
                   <input
                     type="tel"
@@ -183,8 +158,24 @@ export function ListYourBusinessClient() {
 
                 <div>
                   <label className="block text-xs font-extrabold text-slate-700 mb-1.5 flex items-center gap-1.5">
+                    <Tag className="w-3.5 h-3.5 text-orange-500" />
+                    <span>Badge</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.badge}
+                    onChange={(e) =>
+                      setFormData({ ...formData, badge: e.target.value })
+                    }
+                    placeholder="E.g. 20% OFF, BOGO DEAL (optional)"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm font-semibold outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 shadow-xs"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-extrabold text-slate-700 mb-1.5 flex items-center gap-1.5">
                     <Clock className="w-3.5 h-3.5 text-orange-500" />
-                    <span>Offer Validity (validity) *</span>
+                    <span>Validity</span>
                   </label>
                   <select
                     value={formData.validity}
@@ -193,6 +184,7 @@ export function ListYourBusinessClient() {
                     }
                     className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs sm:text-sm font-bold outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 shadow-xs"
                   >
+                    <option value="">Select Validity (Optional)</option>
                     <option value="Valid All Days">Valid All Days</option>
                     <option value="Limited">Limited</option>
                     <option value="Expires Soon">Expires Soon</option>
@@ -201,23 +193,22 @@ export function ListYourBusinessClient() {
                     <option value="Available">Available</option>
                   </select>
                 </div>
-              </div>
 
-              {/* Description Field */}
-              <div>
-                <label className="block text-xs font-extrabold text-slate-700 mb-1.5 flex items-center gap-1.5">
-                  <FileText className="w-3.5 h-3.5 text-orange-500" />
-                  <span>Description / Terms (description)</span>
-                </label>
-                <textarea
-                  rows={3}
-                  value={formData.description}
-                  onChange={(e) =>
-                    setFormData({ ...formData, description: e.target.value })
-                  }
-                  placeholder="Enter additional offer terms, working hours, or shop details..."
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs sm:text-sm font-medium outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 shadow-xs"
-                />
+                <div>
+                  <label className="block text-xs font-extrabold text-slate-700 mb-1.5 flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-orange-500" />
+                    <span>Location / Area</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.location}
+                    onChange={(e) =>
+                      setFormData({ ...formData, location: e.target.value })
+                    }
+                    placeholder="E.g. Vickramasingapuram (optional)"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm font-semibold outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 shadow-xs"
+                  />
+                </div>
               </div>
 
               {/* Submit Button (Auto width, text "Submit") */}
@@ -235,7 +226,10 @@ export function ListYourBusinessClient() {
         </div>
       </main>
 
-      <Footer />
+      {/* Footer (Hidden on Mobile) */}
+      <div className="hidden md:block">
+        <Footer />
+      </div>
     </div>
   );
 }
