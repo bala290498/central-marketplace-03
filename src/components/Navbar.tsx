@@ -54,24 +54,45 @@ export function Navbar({
   useEffect(() => {
     if (!isSticky) return;
 
-    let lastY = window.scrollY || 0;
+    let lastY = typeof window !== "undefined" ? window.scrollY || 0 : 0;
+    let ticking = false;
 
     const handleScroll = () => {
-      const y = Math.max(0, window.scrollY || 0);
-      const delta = y - lastY;
-      lastY = y;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const y = Math.max(0, window.scrollY || 0);
+          const delta = y - lastY;
 
-      if (y < 30) {
-        setIsHidden(false);
-        setIsCompact(false);
-        return;
-      }
+          // On desktop (md: width >= 768px), keep header always visible and steady
+          if (window.innerWidth >= 768) {
+            setIsHidden(false);
+            setIsCompact(y > 40);
+            lastY = y;
+            ticking = false;
+            return;
+          }
 
-      if (delta > 6) {
-        setIsHidden(true);
-        setIsCompact(true);
-      } else if (delta < -6) {
-        setIsHidden(false);
+          if (y < 40) {
+            setIsHidden(false);
+            setIsCompact(false);
+            lastY = y;
+            ticking = false;
+            return;
+          }
+
+          if (delta > 25 && y > 100) {
+            setIsHidden(true);
+            setIsCompact(true);
+            lastY = y;
+          } else if (delta < -25) {
+            setIsHidden(false);
+            setIsCompact(y > 40);
+            lastY = y;
+          }
+
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
@@ -96,7 +117,9 @@ export function Navbar({
       className={`${
         isSticky
           ? `sticky top-0 z-40 transition-all duration-300 ${
-              isHidden ? "-translate-y-full opacity-0 pointer-events-none" : "translate-y-0 opacity-100"
+              isHidden
+                ? "-translate-y-full opacity-0 pointer-events-none md:translate-y-0 md:opacity-100 md:pointer-events-auto"
+                : "translate-y-0 opacity-100"
             }`
           : ""
       } bg-white/95 backdrop-blur-md border-b border-slate-200/80 ${

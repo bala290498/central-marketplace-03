@@ -44,47 +44,45 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
   // Stable, flicker-free scroll listener with transition lock
   useEffect(() => {
     let lastY = typeof window !== "undefined" ? window.scrollY || 0 : 0;
-    let isLocked = false;
+    let ticking = false;
 
     const handleScroll = () => {
-      if (isLocked) return;
-      const currentY = Math.max(0, window.scrollY || 0);
-      const delta = currentY - lastY;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentY = Math.max(0, window.scrollY || 0);
+          const delta = currentY - lastY;
 
-      // At top of page (< 50px), always show header
-      if (currentY <= 50) {
-        if (isHeaderHidden) {
-          setIsHeaderHidden(false);
-        }
-        lastY = currentY;
-        return;
+          // On Desktop (width >= 768px), ALWAYS show header to prevent any layout flicker
+          if (window.innerWidth >= 768) {
+            if (isHeaderHidden) setIsHeaderHidden(false);
+            lastY = currentY;
+            ticking = false;
+            return;
+          }
+
+          // At top of page (< 60px), always show header
+          if (currentY <= 60) {
+            if (isHeaderHidden) setIsHeaderHidden(false);
+            lastY = currentY;
+            ticking = false;
+            return;
+          }
+
+          // Scroll Down -> Hide Navbar Header on mobile (scroll delta > 35px & scrolled > 100px)
+          if (delta > 35 && currentY > 100 && !isHeaderHidden) {
+            setIsHeaderHidden(true);
+            lastY = currentY;
+          }
+          // Scroll Up -> Show Navbar Header on mobile (scroll delta < -35px)
+          else if (delta < -35 && isHeaderHidden) {
+            setIsHeaderHidden(false);
+            lastY = currentY;
+          }
+
+          ticking = false;
+        });
+        ticking = true;
       }
-
-      // Scroll Down -> Hide Navbar Header (scroll delta > 30px)
-      if (delta > 30 && !isHeaderHidden) {
-        setIsHeaderHidden(true);
-        isLocked = true;
-        lastY = currentY;
-        setTimeout(() => {
-          isLocked = false;
-          lastY = Math.max(0, window.scrollY || 0);
-        }, 320);
-        return;
-      }
-
-      // Scroll Up -> Show Navbar Header (scroll delta < -30px)
-      if (delta < -30 && isHeaderHidden) {
-        setIsHeaderHidden(false);
-        isLocked = true;
-        lastY = currentY;
-        setTimeout(() => {
-          isLocked = false;
-          lastY = Math.max(0, window.scrollY || 0);
-        }, 320);
-        return;
-      }
-
-      lastY = currentY;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -265,7 +263,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
         <div
           className={`transition-all duration-300 ease-in-out overflow-hidden ${
             isHeaderHidden
-              ? "max-h-0 opacity-0 pointer-events-none"
+              ? "max-h-0 opacity-0 pointer-events-none md:max-h-96 md:opacity-100 md:pointer-events-auto"
               : "max-h-96 opacity-100"
           }`}
         >
