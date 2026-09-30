@@ -53,64 +53,19 @@ interface ThemeConfig {
   arrowColor: string;
 }
 
-const THEMES: ThemeConfig[] = [
-  {
-    // Pink / Red Theme
-    cardBg: "bg-[#FFF4F6]",
-    cardBorder: "border-[#FDE2E7]",
-    headerIconBg: "bg-[#E63956]",
-    headerIconColor: "text-white",
-    badgeBg: "bg-[#FDE2E8]",
-    badgeTextColor: "text-[#D81B43]",
-    circleBg: "bg-[#FDE5EC]",
-    sparkColor: "#E63956",
-    storePrimary: "#E63956",
-    pinColor: "text-[#E63956]",
-    arrowColor: "text-[#E63956]",
-  },
-  {
-    // Blue Theme
-    cardBg: "bg-[#F0F6FF]",
-    cardBorder: "border-[#DCE8FE]",
-    headerIconBg: "bg-[#1E75EB]",
-    headerIconColor: "text-white",
-    badgeBg: "bg-[#DBEAFE]",
-    badgeTextColor: "text-[#1D4ED8]",
-    circleBg: "bg-[#DBEAFE]",
-    sparkColor: "#1E75EB",
-    storePrimary: "#1E75EB",
-    pinColor: "text-[#1E75EB]",
-    arrowColor: "text-[#1E75EB]",
-  },
-  {
-    // Amber / Orange Theme
-    cardBg: "bg-[#FFF8EE]",
-    cardBorder: "border-[#FDEBD0]",
-    headerIconBg: "bg-[#F97316]",
-    headerIconColor: "text-white",
-    badgeBg: "bg-[#FFEDD5]",
-    badgeTextColor: "text-[#C2410C]",
-    circleBg: "bg-[#FFEDD5]",
-    sparkColor: "#F97316",
-    storePrimary: "#F97316",
-    pinColor: "text-[#F97316]",
-    arrowColor: "text-[#F97316]",
-  },
-  {
-    // Green Theme
-    cardBg: "bg-[#F0FDF4]",
-    cardBorder: "border-[#DCFCE7]",
-    headerIconBg: "bg-[#10B981]",
-    headerIconColor: "text-white",
-    badgeBg: "bg-[#DCFCE7]",
-    badgeTextColor: "text-[#15803D]",
-    circleBg: "bg-[#DCFCE7]",
-    sparkColor: "#10B981",
-    storePrimary: "#10B981",
-    pinColor: "text-[#10B981]",
-    arrowColor: "text-[#10B981]",
-  },
-];
+const LIGHT_ORANGE_THEME: ThemeConfig = {
+  cardBg: "bg-[#FFF8EE]",
+  cardBorder: "border-[#FDEBD0]",
+  headerIconBg: "bg-[#F97316]",
+  headerIconColor: "text-white",
+  badgeBg: "bg-[#FFEDD5]",
+  badgeTextColor: "text-[#C2410C]",
+  circleBg: "bg-[#FFEDD5]",
+  sparkColor: "#F97316",
+  storePrimary: "#F97316",
+  pinColor: "text-[#F97316]",
+  arrowColor: "text-[#F97316]",
+};
 
 export function getCategoryIcon(category: string = "", title: string = ""): LucideIcon {
   const catLower = (category || "").toLowerCase();
@@ -230,11 +185,8 @@ export function getCategoryIcon(category: string = "", title: string = ""): Luci
   return Store;
 }
 
-function getCardTheme(key: string): ThemeConfig {
-  const hash = Math.abs(
-    key.split("").reduce((sum, ch) => sum + ch.charCodeAt(0), 0)
-  );
-  return THEMES[hash % THEMES.length];
+function getCardTheme(key?: string): ThemeConfig {
+  return LIGHT_ORANGE_THEME;
 }
 
 function StoreGraphic({ primaryColor }: { primaryColor: string }) {

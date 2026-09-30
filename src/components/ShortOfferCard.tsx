@@ -14,46 +14,17 @@ interface ShortOfferCardProps {
   onClick?: () => void;
 }
 
-const SHORT_THEMES = [
-  {
-    bg: "bg-[#FFF4F6]",
-    border: "border-[#FDE2E7]",
-    iconBg: "bg-[#E63956]",
-    badgeBg: "bg-[#FDE2E8]",
-    badgeText: "text-[#D81B43]",
-    pinColor: "text-[#E63956]",
-  },
-  {
-    bg: "bg-[#F0F6FF]",
-    border: "border-[#DCE8FE]",
-    iconBg: "bg-[#1E75EB]",
-    badgeBg: "bg-[#DBEAFE]",
-    badgeText: "text-[#1D4ED8]",
-    pinColor: "text-[#1E75EB]",
-  },
-  {
-    bg: "bg-[#FFF8EE]",
-    border: "border-[#FDEBD0]",
-    iconBg: "bg-[#F97316]",
-    badgeBg: "bg-[#FFEDD5]",
-    badgeText: "text-[#C2410C]",
-    pinColor: "text-[#F97316]",
-  },
-  {
-    bg: "bg-[#F0FDF4]",
-    border: "border-[#DCFCE7]",
-    iconBg: "bg-[#10B981]",
-    badgeBg: "bg-[#DCFCE7]",
-    badgeText: "text-[#15803D]",
-    pinColor: "text-[#10B981]",
-  },
-];
+const LIGHT_ORANGE_SHORT_THEME = {
+  bg: "bg-[#FFF8EE]",
+  border: "border-[#FDEBD0]",
+  iconBg: "bg-[#F97316]",
+  badgeBg: "bg-[#FFEDD5]",
+  badgeText: "text-[#C2410C]",
+  pinColor: "text-[#F97316]",
+};
 
-export function getShortTheme(key: string) {
-  const hash = Math.abs(
-    (key || "").split("").reduce((sum, ch) => sum + ch.charCodeAt(0), 0)
-  );
-  return SHORT_THEMES[hash % SHORT_THEMES.length];
+export function getShortTheme(key?: string) {
+  return LIGHT_ORANGE_SHORT_THEME;
 }
 
 export function ShortOfferCard({
