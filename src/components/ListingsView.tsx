@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useEffect, useCallback } from "react";
+import React, { useState, useMemo, useEffect, useCallback, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import { Offer, UserLocation } from "@/types/offer";
 import {
@@ -235,30 +235,53 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
     }
   };
 
+  const stickyHeaderRef = useRef<HTMLDivElement>(null);
+  const mainContentRef = useRef<HTMLDivElement>(null);
+
+  const scrollToTopCard = useCallback(() => {
+    if (typeof window === "undefined") return;
+    window.requestAnimationFrame(() => {
+      const headerEl = stickyHeaderRef.current;
+      const headerHeight = headerEl ? headerEl.getBoundingClientRect().height : 140;
+      if (mainContentRef.current) {
+        const mainTop = mainContentRef.current.getBoundingClientRect().top + window.scrollY;
+        const targetScroll = Math.max(0, mainTop - headerHeight - 12);
+        window.scrollTo({
+          top: targetScroll,
+          behavior: "smooth",
+        });
+      }
+    });
+  }, []);
+
   const handleCategorySelect = (cat: string) => {
     setSelectedCategory(cat);
     setSearchQuery("");
+    scrollToTopCard();
   };
 
   const handleLocationSelect = (loc: string) => {
     setSelectedLocation(loc);
     setSearchQuery("");
+    scrollToTopCard();
   };
 
   const handleDistanceSelect = (dist: number | null) => {
     setSelectedDistance(dist);
     setSearchQuery("");
+    scrollToTopCard();
   };
 
   const handleValiditySelect = (val: string) => {
     setSelectedValidity(val);
     setSearchQuery("");
+    scrollToTopCard();
   };
 
   return (
     <div className="min-h-screen bg-slate-50/60 text-slate-900 flex flex-col">
       {/* Unified Top Sticky Container */}
-      <div className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
+      <div ref={stickyHeaderRef} className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
         {/* Collapsible Navbar Header Section */}
         <div
           className={`transition-all duration-300 ease-in-out overflow-hidden ${
@@ -294,7 +317,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
         </div>
       </div>
 
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 pt-4 pb-16">
+      <main ref={mainContentRef} className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 pt-4 pb-16 scroll-mt-36">
 
         {/* Listings Grid */}
         {processedOffers.length > 0 ? (
@@ -327,6 +350,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
                 setSelectedDistance(null);
                 setSelectedValidity("");
                 setSearchQuery("");
+                scrollToTopCard();
               }}
               className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-md transition-colors"
             >
