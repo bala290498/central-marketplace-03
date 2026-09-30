@@ -66,21 +66,13 @@ export function MobileCategoryGrid({
     <>
       <div className="w-full mb-6 transition-all duration-300">
         {/* Popular Categories Title */}
-        <div className="mb-3.5 flex items-center justify-between px-1">
+        <div className="mb-3.5 px-1">
           <h2
             onClick={() => router.push("/list")}
-            className="text-lg font-extrabold text-slate-900 tracking-tight cursor-pointer hover:text-blue-600 transition-colors"
+            className="text-lg font-extrabold text-slate-900 tracking-tight cursor-pointer hover:text-blue-600 transition-colors inline-block"
           >
             Popular Categories
           </h2>
-          <button
-            type="button"
-            onClick={() => setIsModalOpen(true)}
-            className="text-xs font-extrabold text-blue-600 hover:text-blue-700 transition-colors inline-flex items-center gap-1 cursor-pointer"
-          >
-            <span>All Categories</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
         </div>
 
         {/* Desktop Grid (Latest Listings Card Style) */}
@@ -102,9 +94,7 @@ export function MobileCategoryGrid({
                   <div className={`w-8 h-8 rounded-xl ${theme.iconBg} text-white flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-105 transition-transform`}>
                     <Icon className="w-4 h-4 stroke-[2.2]" />
                   </div>
-                  <span className={`px-1.5 py-0.5 rounded-full text-[9px] font-black ${theme.badgeBg} ${theme.textColor} uppercase tracking-wider`}>
-                    Browse
-                  </span>
+                  <ArrowRight className={`w-3.5 h-3.5 ${theme.textColor} opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all`} />
                 </div>
                 <span className="text-xs font-extrabold text-slate-900 line-clamp-2 leading-tight whitespace-pre-line group-hover:text-slate-800 tracking-tight">
                   {formatCategoryLabel(item.name)}
