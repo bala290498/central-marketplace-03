@@ -72,7 +72,7 @@ export function MoreDrawer({ isOpen, onClose }: MoreDrawerProps) {
         <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
           <div className="flex items-center gap-2">
             <img
-              src="/logo/cm-icon.svg"
+              src="/logo/logo.svg"
               alt="Central Marketplace Logo"
               className="w-8 h-8 rounded-xl object-cover shadow-xs"
             />

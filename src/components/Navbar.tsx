@@ -112,7 +112,7 @@ export function Navbar({
               className="flex items-center gap-3 group outline-none focus:outline-none focus:ring-0 rounded-xl p-1 -ml-1 transition-all"
             >
               <img
-                src="/logo/cm-icon.svg"
+                src="/logo/logo.svg"
                 alt="Central Marketplace Logo"
                 className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl shadow-md shadow-orange-500/25 group-hover:scale-105 transition-transform duration-200 object-cover"
               />

@@ -27,13 +27,13 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://centralmarketplace.in"),
   icons: {
     icon: [
-      { url: "/logo/cm-icon.svg", type: "image/svg+xml" },
+      { url: "/logo/logo.svg", type: "image/svg+xml" },
       { url: "/favicon.ico", sizes: "any" },
     ],
-    shortcut: "/logo/cm-icon.svg",
+    shortcut: "/logo/logo.svg",
     apple: [
-      { url: "/logo/cm-icon.svg", type: "image/svg+xml" },
-      { url: "/logo/cm-icon.svg", sizes: "180x180", type: "image/svg+xml" },
+      { url: "/logo/logo.svg", type: "image/svg+xml" },
+      { url: "/logo/logo.svg", sizes: "180x180", type: "image/svg+xml" },
     ],
   },
   appleWebApp: {

@@ -9,7 +9,7 @@ import { MobileCategoryGrid } from "./MobileCategoryGrid";
 import { LatestListingsCarousel } from "./LatestListingsCarousel";
 import { ValidityCategoryBar } from "./ValidityCategoryBar";
 import { ValiditySections } from "./ValiditySections";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, AlertCircle } from "lucide-react";
 
 interface OfferGridProps {
   initialOffers: Offer[];
@@ -166,8 +166,14 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
 
       {/* Floating Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-20 right-6 z-50 flex items-center gap-2 px-4 py-3 rounded-2xl bg-slate-900 text-white text-xs sm:text-sm font-semibold shadow-xl border border-slate-800 animate-bounce">
-          <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+        <div className="fixed bottom-20 right-6 z-50 flex items-center gap-2 px-4 py-3 rounded-2xl bg-slate-900 text-white text-xs sm:text-sm font-semibold shadow-xl border border-slate-800 animate-in fade-in duration-200">
+          {toastMessage.toLowerCase().includes("could not") ||
+          toastMessage.toLowerCase().includes("failed") ||
+          toastMessage.toLowerCase().includes("not supported") ? (
+            <AlertCircle className="w-4 h-4 text-amber-400 flex-shrink-0" />
+          ) : (
+            <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+          )}
           <span>{toastMessage}</span>
         </div>
       )}
