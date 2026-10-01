@@ -19,6 +19,11 @@ export interface Offer {
   ends?: string;
   expiry?: string;
   distance?: number;
+  whatsNew?: string;
+  whatsDifferent?: string;
+  marketPrice?: number | string;
+  ourPrice?: number | string;
+  isVerified?: boolean;
 }
 
 export interface UserLocation {

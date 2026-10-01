@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { getOffers } from "@/lib/offers";
+import { getSpotlightOffers } from "@/lib/offers";
 import { SpotlightView } from "@/components/SpotlightView";
 
 export const metadata: Metadata = {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 };
 
 export default function SpotlightPage() {
-  const initialOffers = getOffers();
+  const initialOffers = getSpotlightOffers();
 
   return <SpotlightView initialOffers={initialOffers} />;
 }

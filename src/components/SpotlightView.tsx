@@ -7,15 +7,41 @@ import {
   offerCategory,
   distanceKm,
   lookupUserArea,
+  directionsUrl,
 } from "@/lib/utils";
 import { Navbar } from "./Navbar";
-import { OfferCard } from "./OfferCard";
 import { Footer } from "./Footer";
-import { getCategoryColors, formatCategoryLabel } from "@/lib/categories";
-import { Sparkles, Flame, CheckCircle2, AlertCircle, Compass, Star } from "lucide-react";
+import { getCategoryIcon, getCategoryColors } from "@/lib/categories";
+import {
+  Sparkles,
+  BadgeCheck,
+  Phone,
+  MapPin,
+  Map,
+  Share2,
+  Navigation,
+  Timer,
+  AlertCircle,
+  CheckCircle2,
+  Tag,
+  Info,
+} from "lucide-react";
 
 interface SpotlightViewProps {
   initialOffers: Offer[];
+}
+
+function WhatsAppIcon({ className = "w-4 h-4" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01zm-7.01 15.24c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.2 8.2 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.66.81-.81.98-.15.17-.3.19-.55.07-.25-.12-1.05-.39-2.01-1.24-.74-.66-1.24-1.47-1.39-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.16-.24.24-.4.08-.17.04-.31-.02-.43s-.56-1.36-.77-1.86c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.53.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.2-.58.2-1.08.14-1.18-.06-.1-.22-.16-.47-.28z" />
+    </svg>
+  );
 }
 
 export function SpotlightView({ initialOffers }: SpotlightViewProps) {
@@ -24,7 +50,6 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
   const [userAreaLabel, setUserAreaLabel] = useState<string>("");
   const [isLocating, setIsLocating] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
-
   const [selectedCategory, setSelectedCategory] = useState<string>("");
 
   const triggerToast = (msg: string) => {
@@ -57,14 +82,9 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
     detectLocation();
   }, [detectLocation]);
 
-  // Compute spotlight offers (handpicked/featured top offers)
+  // Max 20 spotlight offers allowed
   const spotlightOffers = useMemo(() => {
-    let list = offers.filter((offer) => {
-      // Prioritize offers with badges, discounts, or specific categories
-      const hasBadge = Boolean(offer.badge);
-      const isTopDeal = (offer.title || "").toLowerCase().includes("off") || (offer.title || "").toLowerCase().includes("bogo") || (offer.title || "").toLowerCase().includes("free");
-      return hasBadge || isTopDeal || true;
-    });
+    let list = offers.slice(0, 20);
 
     if (selectedCategory) {
       list = list.filter((o) => offerCategory(o) === selectedCategory);
@@ -122,21 +142,29 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
       />
 
       {/* Main Spotlight Container */}
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 pt-4 pb-12">
-        {/* Spotlight Hero Section */}
-        <div className="relative rounded-3xl overflow-hidden shadow-md mb-8 border border-slate-200/80 bg-slate-900">
+      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 pt-4 pb-16">
+        {/* Spotlight Hero Section (Sharp Corners) */}
+        <div className="relative rounded-none overflow-hidden shadow-md mb-6 border border-slate-200/80 bg-slate-900">
           {/* Mobile Hero Banner Image */}
           <img
             src="/spotlight/mobile.jpeg"
             alt="Spotlight Banner"
-            className="w-full h-auto object-cover block md:hidden rounded-3xl"
+            className="w-full h-auto object-cover block md:hidden rounded-none"
           />
           {/* Desktop Hero Banner Image */}
           <img
             src="/spotlight/desktop.jpeg"
             alt="Spotlight Banner"
-            className="w-full h-auto object-cover hidden md:block rounded-3xl"
+            className="w-full h-auto object-cover hidden md:block rounded-none"
           />
+        </div>
+
+        {/* Paid Visibility Disclaimer Note */}
+        <div className="bg-amber-50/90 border border-amber-200/90 rounded-2xl p-4 mb-6 text-xs text-amber-900 flex items-start gap-3 shadow-2xs">
+          <Info className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
+          <div className="leading-relaxed">
+            <strong className="font-extrabold text-amber-950">Spotlight Showcase Policy:</strong> Spotlight is a limited paid-promotion page for selected local merchants (maximum 20 listings). It provides enhanced visibility and does not guarantee sales or leads. Regular listings remain 100% free on the main List page.
+          </div>
         </div>
 
         {/* Category Filter Chips */}
@@ -151,7 +179,7 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                   : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-100"
               }`}
             >
-              All Spotlight ({offers.length})
+              All Spotlight ({spotlightOffers.length})
             </button>
             {categories.map((cat) => {
               const isSelected = selectedCategory === cat;
@@ -173,17 +201,286 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
           </div>
         </div>
 
-        {/* Spotlight Offers Grid */}
+        {/* Spotlight Offers List */}
         {spotlightOffers.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-            {spotlightOffers.map((offer) => (
-              <OfferCard
-                key={offer.id}
-                offer={offer}
-                userLocation={userLocation}
-                onShare={handleShare}
-              />
-            ))}
+          <div className="space-y-6">
+            {spotlightOffers.map((offer, idx) => {
+              const numStr = String(idx + 1).padStart(2, "0");
+              const businessName = offer.business || offer.store || offer.merchant || "";
+              const areaName = offerArea(offer) || "Chennai";
+              const categoryName = offer.category || "";
+              const validityText = offer.validity || offer.ends || offer.expiry || "Available";
+              const CategoryIcon = getCategoryIcon(categoryName, offer.title);
+              const categoryColors = getCategoryColors(categoryName);
+              const cleanPhone = offer.phone ? offer.phone.replace(/\s+/g, "") : "";
+              const rawWhatsapp = offer.whatsapp || offer.phone || "";
+              const cleanWhatsapp = rawWhatsapp.replace(/\D/g, "");
+              const whatsappUrl = cleanWhatsapp ? `https://wa.me/${cleanWhatsapp}` : null;
+              const mapLink = directionsUrl(userLocation, offer);
+              const whatsNewText = offer.whatsNew || offer.whatsDifferent;
+
+              return (
+                <article
+                  key={offer.id}
+                  className="bg-white rounded-none border border-slate-200 p-5 sm:p-6 shadow-xs hover:shadow-md transition-all duration-300 relative overflow-hidden"
+                >
+                  {/* DESKTOP LAYOUT (Full-width banner card) */}
+                  <div className="hidden md:flex items-stretch gap-6">
+                    {/* Left: Number Badge */}
+                    <div className="flex flex-col items-center justify-center bg-orange-50 border border-orange-200 rounded-none w-20 px-2 py-4 flex-shrink-0 text-center">
+                      <span className="text-3xl font-black text-orange-600 tracking-tighter">
+                        {numStr}
+                      </span>
+                      <span className="text-[9px] font-black uppercase text-orange-700 tracking-wider mt-1">
+                        Spotlight
+                      </span>
+                    </div>
+
+                    {/* Middle: Core Details */}
+                    <div className="flex-1 min-w-0 flex flex-col justify-between">
+                      <div>
+                        {/* Header: Icon + Category + Verified Badge */}
+                        <div className="flex items-center justify-between gap-3 mb-2">
+                          <div className="flex items-center gap-2 min-w-0">
+                            <div className={`w-7 h-7 rounded-md ${categoryColors.iconBg} text-white flex items-center justify-center flex-shrink-0`}>
+                              <CategoryIcon className="w-4 h-4 stroke-[2.2]" />
+                            </div>
+                            <span className="text-xs font-bold text-slate-500 truncate">
+                              {businessName} {categoryName ? `• ${categoryName}` : ""}
+                            </span>
+                          </div>
+
+                          {/* Verified Badge */}
+                          {offer.isVerified && (
+                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 text-xs font-extrabold flex-shrink-0">
+                              <BadgeCheck className="w-3.5 h-3.5 text-blue-600 fill-blue-100" />
+                              <span>Verified</span>
+                            </span>
+                          )}
+                        </div>
+
+                        {/* Title */}
+                        <h2 className="text-xl font-extrabold text-slate-900 leading-snug mb-2">
+                          {offer.title}
+                        </h2>
+
+                        {/* Description */}
+                        {offer.description && (
+                          <p className="text-xs text-slate-600 leading-relaxed mb-3">
+                            {offer.description}
+                          </p>
+                        )}
+
+                        {/* What's New / What's Different Box */}
+                        {whatsNewText && (
+                          <div className="bg-amber-50/80 border border-amber-200/90 rounded-xl p-2.5 mb-3 text-xs text-amber-900 flex items-start gap-2">
+                            <Sparkles className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
+                            <div>
+                              <strong className="font-extrabold text-amber-950">What&apos;s New / Different: </strong>
+                              <span>{whatsNewText}</span>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Location & Validity Footer Row */}
+                      <div className="flex items-center gap-4 text-xs font-bold text-slate-700 pt-2 border-t border-slate-100">
+                        <div className="flex items-center gap-1">
+                          <MapPin className="w-4 h-4 text-red-500 fill-red-500/20" />
+                          <span>{areaName}</span>
+                        </div>
+                        <span className="text-slate-300">|</span>
+                        <div className="flex items-center gap-1">
+                          <Timer className="w-4 h-4 text-rose-600" />
+                          <span>{validityText}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Right: Pricing & Actions Stack */}
+                    <div className="w-64 flex flex-col justify-between pl-6 border-l border-slate-100 flex-shrink-0">
+                      {/* Special Pricing Box */}
+                      {offer.marketPrice && offer.ourPrice ? (
+                        <div className="bg-emerald-50 border border-emerald-200/80 p-3 rounded-2xl mb-4 text-center">
+                          <div className="text-[11px] font-bold text-slate-400 line-through mb-0.5">
+                            Market Price {offer.marketPrice}
+                          </div>
+                          <div className="text-lg font-black text-emerald-700">
+                            Our Price {offer.ourPrice}
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="mb-4" />
+                      )}
+
+                      {/* Action Buttons */}
+                      <div className="space-y-2">
+                        {cleanPhone && (
+                          <a
+                            href={`tel:${cleanPhone}`}
+                            className="w-full flex items-center justify-center gap-2 py-2.5 px-3 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-xs transition-colors"
+                          >
+                            <Phone className="w-4 h-4 fill-current" />
+                            <span>Call Merchant</span>
+                          </a>
+                        )}
+
+                        <div className="flex items-center gap-2">
+                          {whatsappUrl && (
+                            <a
+                              href={whatsappUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 py-2 px-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 text-xs font-extrabold text-center flex items-center justify-center gap-1"
+                              title="WhatsApp"
+                            >
+                              <WhatsAppIcon className="w-4 h-4 text-emerald-600" />
+                              <span>WhatsApp</span>
+                            </a>
+                          )}
+
+                          {mapLink && (
+                            <a
+                              href={mapLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 text-xs font-extrabold flex items-center justify-center"
+                              title="Maps"
+                            >
+                              <Map className="w-4 h-4 text-blue-600" />
+                            </a>
+                          )}
+
+                          <button
+                            type="button"
+                            onClick={() => handleShare(offer)}
+                            className="py-2 px-3 bg-pink-50 hover:bg-pink-100 text-pink-700 border border-pink-200 text-xs font-extrabold flex items-center justify-center cursor-pointer"
+                            title="Share"
+                          >
+                            <Share2 className="w-4 h-4 text-pink-600" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* MOBILE LAYOUT (Vertical Numbered Card) */}
+                  <div className="block md:hidden space-y-3">
+                    {/* Top Row: Number Badge + Category + Verified Badge */}
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2">
+                        <span className="px-2.5 py-1 rounded-md bg-orange-500 text-white font-black text-xs">
+                          #{numStr}
+                        </span>
+                        <span className="text-xs font-extrabold text-slate-800 truncate">
+                          {businessName}
+                        </span>
+                      </div>
+
+                      {offer.isVerified && (
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 text-[10px] font-bold">
+                          <BadgeCheck className="w-3.5 h-3.5 text-blue-600 fill-blue-100" />
+                          <span>Verified</span>
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Title */}
+                    <h2 className="text-base font-extrabold text-slate-900 leading-snug">
+                      {offer.title}
+                    </h2>
+
+                    {/* Description */}
+                    {offer.description && (
+                      <p className="text-xs text-slate-600 leading-relaxed">
+                        {offer.description}
+                      </p>
+                    )}
+
+                    {/* What's New / What's Different Box */}
+                    {whatsNewText && (
+                      <div className="bg-amber-50/80 border border-amber-200/90 rounded-xl p-2.5 text-xs text-amber-900 flex items-start gap-2">
+                        <Sparkles className="w-3.5 h-3.5 text-amber-500 flex-shrink-0 mt-0.5" />
+                        <div>
+                          <strong className="font-extrabold text-amber-950">What&apos;s New / Different: </strong>
+                          <span>{whatsNewText}</span>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Special Pricing Display */}
+                    {offer.marketPrice && offer.ourPrice && (
+                      <div className="bg-emerald-50 border border-emerald-200/80 p-2.5 rounded-xl text-xs flex items-center justify-between">
+                        <span className="text-slate-400 line-through font-medium">
+                          Market Price {offer.marketPrice}
+                        </span>
+                        <span className="text-emerald-700 font-black text-sm">
+                          Our Price {offer.ourPrice}
+                        </span>
+                      </div>
+                    )}
+
+                    {/* Info Row: Location & Validity */}
+                    <div className="flex items-center justify-between text-xs font-bold text-slate-600 pt-1">
+                      <div className="flex items-center gap-1">
+                        <MapPin className="w-3.5 h-3.5 text-red-500 fill-red-500/20" />
+                        <span>{areaName}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Timer className="w-3.5 h-3.5 text-rose-600" />
+                        <span>{validityText}</span>
+                      </div>
+                    </div>
+
+                    {/* Action Buttons Row */}
+                    <div className="flex items-center gap-2 pt-2 border-t border-slate-100">
+                      {cleanPhone && (
+                        <a
+                          href={`tel:${cleanPhone}`}
+                          className="flex-[3] min-w-0 flex items-center justify-center gap-1.5 py-2.5 px-3 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-xs transition-colors"
+                        >
+                          <Phone className="w-4 h-4 fill-current" />
+                          <span>Call</span>
+                        </a>
+                      )}
+
+                      {whatsappUrl && (
+                        <a
+                          href={whatsappUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 py-2.5 px-2 bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-extrabold flex items-center justify-center"
+                          title="WhatsApp"
+                        >
+                          <WhatsAppIcon className="w-4 h-4 text-emerald-600" />
+                        </a>
+                      )}
+
+                      {mapLink && (
+                        <a
+                          href={mapLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 py-2.5 px-2 bg-blue-50 text-blue-700 border border-blue-200 text-xs font-extrabold flex items-center justify-center"
+                          title="Maps"
+                        >
+                          <Map className="w-4 h-4 text-blue-600" />
+                        </a>
+                      )}
+
+                      <button
+                        type="button"
+                        onClick={() => handleShare(offer)}
+                        className="flex-1 py-2.5 px-2 bg-pink-50 text-pink-700 border border-pink-200 text-xs font-extrabold flex items-center justify-center cursor-pointer"
+                        title="Share"
+                      >
+                        <Share2 className="w-4 h-4 text-pink-600" />
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         ) : (
           <div className="bg-white rounded-2xl p-12 text-center border border-slate-200 my-6 shadow-xs">
