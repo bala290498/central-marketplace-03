@@ -14,6 +14,7 @@ export interface Offer {
   dealType?: string;
   mapUrl?: string | null;
   phone?: string;
+  whatsapp?: string;
   validity?: string;
   ends?: string;
   expiry?: string;

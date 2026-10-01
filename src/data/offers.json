@@ -11,6 +11,7 @@
     "badge": "20% OFF",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01001",
+    "whatsapp": "+91 98765 01001",
     "validity": "Valid All Days"
   },
   {
@@ -25,6 +26,7 @@
     "badge": "BOGO DEAL",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9342,80.2150",
     "phone": "+91 98765 01002",
+    "whatsapp": "+91 98765 01002",
     "validity": "Expires Soon"
   },
   {
@@ -39,6 +41,7 @@
     "badge": "30% OFF",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0067,80.2572",
     "phone": "+91 98765 01003",
+    "whatsapp": "+91 98765 01003",
     "validity": "Expires Soon"
   },
   {
@@ -53,6 +56,7 @@
     "badge": "15% OFF",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0418,80.2337",
     "phone": "+91 98765 01004",
+    "whatsapp": "+91 98765 01004",
     "validity": "Limited"
   },
   {
@@ -67,6 +71,7 @@
     "badge": "COMBO",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0604,80.2496",
     "phone": "+91 98765 01005",
+    "whatsapp": "+91 98765 01005",
     "validity": "Valid All Days"
   },
   {
@@ -81,6 +86,7 @@
     "badge": "₹200 OFF",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9818,80.2184",
     "phone": "+91 98765 01006",
+    "whatsapp": "+91 98765 01006",
     "validity": "Expires Soon"
   },
   {
@@ -95,6 +101,7 @@
     "badge": "B2G1",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0830,80.2707",
     "phone": "+91 98765 01007",
+    "whatsapp": "+91 98765 01007",
     "validity": "Expires Soon"
   },
   {
@@ -109,6 +116,7 @@
     "badge": "10% OFF",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0475,80.2420",
     "phone": "+91 98765 01008",
+    "whatsapp": "+91 98765 01008",
     "validity": "Limited"
   },
   {
@@ -123,6 +131,7 @@
     "badge": "TRIAL",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.8996,80.2279",
     "phone": "+91 98765 01009",
+    "whatsapp": "+91 98765 01009",
     "validity": "Valid All Days"
   },
   {
@@ -137,6 +146,7 @@
     "badge": "12% OFF",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0213,80.1850",
     "phone": "+91 98765 01010",
+    "whatsapp": "+91 98765 01010",
     "validity": "Expires Soon"
   },
   {
@@ -151,6 +161,7 @@
     "badge": "COMBO",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0827,80.2707",
     "phone": "+91 98765 01011",
+    "whatsapp": "+91 98765 01011",
     "validity": "Expires Soon"
   },
   {
@@ -165,6 +176,7 @@
     "badge": "PACKAGE",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9526,80.1462",
     "phone": "+91 98765 01012",
+    "whatsapp": "+91 98765 01012",
     "validity": "Limited"
   },
   {
@@ -179,6 +191,7 @@
     "badge": "FREE VISIT",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0732,80.2210",
     "phone": "+91 98765 01013",
+    "whatsapp": "+91 98765 01013",
     "validity": "Valid All Days"
   },
   {
@@ -193,6 +206,7 @@
     "badge": "DOORSTEP",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01014",
+    "whatsapp": "+91 98765 01014",
     "validity": "Available"
   },
   {
@@ -207,6 +221,7 @@
     "badge": "Hiring",
     "mapUrl": null,
     "phone": "+91 98765 01001",
+    "whatsapp": "+91 98765 01001",
     "validity": "Until Filled"
   },
   {
@@ -221,6 +236,7 @@
     "badge": "Professional",
     "mapUrl": null,
     "phone": "+91 98765 01002",
+    "whatsapp": "+91 98765 01002",
     "validity": "Available"
   },
   {
@@ -235,6 +251,7 @@
     "badge": "Professional",
     "mapUrl": null,
     "phone": "+91 98765 01003",
+    "whatsapp": "+91 98765 01003",
     "validity": "Available"
   },
   {
@@ -249,6 +266,7 @@
     "badge": "Wanted",
     "mapUrl": null,
     "phone": "+91 98765 01004",
+    "whatsapp": "+91 98765 01004",
     "validity": "Until Found"
   },
   {
@@ -263,6 +281,7 @@
     "badge": "Wanted",
     "mapUrl": null,
     "phone": "+91 98765 01005",
+    "whatsapp": "+91 98765 01005",
     "validity": "Until Found"
   },
   {
@@ -277,6 +296,7 @@
     "badge": "For Rent",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01006",
+    "whatsapp": "+91 98765 01006",
     "validity": "Available"
   },
   {
@@ -291,6 +311,7 @@
     "badge": "For Sale",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01007",
+    "whatsapp": "+91 98765 01007",
     "validity": "Available"
   },
   {
@@ -305,6 +326,7 @@
     "badge": "Home Food",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01008",
+    "whatsapp": "+91 98765 01008",
     "validity": "Available"
   },
   {
@@ -319,6 +341,7 @@
     "badge": "Available",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01009",
+    "whatsapp": "+91 98765 01009",
     "validity": "Available"
   },
   {
@@ -333,6 +356,7 @@
     "badge": "For Sale",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01010",
+    "whatsapp": "+91 98765 01010",
     "validity": "Available"
   },
   {
@@ -347,6 +371,7 @@
     "badge": "For Sale",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01011",
+    "whatsapp": "+91 98765 01011",
     "validity": "Available"
   },
   {
@@ -361,6 +386,7 @@
     "badge": "For Sale",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01012",
+    "whatsapp": "+91 98765 01012",
     "validity": "Available"
   },
   {
@@ -375,6 +401,7 @@
     "badge": "Wholesale",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01013",
+    "whatsapp": "+91 98765 01013",
     "validity": "Available"
   },
   {
@@ -389,6 +416,7 @@
     "badge": "Wholesale",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01014",
+    "whatsapp": "+91 98765 01014",
     "validity": "Available"
   },
   {
@@ -403,6 +431,7 @@
     "badge": "Wholesale",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01015",
+    "whatsapp": "+91 98765 01015",
     "validity": "Available"
   },
   {
@@ -417,6 +446,7 @@
     "badge": "25% OFF",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=8.7178,77.3841",
     "phone": "+91 94431 08717",
+    "whatsapp": "+91 94431 08717",
     "validity": "Valid All Days"
   },
   {
@@ -431,6 +461,7 @@
     "badge": "20% OFF",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=8.7178,77.3841",
     "phone": "+91 94432 08718",
+    "whatsapp": "+91 94432 08718",
     "validity": "Expires Soon"
   },
   {
@@ -445,6 +476,7 @@
     "badge": "₹150 OFF",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=8.7178,77.3841",
     "phone": "+91 94433 08719",
+    "whatsapp": "+91 94433 08719",
     "validity": "Limited"
   },
   {
@@ -459,6 +491,7 @@
     "badge": "BEST PRICE",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=8.7178,77.3841",
     "phone": "+91 94434 08720",
+    "whatsapp": "+91 94434 08720",
     "validity": "Available"
   },
   {
@@ -473,6 +506,7 @@
     "badge": "FREE CONSULT",
     "mapUrl": null,
     "phone": "+91 94435 08721",
+    "whatsapp": "+91 94435 08721",
     "validity": "Available"
   },
   {
@@ -487,6 +521,7 @@
     "badge": "HIRING NOW",
     "mapUrl": null,
     "phone": "+91 94436 08722",
+    "whatsapp": "+91 94436 08722",
     "validity": "Until Filled"
   }
 ]
