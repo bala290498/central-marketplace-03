@@ -18,6 +18,9 @@ export const metadata: Metadata = {
   description:
     "Central Marketplace is your premier local listing platform to discover verified neighborhood deals, local business listings, dining discounts, and offers near you.",
   metadataBase: new URL("https://centralmarketplace.in"),
+  alternates: {
+    canonical: "https://centralmarketplace.in",
+  },
   keywords: [
     "local listing platform",
     "neighborhood deals",

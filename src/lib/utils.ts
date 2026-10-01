@@ -102,12 +102,13 @@ export function formatAddress(address: Record<string, string>): string {
 
 export async function lookupUserArea(latitude: number, longitude: number): Promise<string> {
   try {
-    const osmUrl = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=16&addressdetails=1&lat=${encodeURIComponent(
+    const osmUrl = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=16&addressdetails=1&accept-language=en&lat=${encodeURIComponent(
       latitude
     )}&lon=${encodeURIComponent(longitude)}`;
     const res = await fetch(osmUrl, {
       headers: {
         Accept: "application/json",
+        "Accept-Language": "en",
         "User-Agent": "CentralMarketplace/1.0",
       },
     });
