@@ -15,6 +15,7 @@ import { Navbar } from "./Navbar";
 import { ListCategoryBar } from "./ListCategoryBar";
 import { OfferCard } from "./OfferCard";
 import { SearchModal } from "./SearchModal";
+import { Footer } from "./Footer";
 import { getOfferValidityCategory, normalizeValidity } from "@/lib/validity";
 import { CheckCircle2, AlertCircle } from "lucide-react";
 
@@ -353,6 +354,9 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
           <span>{toastMessage}</span>
         </div>
       )}
+
+      {/* Desktop Footer (Hidden on mobile) */}
+      <Footer />
 
       {/* Global Search Modal */}
       <SearchModal

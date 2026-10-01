@@ -143,14 +143,14 @@ export function ListCategoryBar({
                 key={name}
                 type="button"
                 onClick={() => onSelectCategory(val)}
-                className={`flex-shrink-0 flex flex-col items-center justify-start px-2.5 py-1.5 rounded-2xl transition-all cursor-pointer group focus:outline-none min-w-[58px] ${
+                className={`flex-shrink-0 flex flex-col items-center justify-center w-[76px] sm:w-[80px] h-[64px] p-1.5 rounded-2xl transition-all cursor-pointer group focus:outline-none ${
                   isSelected
-                    ? `${colors.outlineBorder} scale-102`
+                    ? `${colors.outlineBorder}`
                     : "border border-slate-200/80 bg-white hover:border-slate-300 hover:bg-slate-50/60"
                 }`}
               >
                 <div
-                  className={`h-6 flex items-center justify-center mb-1 transition-all duration-200 ${
+                  className={`h-5 flex items-center justify-center mb-0.5 transition-all duration-200 ${
                     isSelected
                       ? `${colors.iconColor} scale-110`
                       : `${colors.iconColor} opacity-75 group-hover:opacity-100 group-hover:scale-105`
@@ -159,7 +159,7 @@ export function ListCategoryBar({
                   {renderCategoryIcon(name)}
                 </div>
                 <span
-                  className={`text-[11px] tracking-tight text-center leading-tight whitespace-pre-line transition-colors ${
+                  className={`text-[10px] sm:text-[11px] tracking-tight text-center leading-tight whitespace-pre-line transition-colors line-clamp-2 px-0.5 ${
                     isSelected
                       ? `font-extrabold ${colors.textColor || colors.activeText}`
                       : "font-semibold text-slate-600 group-hover:text-slate-900"

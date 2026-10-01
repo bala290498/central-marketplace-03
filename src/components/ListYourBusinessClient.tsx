@@ -207,10 +207,8 @@ export function ListYourBusinessClient() {
         </div>
       </main>
 
-      {/* Footer (Hidden on Mobile) */}
-      <div className="hidden md:block">
-        <Footer />
-      </div>
+      {/* Desktop Footer (Hidden on Mobile) */}
+      <Footer />
     </div>
   );
 }
