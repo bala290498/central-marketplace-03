@@ -6,7 +6,7 @@ export function Footer() {
       <div className="max-w-6xl mx-auto px-4 flex flex-col items-center gap-3">
         <div className="flex flex-wrap justify-center items-center gap-4 font-semibold text-slate-600">
           <Link href="/" className="hover:text-orange-600 transition-colors">
-            Deals
+            Home
           </Link>
           <span>·</span>
           <Link href="/about-us" className="hover:text-orange-600 transition-colors">
