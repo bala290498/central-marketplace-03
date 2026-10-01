@@ -25,7 +25,7 @@ export function Footer() {
             Terms &amp; Conditions
           </Link>
         </div>
-        <p>© Central Marketplace · Local deals around you</p>
+        <p>© Central Marketplace · Nearby Listing Platform</p>
       </div>
     </footer>
   );

@@ -106,55 +106,55 @@ export function getCategoryColors(name: string = "") {
   const catLower = (name || "").toLowerCase().trim();
 
   if (catLower === "all" || catLower === "all deals") {
-    return { iconBg: "bg-orange-500", iconColor: "text-orange-500", activeText: "text-orange-600 border-orange-500" };
+    return { iconBg: "bg-orange-500", iconColor: "text-orange-500", textColor: "text-orange-700", activeText: "text-orange-600", outlineBorder: "border-2 border-orange-500 bg-orange-50/60 text-orange-700 shadow-2xs" };
   }
   if (catLower.includes("dining") || catLower.includes("food") || catLower.includes("cafe")) {
-    return { iconBg: "bg-amber-500", iconColor: "text-amber-500", activeText: "text-amber-600 border-amber-500" };
+    return { iconBg: "bg-amber-500", iconColor: "text-amber-500", textColor: "text-amber-700", activeText: "text-amber-600", outlineBorder: "border-2 border-amber-500 bg-amber-50/60 text-amber-700 shadow-2xs" };
   }
   if (catLower.includes("salon") || catLower.includes("spa")) {
-    return { iconBg: "bg-pink-500", iconColor: "text-pink-500", activeText: "text-pink-600 border-pink-500" };
+    return { iconBg: "bg-pink-500", iconColor: "text-pink-500", textColor: "text-pink-700", activeText: "text-pink-600", outlineBorder: "border-2 border-pink-500 bg-pink-50/60 text-pink-700 shadow-2xs" };
   }
   if (catLower.includes("grocery") || catLower.includes("daily")) {
-    return { iconBg: "bg-emerald-500", iconColor: "text-emerald-500", activeText: "text-emerald-600 border-emerald-500" };
+    return { iconBg: "bg-emerald-500", iconColor: "text-emerald-500", textColor: "text-emerald-700", activeText: "text-emerald-600", outlineBorder: "border-2 border-emerald-500 bg-emerald-50/60 text-emerald-700 shadow-2xs" };
   }
   if (catLower.includes("fashion") || catLower.includes("product")) {
-    return { iconBg: "bg-purple-500", iconColor: "text-purple-500", activeText: "text-purple-600 border-purple-500" };
+    return { iconBg: "bg-purple-500", iconColor: "text-purple-500", textColor: "text-purple-700", activeText: "text-purple-600", outlineBorder: "border-2 border-purple-500 bg-purple-50/60 text-purple-700 shadow-2xs" };
   }
   if (catLower.includes("electronic service") || catLower.includes("repair")) {
-    return { iconBg: "bg-blue-500", iconColor: "text-blue-500", activeText: "text-blue-600 border-blue-500" };
+    return { iconBg: "bg-blue-500", iconColor: "text-blue-500", textColor: "text-blue-700", activeText: "text-blue-600", outlineBorder: "border-2 border-blue-500 bg-blue-50/60 text-blue-700 shadow-2xs" };
   }
   if (catLower.includes("electronics")) {
-    return { iconBg: "bg-blue-500", iconColor: "text-blue-500", activeText: "text-blue-600 border-blue-500" };
+    return { iconBg: "bg-blue-500", iconColor: "text-blue-500", textColor: "text-blue-700", activeText: "text-blue-600", outlineBorder: "border-2 border-blue-500 bg-blue-50/60 text-blue-700 shadow-2xs" };
   }
   if (catLower.includes("fitness") || catLower.includes("gym")) {
-    return { iconBg: "bg-red-500", iconColor: "text-red-500", activeText: "text-red-600 border-red-500" };
+    return { iconBg: "bg-red-500", iconColor: "text-red-500", textColor: "text-red-700", activeText: "text-red-600", outlineBorder: "border-2 border-red-500 bg-red-50/60 text-red-700 shadow-2xs" };
   }
   if (catLower.includes("pharmacy") || catLower.includes("medical")) {
-    return { iconBg: "bg-teal-500", iconColor: "text-teal-500", activeText: "text-teal-600 border-teal-500" };
+    return { iconBg: "bg-teal-500", iconColor: "text-teal-500", textColor: "text-teal-700", activeText: "text-teal-600", outlineBorder: "border-2 border-teal-500 bg-teal-50/60 text-teal-700 shadow-2xs" };
   }
   if (catLower.includes("entertainment") || catLower.includes("movie")) {
-    return { iconBg: "bg-indigo-500", iconColor: "text-indigo-500", activeText: "text-indigo-600 border-indigo-500" };
+    return { iconBg: "bg-indigo-500", iconColor: "text-indigo-500", textColor: "text-indigo-700", activeText: "text-indigo-600", outlineBorder: "border-2 border-indigo-500 bg-indigo-50/60 text-indigo-700 shadow-2xs" };
   }
   if (catLower.includes("auto") || catLower.includes("vehicle") || catLower.includes("car")) {
-    return { iconBg: "bg-cyan-500", iconColor: "text-cyan-500", activeText: "text-cyan-600 border-cyan-500" };
+    return { iconBg: "bg-cyan-500", iconColor: "text-cyan-500", textColor: "text-cyan-700", activeText: "text-cyan-600", outlineBorder: "border-2 border-cyan-500 bg-cyan-50/60 text-cyan-700 shadow-2xs" };
   }
   if (catLower.includes("home") || catLower.includes("service") || catLower.includes("living")) {
-    return { iconBg: "bg-sky-500", iconColor: "text-sky-500", activeText: "text-sky-600 border-sky-500" };
+    return { iconBg: "bg-sky-500", iconColor: "text-sky-500", textColor: "text-sky-700", activeText: "text-sky-600", outlineBorder: "border-2 border-sky-500 bg-sky-50/60 text-sky-700 shadow-2xs" };
   }
   if (catLower.includes("recruitment") || catLower.includes("job")) {
-    return { iconBg: "bg-violet-500", iconColor: "text-violet-500", activeText: "text-violet-600 border-violet-500" };
+    return { iconBg: "bg-violet-500", iconColor: "text-violet-500", textColor: "text-violet-700", activeText: "text-violet-600", outlineBorder: "border-2 border-violet-500 bg-violet-50/60 text-violet-700 shadow-2xs" };
   }
   if (catLower.includes("professional")) {
-    return { iconBg: "bg-fuchsia-500", iconColor: "text-fuchsia-500", activeText: "text-fuchsia-600 border-fuchsia-500" };
+    return { iconBg: "bg-fuchsia-500", iconColor: "text-fuchsia-500", textColor: "text-fuchsia-700", activeText: "text-fuchsia-600", outlineBorder: "border-2 border-fuchsia-500 bg-fuchsia-50/60 text-fuchsia-700 shadow-2xs" };
   }
   if (catLower.includes("property")) {
-    return { iconBg: "bg-orange-500", iconColor: "text-orange-500", activeText: "text-orange-600 border-orange-500" };
+    return { iconBg: "bg-orange-500", iconColor: "text-orange-500", textColor: "text-orange-700", activeText: "text-orange-600", outlineBorder: "border-2 border-orange-500 bg-orange-50/60 text-orange-700 shadow-2xs" };
   }
   if (catLower.includes("wholesale")) {
-    return { iconBg: "bg-rose-500", iconColor: "text-rose-500", activeText: "text-rose-600 border-rose-500" };
+    return { iconBg: "bg-rose-500", iconColor: "text-rose-500", textColor: "text-rose-700", activeText: "text-rose-600", outlineBorder: "border-2 border-rose-500 bg-rose-50/60 text-rose-700 shadow-2xs" };
   }
 
-  return { iconBg: "bg-orange-500", iconColor: "text-orange-500", activeText: "text-orange-600 border-orange-500" };
+  return { iconBg: "bg-orange-500", iconColor: "text-orange-500", textColor: "text-orange-700", activeText: "text-orange-600", outlineBorder: "border-2 border-orange-500 bg-orange-50/60 text-orange-700 shadow-2xs" };
 }
 
 export function getCategoryMeta(categoryName: string, index: number = 0): CategoryMeta {

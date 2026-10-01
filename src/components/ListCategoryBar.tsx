@@ -143,7 +143,11 @@ export function ListCategoryBar({
                 key={name}
                 type="button"
                 onClick={() => onSelectCategory(val)}
-                className="flex-shrink-0 flex flex-col items-center justify-start py-1 transition-all cursor-pointer group focus:outline-none min-w-[56px]"
+                className={`flex-shrink-0 flex flex-col items-center justify-start px-2.5 py-1.5 rounded-2xl transition-all cursor-pointer group focus:outline-none min-w-[58px] ${
+                  isSelected
+                    ? `${colors.outlineBorder} scale-102`
+                    : "border border-slate-200/80 bg-white hover:border-slate-300 hover:bg-slate-50/60"
+                }`}
               >
                 <div
                   className={`h-6 flex items-center justify-center mb-1 transition-all duration-200 ${
@@ -157,7 +161,7 @@ export function ListCategoryBar({
                 <span
                   className={`text-[11px] tracking-tight text-center leading-tight whitespace-pre-line transition-colors ${
                     isSelected
-                      ? `font-extrabold ${colors.activeText} border-b-2 pb-0.5`
+                      ? `font-extrabold ${colors.textColor || colors.activeText}`
                       : "font-semibold text-slate-600 group-hover:text-slate-900"
                   }`}
                 >
