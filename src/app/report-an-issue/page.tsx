@@ -3,8 +3,7 @@
 import React, { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { ShieldAlert, AlertOctagon, CheckCircle2, ArrowLeft } from "lucide-react";
-import Link from "next/link";
+import { ShieldAlert, AlertOctagon, CheckCircle2 } from "lucide-react";
 
 export default function ReportPage() {
   const [reason, setReason] = useState<string>("Fake or fraudulent listing");
@@ -31,17 +30,6 @@ export default function ReportPage() {
       <Navbar />
 
       <main className="flex-1 max-w-2xl w-full mx-auto px-4 sm:px-6 py-8">
-        {/* Back Link */}
-        <div className="mb-6">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-slate-900 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>Back to Home</span>
-          </Link>
-        </div>
-
         {/* Page Title Header */}
         <div className="text-center mb-8">
           <div className="w-12 h-12 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center mx-auto mb-3 shadow-xs">
