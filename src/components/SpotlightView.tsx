@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useEffect, useCallback } from "react";
+import React, { useState, useMemo, useEffect, useCallback, useRef } from "react";
 import { Offer, UserLocation } from "@/types/offer";
 import {
   offerArea,
@@ -51,6 +51,16 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
   const [isLocating, setIsLocating] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
+
+  const [mobileBannerLoaded, setMobileBannerLoaded] = useState<boolean>(false);
+  const [desktopBannerLoaded, setDesktopBannerLoaded] = useState<boolean>(false);
+  const mobileImgRef = useRef<HTMLImageElement>(null);
+  const desktopImgRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    if (mobileImgRef.current?.complete) setMobileBannerLoaded(true);
+    if (desktopImgRef.current?.complete) setDesktopBannerLoaded(true);
+  }, []);
 
   const triggerToast = (msg: string) => {
     setToastMessage(msg);
@@ -143,19 +153,42 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
 
       {/* Main Spotlight Container */}
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 pt-4 pb-16">
-        {/* Spotlight Hero Section (Sharp Corners) */}
-        <div className="relative rounded-none overflow-hidden shadow-md mb-6 border border-slate-200/80 bg-slate-900">
+        {/* Spotlight Hero Section with Skeleton Loader (Sharp Corners) */}
+        <div className="relative rounded-none overflow-hidden shadow-md mb-6 border border-slate-200/80 bg-slate-200 min-h-[140px] xs:min-h-[180px] md:min-h-[220px]">
+          {/* Mobile Skeleton Loader */}
+          {!mobileBannerLoaded && (
+            <div className="block md:hidden absolute inset-0 bg-slate-200 animate-pulse z-10">
+              <div className="w-full h-full bg-gradient-to-r from-slate-200 via-slate-100 to-slate-200 animate-pulse" />
+            </div>
+          )}
+
+          {/* Desktop Skeleton Loader */}
+          {!desktopBannerLoaded && (
+            <div className="hidden md:block absolute inset-0 bg-slate-200 animate-pulse z-10">
+              <div className="w-full h-full bg-gradient-to-r from-slate-200 via-slate-100 to-slate-200 animate-pulse" />
+            </div>
+          )}
+
           {/* Mobile Hero Banner Image */}
           <img
+            ref={mobileImgRef}
             src="/spotlight/mobile.jpeg"
-            alt="Spotlight Banner"
-            className="w-full h-auto object-cover block md:hidden rounded-none"
+            alt="Spotlight Mobile Banner"
+            onLoad={() => setMobileBannerLoaded(true)}
+            className={`w-full h-auto object-cover block md:hidden rounded-none transition-opacity duration-300 ${
+              mobileBannerLoaded ? "opacity-100" : "opacity-0"
+            }`}
           />
+
           {/* Desktop Hero Banner Image */}
           <img
+            ref={desktopImgRef}
             src="/spotlight/desktop.jpeg"
-            alt="Spotlight Banner"
-            className="w-full h-auto object-cover hidden md:block rounded-none"
+            alt="Spotlight Desktop Banner"
+            onLoad={() => setDesktopBannerLoaded(true)}
+            className={`w-full h-auto object-cover hidden md:block rounded-none transition-opacity duration-300 ${
+              desktopBannerLoaded ? "opacity-100" : "opacity-0"
+            }`}
           />
         </div>
 
