@@ -52,6 +52,8 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/logo/logo.svg", type: "image/svg+xml" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/icon", sizes: "32x32", type: "image/png" },
       { url: "/favicon.ico", sizes: "any" },
     ],
     shortcut: "/logo/logo.svg",
@@ -83,6 +85,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <head>
+        <link rel="icon" type="image/svg+xml" href="/logo/logo.svg" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/icon" />
+        <link rel="alternate icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/logo/logo.svg" />
         <link rel="apple-touch-icon" href="/apple-icon" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon" />
         <link rel="apple-touch-icon-precomposed" href="/apple-icon" />
