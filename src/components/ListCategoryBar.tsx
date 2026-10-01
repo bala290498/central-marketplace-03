@@ -211,77 +211,53 @@ export function ListCategoryBar({
         )}
       </div>
 
-      {/* Dropdown Selectors Row: Left Aligned on Desktop with "Filter By:" text */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-2 sm:gap-3.5 pt-0.5 pb-0.5 sm:pb-0">
-        {/* Desktop "Filter By:" Label */}
-        <div className="hidden sm:flex items-center gap-1.5 text-xs font-extrabold text-slate-700 whitespace-nowrap select-none">
-          <Filter className="w-3.5 h-3.5 text-orange-500" />
-          <span>Filter By:</span>
+      {/* Search Bar & Dropdown Selectors Row (Full-width 1 Single Row) */}
+      <div className="flex items-center gap-2 sm:gap-3 w-full pt-0.5 pb-0.5 sm:pb-0">
+        {/* Search Trigger: Fills remaining available space (flex-1 min-w-0) */}
+        {onOpenSearch && (
+          <div className="flex-1 min-w-0">
+            <SearchBarTrigger
+              onClick={onOpenSearch}
+              placeholder="Search deals, shops, locations, categories, badges, services..."
+            />
+          </div>
+        )}
+
+        {/* Dropdown 1: All Locations */}
+        <div className="relative flex items-center w-28 xs:w-36 sm:w-44 flex-shrink-0">
+          <MapPin className="absolute left-2.5 sm:left-3 w-3.5 sm:w-4 h-3.5 sm:h-4 text-slate-400 pointer-events-none" />
+          <select
+            value={selectedLocation}
+            onChange={(e) => onLocationChange(e.target.value)}
+            className="w-full pl-7 sm:pl-8 pr-6 sm:pr-7 h-[38px] rounded-full border border-slate-200 bg-white text-slate-900 text-[11px] sm:text-xs font-bold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer truncate"
+          >
+            <option value="">All locations</option>
+            {locations.map((loc) => (
+              <option key={loc} value={loc}>
+                {loc}
+              </option>
+            ))}
+          </select>
+          <div className="absolute right-2 sm:right-3 pointer-events-none text-slate-400 text-[10px] sm:text-xs">▼</div>
         </div>
 
-        {/* Container for Search Trigger & Dropdowns (1 Single Row on Mobile & Desktop) */}
-        <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
-          {/* Search Trigger Button: Placed BEFORE dropdowns (Wider on desktop: sm:w-64) */}
-          {onOpenSearch && (
-            <div className="flex-shrink-0 sm:w-64">
-              {/* Mobile View: Sleek search icon button in the same row */}
-              <button
-                type="button"
-                onClick={onOpenSearch}
-                className="flex sm:hidden items-center justify-center w-10 h-[38px] rounded-full border border-slate-200 bg-white hover:bg-orange-50/50 text-orange-500 shadow-xs transition-all cursor-pointer"
-                title="Search deals"
-                aria-label="Search deals"
-              >
-                <Search className="w-4 h-4 stroke-[2.5]" />
-              </button>
-
-              {/* Desktop View: Wider compact trigger */}
-              <div className="hidden sm:block w-full">
-                <SearchBarTrigger
-                  onClick={onOpenSearch}
-                  variant="compact"
-                  placeholder="Search deals..."
-                />
-              </div>
-            </div>
-          )}
-
-          {/* Dropdown 1: All Locations */}
-          <div className="relative flex items-center flex-1 min-w-0 sm:w-44 sm:flex-none">
-            <MapPin className="absolute left-2.5 sm:left-3 w-3.5 sm:w-4 h-3.5 sm:h-4 text-slate-400 pointer-events-none" />
-            <select
-              value={selectedLocation}
-              onChange={(e) => onLocationChange(e.target.value)}
-              className="w-full pl-7 sm:pl-8 pr-6 sm:pr-7 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-[11px] sm:text-xs font-bold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer truncate"
-            >
-              <option value="">All locations</option>
-              {locations.map((loc) => (
-                <option key={loc} value={loc}>
-                  {loc}
-                </option>
-              ))}
-            </select>
-            <div className="absolute right-2 sm:right-3 pointer-events-none text-slate-400 text-[10px] sm:text-xs">▼</div>
-          </div>
-
-          {/* Dropdown 2: All Validities */}
-          <div className="relative flex items-center flex-1 min-w-0 sm:w-44 sm:flex-none">
-            <Clock className="absolute left-2.5 sm:left-3 w-3.5 sm:w-4 h-3.5 sm:h-4 text-slate-400 pointer-events-none" />
-            <select
-              value={selectedValidity}
-              onChange={(e) => onValidityChange(e.target.value)}
-              className="w-full pl-7 sm:pl-8 pr-6 sm:pr-7 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-[11px] sm:text-xs font-bold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer truncate"
-            >
-              <option value="">All validities</option>
-              <option value="Limited">Limited</option>
-              <option value="Expires Soon">Expires Soon</option>
-              <option value="Until Filled">Until Filled</option>
-              <option value="Until Found">Until Found</option>
-              <option value="Available">Available</option>
-              <option value="Valid All Days">Valid All Days</option>
-            </select>
-            <div className="absolute right-2 sm:right-3 pointer-events-none text-slate-400 text-[10px] sm:text-xs">▼</div>
-          </div>
+        {/* Dropdown 2: All Validities */}
+        <div className="relative flex items-center w-28 xs:w-36 sm:w-44 flex-shrink-0">
+          <Clock className="absolute left-2.5 sm:left-3 w-3.5 sm:w-4 h-3.5 sm:h-4 text-slate-400 pointer-events-none" />
+          <select
+            value={selectedValidity}
+            onChange={(e) => onValidityChange(e.target.value)}
+            className="w-full pl-7 sm:pl-8 pr-6 sm:pr-7 h-[38px] rounded-full border border-slate-200 bg-white text-slate-900 text-[11px] sm:text-xs font-bold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer truncate"
+          >
+            <option value="">All validities</option>
+            <option value="Limited">Limited</option>
+            <option value="Expires Soon">Expires Soon</option>
+            <option value="Until Filled">Until Filled</option>
+            <option value="Until Found">Until Found</option>
+            <option value="Available">Available</option>
+            <option value="Valid All Days">Valid All Days</option>
+          </select>
+          <div className="absolute right-2 sm:right-3 pointer-events-none text-slate-400 text-[10px] sm:text-xs">▼</div>
         </div>
       </div>
     </div>

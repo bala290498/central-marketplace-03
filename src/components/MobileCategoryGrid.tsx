@@ -87,7 +87,7 @@ export function MobileCategoryGrid({
         <div className="mb-4">
           <SearchBarTrigger
             onClick={handleSearchClick}
-            placeholder="Search deals, stores, categories..."
+            placeholder="Search deals, shops, locations, categories, badges, services..."
           />
         </div>
 

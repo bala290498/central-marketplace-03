@@ -125,7 +125,7 @@ export function SearchModal({
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search deals, stores, categories, services..."
+            placeholder="Search deals, shops, locations, categories, badges, services..."
             className="flex-1 bg-transparent text-sm sm:text-base font-semibold text-slate-900 outline-none placeholder:text-slate-400"
           />
           {query && (
