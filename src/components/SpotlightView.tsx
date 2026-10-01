@@ -124,20 +124,19 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
       {/* Main Spotlight Container */}
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 pt-4 pb-12">
         {/* Spotlight Hero Section */}
-        <div className="relative rounded-3xl bg-gradient-to-br from-amber-500 via-orange-500 to-rose-500 p-6 sm:p-10 text-white overflow-hidden shadow-lg mb-8">
-          <div className="absolute -right-10 -bottom-10 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none" />
-          <div className="relative z-10 max-w-2xl">
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/20 backdrop-blur-md text-amber-100 font-extrabold text-xs mb-3 border border-white/25 shadow-xs">
-              <Sparkles className="w-4 h-4 text-amber-300 fill-amber-300" />
-              <span>Premier Neighborhood Spotlight</span>
-            </div>
-            <h1 className="text-2xl sm:text-4xl font-black tracking-tight leading-tight mb-2">
-              Spotlight Listings &amp; Top Deals
-            </h1>
-            <p className="text-xs sm:text-base text-amber-100 font-medium leading-relaxed">
-              Explore handpicked neighborhood offers, verified merchant discounts, and exclusive local store highlights around you.
-            </p>
-          </div>
+        <div className="relative rounded-3xl overflow-hidden shadow-md mb-8 border border-slate-200/80 bg-slate-900">
+          {/* Mobile Hero Banner Image */}
+          <img
+            src="/spotlight/mobile.jpeg"
+            alt="Spotlight Banner"
+            className="w-full h-auto object-cover block md:hidden rounded-3xl"
+          />
+          {/* Desktop Hero Banner Image */}
+          <img
+            src="/spotlight/desktop.jpeg"
+            alt="Spotlight Banner"
+            className="w-full h-auto object-cover hidden md:block rounded-3xl"
+          />
         </div>
 
         {/* Category Filter Chips */}
