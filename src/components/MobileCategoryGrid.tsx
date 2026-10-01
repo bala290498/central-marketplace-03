@@ -3,13 +3,19 @@
 import React, { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronDown, ChevronUp, Sparkles, ArrowRight } from "lucide-react";
+import { SearchBarTrigger } from "./SearchBarTrigger";
+import { SearchModal } from "./SearchModal";
 import { AllCategoriesModal } from "./AllCategoriesModal";
 import { getCategoryMeta, formatCategoryLabel } from "@/lib/categories";
+import { Offer, UserLocation } from "@/types/offer";
 
 interface MobileCategoryGridProps {
   categories?: string[];
   selectedCategory?: string;
   onSelectCategory?: (cat: string) => void;
+  offers?: Offer[];
+  userLocation?: UserLocation | null;
+  onOpenSearch?: () => void;
 }
 
 const DEFAULT_CATEGORIES = [
@@ -37,10 +43,14 @@ export function MobileCategoryGrid({
   categories,
   selectedCategory = "",
   onSelectCategory,
+  offers = [],
+  userLocation,
+  onOpenSearch,
 }: MobileCategoryGridProps) {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const rawList = categories && categories.length > 0 ? categories : DEFAULT_CATEGORIES;
 
@@ -59,12 +69,28 @@ export function MobileCategoryGrid({
     }
   };
 
+  const handleSearchClick = () => {
+    if (onOpenSearch) {
+      onOpenSearch();
+    } else {
+      setIsSearchOpen(true);
+    }
+  };
+
   const desktopVisible = isExpanded ? categoryMetas : categoryMetas.slice(0, 6);
   const mobileVisible = isExpanded ? categoryMetas : categoryMetas.slice(0, 5);
 
   return (
     <>
       <div className="w-full mb-6 transition-all duration-300">
+        {/* Search Bar Above Popular Categories Section */}
+        <div className="mb-4">
+          <SearchBarTrigger
+            onClick={handleSearchClick}
+            placeholder="Search deals, stores, categories..."
+          />
+        </div>
+
         {/* Popular Categories Title */}
         <div className="mb-3.5 px-1">
           <h2
@@ -180,6 +206,13 @@ export function MobileCategoryGrid({
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSelectCategory={handleSelect}
+      />
+      {/* Search Modal */}
+      <SearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        offers={offers}
+        userLocation={userLocation}
       />
     </>
   );

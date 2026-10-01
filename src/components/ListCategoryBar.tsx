@@ -37,6 +37,8 @@ import {
   Filter,
 } from "lucide-react";
 
+import { SearchBarTrigger } from "./SearchBarTrigger";
+
 interface ListCategoryBarProps {
   categories: string[];
   selectedCategory: string;
@@ -49,6 +51,7 @@ interface ListCategoryBarProps {
   onLocationChange: (loc: string) => void;
   onDistanceChange?: (dist: number | null) => void;
   onValidityChange: (val: string) => void;
+  onOpenSearch?: () => void;
 }
 
 export function ListCategoryBar({
@@ -63,6 +66,7 @@ export function ListCategoryBar({
   onLocationChange,
   onDistanceChange,
   onValidityChange,
+  onOpenSearch,
 }: ListCategoryBarProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -186,10 +190,10 @@ export function ListCategoryBar({
           <span>Filter By:</span>
         </div>
 
-        {/* Container for Dropdowns (Grid 2-cols on Mobile, Left-aligned compact Flex on Desktop) */}
+        {/* Container for Dropdowns & Search Trigger */}
         <div className="grid grid-cols-2 sm:flex sm:items-center gap-2 sm:gap-3 w-full sm:w-auto">
           {/* Dropdown 1: All Locations */}
-          <div className="relative flex items-center w-full sm:w-48">
+          <div className="relative flex items-center w-full sm:w-44">
             <MapPin className="absolute left-3 w-4 h-4 text-slate-400 pointer-events-none" />
             <select
               value={selectedLocation}
@@ -207,7 +211,7 @@ export function ListCategoryBar({
           </div>
 
           {/* Dropdown 2: All Validities */}
-          <div className="relative flex items-center w-full sm:w-48">
+          <div className="relative flex items-center w-full sm:w-44">
             <Clock className="absolute left-3 w-4 h-4 text-slate-400 pointer-events-none" />
             <select
               value={selectedValidity}
@@ -224,6 +228,17 @@ export function ListCategoryBar({
             </select>
             <div className="absolute right-3 pointer-events-none text-slate-400 text-xs">▼</div>
           </div>
+
+          {/* Search Trigger Button next to Validity Dropdown */}
+          {onOpenSearch && (
+            <div className="col-span-2 sm:col-span-1 sm:w-52">
+              <SearchBarTrigger
+                onClick={onOpenSearch}
+                variant="compact"
+                placeholder="Search deals..."
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

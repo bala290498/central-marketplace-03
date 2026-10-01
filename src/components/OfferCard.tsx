@@ -220,12 +220,12 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
         </div>
       </div>
 
-      {/* Action Buttons: Call (Primary) | WhatsApp (Official theme, icon-only) | Maps (Icon-only) | Share (Icon-only) */}
+      {/* Action Buttons: Call (flex-[3] = width equal to other 3 combined) | WhatsApp (flex-1) | Maps (flex-1) | Share (flex-1) */}
       <div className="flex items-center gap-2 pt-2 border-t border-slate-200/50">
         {cleanPhone ? (
           <a
             href={`tel:${cleanPhone}`}
-            className="flex-1 min-w-0 flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-none bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs sm:text-sm shadow-xs transition-all duration-200 active:scale-95"
+            className="flex-[3] min-w-0 flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-none bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs sm:text-sm shadow-xs transition-all duration-200 active:scale-95"
           >
             <Phone className="w-4 h-4 fill-current flex-shrink-0" />
             <span className="truncate">Call</span>
@@ -234,7 +234,7 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
           <a
             href="#"
             onClick={(e) => e.preventDefault()}
-            className="flex-1 min-w-0 flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-none bg-emerald-600/80 text-white font-extrabold text-xs sm:text-sm shadow-xs transition-all duration-200 cursor-not-allowed opacity-90"
+            className="flex-[3] min-w-0 flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-none bg-emerald-600/80 text-white font-extrabold text-xs sm:text-sm shadow-xs transition-all duration-200 cursor-not-allowed opacity-90"
           >
             <Phone className="w-4 h-4 fill-current flex-shrink-0" />
             <span className="truncate">Call</span>
@@ -248,7 +248,7 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
             rel="noopener noreferrer"
             title="WhatsApp"
             aria-label="WhatsApp"
-            className="py-2.5 px-3 rounded-none bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200/80 font-extrabold text-xs sm:text-sm shadow-2xs transition-all duration-200 active:scale-95 flex items-center justify-center flex-shrink-0"
+            className="flex-1 py-2.5 px-3 rounded-none bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200/80 font-extrabold text-xs sm:text-sm shadow-2xs transition-all duration-200 active:scale-95 flex items-center justify-center flex-shrink-0"
           >
             <WhatsAppIcon className="w-4.5 h-4.5 text-emerald-600" />
           </a>
@@ -258,7 +258,7 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
             disabled
             title="WhatsApp"
             aria-label="WhatsApp"
-            className="py-2.5 px-3 rounded-none bg-slate-100 text-slate-400 border border-slate-200/60 font-bold text-xs sm:text-sm cursor-not-allowed opacity-70 flex items-center justify-center flex-shrink-0"
+            className="flex-1 py-2.5 px-3 rounded-none bg-slate-100 text-slate-400 border border-slate-200/60 font-bold text-xs sm:text-sm cursor-not-allowed opacity-70 flex items-center justify-center flex-shrink-0"
           >
             <WhatsAppIcon className="w-4.5 h-4.5 text-slate-400" />
           </button>
@@ -271,7 +271,7 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
             rel="noopener noreferrer"
             title="Maps"
             aria-label="Maps"
-            className="py-2.5 px-3 rounded-none bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200/80 font-extrabold text-xs sm:text-sm shadow-2xs transition-all duration-200 active:scale-95 flex items-center justify-center flex-shrink-0"
+            className="flex-1 py-2.5 px-3 rounded-none bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200/80 font-extrabold text-xs sm:text-sm shadow-2xs transition-all duration-200 active:scale-95 flex items-center justify-center flex-shrink-0"
           >
             <Map className="w-4 h-4 text-blue-600" />
           </a>
@@ -281,7 +281,7 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
             disabled
             title="No Map"
             aria-label="No Map"
-            className="py-2.5 px-3 rounded-none bg-slate-100 text-slate-400 border border-slate-200/60 font-bold text-xs sm:text-sm cursor-not-allowed opacity-70 flex items-center justify-center flex-shrink-0"
+            className="flex-1 py-2.5 px-3 rounded-none bg-slate-100 text-slate-400 border border-slate-200/60 font-bold text-xs sm:text-sm cursor-not-allowed opacity-70 flex items-center justify-center flex-shrink-0"
           >
             <Map className="w-4 h-4 text-slate-400" />
           </button>
@@ -292,7 +292,7 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
           onClick={() => onShare(offer)}
           title="Share"
           aria-label="Share"
-          className="py-2.5 px-3 rounded-none bg-pink-50 hover:bg-pink-100 text-pink-700 border border-pink-200/80 font-extrabold text-xs sm:text-sm shadow-2xs transition-all duration-200 active:scale-95 cursor-pointer flex items-center justify-center flex-shrink-0"
+          className="flex-1 py-2.5 px-3 rounded-none bg-pink-50 hover:bg-pink-100 text-pink-700 border border-pink-200/80 font-extrabold text-xs sm:text-sm shadow-2xs transition-all duration-200 active:scale-95 cursor-pointer flex items-center justify-center flex-shrink-0"
         >
           <Share2 className="w-4 h-4 text-pink-600" />
         </button>

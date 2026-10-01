@@ -14,6 +14,7 @@ import {
 import { Navbar } from "./Navbar";
 import { ListCategoryBar } from "./ListCategoryBar";
 import { OfferCard } from "./OfferCard";
+import { SearchModal } from "./SearchModal";
 import { getOfferValidityCategory, normalizeValidity } from "@/lib/validity";
 import { CheckCircle2, AlertCircle } from "lucide-react";
 
@@ -32,6 +33,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
   const [userAreaLabel, setUserAreaLabel] = useState<string>("");
   const [isLocating, setIsLocating] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState<boolean>(false);
 
   // Filter States
   const [selectedCategory, setSelectedCategory] = useState<string>(categoryParam);
@@ -265,6 +267,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
             onLocationChange={handleLocationSelect}
             onDistanceChange={handleDistanceSelect}
             onValidityChange={handleValiditySelect}
+            onOpenSearch={() => setIsSearchModalOpen(true)}
           />
         </div>
       </div>
@@ -324,6 +327,14 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
           <span>{toastMessage}</span>
         </div>
       )}
+
+      {/* Global Search Modal */}
+      <SearchModal
+        isOpen={isSearchModalOpen}
+        onClose={() => setIsSearchModalOpen(false)}
+        offers={offers}
+        userLocation={userLocation}
+      />
     </div>
   );
 }

@@ -141,6 +141,8 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
           <MobileCategoryGrid
             categories={categories}
             selectedCategory={selectedCategory}
+            offers={offersWithDistance}
+            userLocation={userLocation}
             onSelectCategory={(cat) => {
               setSelectedCategory(cat);
               router.push(`/list?category=${encodeURIComponent(cat)}`);
