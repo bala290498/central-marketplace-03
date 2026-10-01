@@ -41,9 +41,6 @@ export function SearchBarTrigger({
       <span className="text-xs sm:text-sm font-semibold text-slate-400 flex-1 truncate group-hover:text-slate-600 transition-colors">
         {placeholder}
       </span>
-      <span className="px-2 py-0.5 rounded-md bg-slate-100 text-[10px] font-black text-slate-500 border border-slate-200/60 hidden sm:inline-block">
-        ⌘K / Search
-      </span>
     </div>
   );
 }
