@@ -56,14 +56,15 @@ export const metadata: Metadata = {
     ],
     shortcut: "/logo/logo.svg",
     apple: [
+      { url: "/apple-icon", sizes: "180x180", type: "image/png" },
       { url: "/logo/logo.svg", type: "image/svg+xml" },
-      { url: "/logo/logo.svg", sizes: "180x180", type: "image/svg+xml" },
     ],
   },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
     title: "Central Marketplace",
+    startupImage: ["/logo/logo.svg"],
   },
 };
 
@@ -71,7 +72,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
-  themeColor: "#2563eb",
+  themeColor: "#F97316",
 };
 
 export default function RootLayout({
@@ -81,6 +82,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
+      <head>
+        <link rel="apple-touch-icon" href="/apple-icon" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon" />
+        <link rel="apple-touch-icon-precomposed" href="/apple-icon" />
+        <link rel="apple-touch-icon" type="image/svg+xml" href="/logo/logo.svg" />
+        <link rel="mask-icon" href="/logo/logo.svg" color="#F97316" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Central Marketplace" />
+      </head>
       <body className="min-h-full flex flex-col font-sans bg-slate-50/60 text-slate-900 pb-20 md:pb-0">
         {children}
         <BottomNav />
