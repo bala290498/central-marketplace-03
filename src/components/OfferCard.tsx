@@ -248,9 +248,9 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
             rel="noopener noreferrer"
             title="WhatsApp"
             aria-label="WhatsApp"
-            className="py-2.5 px-3 rounded-none bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold text-xs sm:text-sm shadow-2xs transition-all duration-200 active:scale-95 flex items-center justify-center flex-shrink-0"
+            className="py-2.5 px-3 rounded-none bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200/80 font-extrabold text-xs sm:text-sm shadow-2xs transition-all duration-200 active:scale-95 flex items-center justify-center flex-shrink-0"
           >
-            <WhatsAppIcon className="w-4.5 h-4.5" />
+            <WhatsAppIcon className="w-4.5 h-4.5 text-emerald-600" />
           </a>
         ) : (
           <button
@@ -260,7 +260,7 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
             aria-label="WhatsApp"
             className="py-2.5 px-3 rounded-none bg-slate-100 text-slate-400 border border-slate-200/60 font-bold text-xs sm:text-sm cursor-not-allowed opacity-70 flex items-center justify-center flex-shrink-0"
           >
-            <WhatsAppIcon className="w-4.5 h-4.5 opacity-50" />
+            <WhatsAppIcon className="w-4.5 h-4.5 text-slate-400" />
           </button>
         )}
 
