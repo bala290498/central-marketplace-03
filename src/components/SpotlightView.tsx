@@ -159,48 +159,6 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
           />
         </div>
 
-        {/* Paid Visibility Disclaimer Note */}
-        <div className="bg-amber-50/90 border border-amber-200/90 rounded-2xl p-4 mb-6 text-xs text-amber-900 flex items-start gap-3 shadow-2xs">
-          <Info className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
-          <div className="leading-relaxed">
-            <strong className="font-extrabold text-amber-950">Spotlight Showcase Policy:</strong> Spotlight is a limited paid-promotion page for selected local merchants (maximum 20 listings). It provides enhanced visibility and does not guarantee sales or leads. Regular listings remain 100% free on the main List page.
-          </div>
-        </div>
-
-        {/* Category Filter Chips */}
-        <div className="mb-6">
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
-            <button
-              type="button"
-              onClick={() => setSelectedCategory("")}
-              className={`px-4 py-2 rounded-2xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                selectedCategory === ""
-                  ? "bg-slate-900 text-white shadow-md"
-                  : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-100"
-              }`}
-            >
-              All Spotlight ({spotlightOffers.length})
-            </button>
-            {categories.map((cat) => {
-              const isSelected = selectedCategory === cat;
-              return (
-                <button
-                  key={cat}
-                  type="button"
-                  onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 py-2 rounded-2xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                    isSelected
-                      ? "bg-orange-500 text-white shadow-md"
-                      : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-100"
-                  }`}
-                >
-                  {cat}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
         {/* Spotlight Offers List */}
         {spotlightOffers.length > 0 ? (
           <div className="space-y-6">
