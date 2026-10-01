@@ -51,6 +51,7 @@ export function Navbar({
 
   const mainNavLinks = [
     { href: "/", label: "Home" },
+    { href: "/spotlight", label: "Spotlight" },
     { href: "/list", label: "List" },
     { href: "/register", label: "Free Listing" },
   ];
