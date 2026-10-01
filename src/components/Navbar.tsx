@@ -77,8 +77,9 @@ export function Navbar({
               href="/"
               className="inline-flex items-center outline-none focus:outline-none focus:ring-0 rounded-lg transition-colors group flex-shrink-0"
             >
-              <span className="font-extrabold text-orange-500 text-base sm:text-lg tracking-tight hover:text-orange-600 transition-colors whitespace-nowrap">
-                Central Marketplace
+              <span className="font-extrabold text-base sm:text-lg tracking-tight whitespace-nowrap">
+                <span className="text-orange-500">Central</span>{" "}
+                <span className="text-slate-900">Marketplace</span>
               </span>
             </Link>
 
@@ -152,7 +153,7 @@ export function Navbar({
           )}
 
           {/* Desktop Nav Links & More Hover Dropdown */}
-          <nav className="hidden md:flex items-center space-x-1 sm:space-x-1.5">
+          <nav className="hidden md:flex items-center space-x-1 sm:space-x-2">
 
             {mainNavLinks.map((link) => {
               const isActive = pathname === link.href;
@@ -160,13 +161,16 @@ export function Navbar({
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-colors ${
+                  className={`relative py-1 px-2.5 text-xs sm:text-sm font-extrabold transition-colors ${
                     isActive
-                      ? "bg-orange-50 text-orange-600"
-                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                      ? "text-orange-500"
+                      : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
-                  {link.label}
+                  <span>{link.label}</span>
+                  {isActive && (
+                    <span className="absolute bottom-0 left-1 right-1 h-0.5 bg-orange-500 rounded-full" />
+                  )}
                 </Link>
               );
             })}
@@ -180,18 +184,21 @@ export function Navbar({
               <button
                 type="button"
                 onClick={() => setIsMoreDropdownOpen(!isMoreDropdownOpen)}
-                className={`inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-colors cursor-pointer ${
+                className={`relative inline-flex items-center gap-1 py-1 px-2.5 text-xs sm:text-sm font-extrabold transition-colors cursor-pointer ${
                   moreSubLinks.some((l) => pathname === l.href) || isMoreDropdownOpen
-                    ? "bg-orange-50 text-orange-600"
-                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                    ? "text-orange-500"
+                    : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 <span>More</span>
                 <ChevronDown
                   className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    isMoreDropdownOpen ? "transform rotate-180 text-orange-600" : ""
+                    isMoreDropdownOpen ? "transform rotate-180 text-orange-500" : ""
                   }`}
                 />
+                {(moreSubLinks.some((l) => pathname === l.href) || isMoreDropdownOpen) && (
+                  <span className="absolute bottom-0 left-1 right-1 h-0.5 bg-orange-500 rounded-full" />
+                )}
               </button>
 
               {/* Collapsible Dropdown Menu */}

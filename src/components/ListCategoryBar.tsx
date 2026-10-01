@@ -219,8 +219,33 @@ export function ListCategoryBar({
           <span>Filter By:</span>
         </div>
 
-        {/* Container for Dropdowns & Search Trigger (1 Single Row on Mobile & Desktop) */}
+        {/* Container for Search Trigger & Dropdowns (1 Single Row on Mobile & Desktop) */}
         <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
+          {/* Search Trigger Button: Placed BEFORE dropdowns (Wider on desktop: sm:w-64) */}
+          {onOpenSearch && (
+            <div className="flex-shrink-0 sm:w-64">
+              {/* Mobile View: Sleek search icon button in the same row */}
+              <button
+                type="button"
+                onClick={onOpenSearch}
+                className="flex sm:hidden items-center justify-center w-10 h-[38px] rounded-xl border border-slate-200 bg-white hover:bg-orange-50/50 text-orange-500 shadow-xs transition-all cursor-pointer"
+                title="Search deals"
+                aria-label="Search deals"
+              >
+                <Search className="w-4 h-4 stroke-[2.5]" />
+              </button>
+
+              {/* Desktop View: Wider compact trigger */}
+              <div className="hidden sm:block w-full">
+                <SearchBarTrigger
+                  onClick={onOpenSearch}
+                  variant="compact"
+                  placeholder="Search deals..."
+                />
+              </div>
+            </div>
+          )}
+
           {/* Dropdown 1: All Locations */}
           <div className="relative flex items-center flex-1 min-w-0 sm:w-44 sm:flex-none">
             <MapPin className="absolute left-2.5 sm:left-3 w-3.5 sm:w-4 h-3.5 sm:h-4 text-slate-400 pointer-events-none" />
@@ -257,31 +282,6 @@ export function ListCategoryBar({
             </select>
             <div className="absolute right-2 sm:right-3 pointer-events-none text-slate-400 text-[10px] sm:text-xs">▼</div>
           </div>
-
-          {/* Search Trigger Button: Icon button on mobile in the exact same row! */}
-          {onOpenSearch && (
-            <div className="flex-shrink-0">
-              {/* Mobile View: Sleek search icon button in the same row */}
-              <button
-                type="button"
-                onClick={onOpenSearch}
-                className="flex sm:hidden items-center justify-center w-10 h-[38px] rounded-xl border border-slate-200 bg-white hover:bg-orange-50/50 text-orange-500 shadow-xs transition-all cursor-pointer"
-                title="Search deals"
-                aria-label="Search deals"
-              >
-                <Search className="w-4 h-4 stroke-[2.5]" />
-              </button>
-
-              {/* Desktop View: Compact trigger */}
-              <div className="hidden sm:block w-48">
-                <SearchBarTrigger
-                  onClick={onOpenSearch}
-                  variant="compact"
-                  placeholder="Search deals..."
-                />
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </div>
