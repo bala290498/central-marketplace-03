@@ -228,7 +228,7 @@ export function ListCategoryBar({
               <button
                 type="button"
                 onClick={onOpenSearch}
-                className="flex sm:hidden items-center justify-center w-10 h-[38px] rounded-xl border border-slate-200 bg-white hover:bg-orange-50/50 text-orange-500 shadow-xs transition-all cursor-pointer"
+                className="flex sm:hidden items-center justify-center w-10 h-[38px] rounded-full border border-slate-200 bg-white hover:bg-orange-50/50 text-orange-500 shadow-xs transition-all cursor-pointer"
                 title="Search deals"
                 aria-label="Search deals"
               >
