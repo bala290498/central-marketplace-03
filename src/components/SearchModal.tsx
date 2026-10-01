@@ -101,7 +101,9 @@ export function SearchModal({
 
   const handleSelectFinding = (offer: Offer) => {
     onClose();
-    if (offer.category) {
+    if (offer.id) {
+      router.push(`/list?id=${encodeURIComponent(offer.id)}`);
+    } else if (offer.category) {
       router.push(`/list?category=${encodeURIComponent(offer.category)}&search=${encodeURIComponent(offer.title)}`);
     } else {
       router.push(`/list?search=${encodeURIComponent(offer.title)}`);

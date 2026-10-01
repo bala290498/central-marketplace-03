@@ -27,6 +27,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
   const categoryParam = searchParams.get("category") || "";
   const validityParam = searchParams.get("validity") || "";
   const searchParam = searchParams.get("search") || "";
+  const idParam = searchParams.get("id") || "";
 
   const [offers] = useState<Offer[]>(initialOffers);
   const [userLocation, setUserLocation] = useState<UserLocation | null>(null);
@@ -41,6 +42,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
   const [selectedDistance, setSelectedDistance] = useState<number | null>(null);
   const [selectedValidity, setSelectedValidity] = useState<string>(normalizeValidity(validityParam));
   const [searchQuery, setSearchQuery] = useState<string>(searchParam);
+  const [selectedId, setSelectedId] = useState<string>(idParam);
 
   useEffect(() => {
     if (categoryParam) {
@@ -57,6 +59,12 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
   useEffect(() => {
     setSearchQuery(searchParam);
   }, [searchParam]);
+
+  useEffect(() => {
+    if (idParam) {
+      setSelectedId(idParam);
+    }
+  }, [idParam]);
 
   const triggerToast = (msg: string) => {
     setToastMessage(msg);
@@ -145,8 +153,21 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
       }
     }
 
+    if (selectedId) {
+      const matchIndex = list.findIndex((o) => o.id === selectedId);
+      if (matchIndex > 0) {
+        const [targetCard] = list.splice(matchIndex, 1);
+        list.unshift(targetCard);
+      } else if (matchIndex === -1) {
+        const fullMatch = offers.find((o) => o.id === selectedId);
+        if (fullMatch) {
+          list.unshift(fullMatch);
+        }
+      }
+    }
+
     return list;
-  }, [offers, selectedCategory, selectedLocation, selectedDistance, selectedValidity, searchQuery, userLocation]);
+  }, [offers, selectedCategory, selectedLocation, selectedDistance, selectedValidity, searchQuery, selectedId, userLocation]);
 
   const handleShare = async (offer: Offer) => {
     const title = offer.title || "Deal";
@@ -218,24 +239,28 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
   const handleCategorySelect = (cat: string) => {
     setSelectedCategory(cat);
     setSearchQuery("");
+    setSelectedId("");
     scrollToTopCard();
   };
 
   const handleLocationSelect = (loc: string) => {
     setSelectedLocation(loc);
     setSearchQuery("");
+    setSelectedId("");
     scrollToTopCard();
   };
 
   const handleDistanceSelect = (dist: number | null) => {
     setSelectedDistance(dist);
     setSearchQuery("");
+    setSelectedId("");
     scrollToTopCard();
   };
 
   const handleValiditySelect = (val: string) => {
     setSelectedValidity(val);
     setSearchQuery("");
+    setSelectedId("");
     scrollToTopCard();
   };
 
@@ -305,6 +330,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
                 setSelectedDistance(null);
                 setSelectedValidity("");
                 setSearchQuery("");
+                setSelectedId("");
                 scrollToTopCard();
               }}
               className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-md transition-colors"
