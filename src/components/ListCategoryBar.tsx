@@ -211,9 +211,9 @@ export function ListCategoryBar({
         )}
       </div>
 
-      {/* Search Bar & Dropdown Selectors Row (Full-width 1 Single Row) */}
-      <div className="flex items-center gap-2 sm:gap-3 w-full pt-0.5 pb-0.5 sm:pb-0">
-        {/* Search Trigger: Fills remaining available space (flex-1 min-w-0) */}
+      {/* Search Bar & Dropdown Selectors Row (Equally Spaced 3 items on Mobile) */}
+      <div className="flex items-center gap-1.5 sm:gap-3 w-full pt-0.5 pb-0.5 sm:pb-0">
+        {/* Search Trigger: 1/3 width on mobile (flex-1 min-w-0), flex-1 on desktop */}
         {onOpenSearch && (
           <div className="flex-1 min-w-0">
             <SearchBarTrigger
@@ -223,13 +223,13 @@ export function ListCategoryBar({
           </div>
         )}
 
-        {/* Dropdown 1: All Locations */}
-        <div className="relative flex items-center w-28 xs:w-36 sm:w-44 flex-shrink-0">
-          <MapPin className="absolute left-2.5 sm:left-3 w-3.5 sm:w-4 h-3.5 sm:h-4 text-slate-400 pointer-events-none" />
+        {/* Dropdown 1: All Locations (flex-1 min-w-0 on mobile, sm:w-44 sm:flex-initial on desktop) */}
+        <div className="relative flex items-center flex-1 sm:flex-initial sm:w-44 min-w-0">
+          <MapPin className="absolute left-2 sm:left-3 w-3.5 sm:w-4 h-3.5 sm:h-4 text-slate-400 pointer-events-none" />
           <select
             value={selectedLocation}
             onChange={(e) => onLocationChange(e.target.value)}
-            className="w-full pl-7 sm:pl-8 pr-6 sm:pr-7 h-[38px] rounded-full border border-slate-200 bg-white text-slate-900 text-[11px] sm:text-xs font-bold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer truncate"
+            className="w-full pl-6 sm:pl-8 pr-5 sm:pr-7 h-[38px] rounded-full border border-slate-200 bg-white text-slate-900 text-[10px] sm:text-xs font-bold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer truncate"
           >
             <option value="">All locations</option>
             {locations.map((loc) => (
@@ -238,16 +238,16 @@ export function ListCategoryBar({
               </option>
             ))}
           </select>
-          <div className="absolute right-2 sm:right-3 pointer-events-none text-slate-400 text-[10px] sm:text-xs">▼</div>
+          <div className="absolute right-2 sm:right-3 pointer-events-none text-slate-400 text-[9px] sm:text-xs">▼</div>
         </div>
 
-        {/* Dropdown 2: All Validities */}
-        <div className="relative flex items-center w-28 xs:w-36 sm:w-44 flex-shrink-0">
-          <Clock className="absolute left-2.5 sm:left-3 w-3.5 sm:w-4 h-3.5 sm:h-4 text-slate-400 pointer-events-none" />
+        {/* Dropdown 2: All Validities (flex-1 min-w-0 on mobile, sm:w-44 sm:flex-initial on desktop) */}
+        <div className="relative flex items-center flex-1 sm:flex-initial sm:w-44 min-w-0">
+          <Clock className="absolute left-2 sm:left-3 w-3.5 sm:w-4 h-3.5 sm:h-4 text-slate-400 pointer-events-none" />
           <select
             value={selectedValidity}
             onChange={(e) => onValidityChange(e.target.value)}
-            className="w-full pl-7 sm:pl-8 pr-6 sm:pr-7 h-[38px] rounded-full border border-slate-200 bg-white text-slate-900 text-[11px] sm:text-xs font-bold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer truncate"
+            className="w-full pl-6 sm:pl-8 pr-5 sm:pr-7 h-[38px] rounded-full border border-slate-200 bg-white text-slate-900 text-[10px] sm:text-xs font-bold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer truncate"
           >
             <option value="">All validities</option>
             <option value="Limited">Limited</option>
@@ -257,7 +257,7 @@ export function ListCategoryBar({
             <option value="Available">Available</option>
             <option value="Valid All Days">Valid All Days</option>
           </select>
-          <div className="absolute right-2 sm:right-3 pointer-events-none text-slate-400 text-[10px] sm:text-xs">▼</div>
+          <div className="absolute right-2 sm:right-3 pointer-events-none text-slate-400 text-[9px] sm:text-xs">▼</div>
         </div>
       </div>
     </div>
