@@ -70,8 +70,31 @@ export function ListCategoryBar({
   onOpenSearch,
 }: ListCategoryBarProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const selectedChipRef = useRef<HTMLButtonElement | null>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+
+  // Auto-scroll to center selected category chip in container
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const chip = selectedChipRef.current;
+      const container = scrollRef.current;
+      if (chip && container) {
+        const containerWidth = container.clientWidth;
+        const chipOffsetLeft = chip.offsetLeft;
+        const chipWidth = chip.clientWidth;
+
+        const targetScrollLeft = chipOffsetLeft - containerWidth / 2 + chipWidth / 2;
+
+        container.scrollTo({
+          left: Math.max(0, targetScrollLeft),
+          behavior: "smooth",
+        });
+      }
+    }, 60);
+
+    return () => clearTimeout(timer);
+  }, [selectedCategory]);
 
   const updateScrollButtons = () => {
     const el = scrollRef.current;
@@ -141,6 +164,7 @@ export function ListCategoryBar({
             return (
               <button
                 key={name}
+                ref={isSelected ? selectedChipRef : null}
                 type="button"
                 onClick={() => onSelectCategory(val)}
                 className={`flex-shrink-0 flex flex-col items-center justify-center w-[76px] sm:w-[80px] h-[64px] p-1.5 rounded-2xl transition-all cursor-pointer group focus:outline-none ${

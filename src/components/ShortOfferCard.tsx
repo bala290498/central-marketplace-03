@@ -41,7 +41,12 @@ export function ShortOfferCard({
       onClick();
     } else {
       const cat = offer.category ? encodeURIComponent(offer.category) : "";
-      if (cat) {
+      const id = offer.id ? encodeURIComponent(offer.id) : "";
+      if (id && cat) {
+        router.push(`/list?id=${id}&category=${cat}`);
+      } else if (id) {
+        router.push(`/list?id=${id}`);
+      } else if (cat) {
         router.push(`/list?category=${cat}`);
       } else {
         router.push("/list");
