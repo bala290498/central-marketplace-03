@@ -75,7 +75,7 @@ export function BottomNav() {
             }`}
           >
             <PlusCircle className="w-5 h-5 mb-0.5 stroke-[2.2]" />
-            <span className="text-[9.5px] tracking-tight font-bold leading-none">Listing</span>
+            <span className="text-[9px] tracking-tight font-bold leading-none whitespace-nowrap">Free Listing</span>
           </Link>
 
           {/* Tab 5: More */}
