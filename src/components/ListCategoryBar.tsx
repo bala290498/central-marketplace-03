@@ -35,6 +35,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Filter,
+  Search,
 } from "lucide-react";
 
 import { SearchBarTrigger } from "./SearchBarTrigger";
@@ -190,15 +191,15 @@ export function ListCategoryBar({
           <span>Filter By:</span>
         </div>
 
-        {/* Container for Dropdowns & Search Trigger */}
-        <div className="grid grid-cols-2 sm:flex sm:items-center gap-2 sm:gap-3 w-full sm:w-auto">
+        {/* Container for Dropdowns & Search Trigger (1 Single Row on Mobile & Desktop) */}
+        <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
           {/* Dropdown 1: All Locations */}
-          <div className="relative flex items-center w-full sm:w-44">
-            <MapPin className="absolute left-3 w-4 h-4 text-slate-400 pointer-events-none" />
+          <div className="relative flex items-center flex-1 min-w-0 sm:w-44 sm:flex-none">
+            <MapPin className="absolute left-2.5 sm:left-3 w-3.5 sm:w-4 h-3.5 sm:h-4 text-slate-400 pointer-events-none" />
             <select
               value={selectedLocation}
               onChange={(e) => onLocationChange(e.target.value)}
-              className="w-full pl-8 pr-7 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-bold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer truncate"
+              className="w-full pl-7 sm:pl-8 pr-6 sm:pr-7 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-[11px] sm:text-xs font-bold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer truncate"
             >
               <option value="">All locations</option>
               {locations.map((loc) => (
@@ -207,16 +208,16 @@ export function ListCategoryBar({
                 </option>
               ))}
             </select>
-            <div className="absolute right-3 pointer-events-none text-slate-400 text-xs">▼</div>
+            <div className="absolute right-2 sm:right-3 pointer-events-none text-slate-400 text-[10px] sm:text-xs">▼</div>
           </div>
 
           {/* Dropdown 2: All Validities */}
-          <div className="relative flex items-center w-full sm:w-44">
-            <Clock className="absolute left-3 w-4 h-4 text-slate-400 pointer-events-none" />
+          <div className="relative flex items-center flex-1 min-w-0 sm:w-44 sm:flex-none">
+            <Clock className="absolute left-2.5 sm:left-3 w-3.5 sm:w-4 h-3.5 sm:h-4 text-slate-400 pointer-events-none" />
             <select
               value={selectedValidity}
               onChange={(e) => onValidityChange(e.target.value)}
-              className="w-full pl-8 pr-7 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-bold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer truncate"
+              className="w-full pl-7 sm:pl-8 pr-6 sm:pr-7 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-[11px] sm:text-xs font-bold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer truncate"
             >
               <option value="">All validities</option>
               <option value="Limited">Limited</option>
@@ -226,17 +227,31 @@ export function ListCategoryBar({
               <option value="Available">Available</option>
               <option value="Valid All Days">Valid All Days</option>
             </select>
-            <div className="absolute right-3 pointer-events-none text-slate-400 text-xs">▼</div>
+            <div className="absolute right-2 sm:right-3 pointer-events-none text-slate-400 text-[10px] sm:text-xs">▼</div>
           </div>
 
-          {/* Search Trigger Button next to Validity Dropdown */}
+          {/* Search Trigger Button: Icon button on mobile in the exact same row! */}
           {onOpenSearch && (
-            <div className="col-span-2 sm:col-span-1 sm:w-52">
-              <SearchBarTrigger
+            <div className="flex-shrink-0">
+              {/* Mobile View: Sleek search icon button in the same row */}
+              <button
+                type="button"
                 onClick={onOpenSearch}
-                variant="compact"
-                placeholder="Search deals..."
-              />
+                className="flex sm:hidden items-center justify-center w-10 h-[38px] rounded-xl border border-slate-200 bg-white hover:bg-orange-50/50 text-orange-500 shadow-xs transition-all cursor-pointer"
+                title="Search deals"
+                aria-label="Search deals"
+              >
+                <Search className="w-4 h-4 stroke-[2.5]" />
+              </button>
+
+              {/* Desktop View: Compact trigger */}
+              <div className="hidden sm:block w-48">
+                <SearchBarTrigger
+                  onClick={onOpenSearch}
+                  variant="compact"
+                  placeholder="Search deals..."
+                />
+              </div>
             </div>
           )}
         </div>
