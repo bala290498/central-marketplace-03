@@ -218,12 +218,12 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                 >
                   {/* DESKTOP LAYOUT (Full-width banner card) */}
                   <div className="hidden md:flex items-stretch gap-6">
-                    {/* Left: Number Badge */}
-                    <div className="flex flex-col items-center justify-center bg-orange-50 border border-orange-200 rounded-none w-20 px-2 py-4 flex-shrink-0 text-center">
-                      <span className="text-3xl font-black text-orange-600 tracking-tighter">
+                    {/* Left: Number Badge (Fills Top, Left, Bottom sides with Magenta #A00058 & White text) */}
+                    <div className="flex flex-col items-center justify-center bg-[#A00058] w-20 px-2 py-4 -mt-5 -mb-5 -ml-5 sm:-mt-6 sm:-mb-6 sm:-ml-6 flex-shrink-0 text-center select-none shadow-xs">
+                      <span className="text-3xl font-black text-white tracking-tighter">
                         {numStr}
                       </span>
-                      <span className="text-[9px] font-black uppercase text-orange-700 tracking-wider mt-1">
+                      <span className="text-[9.5px] font-black uppercase text-white/95 tracking-wider mt-1">
                         Spotlight
                       </span>
                     </div>
@@ -299,11 +299,11 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                     <div className="w-64 flex flex-col justify-between pl-6 border-l border-slate-100 flex-shrink-0">
                       {/* Special Pricing Box */}
                       {offer.marketPrice && offer.ourPrice ? (
-                        <div className="bg-emerald-50 border border-emerald-200/80 p-3 rounded-2xl mb-4 text-center">
-                          <div className="text-[11px] font-bold text-slate-400 line-through mb-0.5">
+                        <div className="bg-emerald-50 border border-emerald-200/80 p-3 rounded-2xl mb-4 text-center flex flex-col justify-center gap-1">
+                          <div className="text-xs font-bold text-slate-400 line-through">
                             Market Price {offer.marketPrice}
                           </div>
-                          <div className="text-lg font-black text-emerald-700">
+                          <div className="text-base sm:text-lg font-black text-emerald-700">
                             Our Price {offer.ourPrice}
                           </div>
                         </div>
@@ -367,7 +367,7 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                     {/* Top Row: Number Badge + Icon + Brand Name & Category (Next Line) + Badge Pill */}
                     <div className="flex items-start justify-between gap-2.5 mb-2">
                       <div className="flex items-center gap-2 min-w-0 flex-1">
-                        <span className="px-2.5 py-1 rounded-md bg-orange-500 text-white font-black text-xs flex-shrink-0">
+                        <span className="px-2.5 py-1 rounded-md bg-[#A00058] text-white font-black text-xs flex-shrink-0">
                           #{numStr}
                         </span>
                         <div className={`w-7 h-7 rounded-lg ${categoryColors.iconBg} text-white flex items-center justify-center flex-shrink-0 shadow-2xs mt-0.5`}>
@@ -418,13 +418,13 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
 
                     {/* Special Pricing Display */}
                     {offer.marketPrice && offer.ourPrice && (
-                      <div className="bg-emerald-50 border border-emerald-200/80 p-2.5 rounded-xl text-xs flex items-center justify-between">
-                        <span className="text-slate-400 line-through font-medium">
+                      <div className="bg-emerald-50 border border-emerald-200/80 p-2.5 rounded-xl text-center flex flex-col justify-center gap-0.5">
+                        <div className="text-xs font-bold text-slate-400 line-through">
                           Market Price {offer.marketPrice}
-                        </span>
-                        <span className="text-emerald-700 font-black text-sm">
+                        </div>
+                        <div className="text-sm font-black text-emerald-700">
                           Our Price {offer.ourPrice}
-                        </span>
+                        </div>
                       </div>
                     )}
 
