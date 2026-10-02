@@ -58,13 +58,13 @@ export default function AboutUsPage() {
       <Navbar />
 
       <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-10 sm:py-14">
-        {/* Header Title Banner with Top Icon */}
+        {/* Header Title Banner with Logo Icon */}
         <div className="text-center mb-10">
-          <div className="w-14 h-14 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center mx-auto mb-4 shadow-xs">
-            <Store className="w-7 h-7" />
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 via-orange-600 to-amber-600 text-white flex items-center justify-center mx-auto mb-4 shadow-md shadow-orange-500/25 font-black text-xl tracking-tighter select-none">
+            CM
           </div>
           <h1 className="text-3xl sm:text-5xl font-black text-slate-900 mb-3 tracking-tight">
-            Why Central Marketplace
+            Why Central Marketplace?
           </h1>
           <p className="text-slate-600 text-sm sm:text-base max-w-xl mx-auto leading-relaxed font-medium">
             Connecting neighborhood customers with local merchants through simple, direct, real-time offer cards.
@@ -106,10 +106,10 @@ export default function AboutUsPage() {
         {/* Explore CTA */}
         <div className="text-center">
           <Link
-            href="/"
+            href="/list"
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-extrabold text-sm shadow-md shadow-orange-500/25 transition-all"
           >
-            <span>Explore Nearby Deals</span>
+            <span>Explore Listings</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
