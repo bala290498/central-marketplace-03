@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect } from "react";
-import { X } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { X, Image as ImageIcon } from "lucide-react";
 
 interface NotificationModalProps {
   isOpen: boolean;
@@ -9,6 +9,14 @@ interface NotificationModalProps {
 }
 
 export function NotificationModal({ isOpen, onClose }: NotificationModalProps) {
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      setIsLoaded(false);
+    }
+  }, [isOpen]);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -47,19 +55,37 @@ export function NotificationModal({ isOpen, onClose }: NotificationModalProps) {
         </button>
 
         {/* Notification Image Wrapper */}
-        <div className="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-white/20 bg-slate-900 max-h-[85vh] flex items-center justify-center">
+        <div className="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-white/20 bg-slate-900 max-h-[85vh] flex items-center justify-center min-h-[300px] sm:min-h-[420px] w-full sm:w-auto">
+          {/* Skeleton Loader placeholder shown until image loads */}
+          {!isLoaded && (
+            <div className="w-full sm:w-[500px] h-[320px] sm:h-[440px] bg-slate-900/90 rounded-2xl flex flex-col items-center justify-center p-6 space-y-4 animate-pulse">
+              <div className="w-16 h-16 rounded-2xl bg-slate-800 flex items-center justify-center shadow-inner">
+                <ImageIcon className="w-8 h-8 text-slate-500 animate-bounce" />
+              </div>
+              <div className="w-2/3 h-4 bg-slate-800 rounded-full" />
+              <div className="w-1/2 h-3.5 bg-slate-800/80 rounded-full" />
+              <div className="w-1/3 h-3 bg-slate-800/60 rounded-full" />
+            </div>
+          )}
+
           {/* Desktop Image (Shown on screens >= sm) */}
           <img
             src="/notification/desktop.jpeg"
             alt="Notification Banner"
-            className="hidden sm:block max-h-[80vh] w-auto max-w-full object-contain rounded-2xl"
+            onLoad={() => setIsLoaded(true)}
+            className={`hidden sm:block max-h-[80vh] w-auto max-w-full object-contain rounded-2xl transition-opacity duration-300 ${
+              isLoaded ? "opacity-100" : "opacity-0 absolute"
+            }`}
           />
 
           {/* Mobile Image (Shown on screens < sm) */}
           <img
             src="/notification/mobile.jpeg"
             alt="Notification Banner"
-            className="sm:hidden max-h-[80vh] w-auto max-w-full object-contain rounded-2xl"
+            onLoad={() => setIsLoaded(true)}
+            className={`sm:hidden max-h-[80vh] w-auto max-w-full object-contain rounded-2xl transition-opacity duration-300 ${
+              isLoaded ? "opacity-100" : "opacity-0 absolute"
+            }`}
           />
         </div>
       </div>
