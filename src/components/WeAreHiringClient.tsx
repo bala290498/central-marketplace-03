@@ -6,8 +6,6 @@ import {
   Users,
   FileText,
   Headphones,
-  Mail,
-  MapPin,
   X,
   MessageSquare,
   CheckCircle2,
@@ -129,32 +127,7 @@ export function WeAreHiringClient() {
         })}
       </div>
 
-      {/* Location & Apply CTA Box */}
-      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-2xs mb-10 text-left">
-        <div className="flex items-center gap-2 text-xs font-bold text-orange-600 mb-2 uppercase tracking-wide">
-          <MapPin className="w-4 h-4" />
-          <span>Chennai First</span>
-        </div>
-        <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 mb-2">
-          Remote &amp; Field Roles Available
-        </h2>
-        <p className="text-xs sm:text-sm text-slate-600 mb-6 leading-relaxed">
-          We are looking for energetic team members passionate about local commerce and hyper-local marketplaces. Click any role above or send your intro to get started.
-        </p>
 
-        <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <span className="text-xs font-medium text-slate-500">
-            Have questions? Email us directly anytime.
-          </span>
-          <a
-            href="mailto:jobs@centralmarketplace.in?subject=Application"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm shadow-sm transition-all"
-          >
-            <Mail className="w-4 h-4" />
-            <span>jobs@centralmarketplace.in</span>
-          </a>
-        </div>
-      </div>
 
       {/* Express Interest Modal */}
       {selectedRole && (
