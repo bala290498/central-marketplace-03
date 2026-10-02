@@ -111,13 +111,13 @@ export function Navbar({
                     type="button"
                     onClick={onDetectLocation}
                     disabled={isLocating}
-                    className="inline-flex items-center text-xs sm:text-sm font-extrabold text-slate-700 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 mt-0.5"
+                    className="inline-flex items-center text-xs sm:text-sm font-medium text-slate-600 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 mt-0.5"
                     title={userAreaLabel ? `Location: ${userAreaLabel}` : "Allow location access"}
                   >
                     {isLocating ? (
                       <span className="text-slate-500 whitespace-nowrap">Locating...</span>
                     ) : userLocation && userAreaLabel ? (
-                      <span className="text-slate-800 font-extrabold whitespace-nowrap">
+                      <span className="text-slate-700 font-medium whitespace-nowrap">
                         {userAreaLabel}
                       </span>
                     ) : (
@@ -148,7 +148,7 @@ export function Navbar({
                       type="button"
                       onClick={onDetectLocation}
                       disabled={isLocating}
-                      className="inline-flex items-center gap-1.5 text-sm font-bold text-slate-700 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 truncate"
+                      className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-700 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 truncate"
                       title={userAreaLabel ? `Location: ${userAreaLabel}` : "Allow location access"}
                     >
                       {isLocating ? (
@@ -159,7 +159,7 @@ export function Navbar({
                       ) : userLocation && userAreaLabel ? (
                         <>
                           <MapPin className="w-4 h-4 text-orange-500 flex-shrink-0" />
-                          <span className="text-slate-800 font-bold truncate max-w-[150px]">
+                          <span className="text-slate-700 font-medium truncate max-w-[150px]">
                             {userAreaLabel}
                           </span>
                         </>
