@@ -335,6 +335,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
             userAreaLabel={userAreaLabel}
             onDetectLocation={detectLocation}
             isLocating={isLocating}
+            onOpenSearch={() => setIsSearchModalOpen(true)}
             isSticky={false}
           />
         </div>

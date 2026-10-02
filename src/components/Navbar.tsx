@@ -90,16 +90,16 @@ export function Navbar({
           isSticky ? "sticky top-0" : ""
         } bg-white/95 backdrop-blur-md border-b border-slate-200/80 py-2 sm:py-2.5 shadow-xs`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-2">
-          <div className="flex items-center justify-between gap-2 sm:gap-4">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6">
+          <div className="flex items-center justify-between gap-1.5 sm:gap-4">
             {/* Brand Title + Location (Left Side) */}
-            <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0 flex-shrink-0">
+            <div className="flex items-center gap-2 sm:gap-3.5 min-w-0 flex-shrink-0">
               <div className="flex flex-col items-start min-w-0">
                 <Link
                   href="/"
                   className="inline-flex items-center outline-none focus:outline-none focus:ring-0 rounded-lg transition-colors group flex-shrink-0"
                 >
-                  <span className="font-extrabold text-base sm:text-lg tracking-tight whitespace-nowrap">
+                  <span className="font-extrabold text-sm xs:text-base sm:text-lg tracking-tight whitespace-nowrap">
                     <span className="text-orange-500">Central</span>{" "}
                     <span className="text-slate-900">Marketplace</span>
                   </span>
@@ -111,7 +111,7 @@ export function Navbar({
                     type="button"
                     onClick={onDetectLocation}
                     disabled={isLocating}
-                    className="lg:hidden inline-flex items-center gap-1 text-[11px] font-bold text-slate-600 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 truncate mt-0.5"
+                    className="lg:hidden inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-bold text-slate-600 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 truncate mt-0.5"
                     title={userAreaLabel ? `Location: ${userAreaLabel}` : "Allow location access"}
                   >
                     {isLocating ? (
@@ -122,7 +122,7 @@ export function Navbar({
                     ) : userLocation && userAreaLabel ? (
                       <>
                         <MapPin className="w-3 h-3 text-orange-500 flex-shrink-0" />
-                        <span className="text-slate-800 font-bold truncate max-w-[160px]">
+                        <span className="text-slate-800 font-bold truncate max-w-[110px] sm:max-w-[160px]">
                           {userAreaLabel}
                         </span>
                       </>
@@ -174,16 +174,16 @@ export function Navbar({
               )}
             </div>
 
-            {/* Desktop Search Bar in Header */}
-            <div className="hidden md:block flex-1 max-w-sm lg:max-w-md mx-2 sm:mx-3">
+            {/* Compact Search Bar (Desktop & Mobile - inline right before Bell icon!) */}
+            <div className="flex-1 min-w-0 mx-1 sm:mx-3 max-w-[160px] xs:max-w-[200px] md:max-w-sm lg:max-w-md">
               <SearchBarTrigger
                 onClick={handleSearchClick}
-                placeholder="Search deals, shops, locations, categories, badges, services..."
+                placeholder="Search..."
               />
             </div>
 
             {/* Right Side: Desktop Nav Links + Notification Bell */}
-            <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0 ml-auto md:ml-0">
+            <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
               {/* Desktop Nav Links */}
               <nav className="hidden md:flex items-center space-x-1 sm:space-x-2">
                 {mainNavLinks.map((link) => {
@@ -275,14 +275,6 @@ export function Navbar({
                 )}
               </button>
             </div>
-          </div>
-
-          {/* Mobile Search Bar in Header (< md) */}
-          <div className="md:hidden w-full pt-1 pb-0.5">
-            <SearchBarTrigger
-              onClick={handleSearchClick}
-              placeholder="Search deals, shops, locations, categories, badges, services..."
-            />
           </div>
 
           {children}

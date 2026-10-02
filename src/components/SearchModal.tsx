@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useMemo } from "react";
+import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
 import { Offer, UserLocation } from "@/types/offer";
 import { offerArea } from "@/lib/utils";
@@ -30,7 +31,12 @@ export function SearchModal({
 }: SearchModalProps) {
   const router = useRouter();
   const [query, setQuery] = useState(initialQuery);
+  const [mounted, setMounted] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -80,7 +86,7 @@ export function SearchModal({
     });
   }, [offers, query]);
 
-  if (!isOpen) return null;
+  if (!isOpen || !mounted) return null;
 
   const handleSelectFinding = (offer: Offer) => {
     onClose();
@@ -112,8 +118,8 @@ export function SearchModal({
     "Property",
   ];
 
-  return (
-    <div className="fixed inset-0 z-50 flex flex-col items-center justify-start bg-slate-900/60 backdrop-blur-md p-2 sm:p-4 animate-in fade-in duration-200">
+  return createPortal(
+    <div className="fixed inset-0 z-[100] flex flex-col items-center justify-start bg-slate-900/60 backdrop-blur-md p-2 sm:p-4 animate-in fade-in duration-200">
       {/* Modal Container */}
       <div className="w-full max-w-2xl bg-white shadow-2xl rounded-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[90vh] sm:max-h-[85vh] mt-2 sm:mt-8 animate-in zoom-in-95 duration-200">
         
@@ -132,7 +138,7 @@ export function SearchModal({
             <button
               type="button"
               onClick={() => setQuery("")}
-              className="p-1 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-200/60 transition-colors"
+              className="p-1 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-200/60 transition-colors cursor-pointer"
               title="Clear search"
             >
               <X className="w-4 h-4" />
@@ -260,6 +266,7 @@ export function SearchModal({
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
