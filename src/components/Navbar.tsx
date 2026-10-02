@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef, useMemo } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import {
   MapPin,
   Loader2,
@@ -13,8 +13,10 @@ import {
   FileText,
   Bell,
 } from "lucide-react";
-import { UserLocation } from "@/types/offer";
+import { UserLocation, Offer } from "@/types/offer";
 import { SearchBarTrigger } from "./SearchBarTrigger";
+import { SearchModal } from "./SearchModal";
+import { getOffers } from "@/lib/offers";
 import { useNotification } from "@/context/NotificationContext";
 
 interface NavbarProps {
@@ -23,6 +25,7 @@ interface NavbarProps {
   onDetectLocation?: () => void;
   isLocating?: boolean;
   onOpenSearch?: () => void;
+  offers?: Offer[];
   children?: React.ReactNode;
   isSticky?: boolean;
 }
@@ -33,20 +36,25 @@ export function Navbar({
   onDetectLocation,
   isLocating = false,
   onOpenSearch,
+  offers,
   children,
   isSticky = true,
 }: NavbarProps) {
   const pathname = usePathname();
-  const router = useRouter();
   const { hasUnread, badgeCount, openNotification } = useNotification();
   const [isMoreDropdownOpen, setIsMoreDropdownOpen] = useState(false);
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState<boolean>(false);
   const timeoutId = useRef<NodeJS.Timeout | null>(null);
+
+  const allOffers = useMemo(() => {
+    return offers && offers.length > 0 ? offers : getOffers();
+  }, [offers]);
 
   const handleSearchClick = () => {
     if (onOpenSearch) {
       onOpenSearch();
     } else {
-      router.push("/list");
+      setIsSearchModalOpen(true);
     }
   };
 
@@ -76,200 +84,218 @@ export function Navbar({
   ];
 
   return (
-    <header
-      className={`relative z-50 ${
-        isSticky ? "sticky top-0" : ""
-      } bg-white/95 backdrop-blur-md border-b border-slate-200/80 py-2.5 sm:py-3 shadow-xs`}
-    >
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 space-y-2">
-        <div className="flex items-center justify-between gap-1.5 sm:gap-4">
-          {/* Brand Title + Location (Left Side) */}
-          <div className="flex items-center gap-2 sm:gap-3.5 flex-shrink-0">
-            <div className="flex flex-col items-start min-w-0">
-              <Link
-                href="/"
-                className="inline-flex items-center outline-none focus:outline-none focus:ring-0 rounded-lg transition-colors group flex-shrink-0"
-              >
-                <span className="font-extrabold text-sm sm:text-base md:text-lg tracking-tight whitespace-nowrap">
-                  <span className="text-orange-500">Central</span>{" "}
-                  <span className="text-slate-900">Marketplace</span>
-                </span>
-              </Link>
-
-              {/* Location Button on Mobile (Under Brand Name) */}
-              {onDetectLocation && (
-                <button
-                  type="button"
-                  onClick={onDetectLocation}
-                  disabled={isLocating}
-                  className="lg:hidden inline-flex items-center gap-1 text-[11px] sm:text-xs font-medium text-slate-500 hover:text-slate-700 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 truncate mt-0.5"
-                  title={userAreaLabel ? `Location: ${userAreaLabel}` : "Allow location access"}
+    <>
+      <header
+        className={`relative z-50 ${
+          isSticky ? "sticky top-0" : ""
+        } bg-white/95 backdrop-blur-md border-b border-slate-200/80 py-2 sm:py-2.5 shadow-xs`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-2">
+          <div className="flex items-center justify-between gap-2 sm:gap-4">
+            {/* Brand Title + Location (Left Side) */}
+            <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0 flex-shrink-0">
+              <div className="flex flex-col items-start min-w-0">
+                <Link
+                  href="/"
+                  className="inline-flex items-center outline-none focus:outline-none focus:ring-0 rounded-lg transition-colors group flex-shrink-0"
                 >
-                  {isLocating ? (
-                    <>
-                      <Loader2 className="w-3 h-3 animate-spin text-slate-400 flex-shrink-0" />
-                      <span className="text-slate-400 truncate">Locating...</span>
-                    </>
-                  ) : userLocation && userAreaLabel ? (
-                    <>
-                      <MapPin className="w-3 h-3 text-slate-400 flex-shrink-0" />
-                      <span className="text-slate-500 font-medium truncate max-w-[120px] sm:max-w-[160px]">
-                        {userAreaLabel}
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      <MapPin className="w-3 h-3 text-slate-400 flex-shrink-0" />
-                      <span className="text-slate-500 font-medium hover:text-slate-700 truncate">
-                        Allow location
-                      </span>
-                    </>
-                  )}
-                </button>
+                  <span className="font-extrabold text-base sm:text-lg tracking-tight whitespace-nowrap">
+                    <span className="text-orange-500">Central</span>{" "}
+                    <span className="text-slate-900">Marketplace</span>
+                  </span>
+                </Link>
+
+                {/* Location Button on Mobile (Under Brand Name) */}
+                {onDetectLocation && (
+                  <button
+                    type="button"
+                    onClick={onDetectLocation}
+                    disabled={isLocating}
+                    className="lg:hidden inline-flex items-center gap-1 text-[11px] font-bold text-slate-600 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 truncate mt-0.5"
+                    title={userAreaLabel ? `Location: ${userAreaLabel}` : "Allow location access"}
+                  >
+                    {isLocating ? (
+                      <>
+                        <Loader2 className="w-3 h-3 animate-spin text-orange-500 flex-shrink-0" />
+                        <span className="text-slate-500 truncate">Locating...</span>
+                      </>
+                    ) : userLocation && userAreaLabel ? (
+                      <>
+                        <MapPin className="w-3 h-3 text-orange-500 flex-shrink-0" />
+                        <span className="text-slate-800 font-bold truncate max-w-[160px]">
+                          {userAreaLabel}
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <MapPin className="w-3 h-3 text-slate-400 flex-shrink-0" />
+                        <span className="text-slate-500 hover:text-slate-900 truncate">
+                          Allow location
+                        </span>
+                      </>
+                    )}
+                  </button>
+                )}
+              </div>
+
+              {/* Location Button on Desktop (Next to title with vertical line) */}
+              {onDetectLocation && (
+                <div className="hidden lg:flex items-center gap-2.5">
+                  <div className="h-5.5 w-px bg-slate-300 flex-shrink-0 select-none" />
+                  <button
+                    type="button"
+                    onClick={onDetectLocation}
+                    disabled={isLocating}
+                    className="inline-flex items-center gap-1.5 text-sm font-bold text-slate-700 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 truncate"
+                    title={userAreaLabel ? `Location: ${userAreaLabel}` : "Allow location access"}
+                  >
+                    {isLocating ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin text-orange-500 flex-shrink-0" />
+                        <span className="text-slate-500 truncate">Locating...</span>
+                      </>
+                    ) : userLocation && userAreaLabel ? (
+                      <>
+                        <MapPin className="w-4 h-4 text-orange-500 flex-shrink-0" />
+                        <span className="text-slate-800 font-bold truncate max-w-[150px]">
+                          {userAreaLabel}
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <MapPin className="w-4 h-4 text-slate-400 flex-shrink-0" />
+                        <span className="text-slate-600 hover:text-slate-900 truncate">
+                          Allow location
+                        </span>
+                      </>
+                    )}
+                  </button>
+                </div>
               )}
             </div>
 
-            {/* Location Button on Desktop (Next to title with vertical line) */}
-            {onDetectLocation && (
-              <div className="hidden lg:flex items-center gap-2.5">
-                <div className="h-5.5 w-px bg-slate-300 flex-shrink-0 select-none" />
-                <button
-                  type="button"
-                  onClick={onDetectLocation}
-                  disabled={isLocating}
-                  className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500 hover:text-slate-700 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 truncate"
-                  title={userAreaLabel ? `Location: ${userAreaLabel}` : "Allow location access"}
-                >
-                  {isLocating ? (
-                    <>
-                      <Loader2 className="w-3.5 h-3.5 animate-spin text-slate-400 flex-shrink-0" />
-                      <span className="text-slate-400 truncate">Locating...</span>
-                    </>
-                  ) : userLocation && userAreaLabel ? (
-                    <>
-                      <MapPin className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
-                      <span className="text-slate-500 font-medium truncate max-w-[180px]">
-                        {userAreaLabel}
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      <MapPin className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
-                      <span className="text-slate-500 font-medium hover:text-slate-700 truncate">
-                        Allow location
-                      </span>
-                    </>
-                  )}
-                </button>
-              </div>
-            )}
-          </div>
-
-          {/* Right Aligned Container: Search Bar & Bell Icon on Mobile, Nav Links & Bell Icon on Desktop */}
-          <div className="flex items-center justify-end gap-1 sm:gap-2 flex-1 min-w-0 ml-auto">
-            {/* Real Search Bar in Header */}
-            <div className="w-[125px] sm:w-64 md:w-auto md:flex-1 max-w-xs sm:max-w-sm lg:max-w-md">
+            {/* Desktop Search Bar in Header */}
+            <div className="hidden md:block flex-1 max-w-sm lg:max-w-md mx-2 sm:mx-3">
               <SearchBarTrigger
                 onClick={handleSearchClick}
-                placeholder="Search..."
+                placeholder="Search deals, shops, locations, categories, badges, services..."
               />
             </div>
 
-            {/* Desktop Nav Links */}
-            <nav className="hidden md:flex items-center space-x-1 sm:space-x-2">
-              {mainNavLinks.map((link) => {
-                const isActive = pathname === link.href;
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={`relative py-1 px-2.5 text-xs sm:text-sm font-extrabold transition-colors ${
-                      isActive
+            {/* Right Side: Desktop Nav Links + Notification Bell */}
+            <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0 ml-auto md:ml-0">
+              {/* Desktop Nav Links */}
+              <nav className="hidden md:flex items-center space-x-1 sm:space-x-2">
+                {mainNavLinks.map((link) => {
+                  const isActive = pathname === link.href;
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className={`relative py-1 px-2.5 text-xs sm:text-sm font-extrabold transition-colors ${
+                        isActive
+                          ? "text-orange-500"
+                          : "text-slate-600 hover:text-slate-900"
+                      }`}
+                    >
+                      <span>{link.label}</span>
+                      {isActive && (
+                        <span className="absolute bottom-0 left-1 right-1 h-0.5 bg-orange-500 rounded-full" />
+                      )}
+                    </Link>
+                  );
+                })}
+
+                {/* Desktop More Hover Dropdown */}
+                <div
+                  className="relative"
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setIsMoreDropdownOpen(!isMoreDropdownOpen)}
+                    className={`relative inline-flex items-center gap-1 py-1 px-2.5 text-xs sm:text-sm font-extrabold transition-colors cursor-pointer ${
+                      moreSubLinks.some((l) => pathname === l.href) || isMoreDropdownOpen
                         ? "text-orange-500"
                         : "text-slate-600 hover:text-slate-900"
                     }`}
                   >
-                    <span>{link.label}</span>
-                    {isActive && (
+                    <span>More</span>
+                    <ChevronDown
+                      className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                        isMoreDropdownOpen ? "transform rotate-180 text-orange-500" : ""
+                      }`}
+                    />
+                    {(moreSubLinks.some((l) => pathname === l.href) || isMoreDropdownOpen) && (
                       <span className="absolute bottom-0 left-1 right-1 h-0.5 bg-orange-500 rounded-full" />
                     )}
-                  </Link>
-                );
-              })}
+                  </button>
 
-              {/* Desktop More Hover Dropdown */}
-              <div
-                className="relative"
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              >
-                <button
-                  type="button"
-                  onClick={() => setIsMoreDropdownOpen(!isMoreDropdownOpen)}
-                  className={`relative inline-flex items-center gap-1 py-1 px-2.5 text-xs sm:text-sm font-extrabold transition-colors cursor-pointer ${
-                    moreSubLinks.some((l) => pathname === l.href) || isMoreDropdownOpen
-                      ? "text-orange-500"
-                      : "text-slate-600 hover:text-slate-900"
-                  }`}
-                >
-                  <span>More</span>
-                  <ChevronDown
-                    className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                      isMoreDropdownOpen ? "transform rotate-180 text-orange-500" : ""
-                    }`}
-                  />
-                  {(moreSubLinks.some((l) => pathname === l.href) || isMoreDropdownOpen) && (
-                    <span className="absolute bottom-0 left-1 right-1 h-0.5 bg-orange-500 rounded-full" />
+                  {/* Collapsible Dropdown Menu */}
+                  {isMoreDropdownOpen && (
+                    <div className="absolute right-0 top-full mt-1 w-max min-w-[220px] bg-white/95 backdrop-blur-md rounded-2xl p-1.5 shadow-xl border border-slate-200/90 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                      {moreSubLinks.map((sub) => {
+                        const SubIcon = sub.icon;
+                        const isSubActive = pathname === sub.href;
+                        return (
+                          <Link
+                            key={sub.href}
+                            href={sub.href}
+                            onClick={() => setIsMoreDropdownOpen(false)}
+                            className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+                              isSubActive
+                                ? "bg-orange-50 text-orange-600"
+                                : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+                            }`}
+                          >
+                            <SubIcon className="w-4 h-4 text-slate-500 shrink-0" />
+                            <span className="whitespace-nowrap">{sub.label}</span>
+                          </Link>
+                        );
+                      })}
+                    </div>
                   )}
-                </button>
+                </div>
+              </nav>
 
-                {/* Collapsible Dropdown Menu */}
-                {isMoreDropdownOpen && (
-                  <div className="absolute right-0 top-full mt-1 w-max min-w-[220px] bg-white/95 backdrop-blur-md rounded-2xl p-1.5 shadow-xl border border-slate-200/90 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                    {moreSubLinks.map((sub) => {
-                      const SubIcon = sub.icon;
-                      const isSubActive = pathname === sub.href;
-                      return (
-                        <Link
-                          key={sub.href}
-                          href={sub.href}
-                          onClick={() => setIsMoreDropdownOpen(false)}
-                          className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
-                            isSubActive
-                              ? "bg-orange-50 text-orange-600"
-                              : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
-                          }`}
-                        >
-                          <SubIcon className="w-4 h-4 text-slate-500 shrink-0" />
-                          <span className="whitespace-nowrap">{sub.label}</span>
-                        </Link>
-                      );
-                    })}
-                  </div>
+              {/* Header Right Corner Notification Bell Button */}
+              <button
+                type="button"
+                onClick={openNotification}
+                aria-label="Notifications"
+                title="Notifications"
+                className="relative p-1.5 sm:p-2 rounded-full text-slate-700 hover:text-orange-600 hover:bg-orange-50/60 transition-all cursor-pointer group flex-shrink-0"
+              >
+                <Bell className="w-5 h-5 stroke-[2.2] group-hover:scale-110 transition-transform text-slate-800 hover:text-orange-600" />
+                {hasUnread && (
+                  <span className="absolute -top-0.5 -right-0.5 w-4.5 h-4.5 sm:w-5 sm:h-5 bg-red-500 text-white rounded-full text-[10px] font-black flex items-center justify-center ring-2 ring-white shadow-md">
+                    {badgeCount}
+                  </span>
                 )}
-              </div>
-            </nav>
-
-            {/* Header Right Corner Notification Bell Button */}
-            <button
-              type="button"
-              onClick={openNotification}
-              aria-label="Notifications"
-              title="Notifications"
-              className="relative p-1.5 sm:p-2 rounded-full text-slate-700 hover:text-orange-600 hover:bg-orange-50/60 transition-all cursor-pointer group flex-shrink-0"
-            >
-              <Bell className="w-5 h-5 stroke-[2.2] group-hover:scale-110 transition-transform text-slate-800 hover:text-orange-600" />
-              {hasUnread && (
-                <span className="absolute -top-0.5 -right-0.5 w-4.5 h-4.5 sm:w-5 sm:h-5 bg-red-500 text-white rounded-full text-[10px] font-black flex items-center justify-center ring-2 ring-white shadow-md">
-                  {badgeCount}
-                </span>
-              )}
-            </button>
+              </button>
+            </div>
           </div>
-        </div>
 
-        {children}
-      </div>
-    </header>
+          {/* Mobile Search Bar in Header (< md) */}
+          <div className="md:hidden w-full pt-1 pb-0.5">
+            <SearchBarTrigger
+              onClick={handleSearchClick}
+              placeholder="Search deals, shops, locations, categories, badges, services..."
+            />
+          </div>
+
+          {children}
+        </div>
+      </header>
+
+      {/* Global Search Modal triggered by Header Search Bar */}
+      <SearchModal
+        isOpen={isSearchModalOpen}
+        onClose={() => setIsSearchModalOpen(false)}
+        offers={allOffers}
+        userLocation={userLocation}
+      />
+    </>
   );
 }
