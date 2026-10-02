@@ -291,19 +291,21 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                         )}
                       </div>
 
-                      {/* Bottom Space: 3 Key Features */}
-                      <div className="flex items-center gap-2 sm:gap-2.5 text-xs font-bold text-slate-700 pt-2.5 border-t border-slate-100 flex-wrap">
+                      {/* Bottom Space: 3 Key Features (Full width row with vertical lines, desktop only) */}
+                      <div className="flex items-center justify-between text-xs font-bold text-slate-700 pt-2.5 border-t border-slate-100 w-full">
                         {(offer.features && offer.features.length > 0
                           ? offer.features.slice(0, 3)
                           : ["100% Genuine Offer", "Instant Redemption", "Verified Merchant"]
-                        ).map((feat, fIdx) => (
-                          <div
-                            key={fIdx}
-                            className="flex items-center gap-1.5 bg-slate-100/90 hover:bg-slate-200/60 px-2.5 py-1 rounded-lg text-slate-800 text-[11.5px] font-extrabold transition-colors"
-                          >
-                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
-                            <span>{feat}</span>
-                          </div>
+                        ).map((feat, fIdx, arr) => (
+                          <React.Fragment key={fIdx}>
+                            <div className="flex items-center gap-1.5 min-w-0">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
+                              <span className="truncate text-slate-700 text-[11.5px] font-extrabold">{feat}</span>
+                            </div>
+                            {fIdx < arr.length - 1 && (
+                              <span className="text-slate-300 font-normal px-1">|</span>
+                            )}
+                          </React.Fragment>
                         ))}
                       </div>
                     </div>
