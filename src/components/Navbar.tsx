@@ -12,7 +12,6 @@ import {
   ShieldAlert,
   FileText,
   Bell,
-  Search,
 } from "lucide-react";
 import { UserLocation } from "@/types/offer";
 import { SearchBarTrigger } from "./SearchBarTrigger";
@@ -80,18 +79,18 @@ export function Navbar({
     <header
       className={`relative z-50 ${
         isSticky ? "sticky top-0" : ""
-      } bg-white/95 backdrop-blur-md border-b border-slate-200/80 py-2 sm:py-3 shadow-xs`}
+      } bg-white/95 backdrop-blur-md border-b border-slate-200/80 py-2.5 sm:py-3 shadow-xs`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-2">
-        <div className="flex items-center justify-between gap-2 sm:gap-4">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 space-y-2">
+        <div className="flex items-center justify-between gap-1.5 sm:gap-4">
           {/* Brand Title + Location (Left Side) */}
-          <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0 flex-shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3.5 flex-shrink-0">
             <div className="flex flex-col items-start min-w-0">
               <Link
                 href="/"
                 className="inline-flex items-center outline-none focus:outline-none focus:ring-0 rounded-lg transition-colors group flex-shrink-0"
               >
-                <span className="font-extrabold text-base sm:text-lg tracking-tight whitespace-nowrap">
+                <span className="font-extrabold text-sm sm:text-base md:text-lg tracking-tight whitespace-nowrap">
                   <span className="text-orange-500">Central</span>{" "}
                   <span className="text-slate-900">Marketplace</span>
                 </span>
@@ -103,25 +102,25 @@ export function Navbar({
                   type="button"
                   onClick={onDetectLocation}
                   disabled={isLocating}
-                  className="lg:hidden inline-flex items-center gap-1 text-[11px] font-bold text-slate-600 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 truncate mt-0.5"
+                  className="lg:hidden inline-flex items-center gap-1 text-[11.5px] sm:text-xs font-extrabold text-slate-700 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 truncate mt-0.5"
                   title={userAreaLabel ? `Location: ${userAreaLabel}` : "Allow location access"}
                 >
                   {isLocating ? (
                     <>
-                      <Loader2 className="w-3 h-3 animate-spin text-orange-500 flex-shrink-0" />
+                      <Loader2 className="w-3.5 h-3.5 animate-spin text-orange-500 flex-shrink-0" />
                       <span className="text-slate-500 truncate">Locating...</span>
                     </>
                   ) : userLocation && userAreaLabel ? (
                     <>
-                      <MapPin className="w-3 h-3 text-orange-500 flex-shrink-0" />
-                      <span className="text-slate-800 font-bold truncate max-w-[160px]">
+                      <MapPin className="w-3.5 h-3.5 text-orange-500 flex-shrink-0" />
+                      <span className="text-slate-800 font-extrabold truncate max-w-[110px] sm:max-w-[150px]">
                         {userAreaLabel}
                       </span>
                     </>
                   ) : (
                     <>
-                      <MapPin className="w-3 h-3 text-slate-400 flex-shrink-0" />
-                      <span className="text-slate-500 hover:text-slate-900 truncate">
+                      <MapPin className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
+                      <span className="text-slate-600 hover:text-slate-900 truncate">
                         Allow location
                       </span>
                     </>
@@ -166,26 +165,15 @@ export function Navbar({
             )}
           </div>
 
-          {/* Search Bar in Header (Desktop & Tablet) */}
-          <div className="hidden md:block flex-1 max-w-sm lg:max-w-md mx-2 sm:mx-3">
-            <SearchBarTrigger
-              onClick={handleSearchClick}
-              placeholder="Search deals, shops, locations, categories..."
-            />
-          </div>
-
-          {/* Right Side: Mobile Search Icon + Bell Icon (and Desktop Nav Links) */}
-          <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0 ml-auto md:ml-0">
-            {/* Mobile Search Icon Button (< md) */}
-            <button
-              type="button"
-              onClick={handleSearchClick}
-              aria-label="Search"
-              title="Search"
-              className="md:hidden p-1.5 sm:p-2 rounded-full text-slate-700 hover:text-orange-600 hover:bg-orange-50/60 transition-all cursor-pointer group flex-shrink-0"
-            >
-              <Search className="w-5 h-5 stroke-[2.2] text-slate-800 group-hover:scale-110 group-hover:text-orange-600 transition-transform" />
-            </button>
+          {/* Right Aligned Container: Search Bar & Bell Icon on Mobile, Nav Links & Bell Icon on Desktop */}
+          <div className="flex items-center justify-end gap-1 sm:gap-2 flex-1 min-w-0 ml-auto">
+            {/* Real Search Bar in Header */}
+            <div className="w-[125px] sm:w-64 md:w-auto md:flex-1 max-w-xs sm:max-w-sm lg:max-w-md">
+              <SearchBarTrigger
+                onClick={handleSearchClick}
+                placeholder="Search..."
+              />
+            </div>
 
             {/* Desktop Nav Links */}
             <nav className="hidden md:flex items-center space-x-1 sm:space-x-2">
@@ -278,14 +266,6 @@ export function Navbar({
               )}
             </button>
           </div>
-        </div>
-
-        {/* Mobile Search Bar in Header (< md) */}
-        <div className="md:hidden w-full pt-1">
-          <SearchBarTrigger
-            onClick={handleSearchClick}
-            placeholder="Search deals, shops, locations, categories..."
-          />
         </div>
 
         {children}
