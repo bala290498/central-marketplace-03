@@ -268,11 +268,11 @@ export default function ReportPage() {
               />
             </div>
 
-            {/* Submit Button (Matching Orange Brand Theme) */}
-            <div>
+            {/* Submit Button (Centered, No Glowing Shadow) */}
+            <div className="text-center pt-2">
               <button
                 type="submit"
-                className="w-auto px-8 sm:px-10 py-3 sm:py-3.5 rounded-2xl bg-orange-500 hover:bg-orange-600 text-white font-extrabold text-sm sm:text-base shadow-md shadow-orange-500/25 transition-all cursor-pointer inline-flex items-center justify-center gap-2"
+                className="w-auto px-8 sm:px-10 py-3 sm:py-3.5 rounded-2xl bg-orange-500 hover:bg-orange-600 text-white font-extrabold text-sm sm:text-base transition-colors cursor-pointer inline-flex items-center justify-center gap-2"
               >
                 Submit Report
               </button>
