@@ -14,7 +14,7 @@ export function Footer() {
           </Link>
           <span>·</span>
           <Link href="/register" className="hover:text-orange-600 transition-colors">
-            Free Listing
+            Free Posting
           </Link>
           <span>·</span>
           <Link href="/we-are-hiring" className="hover:text-orange-600 transition-colors">

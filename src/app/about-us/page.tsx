@@ -63,7 +63,7 @@ export default function AboutUsPage() {
           <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 via-orange-600 to-amber-600 text-white flex items-center justify-center mx-auto mb-4 shadow-md shadow-orange-500/25 font-black text-xl tracking-tighter select-none">
             CM
           </div>
-          <h1 className="text-3xl sm:text-5xl font-black text-slate-900 mb-3 tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3 tracking-tight">
             Why Central Marketplace?
           </h1>
           <p className="text-slate-600 text-sm sm:text-base max-w-xl mx-auto leading-relaxed font-medium">

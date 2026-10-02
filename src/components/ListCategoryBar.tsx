@@ -211,34 +211,11 @@ export function ListCategoryBar({
         )}
       </div>
 
-      {/* Search & Dropdown Selectors Control Row */}
-      <div className="flex items-center gap-2 sm:gap-3 w-full pt-0.5 pb-0.5 sm:pb-0">
-        {/* Search Trigger: Compact Search Icon Button on Mobile (< sm), Full Search Bar on Desktop (>= sm) */}
-        {onOpenSearch && (
-          <>
-            {/* Mobile: Compact Search Icon Button */}
-            <button
-              type="button"
-              onClick={onOpenSearch}
-              aria-label="Search deals"
-              title="Search deals"
-              className="sm:hidden w-9.5 h-[38px] rounded-full border border-slate-200/90 bg-white hover:border-orange-300 hover:bg-orange-50/50 flex items-center justify-center text-orange-500 shadow-xs flex-shrink-0 cursor-pointer group transition-all"
-            >
-              <Search className="w-4 h-4 stroke-[2.5] group-hover:scale-110 transition-transform" />
-            </button>
+      {/* Mobile/Tablet Dropdown Selectors Control Row (< lg) */}
+      <div className="flex items-center gap-2 sm:gap-3 w-full pt-0.5 pb-0.5 sm:pb-0 lg:hidden">
 
-            {/* Desktop: Full Search Bar */}
-            <div className="hidden sm:block flex-1 min-w-0">
-              <SearchBarTrigger
-                onClick={onOpenSearch}
-                placeholder="Search deals, shops, locations, categories, badges, services..."
-              />
-            </div>
-          </>
-        )}
-
-        {/* Dropdown 1: All Locations (Flex-1 on Mobile for extra space, sm:w-44 on Desktop) */}
-        <div className="relative flex items-center flex-1 sm:flex-initial sm:w-44 min-w-0">
+        {/* Dropdown 1: All Locations (Visible on Mobile/Tablet < lg) */}
+        <div className="relative flex items-center flex-1 sm:flex-initial sm:w-44 min-w-0 lg:hidden">
           <MapPin className="absolute left-2.5 sm:left-3 w-3.5 sm:w-4 h-3.5 sm:h-4 text-slate-400 pointer-events-none" />
           <select
             value={selectedLocation}
@@ -255,15 +232,15 @@ export function ListCategoryBar({
           <div className="absolute right-2.5 sm:right-3 pointer-events-none text-slate-400 text-[10px] sm:text-xs">▼</div>
         </div>
 
-        {/* Dropdown 2: All Validities (Flex-1 on Mobile for extra space, sm:w-44 on Desktop) */}
-        <div className="relative flex items-center flex-1 sm:flex-initial sm:w-44 min-w-0">
+        {/* Dropdown 2: All Validities (Visible on Mobile/Tablet < lg) */}
+        <div className="relative flex items-center flex-1 sm:flex-initial sm:w-44 min-w-0 lg:hidden">
           <Clock className="absolute left-2.5 sm:left-3 w-3.5 sm:w-4 h-3.5 sm:h-4 text-slate-400 pointer-events-none" />
           <select
             value={selectedValidity}
             onChange={(e) => onValidityChange(e.target.value)}
             className="w-full pl-7 sm:pl-8 pr-6 sm:pr-7 h-[38px] rounded-full border border-slate-200 bg-white text-slate-900 text-[11px] sm:text-xs font-bold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer truncate"
           >
-            <option value="">All validities</option>
+            <option value="">All post validities</option>
             <option value="Limited">Limited</option>
             <option value="Expires Soon">Expires Soon</option>
             <option value="Until Filled">Until Filled</option>

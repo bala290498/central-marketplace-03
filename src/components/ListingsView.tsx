@@ -16,6 +16,7 @@ import { ListCategoryBar } from "./ListCategoryBar";
 import { OfferCard } from "./OfferCard";
 import { SearchModal } from "./SearchModal";
 import { Footer } from "./Footer";
+import { FilterBar } from "./FilterBar";
 import { getOfferValidityCategory, normalizeValidity } from "@/lib/validity";
 import { CheckCircle2, AlertCircle } from "lucide-react";
 
@@ -27,6 +28,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get("category") || "";
   const validityParam = searchParams.get("validity") || "";
+  const dealTypeParam = searchParams.get("dealType") || "";
   const searchParam = searchParams.get("search") || "";
   const idParam = searchParams.get("id") || "";
 
@@ -42,6 +44,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
   const [selectedLocation, setSelectedLocation] = useState<string>("");
   const [selectedDistance, setSelectedDistance] = useState<number | null>(null);
   const [selectedValidity, setSelectedValidity] = useState<string>(normalizeValidity(validityParam));
+  const [selectedDealType, setSelectedDealType] = useState<string>(dealTypeParam);
   const [searchQuery, setSearchQuery] = useState<string>(searchParam);
   const [selectedId, setSelectedId] = useState<string>(idParam);
 
@@ -56,6 +59,12 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
       setSelectedValidity(normalizeValidity(validityParam));
     }
   }, [validityParam]);
+
+  useEffect(() => {
+    if (dealTypeParam) {
+      setSelectedDealType(dealTypeParam);
+    }
+  }, [dealTypeParam]);
 
   useEffect(() => {
     setSearchQuery(searchParam);
@@ -111,17 +120,38 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
     ).sort() as string[];
   }, [offers]);
 
+  const dealTypes = useMemo(() => {
+    const items = offers
+      .map((o) => o.dealType || o.badge)
+      .filter(Boolean) as string[];
+    return Array.from(new Set(items)).sort();
+  }, [offers]);
+
   const processedOffers = useMemo(() => {
     let list = offers.filter((offer) => {
-      const areaOk = !selectedLocation || offerArea(offer) === selectedLocation;
+      const areaOk =
+        !selectedLocation ||
+        offerArea(offer).toLowerCase() === selectedLocation.toLowerCase() ||
+        (offer.location && offer.location.toLowerCase() === selectedLocation.toLowerCase());
+
       const catOk = !selectedCategory || offerCategory(offer) === selectedCategory;
+
       const offerValNorm = normalizeValidity(getOfferValidityCategory(offer)).toLowerCase();
       const selValNorm = normalizeValidity(selectedValidity).toLowerCase();
       const valText = (offer.validity || offer.ends || offer.expiry || "").toLowerCase().trim();
       const validityOk =
         !selectedValidity ||
         offerValNorm === selValNorm ||
-        valText === selValNorm;
+        valText === selValNorm ||
+        (selValNorm && valText.includes(selValNorm));
+
+      const dtText = (offer.dealType || offer.badge || "").toLowerCase().trim();
+      const selDtNorm = selectedDealType.toLowerCase().trim();
+      const dealTypeOk =
+        !selectedDealType ||
+        dtText === selDtNorm ||
+        (selDtNorm && dtText.includes(selDtNorm)) ||
+        (selDtNorm && offer.title.toLowerCase().includes(selDtNorm));
 
       const searchLower = searchQuery.toLowerCase().trim();
       const searchOk =
@@ -131,7 +161,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
         (offer.business && offer.business.toLowerCase().includes(searchLower)) ||
         (offer.location && offer.location.toLowerCase().includes(searchLower));
 
-      return areaOk && catOk && validityOk && searchOk;
+      return areaOk && catOk && validityOk && dealTypeOk && searchOk;
     });
 
     if (userLocation) {
@@ -168,7 +198,17 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
     }
 
     return list;
-  }, [offers, selectedCategory, selectedLocation, selectedDistance, selectedValidity, searchQuery, selectedId, userLocation]);
+  }, [
+    offers,
+    selectedCategory,
+    selectedLocation,
+    selectedDistance,
+    selectedValidity,
+    selectedDealType,
+    searchQuery,
+    selectedId,
+    userLocation,
+  ]);
 
   const handleShare = async (offer: Offer) => {
     const title = offer.title || "Deal";
@@ -216,7 +256,9 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
 
   const scrollToTopCard = useCallback(() => {
     if (typeof window === "undefined") return;
-    // Blur any active element (like select inputs) on mobile to dismiss native pickers/keyboards
+    // Do not scroll page on desktop views (width >= 1024px) to keep left sidebar completely static
+    if (window.innerWidth >= 1024) return;
+
     if (document.activeElement && typeof (document.activeElement as HTMLElement).blur === "function") {
       (document.activeElement as HTMLElement).blur();
     }
@@ -265,6 +307,24 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
     scrollToTopCard();
   };
 
+  const handleDealTypeSelect = (dt: string) => {
+    setSelectedDealType(dt);
+    setSearchQuery("");
+    setSelectedId("");
+    scrollToTopCard();
+  };
+
+  const handleResetAll = () => {
+    setSelectedCategory("");
+    setSelectedLocation("");
+    setSelectedDistance(null);
+    setSelectedValidity("");
+    setSelectedDealType("");
+    setSearchQuery("");
+    setSelectedId("");
+    scrollToTopCard();
+  };
+
   return (
     <div className="min-h-screen bg-slate-50/60 text-slate-900 flex flex-col">
       {/* Unified Top Sticky Container */}
@@ -279,8 +339,8 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
           />
         </div>
 
-        {/* Permanent Category & Dropdown Filter Bar (ALWAYS visible, NO OVERLAPPING) */}
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-2.5 bg-white border-t border-slate-100">
+        {/* Category Filter Bar */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-2.5 bg-white border-t border-slate-100">
           <ListCategoryBar
             categories={categories}
             selectedCategory={selectedCategory}
@@ -298,48 +358,112 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
         </div>
       </div>
 
-      <main ref={mainContentRef} className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 pt-4 pb-16 scroll-mt-36">
+      <main ref={mainContentRef} className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 pt-5 pb-16 scroll-mt-36">
+        <div className="flex flex-col lg:flex-row gap-6 items-start">
+          {/* Desktop Left Side Bar (Filters) - 100% Static & Sticky with generous header clearance */}
+          <aside className="w-full lg:w-72 flex-shrink-0 lg:sticky lg:top-[185px] hidden lg:block self-start z-30">
+            <FilterBar
+              selectedCategory={selectedCategory}
+              onClearCategory={() => handleCategorySelect("")}
+              locations={locations}
+              selectedLocation={selectedLocation}
+              onLocationChange={handleLocationSelect}
+              dealTypes={dealTypes}
+              selectedDealType={selectedDealType}
+              onDealTypeChange={handleDealTypeSelect}
+              validities={validities}
+              selectedValidity={selectedValidity}
+              onValidityChange={handleValiditySelect}
+              selectedDistance={selectedDistance}
+              onDistanceChange={handleDistanceSelect}
+              searchQuery={searchQuery}
+              onClearSearch={() => setSearchQuery("")}
+              onResetAll={handleResetAll}
+              userLocation={userLocation}
+              onDetectLocation={detectLocation}
+              isLocating={isLocating}
+            />
+          </aside>
 
-        {/* Listings Grid */}
-        {processedOffers.length > 0 ? (
-          <div ref={cardsGridRef} className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-            {processedOffers.map((offer) => (
-              <OfferCard
-                key={offer.id}
-                offer={offer}
-                userLocation={userLocation}
-                onShare={handleShare}
-              />
-            ))}
+          {/* Right Main Content Area: Listings Grid */}
+          <div className="flex-1 min-w-0 w-full">
+            {/* Active Filters Bar (shown on Mobile/Tablet < lg) */}
+            {(selectedCategory || selectedLocation || selectedDistance !== null || selectedValidity || selectedDealType || searchQuery) && (
+              <div className="flex lg:hidden flex-wrap items-center gap-2 mb-4 p-3 bg-white border border-slate-200/80 rounded-2xl shadow-2xs">
+                <span className="text-xs font-bold text-slate-500 mr-1">Active filters:</span>
+                {selectedCategory && (
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-orange-50 text-orange-600 border border-orange-200/70">
+                    Category: {selectedCategory}
+                    <button type="button" onClick={() => handleCategorySelect("")} className="hover:text-orange-800 ml-0.5 cursor-pointer font-extrabold">×</button>
+                  </span>
+                )}
+                {selectedLocation && (
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-600 border border-blue-200/70">
+                    Location: {selectedLocation}
+                    <button type="button" onClick={() => handleLocationSelect("")} className="hover:text-blue-800 ml-0.5 cursor-pointer font-extrabold">×</button>
+                  </span>
+                )}
+                {selectedDealType && (
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200/70">
+                    Post Type: {selectedDealType}
+                    <button type="button" onClick={() => handleDealTypeSelect("")} className="hover:text-amber-900 ml-0.5 cursor-pointer font-extrabold">×</button>
+                  </span>
+                )}
+                {selectedDistance !== null && (
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 border border-emerald-200/70">
+                    Within {selectedDistance} km
+                    <button type="button" onClick={() => handleDistanceSelect(null)} className="hover:text-emerald-800 ml-0.5 cursor-pointer font-extrabold">×</button>
+                  </span>
+                )}
+                {selectedValidity && (
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-purple-50 text-purple-600 border border-purple-200/70">
+                    Post Validity: {selectedValidity}
+                    <button type="button" onClick={() => handleValiditySelect("")} className="hover:text-purple-800 ml-0.5 cursor-pointer font-extrabold">×</button>
+                  </span>
+                )}
+                {searchQuery && (
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-700 border border-slate-300">
+                    "{searchQuery}"
+                    <button type="button" onClick={() => setSearchQuery("")} className="hover:text-slate-900 ml-0.5 cursor-pointer font-extrabold">×</button>
+                  </span>
+                )}
+              </div>
+            )}
+
+            {/* Listings Grid: 2 Columns on Desktop */}
+            {processedOffers.length > 0 ? (
+              <div ref={cardsGridRef} className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                {processedOffers.map((offer) => (
+                  <OfferCard
+                    key={offer.id}
+                    offer={offer}
+                    userLocation={userLocation}
+                    onShare={handleShare}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="bg-white rounded-2xl p-12 text-center border border-slate-200 my-4 shadow-xs">
+                <div className="w-16 h-16 rounded-2xl bg-orange-50 text-orange-500 flex items-center justify-center mx-auto mb-4">
+                  <AlertCircle className="w-8 h-8" />
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 mb-2">
+                  No matching listings found
+                </h3>
+                <p className="text-sm text-slate-500 max-w-md mx-auto mb-6">
+                  Try resetting your category, location, or distance filters to view all available listings.
+                </p>
+                <button
+                  type="button"
+                  onClick={handleResetAll}
+                  className="px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm shadow-md transition-colors cursor-pointer"
+                >
+                  Reset All Filters
+                </button>
+              </div>
+            )}
           </div>
-        ) : (
-          <div className="bg-white rounded-none p-12 text-center border border-slate-200 my-8 shadow-xs">
-            <div className="w-16 h-16 rounded-2xl bg-orange-50 text-orange-500 flex items-center justify-center mx-auto mb-4">
-              <AlertCircle className="w-8 h-8" />
-            </div>
-            <h3 className="text-lg font-bold text-slate-900 mb-2">
-              No matching listings found
-            </h3>
-            <p className="text-sm text-slate-500 max-w-md mx-auto mb-6">
-              Try resetting your category or location filters to view all available listings.
-            </p>
-            <button
-              type="button"
-              onClick={() => {
-                setSelectedCategory("");
-                setSelectedLocation("");
-                setSelectedDistance(null);
-                setSelectedValidity("");
-                setSearchQuery("");
-                setSelectedId("");
-                scrollToTopCard();
-              }}
-              className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-md transition-colors"
-            >
-              Reset All Filters
-            </button>
-          </div>
-        )}
+        </div>
       </main>
 
       {toastMessage && (

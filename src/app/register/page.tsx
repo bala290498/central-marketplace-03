@@ -4,7 +4,7 @@ import { ListYourBusinessClient } from "@/components/ListYourBusinessClient";
 export const metadata: Metadata = {
   title: "Register Your Business | Central Marketplace",
   description:
-    "Register your shop, restaurant, salon, clinic, or service for a free listing on Central Marketplace.",
+    "Register your shop, restaurant, salon, clinic, or service for a free posting on Central Marketplace.",
 };
 
 export default function RegisterPage() {
