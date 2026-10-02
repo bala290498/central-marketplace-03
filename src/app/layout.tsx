@@ -80,6 +80,8 @@ export const viewport: Viewport = {
   themeColor: "#F97316",
 };
 
+import { NotificationProvider } from "@/context/NotificationContext";
+
 export default function RootLayout({
   children,
 }: {
@@ -103,8 +105,10 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Central Marketplace" />
       </head>
       <body className="min-h-full flex flex-col font-sans bg-slate-50/60 text-slate-900 pb-20 md:pb-0">
-        {children}
-        <BottomNav />
+        <NotificationProvider>
+          {children}
+          <BottomNav />
+        </NotificationProvider>
       </body>
     </html>
   );

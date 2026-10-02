@@ -11,9 +11,11 @@ import {
   Users,
   ShieldAlert,
   FileText,
+  Bell,
 } from "lucide-react";
 import { UserLocation } from "@/types/offer";
 import { SearchBarTrigger } from "./SearchBarTrigger";
+import { useNotification } from "@/context/NotificationContext";
 
 interface NavbarProps {
   userLocation?: UserLocation | null;
@@ -36,6 +38,7 @@ export function Navbar({
 }: NavbarProps) {
   const pathname = usePathname();
   const router = useRouter();
+  const { hasUnread, badgeCount, openNotification } = useNotification();
   const [isMoreDropdownOpen, setIsMoreDropdownOpen] = useState(false);
   const timeoutId = useRef<NodeJS.Timeout | null>(null);
 
@@ -137,8 +140,8 @@ export function Navbar({
             />
           </div>
 
-          {/* Right Side: Location (Mobile) + Desktop Nav Links */}
-          <div className="flex items-center gap-2 flex-shrink-0 ml-auto md:ml-0">
+          {/* Right Side: Location (Mobile) + Desktop Nav Links + Notification Bell */}
+          <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0 ml-auto md:ml-0">
             {onDetectLocation && (
               <button
                 type="button"
@@ -243,6 +246,22 @@ export function Navbar({
                 )}
               </div>
             </nav>
+
+            {/* Header Right Corner Notification Bell Button */}
+            <button
+              type="button"
+              onClick={openNotification}
+              aria-label="Notifications"
+              title="Notifications"
+              className="relative p-1.5 sm:p-2 rounded-full text-slate-700 hover:text-orange-600 hover:bg-orange-50/60 transition-all cursor-pointer group flex-shrink-0"
+            >
+              <Bell className="w-5 h-5 stroke-[2.2] group-hover:scale-110 transition-transform text-slate-800 hover:text-orange-600" />
+              {hasUnread && (
+                <span className="absolute -top-0.5 -right-0.5 w-4.5 h-4.5 sm:w-5 sm:h-5 bg-red-500 text-white rounded-full text-[10px] font-black flex items-center justify-center ring-2 ring-white animate-bounce shadow-md">
+                  {badgeCount}
+                </span>
+              )}
+            </button>
           </div>
         </div>
 
