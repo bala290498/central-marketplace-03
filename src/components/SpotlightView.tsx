@@ -295,47 +295,41 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                       </div>
                     </div>
 
-                    {/* Right: Pricing & Actions Stack */}
-                    <div className="w-64 flex flex-col justify-between pl-6 border-l border-slate-100 flex-shrink-0">
-                      {/* Special Pricing Box */}
+                    {/* Right: Unified Pricing & Actions Container */}
+                    <div className="w-64 bg-slate-50/80 border border-slate-200/90 rounded-2xl p-3.5 flex flex-col justify-between flex-shrink-0">
+                      {/* Special Pricing Display */}
                       {offer.marketPrice && offer.ourPrice ? (
-                        <div className="bg-emerald-50 border border-emerald-200/80 p-3 rounded-2xl mb-4 text-center flex flex-col justify-center gap-0.5">
-                          <div className="text-[10.5px] font-extrabold uppercase tracking-wider text-slate-400">
-                            Market Price
+                        <div className="text-center pb-3 border-b border-slate-200/70 mb-3">
+                          <div className="text-[11px] font-bold text-slate-400 line-through mb-0.5">
+                            Market Price {offer.marketPrice}
                           </div>
-                          <div className="text-base font-bold text-slate-400 line-through mb-1.5">
-                            {offer.marketPrice}
-                          </div>
-                          <div className="text-[11px] font-black uppercase tracking-wider text-emerald-800">
-                            Our Price
-                          </div>
-                          <div className="text-xl sm:text-2xl font-black text-emerald-700">
-                            {offer.ourPrice}
+                          <div className="text-lg font-black text-emerald-700">
+                            Our Price {offer.ourPrice}
                           </div>
                         </div>
                       ) : (
-                        <div className="mb-4" />
+                        <div className="flex-1" />
                       )}
 
                       {/* Action Buttons */}
-                      <div className="space-y-2">
+                      <div className="space-y-2 mt-auto">
                         {cleanPhone && (
                           <a
                             href={`tel:${cleanPhone}`}
-                            className="w-full flex items-center justify-center gap-2 py-2.5 px-3 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-xs transition-colors"
+                            className="w-full flex items-center justify-center gap-2 py-2.5 px-3 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-xs transition-colors rounded-xl"
                           >
                             <Phone className="w-4 h-4 fill-current" />
                             <span>Call Merchant</span>
                           </a>
                         )}
 
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-1.5">
                           {whatsappUrl && (
                             <a
                               href={whatsappUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex-1 py-2 px-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 text-xs font-extrabold text-center flex items-center justify-center gap-1"
+                              className="flex-1 py-2 px-2 bg-emerald-100/70 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/80 text-xs font-extrabold text-center flex items-center justify-center gap-1 rounded-xl"
                               title="WhatsApp"
                             >
                               <WhatsAppIcon className="w-4 h-4 text-emerald-600" />
@@ -348,7 +342,7 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                               href={mapLink}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 text-xs font-extrabold flex items-center justify-center"
+                              className="py-2 px-2.5 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 text-xs font-extrabold flex items-center justify-center rounded-xl"
                               title="Maps"
                             >
                               <Map className="w-4 h-4 text-blue-600" />
@@ -358,7 +352,7 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                           <button
                             type="button"
                             onClick={() => handleShare(offer)}
-                            className="py-2 px-3 bg-pink-50 hover:bg-pink-100 text-pink-700 border border-pink-200 text-xs font-extrabold flex items-center justify-center cursor-pointer"
+                            className="py-2 px-2.5 bg-pink-50 hover:bg-pink-100 text-pink-700 border border-pink-200 text-xs font-extrabold flex items-center justify-center cursor-pointer rounded-xl"
                             title="Share"
                           >
                             <Share2 className="w-4 h-4 text-pink-600" />
@@ -424,16 +418,13 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
 
                     {/* Special Pricing Display */}
                     {offer.marketPrice && offer.ourPrice && (
-                      <div className="bg-emerald-50 border border-emerald-200/80 p-2.5 rounded-xl text-xs flex items-center justify-around text-center">
-                        <div>
-                          <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Market Price</div>
-                          <div className="text-sm font-bold text-slate-400 line-through">{offer.marketPrice}</div>
-                        </div>
-                        <div className="w-px h-8 bg-emerald-200/80" />
-                        <div>
-                          <div className="text-[10.5px] font-black uppercase tracking-wider text-emerald-800">Our Price</div>
-                          <div className="text-base sm:text-lg font-black text-emerald-700">{offer.ourPrice}</div>
-                        </div>
+                      <div className="bg-emerald-50 border border-emerald-200/80 p-2.5 rounded-xl text-xs flex items-center justify-between">
+                        <span className="text-slate-400 line-through font-medium">
+                          Market Price {offer.marketPrice}
+                        </span>
+                        <span className="text-emerald-700 font-black text-sm">
+                          Our Price {offer.ourPrice}
+                        </span>
                       </div>
                     )}
 
