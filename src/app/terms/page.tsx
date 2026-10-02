@@ -29,20 +29,20 @@ export default function TermsPage() {
         </div>
 
         {/* Core Disclaimer Callout */}
-        <div className="bg-amber-50 border-2 border-amber-200/80 rounded-2xl p-5 sm:p-6 mb-12 shadow-xs">
-          <div className="flex items-start gap-4">
-            <div className="p-2.5 bg-amber-100 text-amber-700 rounded-xl flex-shrink-0 mt-0.5">
+        <div className="bg-amber-50 border-2 border-amber-200/80 rounded-2xl p-5 sm:p-6 mb-12 shadow-xs space-y-3 text-left">
+          {/* Row 1: Icon + Title */}
+          <div className="flex items-center gap-3">
+            <div className="p-2.5 bg-amber-100 text-amber-700 rounded-xl flex-shrink-0">
               <AlertTriangle className="w-6 h-6" />
             </div>
-            <div className="space-y-2">
-              <h3 className="text-base sm:text-lg font-extrabold text-amber-950">
-                CRITICAL NOTICE: WE ARE ONLY A LISTING PLATFORM
-              </h3>
-              <p className="text-sm sm:text-base text-amber-900 leading-relaxed font-medium">
-                Central Marketplace is <strong>strictly a listing platform and information directory</strong>. We do <strong>NOT</strong> take care of, are <strong>NOT</strong> involved in, and offer <strong>NO GUARANTEES</strong> for any payments, transactions, quality of work, service delivery, or agreements made between users and listed third-party vendors.
-              </p>
-            </div>
+            <h3 className="text-base sm:text-lg font-extrabold text-amber-950">
+              CRITICAL NOTICE: WE ARE ONLY A LISTING PLATFORM
+            </h3>
           </div>
+          {/* Row 2: Left-aligned Description */}
+          <p className="text-sm sm:text-base text-amber-900 leading-relaxed font-medium text-left">
+            Central Marketplace is <strong>strictly a listing platform and information directory</strong>. We do <strong>NOT</strong> take care of, are <strong>NOT</strong> involved in, and offer <strong>NO GUARANTEES</strong> for any payments, transactions, quality of work, service delivery, or agreements made between users and listed third-party vendors.
+          </p>
         </div>
 
         {/* Direct Page Content - Direct Layout (No Box Container) */}
