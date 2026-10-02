@@ -174,16 +174,8 @@ export function Navbar({
               )}
             </div>
 
-            {/* Compact Search Bar (Desktop & Mobile - inline right before Bell icon!) */}
-            <div className="flex-1 min-w-0 mx-1 sm:mx-3 max-w-[160px] xs:max-w-[200px] md:max-w-sm lg:max-w-md">
-              <SearchBarTrigger
-                onClick={handleSearchClick}
-                placeholder="Search..."
-              />
-            </div>
-
-            {/* Right Side: Desktop Nav Links + Notification Bell */}
-            <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
+            {/* Right Side Container: Right-Aligned Nav Links + Search Bar + Notification Bell */}
+            <div className="flex items-center justify-end gap-1.5 sm:gap-2.5 ml-auto flex-shrink-0 min-w-0">
               {/* Desktop Nav Links */}
               <nav className="hidden md:flex items-center space-x-1 sm:space-x-2">
                 {mainNavLinks.map((link) => {
@@ -258,6 +250,14 @@ export function Navbar({
                   )}
                 </div>
               </nav>
+
+              {/* Right-Aligned Search Bar (Both Desktop & Mobile) */}
+              <div className="w-[135px] xs:w-[165px] sm:w-[210px] md:w-[230px] lg:w-[260px] flex-shrink-0">
+                <SearchBarTrigger
+                  onClick={handleSearchClick}
+                  placeholder="Search..."
+                />
+              </div>
 
               {/* Header Right Corner Notification Bell Button */}
               <button
