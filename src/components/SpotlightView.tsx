@@ -201,6 +201,7 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
               const areaName = offerArea(offer) || "Chennai";
               const categoryName = offer.category || "";
               const validityText = offer.validity || offer.ends || offer.expiry || "Available";
+              const badgeText = offer.badge || offer.dealType || "Spotlight";
               const CategoryIcon = getCategoryIcon(categoryName, offer.title);
               const categoryColors = getCategoryColors(categoryName);
               const cleanPhone = offer.phone ? offer.phone.replace(/\s+/g, "") : "";
@@ -230,22 +231,28 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                     {/* Middle: Core Details */}
                     <div className="flex-1 min-w-0 flex flex-col justify-between">
                       <div>
-                        {/* Header: Icon + Category + Verified Badge */}
-                        <div className="flex items-center justify-between gap-3 mb-2">
-                          <div className="flex items-center gap-2 min-w-0">
-                            <div className={`w-7 h-7 rounded-md ${categoryColors.iconBg} text-white flex items-center justify-center flex-shrink-0`}>
+                        {/* Header: Icon + Brand Name (Line 1) & Category (Line 2) + Badge Pill */}
+                        <div className="flex items-start justify-between gap-3 mb-3">
+                          <div className="flex items-center gap-2 min-w-0 flex-1">
+                            <div className={`w-7.5 h-7.5 rounded-lg ${categoryColors.iconBg} text-white flex items-center justify-center flex-shrink-0 shadow-2xs mt-0.5`}>
                               <CategoryIcon className="w-4 h-4 stroke-[2.2]" />
                             </div>
-                            <span className="text-xs font-bold text-slate-500 truncate">
-                              {businessName} {categoryName ? `• ${categoryName}` : ""}
-                            </span>
+                            <div className="flex flex-col text-left min-w-0">
+                              <span className="text-xs sm:text-sm font-extrabold text-slate-800 truncate leading-tight">
+                                {businessName || areaName}
+                              </span>
+                              {categoryName && (
+                                <span className="text-[11px] font-semibold text-slate-500 truncate leading-tight mt-0.5">
+                                  {categoryName}
+                                </span>
+                              )}
+                            </div>
                           </div>
 
-                          {/* Verified Badge */}
-                          {offer.isVerified && (
-                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 text-xs font-extrabold flex-shrink-0">
-                              <BadgeCheck className="w-3.5 h-3.5 text-blue-600 fill-blue-100" />
-                              <span>Verified</span>
+                          {/* Badge Pill (Replacing Verified tag) */}
+                          {badgeText && (
+                            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-black tracking-wide bg-orange-50 text-orange-700 flex-shrink-0 ml-auto mt-0.5">
+                              {badgeText}
                             </span>
                           )}
                         </div>
@@ -357,21 +364,31 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
 
                   {/* MOBILE LAYOUT (Vertical Numbered Card) */}
                   <div className="block md:hidden space-y-3">
-                    {/* Top Row: Number Badge + Category + Verified Badge */}
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="flex items-center gap-2">
-                        <span className="px-2.5 py-1 rounded-md bg-orange-500 text-white font-black text-xs">
+                    {/* Top Row: Number Badge + Icon + Brand Name & Category (Next Line) + Badge Pill */}
+                    <div className="flex items-start justify-between gap-2.5 mb-2">
+                      <div className="flex items-center gap-2 min-w-0 flex-1">
+                        <span className="px-2.5 py-1 rounded-md bg-orange-500 text-white font-black text-xs flex-shrink-0">
                           #{numStr}
                         </span>
-                        <span className="text-xs font-extrabold text-slate-800 truncate">
-                          {businessName}
-                        </span>
+                        <div className={`w-7 h-7 rounded-lg ${categoryColors.iconBg} text-white flex items-center justify-center flex-shrink-0 shadow-2xs mt-0.5`}>
+                          <CategoryIcon className="w-3.5 h-3.5 stroke-[2.2]" />
+                        </div>
+                        <div className="flex flex-col text-left min-w-0">
+                          <span className="text-xs font-extrabold text-slate-800 truncate leading-tight">
+                            {businessName || areaName}
+                          </span>
+                          {categoryName && (
+                            <span className="text-[10.5px] font-semibold text-slate-500 truncate leading-tight mt-0.5">
+                              {categoryName}
+                            </span>
+                          )}
+                        </div>
                       </div>
 
-                      {offer.isVerified && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 text-[10px] font-bold">
-                          <BadgeCheck className="w-3.5 h-3.5 text-blue-600 fill-blue-100" />
-                          <span>Verified</span>
+                      {/* Badge Pill (Replacing Verified tag) */}
+                      {badgeText && (
+                        <span className="px-2.5 py-0.5 rounded-full text-[10.5px] font-black tracking-wide bg-orange-50 text-orange-700 flex-shrink-0 ml-auto mt-0.5">
+                          {badgeText}
                         </span>
                       )}
                     </div>
