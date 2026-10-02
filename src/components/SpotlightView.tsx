@@ -243,10 +243,6 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                                 {businessName || areaName}
                               </span>
                               <div className="flex items-center gap-2 flex-wrap text-[11px] font-semibold text-slate-500 mt-0.5">
-                                {categoryName && (
-                                  <span className="text-slate-600 font-bold">{categoryName}</span>
-                                )}
-                                <span className="text-slate-300">•</span>
                                 <div className="flex items-center gap-1 font-bold text-slate-700">
                                   <MapPin className="w-3.5 h-3.5 text-red-500 fill-red-500/20" />
                                   <span>{areaName}</span>
@@ -425,10 +421,6 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                           {businessName || areaName}
                         </span>
                         <div className="flex items-center gap-1.5 flex-wrap text-[10.5px] font-semibold text-slate-500 mt-0.5">
-                          {categoryName && (
-                            <span className="text-slate-600 font-bold">{categoryName}</span>
-                          )}
-                          <span className="text-slate-300">•</span>
                           <div className="flex items-center gap-0.5 font-bold text-slate-700">
                             <MapPin className="w-3 h-3 text-red-500 fill-red-500/20" />
                             <span>{areaName}</span>
