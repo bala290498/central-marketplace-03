@@ -94,57 +94,39 @@ export function Navbar({
           <div className="flex items-center justify-between gap-1.5 sm:gap-4">
             {/* Brand Title + Location (Left Side) */}
             <div className="flex items-center gap-2 sm:gap-3.5 min-w-0 flex-shrink-0">
-              {/* Mobile View (< lg): Big Location Icon on Left + (Brand Name Line 1, Location Name Line 2) */}
-              <div className="flex lg:hidden items-center gap-2 min-w-0 flex-shrink-0">
+              {/* Mobile View (< lg): Brand Name Line 1, Location Name Line 2 (No Location Icon) */}
+              <div className="flex lg:hidden flex-col items-start justify-center min-w-0 leading-tight">
+                <Link
+                  href="/"
+                  className="inline-flex items-center outline-none focus:outline-none focus:ring-0 rounded-lg transition-colors group flex-shrink-0"
+                >
+                  <span className="font-extrabold text-xs xs:text-sm tracking-tight whitespace-nowrap">
+                    <span className="text-orange-500">Central</span>{" "}
+                    <span className="text-slate-900">Marketplace</span>
+                  </span>
+                </Link>
+
                 {onDetectLocation && (
                   <button
                     type="button"
                     onClick={onDetectLocation}
                     disabled={isLocating}
-                    className="w-8 h-8 rounded-xl bg-orange-50 border border-orange-200/80 text-orange-500 flex items-center justify-center flex-shrink-0 cursor-pointer hover:bg-orange-100 transition-colors shadow-2xs"
+                    className="inline-flex items-center text-[10px] sm:text-[11px] font-bold text-slate-600 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 truncate mt-0.5"
                     title={userAreaLabel ? `Location: ${userAreaLabel}` : "Allow location access"}
                   >
                     {isLocating ? (
-                      <Loader2 className="w-4.5 h-4.5 animate-spin text-orange-500" />
+                      <span className="text-slate-500 truncate">Locating...</span>
+                    ) : userLocation && userAreaLabel ? (
+                      <span className="text-slate-800 font-bold truncate max-w-[95px] xs:max-w-[125px]">
+                        {userAreaLabel}
+                      </span>
                     ) : (
-                      <MapPin className="w-4.5 h-4.5 text-orange-500 stroke-[2.2]" />
+                      <span className="text-slate-500 hover:text-slate-900 truncate">
+                        Allow location
+                      </span>
                     )}
                   </button>
                 )}
-
-                <div className="flex flex-col items-start justify-center min-w-0 leading-tight">
-                  <Link
-                    href="/"
-                    className="inline-flex items-center outline-none focus:outline-none focus:ring-0 rounded-lg transition-colors group flex-shrink-0"
-                  >
-                    <span className="font-extrabold text-xs xs:text-sm tracking-tight whitespace-nowrap">
-                      <span className="text-orange-500">Central</span>{" "}
-                      <span className="text-slate-900">Marketplace</span>
-                    </span>
-                  </Link>
-
-                  {onDetectLocation && (
-                    <button
-                      type="button"
-                      onClick={onDetectLocation}
-                      disabled={isLocating}
-                      className="inline-flex items-center text-[10px] sm:text-[11px] font-bold text-slate-600 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 truncate mt-0.5"
-                      title={userAreaLabel ? `Location: ${userAreaLabel}` : "Allow location access"}
-                    >
-                      {isLocating ? (
-                        <span className="text-slate-500 truncate">Locating...</span>
-                      ) : userLocation && userAreaLabel ? (
-                        <span className="text-slate-800 font-bold truncate max-w-[95px] xs:max-w-[125px]">
-                          {userAreaLabel}
-                        </span>
-                      ) : (
-                        <span className="text-slate-500 hover:text-slate-900 truncate">
-                          Allow location
-                        </span>
-                      )}
-                    </button>
-                  )}
-                </div>
               </div>
 
               {/* Desktop View (>= lg): Brand Title + Vertical Line + Location Button */}
