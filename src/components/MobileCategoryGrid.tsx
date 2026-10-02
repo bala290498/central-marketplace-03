@@ -77,7 +77,7 @@ export function MobileCategoryGrid({
     }
   };
 
-  const desktopVisible = isExpanded ? categoryMetas : categoryMetas.slice(0, 6);
+  const desktopVisible = isExpanded ? categoryMetas : categoryMetas.slice(0, 13);
   const mobileVisible = isExpanded ? categoryMetas : categoryMetas.slice(0, 5);
 
   return (
