@@ -241,11 +241,21 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                               <span className="text-xs sm:text-sm font-extrabold text-slate-800 truncate leading-tight">
                                 {businessName || areaName}
                               </span>
-                              {categoryName && (
-                                <span className="text-[11px] font-semibold text-slate-500 truncate leading-tight mt-0.5">
-                                  {categoryName}
-                                </span>
-                              )}
+                              <div className="flex items-center gap-2 flex-wrap text-[11px] font-semibold text-slate-500 mt-0.5">
+                                {categoryName && (
+                                  <span className="text-slate-600 font-bold">{categoryName}</span>
+                                )}
+                                <span className="text-slate-300">•</span>
+                                <div className="flex items-center gap-1 font-bold text-slate-700">
+                                  <MapPin className="w-3.5 h-3.5 text-red-500 fill-red-500/20" />
+                                  <span>{areaName}</span>
+                                </div>
+                                <span className="text-slate-300">•</span>
+                                <div className="flex items-center gap-1 font-bold text-slate-700">
+                                  <Timer className="w-3.5 h-3.5 text-rose-600" />
+                                  <span>{validityText}</span>
+                                </div>
+                              </div>
                             </div>
                           </div>
 
@@ -281,29 +291,32 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                         )}
                       </div>
 
-                      {/* Location & Validity Footer Row */}
-                      <div className="flex items-center gap-4 text-xs font-bold text-slate-700 pt-2 border-t border-slate-100">
-                        <div className="flex items-center gap-1">
-                          <MapPin className="w-4 h-4 text-red-500 fill-red-500/20" />
-                          <span>{areaName}</span>
-                        </div>
-                        <span className="text-slate-300">|</span>
-                        <div className="flex items-center gap-1">
-                          <Timer className="w-4 h-4 text-rose-600" />
-                          <span>{validityText}</span>
-                        </div>
+                      {/* Bottom Space: 3 Key Features */}
+                      <div className="flex items-center gap-2 sm:gap-2.5 text-xs font-bold text-slate-700 pt-2.5 border-t border-slate-100 flex-wrap">
+                        {(offer.features && offer.features.length > 0
+                          ? offer.features.slice(0, 3)
+                          : ["100% Genuine Offer", "Instant Redemption", "Verified Merchant"]
+                        ).map((feat, fIdx) => (
+                          <div
+                            key={fIdx}
+                            className="flex items-center gap-1.5 bg-slate-100/90 hover:bg-slate-200/60 px-2.5 py-1 rounded-lg text-slate-800 text-[11.5px] font-extrabold transition-colors"
+                          >
+                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
+                            <span>{feat}</span>
+                          </div>
+                        ))}
                       </div>
                     </div>
 
                     {/* Right: Light Low-Intensity Green Container (No horizontal line) */}
                     <div className="w-64 bg-emerald-50/60 border border-emerald-200/60 rounded-2xl p-3.5 flex flex-col justify-between flex-shrink-0">
-                      {/* Special Pricing Display (Without inner horizontal line) */}
+                      {/* Special Pricing Display (Larger text, without inner horizontal line) */}
                       {offer.marketPrice && offer.ourPrice ? (
                         <div className="text-center mb-3">
-                          <div className="text-[11px] font-bold text-slate-400 line-through mb-0.5">
+                          <div className="text-xs font-bold text-slate-400 line-through mb-0.5">
                             Market Price {offer.marketPrice}
                           </div>
-                          <div className="text-lg font-black text-emerald-700">
+                          <div className="text-xl sm:text-2xl font-black text-emerald-700">
                             Our Price {offer.ourPrice}
                           </div>
                         </div>
@@ -312,7 +325,7 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                       )}
 
                       {/* Action Buttons */}
-                      <div className="space-y-2 mt-auto">
+                      <div className="space-y-3 mt-auto">
                         {cleanPhone && (
                           <a
                             href={`tel:${cleanPhone}`}
@@ -323,19 +336,22 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                           </a>
                         )}
 
-                        <div className="flex items-center gap-1.5">
+                        {/* 3 Circular Action Icons with text placed outside below */}
+                        <div className="flex items-center justify-around gap-2 pt-1">
                           {whatsappUrl && (
                             <a
                               href={whatsappUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex-1 py-1.5 px-1 bg-white/70 hover:bg-white text-emerald-900 border border-emerald-200/80 text-[11px] font-extrabold text-center flex items-center justify-center gap-1.5 rounded-xl transition-colors shadow-2xs"
+                              className="flex flex-col items-center gap-1 group"
                               title="Chat on WhatsApp"
                             >
-                              <div className="w-6 h-6 rounded-full bg-white shadow-2xs flex items-center justify-center flex-shrink-0">
-                                <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-600" />
+                              <div className="w-9.5 h-9.5 rounded-full bg-white border border-emerald-200/90 shadow-2xs flex items-center justify-center text-emerald-600 group-hover:bg-emerald-50 group-hover:border-emerald-300 transition-all">
+                                <WhatsAppIcon className="w-4.5 h-4.5" />
                               </div>
-                              <span>Chat</span>
+                              <span className="text-[11px] font-extrabold text-emerald-950 group-hover:text-emerald-700">
+                                Chat
+                              </span>
                             </a>
                           )}
 
@@ -344,26 +360,30 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                               href={mapLink}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex-1 py-1.5 px-1 bg-white/70 hover:bg-white text-blue-900 border border-blue-200/80 text-[11px] font-extrabold flex items-center justify-center gap-1.5 rounded-xl transition-colors shadow-2xs"
+                              className="flex flex-col items-center gap-1 group"
                               title="View Route"
                             >
-                              <div className="w-6 h-6 rounded-full bg-white shadow-2xs flex items-center justify-center flex-shrink-0">
-                                <Map className="w-3.5 h-3.5 text-blue-600" />
+                              <div className="w-9.5 h-9.5 rounded-full bg-white border border-blue-200/90 shadow-2xs flex items-center justify-center text-blue-600 group-hover:bg-blue-50 group-hover:border-blue-300 transition-all">
+                                <Map className="w-4.5 h-4.5" />
                               </div>
-                              <span>Route</span>
+                              <span className="text-[11px] font-extrabold text-blue-950 group-hover:text-blue-700">
+                                Route
+                              </span>
                             </a>
                           )}
 
                           <button
                             type="button"
                             onClick={() => handleShare(offer)}
-                            className="flex-1 py-1.5 px-1 bg-white/70 hover:bg-white text-pink-900 border border-pink-200/80 text-[11px] font-extrabold flex items-center justify-center gap-1.5 cursor-pointer rounded-xl transition-colors shadow-2xs"
+                            className="flex flex-col items-center gap-1 group cursor-pointer"
                             title="Share Deal"
                           >
-                            <div className="w-6 h-6 rounded-full bg-white shadow-2xs flex items-center justify-center flex-shrink-0">
-                              <Share2 className="w-3.5 h-3.5 text-pink-600" />
+                            <div className="w-9.5 h-9.5 rounded-full bg-white border border-pink-200/90 shadow-2xs flex items-center justify-center text-pink-600 group-hover:bg-pink-50 group-hover:border-pink-300 transition-all">
+                              <Share2 className="w-4.5 h-4.5" />
                             </div>
-                            <span>Share</span>
+                            <span className="text-[11px] font-extrabold text-pink-950 group-hover:text-pink-700">
+                              Share
+                            </span>
                           </button>
                         </div>
                       </div>
@@ -385,11 +405,21 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                           <span className="text-xs font-extrabold text-slate-800 truncate leading-tight">
                             {businessName || areaName}
                           </span>
-                          {categoryName && (
-                            <span className="text-[10.5px] font-semibold text-slate-500 truncate leading-tight mt-0.5">
-                              {categoryName}
-                            </span>
-                          )}
+                          <div className="flex items-center gap-1.5 flex-wrap text-[10.5px] font-semibold text-slate-500 mt-0.5">
+                            {categoryName && (
+                              <span className="text-slate-600 font-bold">{categoryName}</span>
+                            )}
+                            <span className="text-slate-300">•</span>
+                            <div className="flex items-center gap-0.5 font-bold text-slate-700">
+                              <MapPin className="w-3 h-3 text-red-500 fill-red-500/20" />
+                              <span>{areaName}</span>
+                            </div>
+                            <span className="text-slate-300">•</span>
+                            <div className="flex items-center gap-0.5 font-bold text-slate-700">
+                              <Timer className="w-3 h-3 text-rose-600" />
+                              <span>{validityText}</span>
+                            </div>
+                          </div>
                         </div>
                       </div>
 
@@ -436,16 +466,20 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                       </div>
                     )}
 
-                    {/* Info Row: Location & Validity */}
-                    <div className="flex items-center justify-between text-xs font-bold text-slate-600 pt-1">
-                      <div className="flex items-center gap-1">
-                        <MapPin className="w-3.5 h-3.5 text-red-500 fill-red-500/20" />
-                        <span>{areaName}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Timer className="w-3.5 h-3.5 text-rose-600" />
-                        <span>{validityText}</span>
-                      </div>
+                    {/* Bottom Space: 3 Key Features */}
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-slate-700 pt-1 flex-wrap">
+                      {(offer.features && offer.features.length > 0
+                        ? offer.features.slice(0, 3)
+                        : ["100% Genuine Offer", "Instant Redemption", "Verified Merchant"]
+                      ).map((feat, fIdx) => (
+                        <div
+                          key={fIdx}
+                          className="flex items-center gap-1 bg-slate-100/90 px-2 py-0.5 rounded-md text-slate-800 text-[10.5px] font-bold"
+                        >
+                          <CheckCircle2 className="w-3 h-3 text-emerald-600 flex-shrink-0" />
+                          <span>{feat}</span>
+                        </div>
+                      ))}
                     </div>
 
                     {/* Action Buttons Row */}

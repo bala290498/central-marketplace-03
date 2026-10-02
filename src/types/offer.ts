@@ -21,6 +21,7 @@ export interface Offer {
   distance?: number;
   whatsNew?: string;
   whatsDifferent?: string;
+  features?: string[];
   marketPrice?: number | string;
   ourPrice?: number | string;
   isVerified?: boolean;

@@ -13,6 +13,11 @@
     "category": "Food",
     "business": "Royal Feast Fine Dining",
     "badge": "50% OFF SPOTLIGHT",
+    "features": [
+      "12 Traditional Items",
+      "Fresh Ghee Sweets",
+      "Unlimited Thali Feast"
+    ],
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 94431 00001",
     "whatsapp": "+91 94431 00001",
@@ -32,6 +37,11 @@
     "category": "Salon & Spa",
     "business": "Velvet Touch Luxury Salon",
     "badge": "SPOTLIGHT BOGO",
+    "features": [
+      "Deep Conditioning Spa",
+      "Organic Keratin Oil",
+      "Free Beard & Eyebrow Trim"
+    ],
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0067,80.2572",
     "phone": "+91 94431 00002",
     "whatsapp": "+91 94431 00002",
@@ -51,6 +61,11 @@
     "category": "Grocery",
     "business": "Green Earth Organic Mart",
     "badge": "SPOTLIGHT EXCLUSIVE",
+    "features": [
+      "25kg Monthly Bundle",
+      "Cold-Pressed Oils",
+      "Direct Farm Delivery"
+    ],
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9342,80.2150",
     "phone": "+91 94431 00003",
     "whatsapp": "+91 94431 00003",
@@ -70,6 +85,11 @@
     "category": "Electronic Services",
     "business": "Cool Tech AC Care",
     "badge": "VERIFIED SPOTLIGHT",
+    "features": [
+      "High-Pressure Jet Clean",
+      "Free Electrical Audit",
+      "30-Day Service Warranty"
+    ],
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0418,80.2337",
     "phone": "+91 94431 00004",
     "whatsapp": "+91 94431 00004",
@@ -89,6 +109,11 @@
     "category": "Electronics",
     "business": "iFix Smart Hub",
     "badge": "SPOTLIGHT DEAL",
+    "features": [
+      "30-Min Express Repair",
+      "9H Gorilla Glass Free",
+      "6-Month Guarantee"
+    ],
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9716,80.2206",
     "phone": "+91 94431 00005",
     "whatsapp": "+91 94431 00005",
@@ -108,6 +133,11 @@
     "category": "Fitness",
     "business": "Iron Vault Fitness Gym",
     "badge": "SPOTLIGHT 50% OFF",
+    "features": [
+      "3 Free Personal Sessions",
+      "Steam Bath & Locker Access",
+      "Customized Diet Plan"
+    ],
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9229,80.1275",
     "phone": "+91 94431 00006",
     "whatsapp": "+91 94431 00006",
@@ -127,6 +157,11 @@
     "category": "Home Services",
     "business": "Sparkle Cleaners",
     "badge": "SPOTLIGHT FEATURED",
+    "features": [
+      "5-Star Deep Sanitation",
+      "Free Herbal Pest Control",
+      "Full Balcony & Scrubbing"
+    ],
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0827,80.2707",
     "phone": "+91 94431 00007",
     "whatsapp": "+91 94431 00007",
@@ -146,6 +181,11 @@
     "category": "Fashion",
     "business": "Silk Heritage Silks",
     "badge": "SPOTLIGHT OFFER",
+    "features": [
+      "Silk Mark Certified",
+      "Direct Weaver Price",
+      "Free Blouse Stitching Coupon"
+    ],
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0382,80.2121",
     "phone": "+91 94431 00008",
     "whatsapp": "+91 94431 00008",
