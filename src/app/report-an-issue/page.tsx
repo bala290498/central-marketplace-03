@@ -64,7 +64,6 @@ export default function ReportPage() {
     return searchableItems.filter(
       (item) =>
         item.title.toLowerCase().includes(q) ||
-        item.id.toLowerCase().includes(q) ||
         item.business.toLowerCase().includes(q) ||
         item.location.toLowerCase().includes(q)
     );
@@ -131,10 +130,10 @@ export default function ReportPage() {
         ) : (
           <form onSubmit={handleSubmit} className="space-y-6">
 
-            {/* Searchable Listing ID or Title Combobox */}
+            {/* Searchable Listing Title Combobox */}
             <div className="relative" ref={dropdownRef}>
               <label className="block text-xs sm:text-sm font-bold text-slate-900 mb-1.5">
-                Listing ID or Title <span className="text-red-500">*</span>
+                Listing Title <span className="text-red-500">*</span>
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
@@ -149,7 +148,7 @@ export default function ReportPage() {
                     setListingId(e.target.value);
                     setIsDropdownOpen(true);
                   }}
-                  placeholder="Type or search listing (e.g. offer-001 or Title)..."
+                  placeholder="Type or search listing title..."
                   className="w-full pl-10 pr-10 py-3 rounded-2xl border border-slate-200 bg-white text-xs sm:text-sm font-medium focus:outline-none focus:ring-2 focus:ring-orange-500 shadow-2xs"
                 />
                 <button
@@ -170,7 +169,7 @@ export default function ReportPage() {
                         key={`${item.type}-${item.id}`}
                         type="button"
                         onClick={() => {
-                          setListingId(`[${item.id}] ${item.title}`);
+                          setListingId(item.title);
                           setIsDropdownOpen(false);
                         }}
                         className="w-full px-4 py-3 text-left hover:bg-slate-50 transition-colors flex items-center justify-between gap-3 group cursor-pointer"
@@ -181,11 +180,12 @@ export default function ReportPage() {
                               {item.title}
                             </span>
                           </div>
-                          <div className="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
-                            <span className="font-mono text-slate-400">#{item.id}</span>
-                            {item.business && <span>• {item.business}</span>}
-                            {item.location && <span>({item.location})</span>}
-                          </div>
+                          {(item.business || item.location) && (
+                            <div className="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
+                              {item.business && <span>{item.business}</span>}
+                              {item.location && <span>({item.location})</span>}
+                            </div>
+                          )}
                         </div>
                         <span
                           className={`text-[10px] font-extrabold px-2 py-0.5 rounded-md flex-shrink-0 flex items-center gap-1 ${
