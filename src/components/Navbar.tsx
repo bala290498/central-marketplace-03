@@ -94,13 +94,13 @@ export function Navbar({
           <div className="flex items-center justify-between gap-1.5 sm:gap-4">
             {/* Brand Title + Location (Left Side) */}
             <div className="flex items-center gap-2 sm:gap-3.5 min-w-0 flex-shrink-0">
-              {/* Mobile View (< lg): Brand Name Line 1, Location Name Line 2 (No Location Icon) */}
+              {/* Mobile View (< lg): Brand Name Line 1, Location Icon + Location Name Line 2 */}
               <div className="flex lg:hidden flex-col items-start justify-center min-w-0 leading-tight">
                 <Link
                   href="/"
                   className="inline-flex items-center outline-none focus:outline-none focus:ring-0 rounded-lg transition-colors group flex-shrink-0"
                 >
-                  <span className="font-extrabold text-sm xs:text-base sm:text-lg tracking-tight whitespace-nowrap">
+                  <span className="font-extrabold text-base xs:text-lg sm:text-xl tracking-tight whitespace-nowrap">
                     <span className="text-orange-500">Central</span>{" "}
                     <span className="text-slate-900">Marketplace</span>
                   </span>
@@ -111,19 +111,28 @@ export function Navbar({
                     type="button"
                     onClick={onDetectLocation}
                     disabled={isLocating}
-                    className="inline-flex items-center text-xs sm:text-sm font-medium text-slate-600 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 mt-0.5"
+                    className="inline-flex items-center gap-1 text-xs xs:text-sm font-semibold text-slate-600 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 mt-0.5"
                     title={userAreaLabel ? `Location: ${userAreaLabel}` : "Allow location access"}
                   >
                     {isLocating ? (
-                      <span className="text-slate-500 whitespace-nowrap">Locating...</span>
+                      <>
+                        <Loader2 className="w-3.5 h-3.5 animate-spin text-orange-500 flex-shrink-0" />
+                        <span className="text-slate-500 whitespace-nowrap">Locating...</span>
+                      </>
                     ) : userLocation && userAreaLabel ? (
-                      <span className="text-slate-700 font-medium whitespace-nowrap">
-                        {userAreaLabel}
-                      </span>
+                      <>
+                        <MapPin className="w-3.5 h-3.5 text-orange-500 flex-shrink-0" />
+                        <span className="text-slate-700 font-medium whitespace-nowrap">
+                          {userAreaLabel}
+                        </span>
+                      </>
                     ) : (
-                      <span className="text-slate-500 hover:text-slate-900 whitespace-nowrap">
-                        Allow location
-                      </span>
+                      <>
+                        <MapPin className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
+                        <span className="text-slate-500 hover:text-slate-900 whitespace-nowrap">
+                          Allow location
+                        </span>
+                      </>
                     )}
                   </button>
                 )}
