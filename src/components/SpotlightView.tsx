@@ -405,7 +405,7 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
 
                       {/* Badge Pill */}
                       {badgeText && (
-                        <span className="px-2.5 py-0.5 rounded-full text-[10.5px] font-black tracking-wide bg-amber-400 text-slate-950 flex-shrink-0">
+                        <span className="px-2.5 py-0.5 rounded-full text-[10.5px] font-black tracking-wide bg-orange-50 text-orange-700 flex-shrink-0">
                           {badgeText}
                         </span>
                       )}
