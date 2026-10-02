@@ -102,25 +102,25 @@ export function Navbar({
                   type="button"
                   onClick={onDetectLocation}
                   disabled={isLocating}
-                  className="lg:hidden inline-flex items-center gap-1 text-[11.5px] sm:text-xs font-extrabold text-slate-700 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 truncate mt-0.5"
+                  className="lg:hidden inline-flex items-center gap-1 text-[11px] sm:text-xs font-medium text-slate-500 hover:text-slate-700 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 truncate mt-0.5"
                   title={userAreaLabel ? `Location: ${userAreaLabel}` : "Allow location access"}
                 >
                   {isLocating ? (
                     <>
-                      <Loader2 className="w-3.5 h-3.5 animate-spin text-orange-500 flex-shrink-0" />
-                      <span className="text-slate-500 truncate">Locating...</span>
+                      <Loader2 className="w-3 h-3 animate-spin text-slate-400 flex-shrink-0" />
+                      <span className="text-slate-400 truncate">Locating...</span>
                     </>
                   ) : userLocation && userAreaLabel ? (
                     <>
-                      <MapPin className="w-3.5 h-3.5 text-orange-500 flex-shrink-0" />
-                      <span className="text-slate-800 font-extrabold truncate max-w-[110px] sm:max-w-[150px]">
+                      <MapPin className="w-3 h-3 text-slate-400 flex-shrink-0" />
+                      <span className="text-slate-500 font-medium truncate max-w-[120px] sm:max-w-[160px]">
                         {userAreaLabel}
                       </span>
                     </>
                   ) : (
                     <>
-                      <MapPin className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
-                      <span className="text-slate-600 hover:text-slate-900 truncate">
+                      <MapPin className="w-3 h-3 text-slate-400 flex-shrink-0" />
+                      <span className="text-slate-500 font-medium hover:text-slate-700 truncate">
                         Allow location
                       </span>
                     </>
@@ -137,25 +137,25 @@ export function Navbar({
                   type="button"
                   onClick={onDetectLocation}
                   disabled={isLocating}
-                  className="inline-flex items-center gap-1.5 text-sm font-bold text-slate-700 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 truncate"
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500 hover:text-slate-700 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 truncate"
                   title={userAreaLabel ? `Location: ${userAreaLabel}` : "Allow location access"}
                 >
                   {isLocating ? (
                     <>
-                      <Loader2 className="w-4 h-4 animate-spin text-orange-500 flex-shrink-0" />
-                      <span className="text-slate-500 truncate">Locating...</span>
+                      <Loader2 className="w-3.5 h-3.5 animate-spin text-slate-400 flex-shrink-0" />
+                      <span className="text-slate-400 truncate">Locating...</span>
                     </>
                   ) : userLocation && userAreaLabel ? (
                     <>
-                      <MapPin className="w-4 h-4 text-orange-500 flex-shrink-0" />
-                      <span className="text-slate-800 font-bold truncate max-w-[150px]">
+                      <MapPin className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
+                      <span className="text-slate-500 font-medium truncate max-w-[180px]">
                         {userAreaLabel}
                       </span>
                     </>
                   ) : (
                     <>
-                      <MapPin className="w-4 h-4 text-slate-400 flex-shrink-0" />
-                      <span className="text-slate-600 hover:text-slate-900 truncate">
+                      <MapPin className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
+                      <span className="text-slate-500 font-medium hover:text-slate-700 truncate">
                         Allow location
                       </span>
                     </>

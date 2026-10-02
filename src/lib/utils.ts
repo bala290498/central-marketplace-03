@@ -88,16 +88,20 @@ export function getBadgeTone(key: string): string {
 
 export function formatAddress(address: Record<string, string>): string {
   if (!address) return "";
-  return (
+  const area =
     address.suburb ||
     address.neighbourhood ||
     address.quarter ||
     address.village ||
     address.town ||
     address.city_district ||
-    address.city ||
-    ""
-  );
+    "";
+  const city = address.city || address.county || address.state_district || "";
+
+  if (area && city && area.toLowerCase() !== city.toLowerCase()) {
+    return `${area}, ${city}`;
+  }
+  return area || city || "";
 }
 
 export async function lookupUserArea(latitude: number, longitude: number): Promise<string> {
@@ -128,7 +132,12 @@ export async function lookupUserArea(latitude: number, longitude: number): Promi
       )}&longitude=${encodeURIComponent(longitude)}&localityLanguage=en`
     );
     const backup = await backupRes.json();
-    return backup.locality || backup.city || backup.principalSubdivision || "";
+    const locality = backup.locality || backup.suburb || backup.neighbourhood || "";
+    const city = backup.city || backup.principalSubdivision || "";
+    if (locality && city && locality.toLowerCase() !== city.toLowerCase()) {
+      return `${locality}, ${city}`;
+    }
+    return locality || city || "";
   } catch (err) {
     return "";
   }
