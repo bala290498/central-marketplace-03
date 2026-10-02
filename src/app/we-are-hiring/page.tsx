@@ -38,10 +38,7 @@ export default function WeAreHiringPage() {
           <div className="w-14 h-14 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center mx-auto mb-4 shadow-xs">
             <Briefcase className="w-7 h-7" />
           </div>
-          <span className="px-3.5 py-1.5 rounded-full bg-orange-100 text-orange-700 font-bold text-xs uppercase tracking-wider">
-            Careers
-          </span>
-          <h1 className="text-3xl sm:text-5xl font-black text-slate-900 mt-4 mb-3 tracking-tight">
+          <h1 className="text-3xl sm:text-5xl font-black text-slate-900 mb-3 tracking-tight">
             We&apos;re Hiring!
           </h1>
           <p className="text-slate-600 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
