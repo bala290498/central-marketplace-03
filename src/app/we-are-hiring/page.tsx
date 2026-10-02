@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { Users, FileText, Headphones, Mail, MapPin } from "lucide-react";
+import { Briefcase, Users, FileText, Headphones, Mail, MapPin } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "We're hiring | Central Marketplace",
@@ -29,18 +29,22 @@ export default function WeAreHiringPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50/60 text-slate-900 flex flex-col">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col">
       <Navbar />
 
-      <main className="flex-1 max-w-3xl w-full mx-auto px-4 sm:px-6 py-10">
+      <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-10 sm:py-14">
+        {/* Page Title Header with Matching Icon */}
         <div className="text-center mb-10">
+          <div className="w-14 h-14 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center mx-auto mb-4 shadow-xs">
+            <Briefcase className="w-7 h-7" />
+          </div>
           <span className="px-3.5 py-1.5 rounded-full bg-orange-100 text-orange-700 font-bold text-xs uppercase tracking-wider">
             Careers
           </span>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 mb-3 tracking-tight">
+          <h1 className="text-3xl sm:text-5xl font-black text-slate-900 mt-4 mb-3 tracking-tight">
             We&apos;re Hiring!
           </h1>
-          <p className="text-slate-600 text-sm sm:text-base max-w-xl mx-auto">
+          <p className="text-slate-600 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
             Help us bring local deals to more neighborhoods and empower neighborhood merchants.
           </p>
         </div>

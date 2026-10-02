@@ -130,22 +130,6 @@ export default function ReportPage() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Safety Banner */}
-            <div className="bg-red-50 border border-red-200 rounded-2xl p-4 sm:p-5 space-y-2 text-left">
-              {/* Row 1: Icon + Title */}
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-red-500 text-white flex items-center justify-center flex-shrink-0 shadow-xs">
-                  <AlertOctagon className="w-5 h-5" />
-                </div>
-                <h3 className="font-extrabold text-red-950 text-sm sm:text-base">
-                  Help Us Keep Central Marketplace Safe
-                </h3>
-              </div>
-              {/* Row 2: Left-aligned Description */}
-              <p className="text-xs sm:text-sm text-red-800 leading-relaxed text-left">
-                Report inappropriate, fake, or misleading listings so our team can review and take action.
-              </p>
-            </div>
 
             {/* Searchable Listing ID or Title Combobox */}
             <div className="relative" ref={dropdownRef}>
@@ -224,32 +208,27 @@ export default function ReportPage() {
               )}
             </div>
 
-            {/* Select Reason */}
+            {/* Select Reason Dropdown */}
             <div>
-              <label className="block text-xs sm:text-sm font-bold text-slate-900 mb-2.5">
+              <label className="block text-xs sm:text-sm font-bold text-slate-900 mb-1.5">
                 Select Reason <span className="text-red-500">*</span>
               </label>
-              <div className="space-y-2">
-                {reasons.map((r) => (
-                  <label
-                    key={r}
-                    className={`block p-3.5 sm:p-4 rounded-2xl border text-xs sm:text-sm font-bold cursor-pointer transition-all ${
-                      reason === r
-                        ? "border-orange-500 bg-orange-50/80 text-orange-950 shadow-2xs"
-                        : "border-slate-200/90 hover:bg-slate-100/60 text-slate-700 bg-white font-medium"
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name="reportReason"
-                      value={r}
-                      checked={reason === r}
-                      onChange={(e) => setReason(e.target.value)}
-                      className="sr-only"
-                    />
-                    <span>{r}</span>
-                  </label>
-                ))}
+              <div className="relative">
+                <select
+                  required
+                  value={reason}
+                  onChange={(e) => setReason(e.target.value)}
+                  className="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-white text-xs sm:text-sm font-semibold text-slate-900 outline-none focus:ring-2 focus:ring-orange-500 shadow-2xs appearance-none cursor-pointer pr-10"
+                >
+                  {reasons.map((r) => (
+                    <option key={r} value={r}>
+                      {r}
+                    </option>
+                  ))}
+                </select>
+                <div className="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
+                  <ChevronDown className="w-4 h-4" />
+                </div>
               </div>
             </div>
 
