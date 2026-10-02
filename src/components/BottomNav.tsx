@@ -9,15 +9,12 @@ import {
   ListFilter,
   PlusCircle,
   MoreHorizontal,
-  Bell,
 } from "lucide-react";
 import { MoreDrawer } from "./MoreDrawer";
-import { useNotification } from "@/context/NotificationContext";
 
 export function BottomNav() {
   const pathname = usePathname();
   const [isMoreOpen, setIsMoreOpen] = useState(false);
-  const { hasUnread, badgeCount, openNotification } = useNotification();
 
   const isHome = pathname === "/";
   const isSpotlight = pathname === "/spotlight";
@@ -26,22 +23,6 @@ export function BottomNav() {
 
   return (
     <>
-      {/* Mobile Floating Bell Button on Bottom Right Corner */}
-      <button
-        type="button"
-        onClick={openNotification}
-        aria-label="Notifications"
-        title="Notifications"
-        className="fixed bottom-20 right-4 z-40 md:hidden p-3 bg-white text-slate-800 hover:text-orange-600 rounded-full shadow-xl border border-slate-200/90 active:scale-95 transition-all cursor-pointer group flex items-center justify-center"
-      >
-        <Bell className="w-5 h-5 stroke-[2.2] text-slate-800 group-hover:text-orange-600" />
-        {hasUnread && (
-          <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white rounded-full text-[10px] font-black flex items-center justify-center ring-2 ring-white animate-bounce shadow-md">
-            {badgeCount}
-          </span>
-        )}
-      </button>
-
       {/* Mobile Fixed Bottom Navigation Bar (Home | Spotlight | List | Free Listing | More) */}
       <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 py-2 px-1 md:hidden shadow-lg shadow-slate-900/10">
         <div className="max-w-md mx-auto grid grid-cols-5 items-center justify-between text-center relative">

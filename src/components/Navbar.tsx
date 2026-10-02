@@ -257,7 +257,7 @@ export function Navbar({
             >
               <Bell className="w-5 h-5 stroke-[2.2] group-hover:scale-110 transition-transform text-slate-800 hover:text-orange-600" />
               {hasUnread && (
-                <span className="absolute -top-0.5 -right-0.5 w-4.5 h-4.5 sm:w-5 sm:h-5 bg-red-500 text-white rounded-full text-[10px] font-black flex items-center justify-center ring-2 ring-white animate-bounce shadow-md">
+                <span className="absolute -top-0.5 -right-0.5 w-4.5 h-4.5 sm:w-5 sm:h-5 bg-red-500 text-white rounded-full text-[10px] font-black flex items-center justify-center ring-2 ring-white shadow-md">
                   {badgeCount}
                 </span>
               )}
