@@ -100,7 +100,7 @@ export function Navbar({
                   href="/"
                   className="inline-flex items-center outline-none focus:outline-none focus:ring-0 rounded-lg transition-colors group flex-shrink-0"
                 >
-                  <span className="font-extrabold text-xs xs:text-sm tracking-tight whitespace-nowrap">
+                  <span className="font-extrabold text-sm xs:text-base sm:text-lg tracking-tight whitespace-nowrap">
                     <span className="text-orange-500">Central</span>{" "}
                     <span className="text-slate-900">Marketplace</span>
                   </span>
@@ -111,17 +111,17 @@ export function Navbar({
                     type="button"
                     onClick={onDetectLocation}
                     disabled={isLocating}
-                    className="inline-flex items-center text-[10px] sm:text-[11px] font-bold text-slate-600 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 truncate mt-0.5"
+                    className="inline-flex items-center text-xs sm:text-sm font-extrabold text-slate-700 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 mt-0.5"
                     title={userAreaLabel ? `Location: ${userAreaLabel}` : "Allow location access"}
                   >
                     {isLocating ? (
-                      <span className="text-slate-500 truncate">Locating...</span>
+                      <span className="text-slate-500 whitespace-nowrap">Locating...</span>
                     ) : userLocation && userAreaLabel ? (
-                      <span className="text-slate-800 font-bold truncate max-w-[95px] xs:max-w-[125px]">
+                      <span className="text-slate-800 font-extrabold whitespace-nowrap">
                         {userAreaLabel}
                       </span>
                     ) : (
-                      <span className="text-slate-500 hover:text-slate-900 truncate">
+                      <span className="text-slate-500 hover:text-slate-900 whitespace-nowrap">
                         Allow location
                       </span>
                     )}
