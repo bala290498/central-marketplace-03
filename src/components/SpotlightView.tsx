@@ -329,11 +329,11 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                               href={whatsappUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex-1 py-2 px-2 bg-emerald-100/70 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/80 text-xs font-extrabold text-center flex items-center justify-center gap-1 rounded-xl"
-                              title="WhatsApp"
+                              className="flex-1 py-2 px-1.5 bg-emerald-100/70 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/80 text-[11px] font-extrabold text-center flex items-center justify-center gap-1 rounded-xl"
+                              title="Chat on WhatsApp"
                             >
-                              <WhatsAppIcon className="w-4 h-4 text-emerald-600" />
-                              <span>WhatsApp</span>
+                              <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
+                              <span>Chat</span>
                             </a>
                           )}
 
@@ -342,20 +342,22 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                               href={mapLink}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="py-2 px-2.5 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 text-xs font-extrabold flex items-center justify-center rounded-xl"
-                              title="Maps"
+                              className="flex-1 py-2 px-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 text-[11px] font-extrabold flex items-center justify-center gap-1 rounded-xl"
+                              title="View Route"
                             >
-                              <Map className="w-4 h-4 text-blue-600" />
+                              <Map className="w-3.5 h-3.5 text-blue-600 flex-shrink-0" />
+                              <span>Route</span>
                             </a>
                           )}
 
                           <button
                             type="button"
                             onClick={() => handleShare(offer)}
-                            className="py-2 px-2.5 bg-pink-50 hover:bg-pink-100 text-pink-700 border border-pink-200 text-xs font-extrabold flex items-center justify-center cursor-pointer rounded-xl"
-                            title="Share"
+                            className="flex-1 py-2 px-1.5 bg-pink-50 hover:bg-pink-100 text-pink-700 border border-pink-200 text-[11px] font-extrabold flex items-center justify-center gap-1 cursor-pointer rounded-xl"
+                            title="Share Deal"
                           >
-                            <Share2 className="w-4 h-4 text-pink-600" />
+                            <Share2 className="w-3.5 h-3.5 text-pink-600 flex-shrink-0" />
+                            <span>Share</span>
                           </button>
                         </div>
                       </div>
@@ -441,13 +443,13 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                     </div>
 
                     {/* Action Buttons Row */}
-                    <div className="flex items-center gap-2 pt-2 border-t border-slate-100">
+                    <div className="flex items-center gap-1.5 pt-2 border-t border-slate-100">
                       {cleanPhone && (
                         <a
                           href={`tel:${cleanPhone}`}
-                          className="flex-[3] min-w-0 flex items-center justify-center gap-1.5 py-2.5 px-3 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-xs transition-colors"
+                          className="flex-[1.8] min-w-0 flex items-center justify-center gap-1 py-2.5 px-2 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-xs transition-colors rounded-xl"
                         >
-                          <Phone className="w-4 h-4 fill-current" />
+                          <Phone className="w-3.5 h-3.5 fill-current" />
                           <span>Call</span>
                         </a>
                       )}
@@ -457,10 +459,11 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                           href={whatsappUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex-1 py-2.5 px-2 bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-extrabold flex items-center justify-center"
-                          title="WhatsApp"
+                          className="flex-1 py-2.5 px-1 bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-extrabold flex items-center justify-center gap-1 rounded-xl"
+                          title="Chat on WhatsApp"
                         >
-                          <WhatsAppIcon className="w-4 h-4 text-emerald-600" />
+                          <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
+                          <span>Chat</span>
                         </a>
                       )}
 
@@ -469,20 +472,22 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                           href={mapLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex-1 py-2.5 px-2 bg-blue-50 text-blue-700 border border-blue-200 text-xs font-extrabold flex items-center justify-center"
-                          title="Maps"
+                          className="flex-1 py-2.5 px-1 bg-blue-50 text-blue-700 border border-blue-200 text-[11px] font-extrabold flex items-center justify-center gap-1 rounded-xl"
+                          title="View Route"
                         >
-                          <Map className="w-4 h-4 text-blue-600" />
+                          <Map className="w-3.5 h-3.5 text-blue-600 flex-shrink-0" />
+                          <span>Route</span>
                         </a>
                       )}
 
                       <button
                         type="button"
                         onClick={() => handleShare(offer)}
-                        className="flex-1 py-2.5 px-2 bg-pink-50 text-pink-700 border border-pink-200 text-xs font-extrabold flex items-center justify-center cursor-pointer"
-                        title="Share"
+                        className="flex-1 py-2.5 px-1 bg-pink-50 text-pink-700 border border-pink-200 text-[11px] font-extrabold flex items-center justify-center gap-1 cursor-pointer rounded-xl"
+                        title="Share Deal"
                       >
-                        <Share2 className="w-4 h-4 text-pink-600" />
+                        <Share2 className="w-3.5 h-3.5 text-pink-600 flex-shrink-0" />
+                        <span>Share</span>
                       </button>
                     </div>
                   </div>
