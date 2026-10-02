@@ -1,203 +1,197 @@
 import { Metadata } from "next";
-import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { FileText, ArrowLeft, Scale } from "lucide-react";
+import { Scale, AlertTriangle } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Terms & Conditions | Central Marketplace",
   description:
-    "Terms & Conditions for Central Marketplace and the Chennai Desk. Read our user duties, liability limitations, and platform guidelines.",
+    "Terms & Conditions for Central Marketplace. Read our platform disclaimer: we are strictly a listing directory platform and hold no responsibility, guarantees, or involvement in transactions.",
 };
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen bg-slate-50/60 text-slate-900 flex flex-col">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col">
       <Navbar />
 
-      <main className="flex-1 max-w-3xl w-full mx-auto px-4 sm:px-6 py-8">
-        {/* Back Link */}
-        <div className="mb-6">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-orange-600 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>← Central Marketplace</span>
-          </Link>
-        </div>
-
+      <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
         {/* Header Title Section */}
-        <div className="text-center mb-8">
-          <div className="w-12 h-12 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center mx-auto mb-3 shadow-xs">
-            <Scale className="w-6 h-6" />
+        <div className="text-center mb-10">
+          <div className="w-14 h-14 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center mx-auto mb-4 shadow-xs">
+            <Scale className="w-7 h-7" />
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          <h1 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
             Terms &amp; Conditions
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto mt-2 leading-relaxed">
-            Last updated: 10 September 2026. Applies to the Chennai Desk of Central Marketplace (the &ldquo;Desk&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;). By using the website, WhatsApp desk, or any listing we share, you agree to these terms.
+          <p className="text-sm sm:text-base text-slate-500 max-w-2xl mx-auto mt-3 leading-relaxed">
+            Last updated: October 2026. Please read these terms carefully before using our website or contacting listed providers.
           </p>
         </div>
 
-        {/* Content Box */}
-        <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-xs space-y-8 text-slate-700 text-sm leading-relaxed">
+        {/* Core Disclaimer Callout */}
+        <div className="bg-amber-50 border-2 border-amber-200/80 rounded-2xl p-5 sm:p-6 mb-12 shadow-xs">
+          <div className="flex items-start gap-4">
+            <div className="p-2.5 bg-amber-100 text-amber-700 rounded-xl flex-shrink-0 mt-0.5">
+              <AlertTriangle className="w-6 h-6" />
+            </div>
+            <div className="space-y-2">
+              <h3 className="text-base sm:text-lg font-extrabold text-amber-950">
+                CRITICAL NOTICE: WE ARE ONLY A LISTING PLATFORM
+              </h3>
+              <p className="text-sm sm:text-base text-amber-900 leading-relaxed font-medium">
+                Central Marketplace is <strong>strictly a listing platform and information directory</strong>. We do <strong>NOT</strong> take care of, are <strong>NOT</strong> involved in, and offer <strong>NO GUARANTEES</strong> for any payments, transactions, quality of work, service delivery, or agreements made between users and listed third-party vendors.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Direct Page Content - Direct Layout (No Box Container) */}
+        <div className="space-y-10 text-slate-700 text-sm sm:text-base leading-relaxed">
           {/* Section 1 */}
-          <section className="space-y-2">
-            <h2 className="text-lg font-extrabold text-slate-900 flex items-center gap-2">
-              <span className="w-7 h-7 rounded-lg bg-orange-50 text-orange-600 text-xs font-black flex items-center justify-center flex-shrink-0">
+          <section className="border-b border-slate-200 pb-8 space-y-3">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 flex items-center gap-3">
+              <span className="w-8 h-8 rounded-lg bg-orange-500 text-white text-sm font-black flex items-center justify-center flex-shrink-0">
                 1
               </span>
-              <span>What we are</span>
+              <span>We Are Strictly a Listing Directory Platform</span>
             </h2>
-            <p className="pl-9 text-slate-600">
-              Central Marketplace is a listing and introduction desk. We may share names, areas, and contact details of property owners, home-food providers, local sellers, wholesalers, home-service players, and professionals. You contact them directly.
+            <p className="text-slate-600 sm:pl-11">
+              Central Marketplace operates solely as an open information directory and contact listing platform. We publish names, contact numbers, service descriptions, and locations of property owners, vendors, home service providers, local shops, and independent professionals.
             </p>
-            <p className="pl-9 text-slate-600">
-              We are not a broker of record, marketplace seller, payment company, courier, insurer, employer, or guarantor of any person we list.
+            <p className="text-slate-600 sm:pl-11">
+              We are <strong>NOT</strong> a broker, real estate agency, marketplace seller, payment processor, employer, contractor, courier, insurer, or partner of any listed business, provider, or user.
             </p>
           </section>
 
           {/* Section 2 */}
-          <section className="space-y-3">
-            <h2 className="text-lg font-extrabold text-slate-900 flex items-center gap-2">
-              <span className="w-7 h-7 rounded-lg bg-orange-50 text-orange-600 text-xs font-black flex items-center justify-center flex-shrink-0">
+          <section className="border-b border-slate-200 pb-8 space-y-3">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 flex items-center gap-3">
+              <span className="w-8 h-8 rounded-lg bg-orange-500 text-white text-sm font-black flex items-center justify-center flex-shrink-0">
                 2
               </span>
-              <span>What we are not responsible for</span>
+              <span>Zero Involvement &amp; Non-Responsibility</span>
             </h2>
-            <p className="pl-9 text-slate-600">
-              We do not take part in, and we accept no responsibility or liability for:
+            <p className="text-slate-600 sm:pl-11">
+              Central Marketplace is <strong>NOT involved in any interactions, negotiations, bookings, or monetary exchanges</strong> between users and listed vendors. Specifically:
             </p>
-            <ul className="pl-9 space-y-2 list-disc list-inside text-slate-600">
-              <li>Money, deposits, advances, rents, fees, cash, UPI, bank transfer, or any other payment between you and another party.</li>
-              <li>Scams, impersonation, fake listings, fake documents, or dishonest dealing by any listed person or any customer.</li>
-              <li>Damage to property, injury, loss, theft, or any other harm arising from a visit, stay, meal, service, or deal.</li>
-              <li>Delivery time, delay, non-delivery, or partial delivery of food, goods, or services.</li>
-              <li>Quantity, weight, portion, stock, or availability.</li>
-              <li>Quality, fitness, hygiene, skill, licence, safety, or result of any property, food, product, or service.</li>
-              <li>Whether a room, flat, plot, or PG is vacant, legal, or as described.</li>
-              <li>Whether a professional is qualified, registered, or permitted to practise.</li>
+            <ul className="sm:pl-11 space-y-2 list-disc list-inside text-slate-600">
+              <li>
+                <strong>No Payment Handling:</strong> We do not collect, process, hold, escrow, or refund any money, rents, advance deposits, service fees, or payments exchanged between parties.
+              </li>
+              <li>
+                <strong>Not Taking Care of Services:</strong> We do not supervise, direct, control, schedule, monitor, or take care of the work, deliveries, food hygiene, or property conditions provided by listed third parties.
+              </li>
+              <li>
+                <strong>No Dispute Resolution:</strong> We are under no obligation to intervene in disputes, financial losses, non-deliveries, or legal conflicts between users and service providers.
+              </li>
             </ul>
-            <p className="pl-9 text-slate-600 pt-1">
-              No listing, message, or recommendation from the Desk is a promise that a service will work, that a person is genuine, or that a deal will complete.
-            </p>
           </section>
 
           {/* Section 3 */}
-          <section className="space-y-2">
-            <h2 className="text-lg font-extrabold text-slate-900 flex items-center gap-2">
-              <span className="w-7 h-7 rounded-lg bg-orange-50 text-orange-600 text-xs font-black flex items-center justify-center flex-shrink-0">
+          <section className="border-b border-slate-200 pb-8 space-y-3">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 flex items-center gap-3">
+              <span className="w-8 h-8 rounded-lg bg-orange-500 text-white text-sm font-black flex items-center justify-center flex-shrink-0">
                 3
               </span>
-              <span>No warranties</span>
+              <span>No Guarantees or Warranties</span>
             </h2>
-            <p className="pl-9 text-slate-600">
-              Listings and contacts are shared &ldquo;as is&rdquo; and &ldquo;as available&rdquo;. We do not warrant that information is complete, current, or accurate. We may add, change, or remove a listing at any time without notice.
+            <p className="text-slate-600 sm:pl-11">
+              All information shared on our website or official communication channels is provided strictly on an <strong>&ldquo;AS IS&rdquo;</strong> and <strong>&ldquo;AS AVAILABLE&rdquo;</strong> basis without guarantees or warranties of any kind.
             </p>
-            <p className="pl-9 text-slate-600">
-              Any view we share is only a connection aid. It is not advice, not a certificate, and not a guarantee.
-            </p>
+            <ul className="sm:pl-11 space-y-2 list-disc list-inside text-slate-600">
+              <li>
+                <strong>No Authenticity Guarantee:</strong> We do not verify, screen, endorse, or conduct background checks on listed providers, their credentials, licenses, or legal standing.
+              </li>
+              <li>
+                <strong>No Quality or Safety Guarantee:</strong> We offer zero warranties regarding the safety, quality, skill level, durability, legality, accuracy, or fitness for purpose of any property, service, food item, or product listed.
+              </li>
+              <li>
+                <strong>No Fraud Protection:</strong> We are not responsible or liable for scams, fake documents, misrepresentation, fraudulent payment requests, or dishonest behavior by any listed vendor or user.
+              </li>
+            </ul>
           </section>
 
           {/* Section 4 */}
-          <section className="space-y-3">
-            <h2 className="text-lg font-extrabold text-slate-900 flex items-center gap-2">
-              <span className="w-7 h-7 rounded-lg bg-orange-50 text-orange-600 text-xs font-black flex items-center justify-center flex-shrink-0">
+          <section className="border-b border-slate-200 pb-8 space-y-3">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 flex items-center gap-3">
+              <span className="w-8 h-8 rounded-lg bg-orange-500 text-white text-sm font-black flex items-center justify-center flex-shrink-0">
                 4
               </span>
-              <span>Your duty</span>
+              <span>User Duty &amp; Mandatory Due Diligence</span>
             </h2>
-            <ul className="pl-9 space-y-2 list-disc list-inside text-slate-600">
-              <li>Check the person, place, documents, price, and work yourself before you pay or visit.</li>
-              <li>Do not send money to an unknown party on the strength of a listing alone.</li>
-              <li>Keep your own records of what you agree with the other party.</li>
-              <li>Use contacts only for the request you made. Do not spam listed people.</li>
-              <li>Tell the Desk in a private chat if a listing looks fake or harmful.</li>
-            </ul>
-            <p className="pl-9 text-slate-600 pt-1">
-              Any contract, visit, payment, delivery, or work is solely between you and the other party. We are not a party to that arrangement.
+            <p className="text-slate-600 sm:pl-11">
+              By using Central Marketplace, you acknowledge and agree that any contact, deal, property visit, payment, or agreement you make is conducted <strong>entirely at your own sole risk</strong>.
             </p>
+            <div className="sm:pl-11 space-y-2 text-slate-600">
+              <p className="font-semibold text-slate-800">Users must always:</p>
+              <ul className="space-y-2 list-disc list-inside">
+                <li>Independently inspect properties, products, and scope of work in person before paying money or signing agreements.</li>
+                <li>Verify identity cards, legal ownership, business licenses, and official credentials of service providers.</li>
+                <li>Never transfer money, advance deposits, or UPI payments to unverified individuals based solely on a listing.</li>
+                <li>Keep direct receipts and written agreements directly with the service provider.</li>
+              </ul>
+            </div>
           </section>
 
           {/* Section 5 */}
-          <section className="space-y-2">
-            <h2 className="text-lg font-extrabold text-slate-900 flex items-center gap-2">
-              <span className="w-7 h-7 rounded-lg bg-orange-50 text-orange-600 text-xs font-black flex items-center justify-center flex-shrink-0">
+          <section className="border-b border-slate-200 pb-8 space-y-3">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 flex items-center gap-3">
+              <span className="w-8 h-8 rounded-lg bg-orange-500 text-white text-sm font-black flex items-center justify-center flex-shrink-0">
                 5
               </span>
-              <span>Providers</span>
+              <span>Terms for Listed Businesses &amp; Providers</span>
             </h2>
-            <p className="pl-9 text-slate-600">
-              If you ask to be listed, you confirm that your details are true and that you have the right to offer what you describe. We may refuse or remove a listing without giving a reason. Removal after a complaint does not make us responsible for what already happened.
+            <p className="text-slate-600 sm:pl-11">
+              If you submit a business, property, or service listing to Central Marketplace:
             </p>
+            <ul className="sm:pl-11 space-y-2 list-disc list-inside text-slate-600">
+              <li>You confirm that all information, photos, pricing, and contact details provided are accurate and truthful.</li>
+              <li>You confirm you possess all required statutory approvals, permits, and licenses to offer your advertised service or goods.</li>
+              <li>Central Marketplace reserves the right to edit, suspend, or permanently remove any listing at any time without prior notice or refund.</li>
+            </ul>
           </section>
 
           {/* Section 6 */}
-          <section className="space-y-2">
-            <h2 className="text-lg font-extrabold text-slate-900 flex items-center gap-2">
-              <span className="w-7 h-7 rounded-lg bg-orange-50 text-orange-600 text-xs font-black flex items-center justify-center flex-shrink-0">
+          <section className="border-b border-slate-200 pb-8 space-y-3">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 flex items-center gap-3">
+              <span className="w-8 h-8 rounded-lg bg-orange-500 text-white text-sm font-black flex items-center justify-center flex-shrink-0">
                 6
               </span>
-              <span>WhatsApp and data</span>
+              <span>Limitation of Liability</span>
             </h2>
-            <p className="pl-9 text-slate-600">
-              The site may open a private WhatsApp chat with the office. WhatsApp&rsquo;s own terms apply to that chat. We may keep area, name, number, category, and message text so we can reply and run the list. Do not send us data you do not want stored.
+            <p className="text-slate-600 sm:pl-11">
+              To the maximum extent permitted by law, Central Marketplace, its operators, founders, and affiliates shall <strong>NOT be liable for any direct, indirect, incidental, consequential, or punitive damages</strong>, including monetary loss, property damage, personal injury, stolen funds, or loss of business arising from:
             </p>
+            <ul className="sm:pl-11 space-y-2 list-disc list-inside text-slate-600">
+              <li>Your reliance on any contact details or listing published on the platform.</li>
+              <li>Any transaction, deal, payment, or service agreement made with a listed provider.</li>
+              <li>Any error, omission, delay, or interruption in platform availability.</li>
+            </ul>
           </section>
 
           {/* Section 7 */}
-          <section className="space-y-2">
-            <h2 className="text-lg font-extrabold text-slate-900 flex items-center gap-2">
-              <span className="w-7 h-7 rounded-lg bg-orange-50 text-orange-600 text-xs font-black flex items-center justify-center flex-shrink-0">
+          <section className="border-b border-slate-200 pb-8 space-y-3">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 flex items-center gap-3">
+              <span className="w-8 h-8 rounded-lg bg-orange-500 text-white text-sm font-black flex items-center justify-center flex-shrink-0">
                 7
               </span>
-              <span>Limitation of liability</span>
+              <span>Indemnification</span>
             </h2>
-            <p className="pl-9 text-slate-600">
-              To the fullest extent allowed by law, Central Marketplace and the Chennai Desk are not liable for any direct, indirect, special, or consequential loss, including loss of money, property, time, data, or reputation, arising from use of the site, a listing, a contact, or a deal you make with someone else.
-            </p>
-            <p className="pl-9 text-slate-600">
-              If a court still finds us liable, that liability is limited to the amount you paid us for a paid promotion in the thirty days before the claim &mdash; or zero if you paid us nothing.
+            <p className="text-slate-600 sm:pl-11">
+              You agree to indemnify, defend, and hold harmless Central Marketplace from any claims, damages, losses, liabilities, costs, or legal fees resulting from your use of any listing, your dealings with listed vendors, or your violation of these Terms &amp; Conditions.
             </p>
           </section>
 
           {/* Section 8 */}
-          <section className="space-y-2">
-            <h2 className="text-lg font-extrabold text-slate-900 flex items-center gap-2">
-              <span className="w-7 h-7 rounded-lg bg-orange-50 text-orange-600 text-xs font-black flex items-center justify-center flex-shrink-0">
+          <section className="space-y-3">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 flex items-center gap-3">
+              <span className="w-8 h-8 rounded-lg bg-orange-500 text-white text-sm font-black flex items-center justify-center flex-shrink-0">
                 8
               </span>
-              <span>Indemnity</span>
+              <span>Governing Law &amp; Jurisdiction</span>
             </h2>
-            <p className="pl-9 text-slate-600">
-              You will indemnify and hold us harmless against claims, costs, and losses arising from your use of a listing, your messages, your payments, or your breach of these terms.
-            </p>
-          </section>
-
-          {/* Section 9 */}
-          <section className="space-y-2">
-            <h2 className="text-lg font-extrabold text-slate-900 flex items-center gap-2">
-              <span className="w-7 h-7 rounded-lg bg-orange-50 text-orange-600 text-xs font-black flex items-center justify-center flex-shrink-0">
-                9
-              </span>
-              <span>Changes</span>
-            </h2>
-            <p className="pl-9 text-slate-600">
-              We may update these terms by posting a new version on this page. Continued use after that date means you accept the new terms.
-            </p>
-          </section>
-
-          {/* Section 10 */}
-          <section className="space-y-2">
-            <h2 className="text-lg font-extrabold text-slate-900 flex items-center gap-2">
-              <span className="w-7 h-7 rounded-lg bg-orange-50 text-orange-600 text-xs font-black flex items-center justify-center flex-shrink-0">
-                10
-              </span>
-              <span>Law</span>
-            </h2>
-            <p className="pl-9 text-slate-600">
-              These terms are governed by the laws of India. Courts in Chennai have exclusive jurisdiction, without affecting any non-waivable consumer right you may have.
+            <p className="text-slate-600 sm:pl-11">
+              These Terms &amp; Conditions are governed by the laws of India. Courts located in Chennai, Tamil Nadu shall have exclusive jurisdiction over any legal disputes arising in connection with this platform.
             </p>
           </section>
         </div>
@@ -207,3 +201,4 @@ export default function TermsPage() {
     </div>
   );
 }
+
