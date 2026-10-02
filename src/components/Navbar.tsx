@@ -280,6 +280,14 @@ export function Navbar({
           </div>
         </div>
 
+        {/* Mobile Search Bar in Header (< md) */}
+        <div className="md:hidden w-full pt-1">
+          <SearchBarTrigger
+            onClick={handleSearchClick}
+            placeholder="Search deals, shops, locations, categories..."
+          />
+        </div>
+
         {children}
       </div>
     </header>

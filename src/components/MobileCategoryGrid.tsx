@@ -83,14 +83,6 @@ export function MobileCategoryGrid({
   return (
     <>
       <div className="w-full mb-6 transition-all duration-300">
-        {/* Search Bar Above Popular Categories Section */}
-        <div className="mb-4">
-          <SearchBarTrigger
-            onClick={handleSearchClick}
-            placeholder="Search deals, shops, locations, categories, badges, services..."
-          />
-        </div>
-
         {/* Popular Categories Title */}
         <div className="mb-3.5 px-1">
           <h2
