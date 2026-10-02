@@ -300,16 +300,16 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                       {/* Special Pricing Box */}
                       {offer.marketPrice && offer.ourPrice ? (
                         <div className="bg-emerald-50 border border-emerald-200/80 p-3 rounded-2xl mb-4 text-center flex flex-col justify-center gap-0.5">
-                          <div className="text-xs font-semibold text-slate-400">
+                          <div className="text-[10.5px] font-extrabold uppercase tracking-wider text-slate-400">
                             Market Price
                           </div>
-                          <div className="text-xs font-bold text-slate-400 line-through mb-1">
+                          <div className="text-base font-bold text-slate-400 line-through mb-1.5">
                             {offer.marketPrice}
                           </div>
-                          <div className="text-xs font-extrabold text-emerald-800">
+                          <div className="text-[11px] font-black uppercase tracking-wider text-emerald-800">
                             Our Price
                           </div>
-                          <div className="text-lg font-black text-emerald-700">
+                          <div className="text-xl sm:text-2xl font-black text-emerald-700">
                             {offer.ourPrice}
                           </div>
                         </div>
@@ -426,13 +426,13 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                     {offer.marketPrice && offer.ourPrice && (
                       <div className="bg-emerald-50 border border-emerald-200/80 p-2.5 rounded-xl text-xs flex items-center justify-around text-center">
                         <div>
-                          <div className="text-[11px] font-semibold text-slate-400">Market Price</div>
-                          <div className="text-xs font-bold text-slate-400 line-through">{offer.marketPrice}</div>
+                          <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Market Price</div>
+                          <div className="text-sm font-bold text-slate-400 line-through">{offer.marketPrice}</div>
                         </div>
-                        <div className="w-px h-7 bg-emerald-200/80" />
+                        <div className="w-px h-8 bg-emerald-200/80" />
                         <div>
-                          <div className="text-[11px] font-extrabold text-emerald-800">Our Price</div>
-                          <div className="text-sm font-black text-emerald-700">{offer.ourPrice}</div>
+                          <div className="text-[10.5px] font-black uppercase tracking-wider text-emerald-800">Our Price</div>
+                          <div className="text-base sm:text-lg font-black text-emerald-700">{offer.ourPrice}</div>
                         </div>
                       </div>
                     )}
