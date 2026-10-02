@@ -233,10 +233,10 @@ export default function ReportPage() {
                 {reasons.map((r) => (
                   <label
                     key={r}
-                    className={`flex items-center gap-3 p-3.5 sm:p-4 rounded-2xl border text-xs sm:text-sm font-semibold cursor-pointer transition-all ${
+                    className={`block p-3.5 sm:p-4 rounded-2xl border text-xs sm:text-sm font-bold cursor-pointer transition-all ${
                       reason === r
-                        ? "border-orange-500 bg-orange-50/60 text-orange-950 shadow-2xs"
-                        : "border-slate-200/90 hover:bg-slate-100/60 text-slate-700 bg-white"
+                        ? "border-orange-500 bg-orange-50/80 text-orange-950 shadow-2xs"
+                        : "border-slate-200/90 hover:bg-slate-100/60 text-slate-700 bg-white font-medium"
                     }`}
                   >
                     <input
@@ -245,7 +245,7 @@ export default function ReportPage() {
                       value={r}
                       checked={reason === r}
                       onChange={(e) => setReason(e.target.value)}
-                      className="w-4 h-4 text-orange-500 accent-orange-500"
+                      className="sr-only"
                     />
                     <span>{r}</span>
                   </label>
