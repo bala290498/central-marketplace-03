@@ -12,6 +12,7 @@ import {
   ShieldAlert,
   FileText,
   Bell,
+  Search,
 } from "lucide-react";
 import { UserLocation } from "@/types/offer";
 import { SearchBarTrigger } from "./SearchBarTrigger";
@@ -79,32 +80,65 @@ export function Navbar({
     <header
       className={`relative z-50 ${
         isSticky ? "sticky top-0" : ""
-      } bg-white/95 backdrop-blur-md border-b border-slate-200/80 py-2.5 sm:py-3 shadow-xs`}
+      } bg-white/95 backdrop-blur-md border-b border-slate-200/80 py-2 sm:py-3 shadow-xs`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-2">
         <div className="flex items-center justify-between gap-2 sm:gap-4">
-          {/* Brand Title (Left Side) */}
+          {/* Brand Title + Location (Left Side) */}
           <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0 flex-shrink-0">
-            <Link
-              href="/"
-              className="inline-flex items-center outline-none focus:outline-none focus:ring-0 rounded-lg transition-colors group flex-shrink-0"
-            >
-              <span className="font-extrabold text-base sm:text-lg tracking-tight whitespace-nowrap">
-                <span className="text-orange-500">Central</span>{" "}
-                <span className="text-slate-900">Marketplace</span>
-              </span>
-            </Link>
+            <div className="flex flex-col items-start min-w-0">
+              <Link
+                href="/"
+                className="inline-flex items-center outline-none focus:outline-none focus:ring-0 rounded-lg transition-colors group flex-shrink-0"
+              >
+                <span className="font-extrabold text-base sm:text-lg tracking-tight whitespace-nowrap">
+                  <span className="text-orange-500">Central</span>{" "}
+                  <span className="text-slate-900">Marketplace</span>
+                </span>
+              </Link>
 
-            {onDetectLocation && (
-              <>
-                <div className="hidden lg:block h-5.5 w-px bg-slate-300 flex-shrink-0 select-none" />
-
-                {/* Location Button on Desktop (Next to title with vertical line) */}
+              {/* Location Button on Mobile (Under Brand Name) */}
+              {onDetectLocation && (
                 <button
                   type="button"
                   onClick={onDetectLocation}
                   disabled={isLocating}
-                  className="hidden lg:inline-flex items-center gap-1.5 text-sm font-bold text-slate-700 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 truncate"
+                  className="lg:hidden inline-flex items-center gap-1 text-[11px] font-bold text-slate-600 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 truncate mt-0.5"
+                  title={userAreaLabel ? `Location: ${userAreaLabel}` : "Allow location access"}
+                >
+                  {isLocating ? (
+                    <>
+                      <Loader2 className="w-3 h-3 animate-spin text-orange-500 flex-shrink-0" />
+                      <span className="text-slate-500 truncate">Locating...</span>
+                    </>
+                  ) : userLocation && userAreaLabel ? (
+                    <>
+                      <MapPin className="w-3 h-3 text-orange-500 flex-shrink-0" />
+                      <span className="text-slate-800 font-bold truncate max-w-[160px]">
+                        {userAreaLabel}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <MapPin className="w-3 h-3 text-slate-400 flex-shrink-0" />
+                      <span className="text-slate-500 hover:text-slate-900 truncate">
+                        Allow location
+                      </span>
+                    </>
+                  )}
+                </button>
+              )}
+            </div>
+
+            {/* Location Button on Desktop (Next to title with vertical line) */}
+            {onDetectLocation && (
+              <div className="hidden lg:flex items-center gap-2.5">
+                <div className="h-5.5 w-px bg-slate-300 flex-shrink-0 select-none" />
+                <button
+                  type="button"
+                  onClick={onDetectLocation}
+                  disabled={isLocating}
+                  className="inline-flex items-center gap-1.5 text-sm font-bold text-slate-700 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 truncate"
                   title={userAreaLabel ? `Location: ${userAreaLabel}` : "Allow location access"}
                 >
                   {isLocating ? (
@@ -128,7 +162,7 @@ export function Navbar({
                     </>
                   )}
                 </button>
-              </>
+              </div>
             )}
           </div>
 
@@ -140,39 +174,20 @@ export function Navbar({
             />
           </div>
 
-          {/* Right Side: Location (Mobile) + Desktop Nav Links + Notification Bell */}
-          <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0 ml-auto md:ml-0">
-            {onDetectLocation && (
-              <button
-                type="button"
-                onClick={onDetectLocation}
-                disabled={isLocating}
-                className="lg:hidden inline-flex items-center gap-1 text-xs font-bold text-slate-700 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-0 p-0 outline-none min-w-0 truncate"
-                title={userAreaLabel ? `Location: ${userAreaLabel}` : "Allow location access"}
-              >
-                {isLocating ? (
-                  <>
-                    <Loader2 className="w-3.5 h-3.5 animate-spin text-orange-500 flex-shrink-0" />
-                    <span className="text-slate-500 truncate">Locating...</span>
-                  </>
-                ) : userLocation && userAreaLabel ? (
-                  <>
-                    <MapPin className="w-3.5 h-3.5 text-orange-500 flex-shrink-0" />
-                    <span className="text-slate-800 font-bold truncate max-w-[110px] sm:max-w-[150px]">
-                      {userAreaLabel}
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    <MapPin className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
-                    <span className="text-slate-600 hover:text-slate-900 truncate">
-                      Allow location
-                    </span>
-                  </>
-                )}
-              </button>
-            )}
+          {/* Right Side: Mobile Search Icon + Bell Icon (and Desktop Nav Links) */}
+          <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0 ml-auto md:ml-0">
+            {/* Mobile Search Icon Button (< md) */}
+            <button
+              type="button"
+              onClick={handleSearchClick}
+              aria-label="Search"
+              title="Search"
+              className="md:hidden p-1.5 sm:p-2 rounded-full text-slate-700 hover:text-orange-600 hover:bg-orange-50/60 transition-all cursor-pointer group flex-shrink-0"
+            >
+              <Search className="w-5 h-5 stroke-[2.2] text-slate-800 group-hover:scale-110 group-hover:text-orange-600 transition-transform" />
+            </button>
 
+            {/* Desktop Nav Links */}
             <nav className="hidden md:flex items-center space-x-1 sm:space-x-2">
               {mainNavLinks.map((link) => {
                 const isActive = pathname === link.href;
@@ -263,14 +278,6 @@ export function Navbar({
               )}
             </button>
           </div>
-        </div>
-
-        {/* Mobile Search Bar in Header (< md) */}
-        <div className="md:hidden w-full pt-0.5">
-          <SearchBarTrigger
-            onClick={handleSearchClick}
-            placeholder="Search deals, shops, locations..."
-          />
         </div>
 
         {children}
