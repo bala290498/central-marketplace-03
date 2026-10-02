@@ -16,7 +16,7 @@ import {
 import { UserLocation, Offer } from "@/types/offer";
 import { SearchBarTrigger } from "./SearchBarTrigger";
 import { SearchModal } from "./SearchModal";
-import { getOffers } from "@/lib/offers";
+import { getAllOffers } from "@/lib/offers";
 import { useNotification } from "@/context/NotificationContext";
 
 interface NavbarProps {
@@ -47,8 +47,8 @@ export function Navbar({
   const timeoutId = useRef<NodeJS.Timeout | null>(null);
 
   const allOffers = useMemo(() => {
-    return offers && offers.length > 0 ? offers : getOffers();
-  }, [offers]);
+    return getAllOffers();
+  }, []);
 
   const handleSearchClick = () => {
     if (onOpenSearch) {

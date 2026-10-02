@@ -90,7 +90,9 @@ export function SearchModal({
 
   const handleSelectFinding = (offer: Offer) => {
     onClose();
-    if (offer.id) {
+    if (offer.isSpotlight) {
+      router.push("/spotlight");
+    } else if (offer.id) {
       router.push(`/list?id=${encodeURIComponent(offer.id)}`);
     } else if (offer.category) {
       router.push(`/list?category=${encodeURIComponent(offer.category)}&search=${encodeURIComponent(offer.title)}`);
@@ -219,7 +221,13 @@ export function SearchModal({
                         <span className="text-sm font-extrabold text-slate-900 truncate group-hover:text-orange-600 transition-colors">
                           {offer.title}
                         </span>
-                        {offer.badge && (
+                        {offer.isSpotlight && (
+                          <span className="px-2 py-0.5 rounded-full text-[10px] font-black bg-amber-100 text-amber-800 border border-amber-300/60 flex items-center gap-1">
+                            <Sparkles className="w-3 h-3 text-amber-600 fill-amber-500" />
+                            Spotlight
+                          </span>
+                        )}
+                        {!offer.isSpotlight && offer.badge && (
                           <span className="px-2 py-0.5 rounded-full text-[10px] font-black bg-orange-100 text-orange-700">
                             {offer.badge}
                           </span>

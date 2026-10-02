@@ -24,6 +24,7 @@ export interface Offer {
   marketPrice?: number | string;
   ourPrice?: number | string;
   isVerified?: boolean;
+  isSpotlight?: boolean;
 }
 
 export interface UserLocation {
