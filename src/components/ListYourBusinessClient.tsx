@@ -154,14 +154,15 @@ export function ListYourBusinessClient() {
               </div>
             </div>
 
-            {/* Row 2: Post Description (Optional) */}
+            {/* Row 2: Post Description * */}
             <div>
               <label className="block text-xs sm:text-sm font-extrabold text-slate-800 mb-1.5 flex items-center gap-1.5">
                 <FileText className="w-4 h-4 text-orange-500" />
-                <span>Post Description</span>
+                <span>Post Description *</span>
               </label>
               <textarea
                 rows={3}
+                required
                 value={formData.description}
                 onChange={(e) =>
                   setFormData({ ...formData, description: e.target.value })
