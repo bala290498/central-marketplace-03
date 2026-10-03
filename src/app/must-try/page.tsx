@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo, useRef, useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
-import { Star, Search, Sparkles, Tag, ChevronDown, CheckCircle2 } from "lucide-react";
+import { Star, Search, Sparkles, Tag, ChevronDown, CheckCircle2, Send, MessageSquare } from "lucide-react";
 import { getOffers, getSpotlightOffers } from "@/lib/offers";
 
 interface SearchableItem {
@@ -30,6 +30,7 @@ export default function MustTryPage() {
   const [hoverRating, setHoverRating] = useState<number>(0);
   const [details, setDetails] = useState<string>("");
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  const [submittedWhatsappUrl, setSubmittedWhatsappUrl] = useState<string>("");
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -97,6 +98,20 @@ export default function MustTryPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const textLines = [
+      `*Must Try Rating - Central Marketplace*`,
+      listingId ? `• *Listing Title:* ${listingId}` : null,
+      selectedItem?.business ? `• *Business / Brand:* ${selectedItem.business}` : null,
+      `• *Is it True?:* ${isTrueOption}`,
+      `• *Rating:* ${rating} / 5 Stars (${RATING_LABELS[rating] || ""})`,
+      details ? `• *Additional Details:* ${details}` : null,
+    ].filter(Boolean).join("\n");
+
+    const phoneNum = "919677691237";
+    const url = `https://wa.me/${phoneNum}?text=${encodeURIComponent(textLines)}`;
+    setSubmittedWhatsappUrl(url);
+    window.open(url, "_blank");
     setIsSubmitted(true);
   };
 
@@ -122,25 +137,37 @@ export default function MustTryPage() {
 
         {/* Direct Page Form Content */}
         {isSubmitted ? (
-          <div className="py-10 text-left space-y-4">
-            <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shadow-xs">
+          <div className="py-10 text-center space-y-4">
+            <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto shadow-xs">
               <CheckCircle2 className="w-8 h-8" />
             </div>
-            <h2 className="font-extrabold text-slate-900 text-xl sm:text-2xl">Rating Submitted</h2>
-            <p className="text-sm text-slate-600 max-w-sm leading-relaxed">
-              Thank you for sharing your rating! Your feedback helps highlight the best listings on Central Marketplace.
+            <h2 className="font-extrabold text-slate-900 text-xl sm:text-2xl">Rating Prepared for WhatsApp!</h2>
+            <p className="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
+              We&apos;ve formatted your rating details. If WhatsApp didn&apos;t open automatically, click the button below to send your details directly to 9677691237.
             </p>
-            <div className="pt-4">
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+              {submittedWhatsappUrl && (
+                <a
+                  href={submittedWhatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-8 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-extrabold transition-colors shadow-md shadow-emerald-600/25 inline-flex items-center gap-2"
+                >
+                  <MessageSquare className="w-4 h-4" />
+                  <span>Send via WhatsApp (+91 96776 91237)</span>
+                </a>
+              )}
               <button
                 type="button"
                 onClick={() => {
                   setIsSubmitted(false);
+                  setSubmittedWhatsappUrl("");
                   setListingId("");
                   setIsTrueOption("Yes, 100% True");
                   setRating(5);
                   setDetails("");
                 }}
-                className="px-6 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-md transition-colors cursor-pointer"
+                className="px-8 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-bold transition-colors cursor-pointer"
               >
                 Submit Another Rating
               </button>
@@ -330,12 +357,13 @@ export default function MustTryPage() {
             </div>
 
             {/* Submit Button */}
-            <div className="text-center pt-2">
+            <div className="pt-4 flex justify-center text-center">
               <button
                 type="submit"
-                className="w-auto px-8 sm:px-10 py-3 sm:py-3.5 rounded-2xl bg-orange-500 hover:bg-orange-600 text-white font-extrabold text-sm sm:text-base transition-colors cursor-pointer inline-flex items-center justify-center gap-2"
+                className="w-auto px-8 sm:px-10 py-3 sm:py-3.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-extrabold text-sm sm:text-base shadow-md shadow-orange-500/25 transition-all cursor-pointer inline-flex items-center justify-center gap-2"
               >
-                Submit Rating
+                <Send className="w-4 h-4" />
+                <span>Submit Rating</span>
               </button>
             </div>
           </form>
