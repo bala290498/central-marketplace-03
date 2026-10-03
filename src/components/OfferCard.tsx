@@ -149,7 +149,7 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
       {/* Must Try Top Right Corner Ribbon */}
       {(offer.mustTry || offer.isMustTry) && (
         <div className="absolute top-0 right-0 z-20 w-28 h-28 overflow-hidden pointer-events-none">
-          <div className="absolute top-4 -right-8 w-36 py-1 bg-gradient-to-r from-rose-600 via-red-600 to-amber-500 text-white text-[10px] font-black uppercase tracking-wider text-center transform rotate-45 shadow-md border-y border-white/30">
+          <div className="absolute top-4 -right-9 w-36 py-1 bg-gradient-to-r from-rose-600 via-red-600 to-amber-500 text-white text-[10px] font-black uppercase tracking-wider flex items-center justify-center text-center leading-none transform rotate-45 shadow-md border-y border-white/30 pl-0.5">
             MUST TRY
           </div>
         </div>
