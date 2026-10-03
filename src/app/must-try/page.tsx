@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo, useRef, useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
-import { Star, Search, Sparkles, Tag, ChevronDown, CheckCircle2, HelpCircle } from "lucide-react";
+import { Star, Search, Sparkles, Tag, ChevronDown, CheckCircle2 } from "lucide-react";
 import { getOffers, getSpotlightOffers } from "@/lib/offers";
 
 interface SearchableItem {
@@ -11,6 +11,7 @@ interface SearchableItem {
   business: string;
   location: string;
   description: string;
+  badge: string;
   type: "Spotlight" | "Listing";
 }
 
@@ -41,6 +42,7 @@ export default function MustTryPage() {
       business: o.business || o.store || o.merchant || "",
       location: o.location || o.area || "",
       description: o.description || "",
+      badge: o.badge || o.dealType || o.validity || "Available",
       type: "Listing",
     }));
     const spotlightOffers: SearchableItem[] = getSpotlightOffers().map((o) => ({
@@ -49,6 +51,7 @@ export default function MustTryPage() {
       business: o.business || o.store || o.merchant || "",
       location: o.location || o.area || "",
       description: o.description || "",
+      badge: o.badge || o.dealType || o.validity || "Available",
       type: "Spotlight",
     }));
 
@@ -226,53 +229,39 @@ export default function MustTryPage() {
             {/* Verification Field (Appears once listing title is entered/selected) */}
             {listingId.trim() !== "" && (
               <div className="bg-orange-50/80 border border-orange-200 rounded-2xl p-4 sm:p-5 space-y-3.5 animate-in fade-in duration-200">
-                <div className="flex items-start gap-2.5">
-                  <HelpCircle className="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" />
-                  <div className="space-y-2 min-w-0 flex-1">
-                    {/* Brand Name & Type Badge */}
-                    <div className="flex items-center justify-between gap-2 flex-wrap">
-                      {selectedItem?.business ? (
-                        <span className="text-xs sm:text-sm font-extrabold text-slate-800">
-                          {selectedItem.business}
-                        </span>
-                      ) : (
-                        <div />
-                      )}
-                      {selectedItem?.type && (
-                        <span
-                          className={`text-[10px] font-extrabold px-2 py-0.5 rounded-md flex-shrink-0 flex items-center gap-1 ${
-                            selectedItem.type === "Spotlight"
-                              ? "bg-amber-100 text-amber-800 border border-amber-200"
-                              : "bg-orange-100 text-orange-800 border border-orange-200"
-                          }`}
-                        >
-                          {selectedItem.type === "Spotlight" ? (
-                            <Sparkles className="w-3 h-3 text-amber-600" />
-                          ) : (
-                            <Tag className="w-3 h-3 text-orange-600" />
-                          )}
-                          {selectedItem.type}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Title */}
-                    <h3 className="text-sm sm:text-base font-extrabold text-slate-900 leading-snug">
-                      {selectedItem?.title || listingId}
-                    </h3>
-
-                    {/* Description */}
-                    {selectedItem?.description && (
-                      <p className="text-xs text-slate-600 leading-relaxed bg-white/80 p-2.5 rounded-xl border border-orange-200/60">
-                        {selectedItem.description}
-                      </p>
+                <div className="space-y-2 min-w-0">
+                  {/* Brand Name & Card Badge */}
+                  <div className="flex items-center justify-between gap-2 flex-wrap">
+                    {selectedItem?.business ? (
+                      <span className="text-xs sm:text-sm font-extrabold text-slate-800">
+                        {selectedItem.business}
+                      </span>
+                    ) : (
+                      <div />
                     )}
-
-                    {/* Question Prompt */}
-                    <p className="text-xs sm:text-sm font-extrabold text-slate-900 pt-1">
-                      Is this offer / claim true as described? <span className="text-red-500">*</span>
-                    </p>
+                    {selectedItem?.badge && (
+                      <span className="px-2.5 py-0.5 rounded-full text-[11px] font-black tracking-wide bg-orange-100 text-orange-800 border border-orange-200/80 flex-shrink-0">
+                        {selectedItem.badge}
+                      </span>
+                    )}
                   </div>
+
+                  {/* Title */}
+                  <h3 className="text-sm sm:text-base font-extrabold text-slate-900 leading-snug">
+                    {selectedItem?.title || listingId}
+                  </h3>
+
+                  {/* Description */}
+                  {selectedItem?.description && (
+                    <p className="text-xs text-slate-600 leading-relaxed bg-white/80 p-2.5 rounded-xl border border-orange-200/60">
+                      {selectedItem.description}
+                    </p>
+                  )}
+
+                  {/* Question Prompt */}
+                  <p className="text-xs sm:text-sm font-extrabold text-slate-900 pt-1">
+                    Is this offer / claim true as described? <span className="text-red-500">*</span>
+                  </p>
                 </div>
 
                 <div className="flex flex-wrap items-center gap-2 pt-1">
