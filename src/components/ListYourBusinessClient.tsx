@@ -12,6 +12,7 @@ import {
   Phone,
   MessageSquare,
   FileText,
+  PlusCircle,
 } from "lucide-react";
 
 export function ListYourBusinessClient() {
@@ -107,13 +108,16 @@ export function ListYourBusinessClient() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Form Header */}
-            <div className="pb-4 border-b border-slate-200">
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">
-                Post Details
+            {/* Page Title Header */}
+            <div className="text-center mb-8">
+              <div className="w-14 h-14 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center mx-auto mb-3 shadow-xs">
+                <PlusCircle className="w-7 h-7" />
+              </div>
+              <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                Free Listing &amp; Posting
               </h1>
-              <p className="text-xs sm:text-sm text-slate-500 mt-1">
-                Fill out the information below to publish your post on Central Marketplace.
+              <p className="text-sm sm:text-base text-slate-500 max-w-lg mx-auto mt-2 leading-relaxed">
+                Publish your business, dining offers, retail deals, or neighborhood announcements for free on Central Marketplace.
               </p>
             </div>
 
