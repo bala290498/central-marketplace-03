@@ -7,6 +7,7 @@ import {
   MapPin,
   Tag,
   Clock,
+  Calendar,
   ChevronDown,
   Navigation,
   X,
@@ -27,6 +28,8 @@ interface FilterBarProps {
   onValidityChange?: (val: string) => void;
   selectedDistance?: number | null;
   onDistanceChange?: (dist: number | null) => void;
+  sortBy?: string;
+  onSortChange?: (sort: string) => void;
   searchQuery?: string;
   onClearSearch?: () => void;
   onResetAll?: () => void;
@@ -51,6 +54,8 @@ export function FilterBar({
   onValidityChange = () => {},
   selectedDistance = null,
   onDistanceChange = () => {},
+  sortBy = "",
+  onSortChange = () => {},
   searchQuery = "",
   onClearSearch = () => {},
   onResetAll = () => {},
@@ -319,6 +324,24 @@ export function FilterBar({
                 <option value="Valid All Days">Valid All Days</option>
               </>
             )}
+          </select>
+          <ChevronDown className="absolute right-3 w-4 h-4 text-slate-400 pointer-events-none" />
+        </div>
+      </div>
+
+      {/* Row 7: Sort By Date */}
+      <div className="space-y-1.5 pt-1 border-t border-slate-100">
+        <label className="block text-xs font-bold text-slate-700">Sort By Date</label>
+        <div className="relative flex items-center">
+          <Calendar className="absolute left-3 w-4 h-4 text-slate-400 pointer-events-none" />
+          <select
+            value={sortBy}
+            onChange={(e) => onSortChange?.(e.target.value)}
+            className="w-full pl-9 pr-8 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-bold appearance-none outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 shadow-2xs cursor-pointer transition-all"
+          >
+            <option value="">Default Order</option>
+            <option value="newest">Date: Newest First</option>
+            <option value="oldest">Date: Oldest First</option>
           </select>
           <ChevronDown className="absolute right-3 w-4 h-4 text-slate-400 pointer-events-none" />
         </div>

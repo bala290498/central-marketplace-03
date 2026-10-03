@@ -133,3 +133,24 @@ export async function lookupUserArea(latitude: number, longitude: number): Promi
     return "";
   }
 }
+
+export function parseDateDdMmYyyy(dateStr?: string): number {
+  if (!dateStr) return 0;
+  const parts = dateStr.trim().split(/[-/]/);
+  if (parts.length === 3) {
+    const day = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10) - 1;
+    const year = parseInt(parts[2], 10);
+    return new Date(year, month, day).getTime();
+  }
+  return 0;
+}
+
+export function sortOffersByDate(offers: Offer[], ascending = false): Offer[] {
+  return [...offers].sort((a, b) => {
+    const timeA = parseDateDdMmYyyy(a.dateCreated);
+    const timeB = parseDateDdMmYyyy(b.dateCreated);
+    return ascending ? timeA - timeB : timeB - timeA;
+  });
+}
+

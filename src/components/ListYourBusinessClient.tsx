@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
 import {
   CheckCircle2,
   Send,
@@ -17,7 +16,7 @@ import {
 export function ListYourBusinessClient() {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Form State matching offers.json fields
+  // Form State matching list.json fields
   const [formData, setFormData] = useState({
     business: "",
     title: "",
@@ -208,8 +207,7 @@ export function ListYourBusinessClient() {
         )}
       </main>
 
-      {/* Desktop Footer (Hidden on Mobile) */}
-      <Footer />
+
     </div>
   );
 }

@@ -10,7 +10,6 @@ import {
   directionsUrl,
 } from "@/lib/utils";
 import { Navbar } from "./Navbar";
-import { Footer } from "./Footer";
 import { getCategoryIcon, getCategoryColors } from "@/lib/categories";
 import {
   Sparkles,
@@ -586,8 +585,7 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
         )}
       </main>
 
-      {/* Footer (Desktop Only) */}
-      <Footer />
+
 
       {/* Floating Toast Notification */}
       {toastMessage && (

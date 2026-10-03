@@ -1,5 +1,5 @@
 import { Offer } from "@/types/offer";
-import offersData from "@/data/offers.json";
+import offersData from "@/data/list.json";
 import spotlightData from "@/data/spotlight.json";
 
 export function getOffers(): Offer[] {

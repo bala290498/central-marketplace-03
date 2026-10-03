@@ -26,6 +26,7 @@ export interface Offer {
   ourPrice?: number | string;
   isVerified?: boolean;
   isSpotlight?: boolean;
+  dateCreated?: string;
 }
 
 export interface UserLocation {

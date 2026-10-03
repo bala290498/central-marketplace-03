@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
 import { Scale, AlertTriangle } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -197,7 +196,7 @@ export default function TermsPage() {
         </div>
       </main>
 
-      <Footer />
+
     </div>
   );
 }

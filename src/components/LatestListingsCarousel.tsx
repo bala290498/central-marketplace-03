@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Offer, UserLocation } from "@/types/offer";
+import { sortOffersByDate } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import { ShortOfferCard } from "./ShortOfferCard";
 
@@ -18,8 +19,8 @@ export function LatestListingsCarousel({
 }: LatestListingsCarouselProps) {
   if (!offers || offers.length === 0) return null;
 
-  // Take last 5 entries for latest listings carousel
-  const latestItems = offers.slice(-5).reverse();
+  // Take top 10 latest listings sorted by dateCreated (newest first)
+  const latestItems = sortOffersByDate(offers, false).slice(0, 10);
 
   return (
     <section className="mb-8">
@@ -55,4 +56,3 @@ export function LatestListingsCarousel({
     </section>
   );
 }
-

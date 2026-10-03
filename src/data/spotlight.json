@@ -21,7 +21,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 94431 00001",
     "whatsapp": "+91 94431 00001",
-    "validity": "Valid All Days"
+    "validity": "Valid All Days",
+    "dateCreated": "05-01-2026"
   },
   {
     "id": "spotlight-002",
@@ -45,7 +46,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0067,80.2572",
     "phone": "+91 94431 00002",
     "whatsapp": "+91 94431 00002",
-    "validity": "Expires Soon"
+    "validity": "Expires Soon",
+    "dateCreated": "12-02-2026"
   },
   {
     "id": "spotlight-003",
@@ -69,7 +71,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9342,80.2150",
     "phone": "+91 94431 00003",
     "whatsapp": "+91 94431 00003",
-    "validity": "Valid All Days"
+    "validity": "Valid All Days",
+    "dateCreated": "23-03-2026"
   },
   {
     "id": "spotlight-004",
@@ -93,7 +96,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0418,80.2337",
     "phone": "+91 94431 00004",
     "whatsapp": "+91 94431 00004",
-    "validity": "Limited"
+    "validity": "Limited",
+    "dateCreated": "01-05-2026"
   },
   {
     "id": "spotlight-005",
@@ -117,7 +121,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9716,80.2206",
     "phone": "+91 94431 00005",
     "whatsapp": "+91 94431 00005",
-    "validity": "Available"
+    "validity": "Available",
+    "dateCreated": "08-06-2026"
   },
   {
     "id": "spotlight-006",
@@ -141,7 +146,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9229,80.1275",
     "phone": "+91 94431 00006",
     "whatsapp": "+91 94431 00006",
-    "validity": "Limited"
+    "validity": "Limited",
+    "dateCreated": "17-07-2026"
   },
   {
     "id": "spotlight-007",
@@ -165,7 +171,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0827,80.2707",
     "phone": "+91 94431 00007",
     "whatsapp": "+91 94431 00007",
-    "validity": "Valid All Days"
+    "validity": "Valid All Days",
+    "dateCreated": "25-08-2026"
   },
   {
     "id": "spotlight-008",
@@ -189,6 +196,7 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0382,80.2121",
     "phone": "+91 94431 00008",
     "whatsapp": "+91 94431 00008",
-    "validity": "Expires Soon"
+    "validity": "Expires Soon",
+    "dateCreated": "03-10-2026"
   }
 ]

@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
 import {
   Store,
   ArrowRight,
@@ -115,7 +114,7 @@ export default function AboutUsPage() {
         </div>
       </main>
 
-      <Footer />
+
     </div>
   );
 }

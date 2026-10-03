@@ -10,12 +10,12 @@ import {
   distanceKm,
   directionsUrl,
   lookupUserArea,
+  sortOffersByDate,
 } from "@/lib/utils";
 import { Navbar } from "./Navbar";
 import { ListCategoryBar } from "./ListCategoryBar";
 import { OfferCard } from "./OfferCard";
 import { SearchModal } from "./SearchModal";
-import { Footer } from "./Footer";
 import { FilterBar } from "./FilterBar";
 import { getOfferValidityCategory, normalizeValidity } from "@/lib/validity";
 import { CheckCircle2, AlertCircle } from "lucide-react";
@@ -47,6 +47,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
   const [selectedDealType, setSelectedDealType] = useState<string>(dealTypeParam);
   const [searchQuery, setSearchQuery] = useState<string>(searchParam);
   const [selectedId, setSelectedId] = useState<string>(idParam);
+  const [sortBy, setSortBy] = useState<string>("");
 
   useEffect(() => {
     if (categoryParam) {
@@ -184,6 +185,12 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
       }
     }
 
+    if (sortBy === "newest") {
+      list = sortOffersByDate(list, false);
+    } else if (sortBy === "oldest") {
+      list = sortOffersByDate(list, true);
+    }
+
     if (selectedId) {
       const matchIndex = list.findIndex((o) => o.id === selectedId);
       if (matchIndex > 0) {
@@ -207,6 +214,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
     selectedDealType,
     searchQuery,
     selectedId,
+    sortBy,
     userLocation,
   ]);
 
@@ -322,6 +330,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
     setSelectedDealType("");
     setSearchQuery("");
     setSelectedId("");
+    setSortBy("");
     scrollToTopCard();
   };
 
@@ -377,6 +386,8 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
               onValidityChange={handleValiditySelect}
               selectedDistance={selectedDistance}
               onDistanceChange={handleDistanceSelect}
+              sortBy={sortBy}
+              onSortChange={setSortBy}
               searchQuery={searchQuery}
               onClearSearch={() => setSearchQuery("")}
               onResetAll={handleResetAll}
@@ -480,8 +491,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
         </div>
       )}
 
-      {/* Desktop Footer (Hidden on mobile) */}
-      <Footer />
+
 
       {/* Global Search Modal */}
       <SearchModal

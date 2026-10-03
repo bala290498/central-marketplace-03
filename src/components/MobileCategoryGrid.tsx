@@ -83,16 +83,6 @@ export function MobileCategoryGrid({
   return (
     <>
       <div className="w-full mb-6 transition-all duration-300">
-        {/* Popular Categories Title */}
-        <div className="mb-3.5 px-1">
-          <h2
-            onClick={() => router.push("/list")}
-            className="text-lg font-extrabold text-slate-900 tracking-tight cursor-pointer hover:text-blue-600 transition-colors inline-block"
-          >
-            Popular Categories
-          </h2>
-        </div>
-
         {/* Desktop Grid (Latest Listings Card Style) */}
         <div className="hidden md:grid grid-cols-7 gap-3">
           {desktopVisible.map((item, idx) => {

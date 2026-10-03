@@ -7,8 +7,7 @@ import { lookupUserArea, distanceKm } from "@/lib/utils";
 import { Navbar } from "./Navbar";
 import { MobileCategoryGrid } from "./MobileCategoryGrid";
 import { LatestListingsCarousel } from "./LatestListingsCarousel";
-import { ValidityCategoryBar } from "./ValidityCategoryBar";
-import { ValiditySections } from "./ValiditySections";
+
 import { Footer } from "./Footer";
 import { CheckCircle2, AlertCircle } from "lucide-react";
 
@@ -156,18 +155,9 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
           userLocation={userLocation}
           onSeeAll={handleSeeAll}
         />
-
-        {/* 3. Validity Headings Sections / Carousels */}
-        <ValiditySections
-          offers={offersWithDistance}
-          userLocation={userLocation}
-          selectedValidity={selectedValidity}
-          onShare={handleShare}
-          onSeeAllValidity={(key) => router.push(`/list?validity=${encodeURIComponent(key)}`)}
-        />
       </main>
 
-      {/* Desktop Footer (Hidden on mobile) */}
+      {/* Footer (Desktop & Mobile) */}
       <Footer />
 
       {/* Floating Toast Notification */}

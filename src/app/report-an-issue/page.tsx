@@ -2,7 +2,6 @@
 
 import React, { useState, useMemo, useRef, useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
 import { ShieldAlert, AlertOctagon, CheckCircle2, Search, Sparkles, Tag, ChevronDown } from "lucide-react";
 import { getOffers, getSpotlightOffers } from "@/lib/offers";
 
@@ -260,7 +259,7 @@ export default function ReportPage() {
         )}
       </main>
 
-      <Footer />
+
     </div>
   );
 }

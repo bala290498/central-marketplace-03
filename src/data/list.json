@@ -12,7 +12,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01001",
     "whatsapp": "+91 98765 01001",
-    "validity": "Valid All Days"
+    "validity": "Valid All Days",
+    "dateCreated": "05-01-2026"
   },
   {
     "id": "offer-002",
@@ -27,7 +28,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9342,80.2150",
     "phone": "+91 98765 01002",
     "whatsapp": "+91 98765 01002",
-    "validity": "Expires Soon"
+    "validity": "Expires Soon",
+    "dateCreated": "12-01-2026"
   },
   {
     "id": "offer-003",
@@ -42,7 +44,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0067,80.2572",
     "phone": "+91 98765 01003",
     "whatsapp": "+91 98765 01003",
-    "validity": "Expires Soon"
+    "validity": "Expires Soon",
+    "dateCreated": "20-01-2026"
   },
   {
     "id": "offer-004",
@@ -57,7 +60,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0418,80.2337",
     "phone": "+91 98765 01004",
     "whatsapp": "+91 98765 01004",
-    "validity": "Limited"
+    "validity": "Limited",
+    "dateCreated": "28-01-2026"
   },
   {
     "id": "offer-005",
@@ -72,7 +76,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0604,80.2496",
     "phone": "+91 98765 01005",
     "whatsapp": "+91 98765 01005",
-    "validity": "Valid All Days"
+    "validity": "Valid All Days",
+    "dateCreated": "05-02-2026"
   },
   {
     "id": "offer-006",
@@ -87,7 +92,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9818,80.2184",
     "phone": "+91 98765 01006",
     "whatsapp": "+91 98765 01006",
-    "validity": "Expires Soon"
+    "validity": "Expires Soon",
+    "dateCreated": "13-02-2026"
   },
   {
     "id": "offer-007",
@@ -102,7 +108,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0830,80.2707",
     "phone": "+91 98765 01007",
     "whatsapp": "+91 98765 01007",
-    "validity": "Expires Soon"
+    "validity": "Expires Soon",
+    "dateCreated": "21-02-2026"
   },
   {
     "id": "offer-008",
@@ -117,7 +124,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0475,80.2420",
     "phone": "+91 98765 01008",
     "whatsapp": "+91 98765 01008",
-    "validity": "Limited"
+    "validity": "Limited",
+    "dateCreated": "01-03-2026"
   },
   {
     "id": "offer-009",
@@ -132,7 +140,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.8996,80.2279",
     "phone": "+91 98765 01009",
     "whatsapp": "+91 98765 01009",
-    "validity": "Valid All Days"
+    "validity": "Valid All Days",
+    "dateCreated": "09-03-2026"
   },
   {
     "id": "offer-010",
@@ -147,7 +156,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0213,80.1850",
     "phone": "+91 98765 01010",
     "whatsapp": "+91 98765 01010",
-    "validity": "Expires Soon"
+    "validity": "Expires Soon",
+    "dateCreated": "17-03-2026"
   },
   {
     "id": "offer-011",
@@ -162,7 +172,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0827,80.2707",
     "phone": "+91 98765 01011",
     "whatsapp": "+91 98765 01011",
-    "validity": "Expires Soon"
+    "validity": "Expires Soon",
+    "dateCreated": "25-03-2026"
   },
   {
     "id": "offer-012",
@@ -177,7 +188,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9526,80.1462",
     "phone": "+91 98765 01012",
     "whatsapp": "+91 98765 01012",
-    "validity": "Limited"
+    "validity": "Limited",
+    "dateCreated": "02-04-2026"
   },
   {
     "id": "offer-013",
@@ -192,7 +204,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.0732,80.2210",
     "phone": "+91 98765 01013",
     "whatsapp": "+91 98765 01013",
-    "validity": "Valid All Days"
+    "validity": "Valid All Days",
+    "dateCreated": "10-04-2026"
   },
   {
     "id": "offer-014",
@@ -207,7 +220,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01014",
     "whatsapp": "+91 98765 01014",
-    "validity": "Available"
+    "validity": "Available",
+    "dateCreated": "18-04-2026"
   },
   {
     "id": "list-001",
@@ -222,7 +236,8 @@
     "mapUrl": null,
     "phone": "+91 98765 01001",
     "whatsapp": "+91 98765 01001",
-    "validity": "Until Filled"
+    "validity": "Until Filled",
+    "dateCreated": "26-04-2026"
   },
   {
     "id": "list-002",
@@ -237,7 +252,8 @@
     "mapUrl": null,
     "phone": "+91 98765 01002",
     "whatsapp": "+91 98765 01002",
-    "validity": "Available"
+    "validity": "Available",
+    "dateCreated": "04-05-2026"
   },
   {
     "id": "list-003",
@@ -252,7 +268,8 @@
     "mapUrl": null,
     "phone": "+91 98765 01003",
     "whatsapp": "+91 98765 01003",
-    "validity": "Available"
+    "validity": "Available",
+    "dateCreated": "12-05-2026"
   },
   {
     "id": "list-004",
@@ -267,7 +284,8 @@
     "mapUrl": null,
     "phone": "+91 98765 01004",
     "whatsapp": "+91 98765 01004",
-    "validity": "Until Found"
+    "validity": "Until Found",
+    "dateCreated": "20-05-2026"
   },
   {
     "id": "list-005",
@@ -282,7 +300,8 @@
     "mapUrl": null,
     "phone": "+91 98765 01005",
     "whatsapp": "+91 98765 01005",
-    "validity": "Until Found"
+    "validity": "Until Found",
+    "dateCreated": "28-05-2026"
   },
   {
     "id": "list-006",
@@ -297,7 +316,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01006",
     "whatsapp": "+91 98765 01006",
-    "validity": "Available"
+    "validity": "Available",
+    "dateCreated": "05-06-2026"
   },
   {
     "id": "list-007",
@@ -312,7 +332,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01007",
     "whatsapp": "+91 98765 01007",
-    "validity": "Available"
+    "validity": "Available",
+    "dateCreated": "13-06-2026"
   },
   {
     "id": "list-008",
@@ -327,7 +348,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01008",
     "whatsapp": "+91 98765 01008",
-    "validity": "Available"
+    "validity": "Available",
+    "dateCreated": "21-06-2026"
   },
   {
     "id": "list-009",
@@ -342,7 +364,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01009",
     "whatsapp": "+91 98765 01009",
-    "validity": "Available"
+    "validity": "Available",
+    "dateCreated": "29-06-2026"
   },
   {
     "id": "list-010",
@@ -357,7 +380,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01010",
     "whatsapp": "+91 98765 01010",
-    "validity": "Available"
+    "validity": "Available",
+    "dateCreated": "07-07-2026"
   },
   {
     "id": "list-011",
@@ -372,7 +396,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01011",
     "whatsapp": "+91 98765 01011",
-    "validity": "Available"
+    "validity": "Available",
+    "dateCreated": "15-07-2026"
   },
   {
     "id": "list-012",
@@ -387,7 +412,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01012",
     "whatsapp": "+91 98765 01012",
-    "validity": "Available"
+    "validity": "Available",
+    "dateCreated": "23-07-2026"
   },
   {
     "id": "list-013",
@@ -402,7 +428,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01013",
     "whatsapp": "+91 98765 01013",
-    "validity": "Available"
+    "validity": "Available",
+    "dateCreated": "31-07-2026"
   },
   {
     "id": "list-014",
@@ -417,7 +444,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01014",
     "whatsapp": "+91 98765 01014",
-    "validity": "Available"
+    "validity": "Available",
+    "dateCreated": "08-08-2026"
   },
   {
     "id": "list-015",
@@ -432,7 +460,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=12.9165,80.2070",
     "phone": "+91 98765 01015",
     "whatsapp": "+91 98765 01015",
-    "validity": "Available"
+    "validity": "Available",
+    "dateCreated": "16-08-2026"
   },
   {
     "id": "list-016",
@@ -447,7 +476,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=8.7178,77.3841",
     "phone": "+91 94431 08717",
     "whatsapp": "+91 94431 08717",
-    "validity": "Valid All Days"
+    "validity": "Valid All Days",
+    "dateCreated": "24-08-2026"
   },
   {
     "id": "list-017",
@@ -462,7 +492,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=8.7178,77.3841",
     "phone": "+91 94432 08718",
     "whatsapp": "+91 94432 08718",
-    "validity": "Expires Soon"
+    "validity": "Expires Soon",
+    "dateCreated": "01-09-2026"
   },
   {
     "id": "list-018",
@@ -477,7 +508,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=8.7178,77.3841",
     "phone": "+91 94433 08719",
     "whatsapp": "+91 94433 08719",
-    "validity": "Limited"
+    "validity": "Limited",
+    "dateCreated": "09-09-2026"
   },
   {
     "id": "list-019",
@@ -492,7 +524,8 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=8.7178,77.3841",
     "phone": "+91 94434 08720",
     "whatsapp": "+91 94434 08720",
-    "validity": "Available"
+    "validity": "Available",
+    "dateCreated": "17-09-2026"
   },
   {
     "id": "list-020",
@@ -507,7 +540,8 @@
     "mapUrl": null,
     "phone": "+91 94435 08721",
     "whatsapp": "+91 94435 08721",
-    "validity": "Available"
+    "validity": "Available",
+    "dateCreated": "25-09-2026"
   },
   {
     "id": "list-021",
@@ -522,7 +556,7 @@
     "mapUrl": null,
     "phone": "+91 94436 08722",
     "whatsapp": "+91 94436 08722",
-    "validity": "Until Filled"
+    "validity": "Until Filled",
+    "dateCreated": "03-10-2026"
   }
 ]
-
