@@ -13,7 +13,8 @@
     "phone": "+91 98765 01001",
     "whatsapp": "+91 98765 01001",
     "validity": "Valid All Days",
-    "dateCreated": "05-01-2026"
+    "dateCreated": "05-01-2026",
+    "mustTry": true
   },
   {
     "id": "offer-002",
@@ -29,7 +30,8 @@
     "phone": "+91 98765 01002",
     "whatsapp": "+91 98765 01002",
     "validity": "Expires Soon",
-    "dateCreated": "12-01-2026"
+    "dateCreated": "12-01-2026",
+    "mustTry": true
   },
   {
     "id": "offer-003",
@@ -61,7 +63,8 @@
     "phone": "+91 98765 01004",
     "whatsapp": "+91 98765 01004",
     "validity": "Limited",
-    "dateCreated": "28-01-2026"
+    "dateCreated": "28-01-2026",
+    "mustTry": true
   },
   {
     "id": "offer-005",
@@ -77,7 +80,8 @@
     "phone": "+91 98765 01005",
     "whatsapp": "+91 98765 01005",
     "validity": "Valid All Days",
-    "dateCreated": "05-02-2026"
+    "dateCreated": "05-02-2026",
+    "mustTry": true
   },
   {
     "id": "offer-006",
@@ -109,7 +113,8 @@
     "phone": "+91 98765 01007",
     "whatsapp": "+91 98765 01007",
     "validity": "Expires Soon",
-    "dateCreated": "21-02-2026"
+    "dateCreated": "21-02-2026",
+    "mustTry": true
   },
   {
     "id": "offer-008",
@@ -141,7 +146,8 @@
     "phone": "+91 98765 01009",
     "whatsapp": "+91 98765 01009",
     "validity": "Valid All Days",
-    "dateCreated": "09-03-2026"
+    "dateCreated": "09-03-2026",
+    "mustTry": true
   },
   {
     "id": "offer-010",
@@ -157,7 +163,8 @@
     "phone": "+91 98765 01010",
     "whatsapp": "+91 98765 01010",
     "validity": "Expires Soon",
-    "dateCreated": "17-03-2026"
+    "dateCreated": "17-03-2026",
+    "mustTry": true
   },
   {
     "id": "offer-011",
@@ -189,7 +196,8 @@
     "phone": "+91 98765 01012",
     "whatsapp": "+91 98765 01012",
     "validity": "Limited",
-    "dateCreated": "02-04-2026"
+    "dateCreated": "02-04-2026",
+    "mustTry": true
   },
   {
     "id": "offer-013",
@@ -205,7 +213,8 @@
     "phone": "+91 98765 01013",
     "whatsapp": "+91 98765 01013",
     "validity": "Valid All Days",
-    "dateCreated": "10-04-2026"
+    "dateCreated": "10-04-2026",
+    "mustTry": true
   },
   {
     "id": "offer-014",
@@ -253,7 +262,8 @@
     "phone": "+91 98765 01002",
     "whatsapp": "+91 98765 01002",
     "validity": "Available",
-    "dateCreated": "04-05-2026"
+    "dateCreated": "04-05-2026",
+    "mustTry": true
   },
   {
     "id": "list-003",
@@ -301,7 +311,8 @@
     "phone": "+91 98765 01005",
     "whatsapp": "+91 98765 01005",
     "validity": "Until Found",
-    "dateCreated": "28-05-2026"
+    "dateCreated": "28-05-2026",
+    "mustTry": true
   },
   {
     "id": "list-006",
@@ -349,7 +360,8 @@
     "phone": "+91 98765 01008",
     "whatsapp": "+91 98765 01008",
     "validity": "Available",
-    "dateCreated": "21-06-2026"
+    "dateCreated": "21-06-2026",
+    "mustTry": true
   },
   {
     "id": "list-009",
@@ -397,7 +409,8 @@
     "phone": "+91 98765 01011",
     "whatsapp": "+91 98765 01011",
     "validity": "Available",
-    "dateCreated": "15-07-2026"
+    "dateCreated": "15-07-2026",
+    "mustTry": true
   },
   {
     "id": "list-012",
@@ -445,7 +458,8 @@
     "phone": "+91 98765 01014",
     "whatsapp": "+91 98765 01014",
     "validity": "Available",
-    "dateCreated": "08-08-2026"
+    "dateCreated": "08-08-2026",
+    "mustTry": true
   },
   {
     "id": "list-015",
@@ -493,7 +507,8 @@
     "phone": "+91 94432 08718",
     "whatsapp": "+91 94432 08718",
     "validity": "Expires Soon",
-    "dateCreated": "01-09-2026"
+    "dateCreated": "01-09-2026",
+    "mustTry": true
   },
   {
     "id": "list-018",
@@ -541,7 +556,8 @@
     "phone": "+91 94435 08721",
     "whatsapp": "+91 94435 08721",
     "validity": "Available",
-    "dateCreated": "25-09-2026"
+    "dateCreated": "25-09-2026",
+    "mustTry": true
   },
   {
     "id": "list-021",

@@ -36,6 +36,7 @@ import {
   ChevronRight,
   Filter,
   Search,
+  ArrowUpDown,
 } from "lucide-react";
 
 import { SearchBarTrigger } from "./SearchBarTrigger";
@@ -47,11 +48,13 @@ interface ListCategoryBarProps {
   locations: string[];
   selectedLocation: string;
   selectedDistance?: number | null;
-  selectedValidity: string;
+  selectedValidity?: string;
   validities?: string[];
   onLocationChange: (loc: string) => void;
   onDistanceChange?: (dist: number | null) => void;
-  onValidityChange: (val: string) => void;
+  onValidityChange?: (val: string) => void;
+  sortBy?: string;
+  onSortChange?: (val: string) => void;
   onOpenSearch?: () => void;
 }
 
@@ -67,6 +70,8 @@ export function ListCategoryBar({
   onLocationChange,
   onDistanceChange,
   onValidityChange,
+  sortBy = "",
+  onSortChange,
   onOpenSearch,
 }: ListCategoryBarProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -232,21 +237,18 @@ export function ListCategoryBar({
           <div className="absolute right-2.5 sm:right-3 pointer-events-none text-slate-400 text-[10px] sm:text-xs">▼</div>
         </div>
 
-        {/* Dropdown 2: All Validities (Visible on Mobile/Tablet < lg) */}
+        {/* Dropdown 2: Sort By (Visible on Mobile/Tablet < lg) */}
         <div className="relative flex items-center flex-1 sm:flex-initial sm:w-44 min-w-0 lg:hidden">
-          <Clock className="absolute left-2.5 sm:left-3 w-3.5 sm:w-4 h-3.5 sm:h-4 text-slate-400 pointer-events-none" />
+          <ArrowUpDown className="absolute left-2.5 sm:left-3 w-3.5 sm:w-4 h-3.5 sm:h-4 text-slate-400 pointer-events-none" />
           <select
-            value={selectedValidity}
-            onChange={(e) => onValidityChange(e.target.value)}
+            value={sortBy}
+            onChange={(e) => onSortChange?.(e.target.value)}
             className="w-full pl-7 sm:pl-8 pr-6 sm:pr-7 h-[38px] rounded-full border border-slate-200 bg-white text-slate-900 text-[11px] sm:text-xs font-bold appearance-none outline-none focus:outline-none focus:ring-0 shadow-xs cursor-pointer truncate"
           >
-            <option value="">All post validities</option>
-            <option value="Limited">Limited</option>
-            <option value="Expires Soon">Expires Soon</option>
-            <option value="Until Filled">Until Filled</option>
-            <option value="Until Found">Until Found</option>
-            <option value="Available">Available</option>
-            <option value="Valid All Days">Valid All Days</option>
+            <option value="">Default Order</option>
+            <option value="newer">Newer First</option>
+            <option value="older">Older First</option>
+            <option value="mustTry">Must Try</option>
           </select>
           <div className="absolute right-2.5 sm:right-3 pointer-events-none text-slate-400 text-[10px] sm:text-xs">▼</div>
         </div>
@@ -254,3 +256,4 @@ export function ListCategoryBar({
     </div>
   );
 }
+

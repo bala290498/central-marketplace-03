@@ -5,12 +5,9 @@ import {
   SlidersHorizontal,
   RotateCcw,
   MapPin,
-  Tag,
-  Clock,
-  Calendar,
   ChevronDown,
   Navigation,
-  X,
+  ArrowUpDown,
 } from "lucide-react";
 import { UserLocation } from "@/types/offer";
 
@@ -46,12 +43,6 @@ export function FilterBar({
   locations = [],
   selectedLocation = "",
   onLocationChange = () => {},
-  dealTypes = [],
-  selectedDealType = "",
-  onDealTypeChange = () => {},
-  validities = [],
-  selectedValidity = "",
-  onValidityChange = () => {},
   selectedDistance = null,
   onDistanceChange = () => {},
   sortBy = "",
@@ -82,8 +73,6 @@ export function FilterBar({
     Boolean(selectedCategory) ||
     Boolean(selectedLocation) ||
     selectedDistance !== null ||
-    Boolean(selectedValidity) ||
-    Boolean(selectedDealType) ||
     Boolean(searchQuery);
 
   return (
@@ -106,7 +95,7 @@ export function FilterBar({
         </button>
       </div>
 
-      {/* Row 2: Active Filters (Inside the same container, BEFORE Distance Radius) */}
+      {/* Row 2: Active Filters */}
       {hasActiveFilters && (
         <div className="py-2.5 px-3 bg-slate-50 border border-slate-200/90 rounded-xl space-y-2">
           <div className="text-[11px] font-bold text-slate-500">
@@ -137,18 +126,6 @@ export function FilterBar({
                 </button>
               </span>
             )}
-            {selectedDealType && (
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 text-amber-800 border border-amber-200">
-                Post: {selectedDealType}
-                <button
-                  type="button"
-                  onClick={() => onDealTypeChange?.("")}
-                  className="hover:text-amber-950 ml-0.5 cursor-pointer font-extrabold"
-                >
-                  ×
-                </button>
-              </span>
-            )}
             {selectedDistance !== null && (
               <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-700 border border-emerald-200">
                 {selectedDistance} km
@@ -156,18 +133,6 @@ export function FilterBar({
                   type="button"
                   onClick={() => onDistanceChange?.(null)}
                   className="hover:text-emerald-950 ml-0.5 cursor-pointer font-extrabold"
-                >
-                  ×
-                </button>
-              </span>
-            )}
-            {selectedValidity && (
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-purple-100 text-purple-700 border border-purple-200">
-                Val: {selectedValidity}
-                <button
-                  type="button"
-                  onClick={() => onValidityChange?.("")}
-                  className="hover:text-purple-950 ml-0.5 cursor-pointer font-extrabold"
                 >
                   ×
                 </button>
@@ -267,81 +232,20 @@ export function FilterBar({
         </div>
       </div>
 
-      {/* Row 5: Post Type Dropdown */}
-      <div className="space-y-1.5 py-1 border-b border-slate-100">
-        <label className="block text-xs font-bold text-slate-700">Post Type</label>
-        <div className="relative flex items-center">
-          <Tag className="absolute left-3 w-4 h-4 text-slate-400 pointer-events-none" />
-          <select
-            value={selectedDealType}
-            onChange={(e) => onDealTypeChange?.(e.target.value)}
-            className="w-full pl-9 pr-8 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-bold appearance-none outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 shadow-2xs cursor-pointer transition-all"
-          >
-            <option value="">All post types</option>
-            {dealTypes.length > 0 ? (
-              dealTypes.map((dt) => (
-                <option key={dt} value={dt}>
-                  {dt}
-                </option>
-              ))
-            ) : (
-              <>
-                <option value="Discount">Discount / % OFF</option>
-                <option value="BOGO">Buy 1 Get 1 (BOGO)</option>
-                <option value="Flat Off">Flat Savings (₹ OFF)</option>
-                <option value="Combo">Combo Package</option>
-              </>
-            )}
-          </select>
-          <ChevronDown className="absolute right-3 w-4 h-4 text-slate-400 pointer-events-none" />
-        </div>
-      </div>
-
-      {/* Row 6: Post Validity Dropdown */}
+      {/* Row 5: Sort By Dropdown */}
       <div className="space-y-1.5 pt-1">
-        <label className="block text-xs font-bold text-slate-700">Post Validity</label>
+        <label className="block text-xs font-bold text-slate-700">Sort By</label>
         <div className="relative flex items-center">
-          <Clock className="absolute left-3 w-4 h-4 text-slate-400 pointer-events-none" />
-          <select
-            value={selectedValidity}
-            onChange={(e) => onValidityChange?.(e.target.value)}
-            className="w-full pl-9 pr-8 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-bold appearance-none outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 shadow-2xs cursor-pointer transition-all"
-          >
-            <option value="">All post validities</option>
-            {validities.length > 0 ? (
-              validities.map((v) => (
-                <option key={v} value={v}>
-                  {v}
-                </option>
-              ))
-            ) : (
-              <>
-                <option value="Limited">Limited</option>
-                <option value="Expires Soon">Expires Soon</option>
-                <option value="Until Filled">Until Filled</option>
-                <option value="Until Found">Until Found</option>
-                <option value="Available">Available</option>
-                <option value="Valid All Days">Valid All Days</option>
-              </>
-            )}
-          </select>
-          <ChevronDown className="absolute right-3 w-4 h-4 text-slate-400 pointer-events-none" />
-        </div>
-      </div>
-
-      {/* Row 7: Sort By Date */}
-      <div className="space-y-1.5 pt-1 border-t border-slate-100">
-        <label className="block text-xs font-bold text-slate-700">Sort By Date</label>
-        <div className="relative flex items-center">
-          <Calendar className="absolute left-3 w-4 h-4 text-slate-400 pointer-events-none" />
+          <ArrowUpDown className="absolute left-3 w-4 h-4 text-slate-400 pointer-events-none" />
           <select
             value={sortBy}
             onChange={(e) => onSortChange?.(e.target.value)}
             className="w-full pl-9 pr-8 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-bold appearance-none outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 shadow-2xs cursor-pointer transition-all"
           >
             <option value="">Default Order</option>
-            <option value="newest">Date: Newest First</option>
-            <option value="oldest">Date: Oldest First</option>
+            <option value="newer">Newer First</option>
+            <option value="older">Older First</option>
+            <option value="mustTry">Must Try</option>
           </select>
           <ChevronDown className="absolute right-3 w-4 h-4 text-slate-400 pointer-events-none" />
         </div>
@@ -349,3 +253,4 @@ export function FilterBar({
     </div>
   );
 }
+

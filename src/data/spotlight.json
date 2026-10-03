@@ -22,7 +22,8 @@
     "phone": "+91 94431 00001",
     "whatsapp": "+91 94431 00001",
     "validity": "Valid All Days",
-    "dateCreated": "05-01-2026"
+    "dateCreated": "05-01-2026",
+    "mustTry": true
   },
   {
     "id": "spotlight-002",
@@ -72,7 +73,8 @@
     "phone": "+91 94431 00003",
     "whatsapp": "+91 94431 00003",
     "validity": "Valid All Days",
-    "dateCreated": "23-03-2026"
+    "dateCreated": "23-03-2026",
+    "mustTry": true
   },
   {
     "id": "spotlight-004",
@@ -122,7 +124,8 @@
     "phone": "+91 94431 00005",
     "whatsapp": "+91 94431 00005",
     "validity": "Available",
-    "dateCreated": "08-06-2026"
+    "dateCreated": "08-06-2026",
+    "mustTry": true
   },
   {
     "id": "spotlight-006",
@@ -172,7 +175,8 @@
     "phone": "+91 94431 00007",
     "whatsapp": "+91 94431 00007",
     "validity": "Valid All Days",
-    "dateCreated": "25-08-2026"
+    "dateCreated": "25-08-2026",
+    "mustTry": true
   },
   {
     "id": "spotlight-008",

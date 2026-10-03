@@ -4,12 +4,7 @@ import React from "react";
 import Link from "next/link";
 import {
   X,
-  Sparkles,
-  HelpCircle,
-  Briefcase,
-  Users,
   ShieldAlert,
-  FileText,
   ChevronRight,
 } from "lucide-react";
 
@@ -23,32 +18,11 @@ export function MoreDrawer({ isOpen, onClose }: MoreDrawerProps) {
 
   const menuItems = [
     {
-      href: "/about-us",
-      label: "Why Central Marketplace",
-      desc: "Learn how to discover, call and navigate",
-      icon: HelpCircle,
-      color: "bg-blue-100 text-blue-600",
-    },
-    {
-      href: "/we-are-hiring",
-      label: "We're Hiring",
-      desc: "Join our team in bringing local deals",
-      icon: Users,
-      color: "bg-purple-100 text-purple-600",
-    },
-    {
       href: "/report-an-issue",
       label: "Report an Issue",
       desc: "Report inappropriate or fake listings",
       icon: ShieldAlert,
       color: "bg-red-100 text-red-600",
-    },
-    {
-      href: "/terms",
-      label: "Terms & Conditions",
-      desc: "Read platform rules and legal terms",
-      icon: FileText,
-      color: "bg-emerald-100 text-emerald-600",
     },
   ];
 
@@ -62,24 +36,20 @@ export function MoreDrawer({ isOpen, onClose }: MoreDrawerProps) {
         {/* Handle Bar Indicator */}
         <div className="w-12 h-1.5 bg-slate-300 rounded-full mx-auto mb-4" />
 
-        {/* Modal Header */}
-        <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
+        {/* Modal Header Bar */}
+        <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-100">
           <div className="flex items-center gap-2">
             <img
               src="/logo/logo.svg"
               alt="Central Marketplace Logo"
-              className="w-8 h-8 rounded-xl object-cover shadow-xs"
+              className="w-7 h-7 rounded-xl object-cover shadow-xs"
             />
-            <div>
-              <h3 className="font-extrabold text-slate-900 text-base">Explore Marketplace</h3>
-              <p className="text-[11px] text-slate-500">Quick access to all pages & services</p>
-            </div>
           </div>
 
           <button
             type="button"
             onClick={onClose}
-            className="p-2 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100"
+            className="p-2 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 cursor-pointer"
             aria-label="Close menu"
           >
             <X className="w-5 h-5" />

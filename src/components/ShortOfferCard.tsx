@@ -64,10 +64,19 @@ export function ShortOfferCard({
   return (
     <div
       onClick={handleClick}
-      className={`${theme.bg} rounded-none p-4 border ${theme.border} shadow-2xs hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group ${className}`}
+      className={`relative ${theme.bg} rounded-none p-4 border ${theme.border} shadow-2xs hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group overflow-hidden ${className}`}
     >
+      {/* Must Try Top Right Corner Ribbon */}
+      {(offer.mustTry || offer.isMustTry) && (
+        <div className="absolute top-0 right-0 z-20 w-24 h-24 overflow-hidden pointer-events-none">
+          <div className="absolute top-3.5 -right-8 w-32 py-0.5 bg-gradient-to-r from-rose-600 via-red-600 to-amber-500 text-white text-[9px] font-black uppercase tracking-wider text-center transform rotate-45 shadow-md border-y border-white/30">
+            MUST TRY
+          </div>
+        </div>
+      )}
+
       <div>
-        {/* Header Row: Category Icon + Brand Name & Category Stack + Badge */}
+        {/* Header Row: Category Icon + Brand Name & Category Stack */}
         <div className="flex items-start justify-between gap-2 mb-2">
           <div className="flex items-center gap-1.5 min-w-0 flex-1">
             <div
@@ -86,19 +95,18 @@ export function ShortOfferCard({
               )}
             </div>
           </div>
+        </div>
 
+        {/* Title with Badge inline next to Title */}
+        <h3 className="text-sm font-extrabold text-slate-900 line-clamp-2 mb-1 group-hover:text-blue-600 transition-colors flex items-center flex-wrap gap-1.5">
+          <span>{offer.title}</span>
           {badgeText && (
             <span
-              className={`px-2 py-0.5 rounded-full text-[10px] font-black tracking-wide flex-shrink-0 ml-auto mt-0.5 ${theme.badgeBg} ${theme.badgeText}`}
+              className={`px-2 py-0.5 rounded-full text-[10px] font-black tracking-wide inline-flex items-center flex-shrink-0 align-middle ${theme.badgeBg} ${theme.badgeText}`}
             >
               {badgeText}
             </span>
           )}
-        </div>
-
-        {/* Title */}
-        <h3 className="text-sm font-extrabold text-slate-900 line-clamp-1 mb-1 group-hover:text-blue-600 transition-colors">
-          {offer.title}
         </h3>
 
         {/* Description */}

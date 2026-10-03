@@ -146,6 +146,14 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
     <article
       className={`group relative rounded-none border ${theme.cardBg} ${theme.cardBorder} p-5 sm:p-6 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col justify-between overflow-hidden`}
     >
+      {/* Must Try Top Right Corner Ribbon */}
+      {(offer.mustTry || offer.isMustTry) && (
+        <div className="absolute top-0 right-0 z-20 w-28 h-28 overflow-hidden pointer-events-none">
+          <div className="absolute top-4 -right-8 w-36 py-1 bg-gradient-to-r from-rose-600 via-red-600 to-amber-500 text-white text-[10px] font-black uppercase tracking-wider text-center transform rotate-45 shadow-md border-y border-white/30">
+            MUST TRY
+          </div>
+        </div>
+      )}
 
       <div className="relative z-10">
         {/* Top Header Row */}
@@ -168,20 +176,18 @@ export function OfferCard({ offer, userLocation, onShare }: OfferCardProps) {
               )}
             </div>
           </div>
+        </div>
 
-          {/* Badge Pill */}
+        {/* Title with Badge inline next to Title */}
+        <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 leading-snug mb-1.5 tracking-tight group-hover:text-slate-800 transition-colors flex items-center flex-wrap gap-2">
+          <span>{offer.title}</span>
           {badgeText && (
             <span
-              className={`px-2.5 py-0.5 rounded-full text-[11px] font-black tracking-wide ${theme.badgeBg} ${theme.badgeTextColor} flex-shrink-0 ml-auto mt-0.5`}
+              className={`px-2.5 py-0.5 rounded-full text-[11px] font-black tracking-wide ${theme.badgeBg} ${theme.badgeTextColor} inline-flex items-center flex-shrink-0 align-middle`}
             >
               {badgeText}
             </span>
           )}
-        </div>
-
-        {/* Title */}
-        <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 leading-snug mb-1.5 tracking-tight group-hover:text-slate-800 transition-colors">
-          {offer.title}
         </h2>
 
         {/* Description */}

@@ -216,6 +216,14 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                   key={offer.id}
                   className="bg-white rounded-none border border-slate-200 p-5 sm:p-6 shadow-xs hover:shadow-md transition-all duration-300 relative overflow-hidden"
                 >
+                  {/* Must Try Top Right Corner Ribbon */}
+                  {(offer.mustTry || offer.isMustTry) && (
+                    <div className="absolute top-0 right-0 z-20 w-28 h-28 overflow-hidden pointer-events-none">
+                      <div className="absolute top-4 -right-8 w-36 py-1 bg-gradient-to-r from-rose-600 via-red-600 to-amber-500 text-white text-[10px] font-black uppercase tracking-wider text-center transform rotate-45 shadow-md border-y border-white/30">
+                        MUST TRY
+                      </div>
+                    </div>
+                  )}
                   {/* DESKTOP LAYOUT (Full-width banner card) */}
                   <div className="hidden md:flex items-stretch gap-6">
                     {/* Left: Number Badge (Fills Top, Left, Bottom sides with Magenta #A00058 & White text) */}
@@ -254,18 +262,16 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                               </div>
                             </div>
                           </div>
+                        </div>
 
-                          {/* Badge Pill (Replacing Verified tag) */}
+                        {/* Title with Badge inline next to Title */}
+                        <h2 className="text-xl font-extrabold text-slate-900 leading-snug mb-2 flex items-center flex-wrap gap-2">
+                          <span>{offer.title}</span>
                           {badgeText && (
-                            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-black tracking-wide bg-orange-50 text-orange-700 flex-shrink-0 ml-auto mt-0.5">
+                            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-black tracking-wide bg-orange-50 text-orange-700 flex-shrink-0 align-middle">
                               {badgeText}
                             </span>
                           )}
-                        </div>
-
-                        {/* Title */}
-                        <h2 className="text-xl font-extrabold text-slate-900 leading-snug mb-2">
-                          {offer.title}
                         </h2>
 
                         {/* Description */}
@@ -401,13 +407,6 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                           Spotlight
                         </span>
                       </div>
-
-                      {/* Badge Pill */}
-                      {badgeText && (
-                        <span className="px-2.5 py-0.5 rounded-full text-[10.5px] font-black tracking-wide bg-orange-50 text-orange-700 flex-shrink-0">
-                          {badgeText}
-                        </span>
-                      )}
                     </div>
 
                     {/* Brand Name, Category, Location & Expiry Row */}
@@ -433,9 +432,14 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                       </div>
                     </div>
 
-                    {/* Title */}
-                    <h2 className="text-base font-extrabold text-slate-900 leading-snug">
-                      {offer.title}
+                    {/* Title with Badge inline next to Title */}
+                    <h2 className="text-base font-extrabold text-slate-900 leading-snug flex items-center flex-wrap gap-1.5">
+                      <span>{offer.title}</span>
+                      {badgeText && (
+                        <span className="px-2.5 py-0.5 rounded-full text-[10.5px] font-black tracking-wide bg-orange-50 text-orange-700 flex-shrink-0 align-middle">
+                          {badgeText}
+                        </span>
+                      )}
                     </h2>
 
                     {/* Description */}

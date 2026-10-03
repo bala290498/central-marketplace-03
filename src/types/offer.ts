@@ -27,6 +27,8 @@ export interface Offer {
   isVerified?: boolean;
   isSpotlight?: boolean;
   dateCreated?: string;
+  mustTry?: boolean;
+  isMustTry?: boolean;
 }
 
 export interface UserLocation {

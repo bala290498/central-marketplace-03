@@ -185,10 +185,16 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
       }
     }
 
-    if (sortBy === "newest") {
+    if (sortBy === "newer" || sortBy === "newest") {
       list = sortOffersByDate(list, false);
-    } else if (sortBy === "oldest") {
+    } else if (sortBy === "older" || sortBy === "oldest") {
       list = sortOffersByDate(list, true);
+    } else if (sortBy === "mustTry") {
+      list = [...list].sort((a, b) => {
+        const aMust = a.mustTry || a.isMustTry ? 1 : 0;
+        const bMust = b.mustTry || b.isMustTry ? 1 : 0;
+        return bMust - aMust;
+      });
     }
 
     if (selectedId) {
@@ -358,11 +364,10 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
             locations={locations}
             selectedLocation={selectedLocation}
             selectedDistance={selectedDistance}
-            selectedValidity={selectedValidity}
-            validities={validities}
             onLocationChange={handleLocationSelect}
             onDistanceChange={handleDistanceSelect}
-            onValidityChange={handleValiditySelect}
+            sortBy={sortBy}
+            onSortChange={setSortBy}
             onOpenSearch={() => setIsSearchModalOpen(true)}
           />
         </div>
@@ -378,12 +383,6 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
               locations={locations}
               selectedLocation={selectedLocation}
               onLocationChange={handleLocationSelect}
-              dealTypes={dealTypes}
-              selectedDealType={selectedDealType}
-              onDealTypeChange={handleDealTypeSelect}
-              validities={validities}
-              selectedValidity={selectedValidity}
-              onValidityChange={handleValiditySelect}
               selectedDistance={selectedDistance}
               onDistanceChange={handleDistanceSelect}
               sortBy={sortBy}
@@ -399,48 +398,7 @@ export function ListingsView({ initialOffers }: ListingsViewProps) {
 
           {/* Right Main Content Area: Listings Grid */}
           <div className="flex-1 min-w-0 w-full">
-            {/* Active Filters Bar (shown on Mobile/Tablet < lg) */}
-            {(selectedCategory || selectedLocation || selectedDistance !== null || selectedValidity || selectedDealType || searchQuery) && (
-              <div className="flex lg:hidden flex-wrap items-center gap-2 mb-4 p-3 bg-white border border-slate-200/80 rounded-2xl shadow-2xs">
-                <span className="text-xs font-bold text-slate-500 mr-1">Active filters:</span>
-                {selectedCategory && (
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-orange-50 text-orange-600 border border-orange-200/70">
-                    Category: {selectedCategory}
-                    <button type="button" onClick={() => handleCategorySelect("")} className="hover:text-orange-800 ml-0.5 cursor-pointer font-extrabold">×</button>
-                  </span>
-                )}
-                {selectedLocation && (
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-600 border border-blue-200/70">
-                    Location: {selectedLocation}
-                    <button type="button" onClick={() => handleLocationSelect("")} className="hover:text-blue-800 ml-0.5 cursor-pointer font-extrabold">×</button>
-                  </span>
-                )}
-                {selectedDealType && (
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200/70">
-                    Post Type: {selectedDealType}
-                    <button type="button" onClick={() => handleDealTypeSelect("")} className="hover:text-amber-900 ml-0.5 cursor-pointer font-extrabold">×</button>
-                  </span>
-                )}
-                {selectedDistance !== null && (
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 border border-emerald-200/70">
-                    Within {selectedDistance} km
-                    <button type="button" onClick={() => handleDistanceSelect(null)} className="hover:text-emerald-800 ml-0.5 cursor-pointer font-extrabold">×</button>
-                  </span>
-                )}
-                {selectedValidity && (
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-purple-50 text-purple-600 border border-purple-200/70">
-                    Post Validity: {selectedValidity}
-                    <button type="button" onClick={() => handleValiditySelect("")} className="hover:text-purple-800 ml-0.5 cursor-pointer font-extrabold">×</button>
-                  </span>
-                )}
-                {searchQuery && (
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-700 border border-slate-300">
-                    "{searchQuery}"
-                    <button type="button" onClick={() => setSearchQuery("")} className="hover:text-slate-900 ml-0.5 cursor-pointer font-extrabold">×</button>
-                  </span>
-                )}
-              </div>
-            )}
+
 
             {/* Listings Grid: 2 Columns on Desktop */}
             {processedOffers.length > 0 ? (
