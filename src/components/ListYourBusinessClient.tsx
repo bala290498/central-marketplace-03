@@ -12,7 +12,7 @@ import {
   Phone,
   MessageSquare,
   FileText,
-  PlusCircle,
+  ListPlus,
 } from "lucide-react";
 
 export function ListYourBusinessClient() {
@@ -111,7 +111,7 @@ export function ListYourBusinessClient() {
             {/* Page Title Header */}
             <div className="text-center mb-8">
               <div className="w-14 h-14 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center mx-auto mb-3 shadow-xs">
-                <PlusCircle className="w-7 h-7" />
+                <ListPlus className="w-7 h-7" />
               </div>
               <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
                 Free Listing
