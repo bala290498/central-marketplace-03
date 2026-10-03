@@ -10,11 +10,13 @@ import {
   Clock,
   MapPin,
   Phone,
+  MessageSquare,
   FileText,
 } from "lucide-react";
 
 export function ListYourBusinessClient() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submittedWhatsappUrl, setSubmittedWhatsappUrl] = useState("");
 
   // Form State matching list.json fields
   const [formData, setFormData] = useState({
@@ -22,6 +24,7 @@ export function ListYourBusinessClient() {
     title: "",
     description: "",
     phone: "",
+    whatsapp: "",
     badge: "",
     validity: "Valid All Days",
     location: "Vickramasingapuram",
@@ -29,16 +32,35 @@ export function ListYourBusinessClient() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const textLines = [
+      `*New Post Submission - Central Marketplace*`,
+      formData.business ? `• *Post Name:* ${formData.business}` : null,
+      formData.title ? `• *Post Title:* ${formData.title}` : null,
+      formData.description ? `• *Post Description:* ${formData.description}` : null,
+      formData.phone ? `• *Phone:* ${formData.phone}` : null,
+      formData.whatsapp ? `• *WhatsApp:* ${formData.whatsapp}` : null,
+      formData.badge ? `• *Badge:* ${formData.badge}` : null,
+      formData.validity ? `• *Validity:* ${formData.validity}` : null,
+      formData.location ? `• *Location:* ${formData.location}` : null,
+    ].filter(Boolean).join("\n");
+
+    const phoneNum = "919677691237";
+    const url = `https://wa.me/${phoneNum}?text=${encodeURIComponent(textLines)}`;
+    setSubmittedWhatsappUrl(url);
+    window.open(url, "_blank");
     setIsSubmitted(true);
   };
 
   const handleReset = () => {
     setIsSubmitted(false);
+    setSubmittedWhatsappUrl("");
     setFormData({
       business: "",
       title: "",
       description: "",
       phone: "",
+      whatsapp: "",
       badge: "",
       validity: "Valid All Days",
       location: "Vickramasingapuram",
@@ -57,18 +79,29 @@ export function ListYourBusinessClient() {
               <CheckCircle2 className="w-8 h-8" />
             </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
-              Registration Received!
+              Post Prepared for WhatsApp!
             </h2>
             <p className="text-sm sm:text-base text-slate-600 max-w-md mx-auto leading-relaxed">
-              Thank you! Our onboarding team will verify your details and publish your listing shortly.
+              We&apos;ve formatted your post details. If WhatsApp didn&apos;t open automatically, click the button below to send your details directly to 9677691237.
             </p>
-            <div className="pt-4">
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+              {submittedWhatsappUrl && (
+                <a
+                  href={submittedWhatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-8 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-extrabold transition-colors shadow-md shadow-emerald-600/25 inline-flex items-center gap-2"
+                >
+                  <MessageSquare className="w-4 h-4" />
+                  <span>Send via WhatsApp (+91 96776 91237)</span>
+                </a>
+              )}
               <button
                 type="button"
                 onClick={handleReset}
                 className="px-8 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-bold transition-colors cursor-pointer"
               >
-                Submit Another Listing
+                Submit Another Post
               </button>
             </div>
           </div>
@@ -80,33 +113,52 @@ export function ListYourBusinessClient() {
                 Post Details
               </h1>
               <p className="text-xs sm:text-sm text-slate-500 mt-1">
-                Fill out the information below to publish your listing on Central Marketplace.
+                Fill out the information below to publish your post on Central Marketplace.
               </p>
             </div>
 
-            {/* Title Field */}
-            <div>
-              <label className="block text-xs sm:text-sm font-extrabold text-slate-800 mb-1.5 flex items-center gap-1.5">
-                <Tag className="w-4 h-4 text-orange-500" />
-                <span>Title *</span>
-              </label>
-              <input
-                type="text"
-                required
-                value={formData.title}
-                onChange={(e) =>
-                  setFormData({ ...formData, title: e.target.value })
-                }
-                placeholder="E.g. 20% Off Lunch Thali Meals"
-                className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm font-semibold outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 shadow-2xs"
-              />
+            {/* Row 1: Post Name & Post Title */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              <div>
+                <label className="block text-xs sm:text-sm font-extrabold text-slate-800 mb-1.5 flex items-center gap-1.5">
+                  <Store className="w-4 h-4 text-orange-500" />
+                  <span>Post Name *</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={formData.business}
+                  onChange={(e) =>
+                    setFormData({ ...formData, business: e.target.value })
+                  }
+                  placeholder="E.g. Royal Feast Fine Dining"
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm font-semibold outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 shadow-2xs"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs sm:text-sm font-extrabold text-slate-800 mb-1.5 flex items-center gap-1.5">
+                  <Tag className="w-4 h-4 text-orange-500" />
+                  <span>Post Title *</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={formData.title}
+                  onChange={(e) =>
+                    setFormData({ ...formData, title: e.target.value })
+                  }
+                  placeholder="E.g. 20% Off Lunch Thali Meals"
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm font-semibold outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 shadow-2xs"
+                />
+              </div>
             </div>
 
-            {/* Row 2: Description (Optional) */}
+            {/* Row 2: Post Description (Optional) */}
             <div>
               <label className="block text-xs sm:text-sm font-extrabold text-slate-800 mb-1.5 flex items-center gap-1.5">
                 <FileText className="w-4 h-4 text-orange-500" />
-                <span>Description</span>
+                <span>Post Description</span>
               </label>
               <textarea
                 rows={3}
@@ -119,12 +171,12 @@ export function ListYourBusinessClient() {
               />
             </div>
 
-            {/* Row 3: Phone / WhatsApp (Required), Badge (Optional), Validity (Optional), Location / Area (Optional) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            {/* Row 3: Phone, WhatsApp, Badge, Validity, Location */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               <div>
                 <label className="block text-xs sm:text-sm font-extrabold text-slate-800 mb-1.5 flex items-center gap-1.5">
                   <Phone className="w-4 h-4 text-orange-500" />
-                  <span>Phone / WhatsApp *</span>
+                  <span>Phone *</span>
                 </label>
                 <input
                   type="tel"
@@ -134,6 +186,22 @@ export function ListYourBusinessClient() {
                     setFormData({ ...formData, phone: e.target.value })
                   }
                   placeholder="+91 94431 00000"
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm font-semibold outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 shadow-2xs"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs sm:text-sm font-extrabold text-slate-800 mb-1.5 flex items-center gap-1.5">
+                  <MessageSquare className="w-4 h-4 text-orange-500" />
+                  <span>WhatsApp</span>
+                </label>
+                <input
+                  type="tel"
+                  value={formData.whatsapp}
+                  onChange={(e) =>
+                    setFormData({ ...formData, whatsapp: e.target.value })
+                  }
+                  placeholder="+91 94431 00000 (optional)"
                   className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm font-semibold outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 shadow-2xs"
                 />
               </div>
@@ -200,14 +268,12 @@ export function ListYourBusinessClient() {
                 className="w-auto px-8 sm:px-10 py-3 sm:py-3.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-extrabold text-sm sm:text-base shadow-md shadow-orange-500/25 transition-all cursor-pointer inline-flex items-center justify-center gap-2"
               >
                 <Send className="w-4 h-4" />
-                <span>Submit</span>
+                <span>Submit Post</span>
               </button>
             </div>
           </form>
         )}
       </main>
-
-
     </div>
   );
 }
