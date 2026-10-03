@@ -250,7 +250,7 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                                 {businessName || areaName}
                               </span>
                               <span className="text-slate-300 select-none">•</span>
-                              <div className="flex items-center gap-1 text-[11px] font-bold text-slate-700">
+                              <div className="flex items-center gap-1 text-xs sm:text-sm font-extrabold text-slate-800">
                                 <MapPin className="w-3.5 h-3.5 text-red-500 fill-red-500/20 flex-shrink-0" />
                                 <span>{areaName}</span>
                               </div>
@@ -446,30 +446,24 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                       </div>
                     </div>
 
-                    {/* Brand Name, Category, Location & Expiry Row */}
+                    {/* Brand Name & Location inline */}
                     <div className="flex items-center gap-2.5 mb-2">
                       <div className={`w-7.5 h-7.5 rounded-lg ${categoryColors.iconBg} text-white flex items-center justify-center flex-shrink-0 shadow-2xs mt-0.5`}>
                         <CategoryIcon className="w-4 h-4 stroke-[2.2]" />
                       </div>
-                      <div className="flex flex-col text-left min-w-0 flex-1">
+                      <div className="flex items-center gap-1.5 flex-wrap min-w-0 flex-1">
                         <span className="text-xs font-extrabold text-slate-800 truncate leading-tight">
                           {businessName || areaName}
                         </span>
-                        <div className="flex items-center gap-1.5 flex-wrap text-[10.5px] font-semibold text-slate-500 mt-0.5">
-                          <div className="flex items-center gap-0.5 font-bold text-slate-700">
-                            <MapPin className="w-3 h-3 text-red-500 fill-red-500/20" />
-                            <span>{areaName}</span>
-                          </div>
-                          <span className="text-slate-300">•</span>
-                          <div className="flex items-center gap-0.5 font-bold text-slate-700">
-                            <Timer className="w-3 h-3 text-rose-600" />
-                            <span>{validityText}</span>
-                          </div>
+                        <span className="text-slate-300 select-none">•</span>
+                        <div className="flex items-center gap-0.5 text-xs font-extrabold text-slate-800">
+                          <MapPin className="w-3 h-3 text-red-500 fill-red-500/20 flex-shrink-0" />
+                          <span>{areaName}</span>
                         </div>
                       </div>
                     </div>
 
-                    {/* Title with Badge inline next to Title */}
+                    {/* Title with Badge & Validity inline next to Title */}
                     <h2 className="text-base font-extrabold text-slate-900 leading-snug flex items-center flex-wrap gap-1.5">
                       <span>{offer.title}</span>
                       {badgeText && (
@@ -477,6 +471,10 @@ export function SpotlightView({ initialOffers }: SpotlightViewProps) {
                           {badgeText}
                         </span>
                       )}
+                      <div className="flex items-center gap-0.5 text-[10.5px] font-bold text-slate-700 bg-slate-100/90 px-2 py-0.5 rounded-full flex-shrink-0 align-middle">
+                        <Timer className="w-3 h-3 text-rose-600 flex-shrink-0" />
+                        <span>{validityText}</span>
+                      </div>
                     </h2>
 
                     {/* Description */}
