@@ -74,6 +74,7 @@ export function Navbar({
     { href: "/spotlight", label: "Spotlight" },
     { href: "/list", label: "List" },
     { href: "/register", label: "Free Posting" },
+    { href: "/must-try", label: "Must Try" },
   ];
 
   const moreSubLinks = [
