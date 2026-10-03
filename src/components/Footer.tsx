@@ -19,6 +19,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/must-try" className="hover:text-orange-600 transition-colors inline-block">
+                  Must Try
+                </Link>
+              </li>
+              <li>
                 <Link href="/spotlight" className="hover:text-orange-600 transition-colors inline-block">
                   Spotlight Deals
                 </Link>
