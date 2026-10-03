@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo, useRef, useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
-import { Star, Search, Sparkles, Tag, ChevronDown, CheckCircle2 } from "lucide-react";
+import { Star, Search, Sparkles, Tag, ChevronDown, CheckCircle2, HelpCircle } from "lucide-react";
 import { getOffers, getSpotlightOffers } from "@/lib/offers";
 
 interface SearchableItem {
@@ -23,6 +23,7 @@ const RATING_LABELS: Record<number, string> = {
 
 export default function MustTryPage() {
   const [listingId, setListingId] = useState<string>("");
+  const [isTrueOption, setIsTrueOption] = useState<string>("Yes, 100% True");
   const [rating, setRating] = useState<number>(5);
   const [hoverRating, setHoverRating] = useState<number>(0);
   const [details, setDetails] = useState<string>("");
@@ -120,6 +121,7 @@ export default function MustTryPage() {
                 onClick={() => {
                   setIsSubmitted(false);
                   setListingId("");
+                  setIsTrueOption("Yes, 100% True");
                   setRating(5);
                   setDetails("");
                 }}
@@ -208,6 +210,40 @@ export default function MustTryPage() {
                 </div>
               )}
             </div>
+
+            {/* Verification Field (Appears once listing title is entered/selected) */}
+            {listingId.trim() !== "" && (
+              <div className="bg-orange-50/80 border border-orange-200 rounded-2xl p-4 sm:p-5 space-y-3 animate-in fade-in duration-200">
+                <div className="flex items-start gap-2.5">
+                  <HelpCircle className="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h3 className="text-xs sm:text-sm font-extrabold text-slate-900 leading-snug">
+                      Is &quot;<span className="text-orange-600">{listingId}</span>&quot; true as claimed? <span className="text-red-500">*</span>
+                    </h3>
+                    <p className="text-xs text-slate-600 mt-1">
+                      Verify whether this listing offer or claim is accurate based on your experience.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2 pt-1">
+                  {["Yes, 100% True", "Partially True", "No, False / Invalid"].map((opt) => (
+                    <button
+                      key={opt}
+                      type="button"
+                      onClick={() => setIsTrueOption(opt)}
+                      className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
+                        isTrueOption === opt
+                          ? "bg-orange-500 text-white border-orange-500 shadow-xs"
+                          : "bg-white text-slate-700 border-slate-200 hover:border-orange-300 hover:bg-orange-50/50"
+                      }`}
+                    >
+                      {opt}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Rating Stars Selection */}
             <div>
