@@ -12,7 +12,7 @@
     "location": "Medavakkam",
     "category": "Food",
     "business": "Royal Feast Fine Dining",
-    "badge": "50% OFF SPOTLIGHT",
+    "badge": "50% OFF",
     "features": [
       "12 Traditional Items",
       "Fresh Ghee Sweets",
@@ -38,7 +38,7 @@
     "location": "Adyar",
     "category": "Salon & Spa",
     "business": "Velvet Touch Luxury Salon",
-    "badge": "SPOTLIGHT BOGO",
+    "badge": "BOGO",
     "features": [
       "Deep Conditioning Spa",
       "Organic Keratin Oil",
@@ -63,7 +63,7 @@
     "location": "Pallikaranai",
     "category": "Grocery",
     "business": "Green Earth Organic Mart",
-    "badge": "SPOTLIGHT EXCLUSIVE",
+    "badge": "EXCLUSIVE",
     "features": [
       "25kg Monthly Bundle",
       "Cold-Pressed Oils",
@@ -89,7 +89,7 @@
     "location": "T. Nagar",
     "category": "Electronic Services",
     "business": "Cool Tech AC Care",
-    "badge": "VERIFIED SPOTLIGHT",
+    "badge": "VERIFIED",
     "features": [
       "High-Pressure Jet Clean",
       "Free Electrical Audit",
@@ -114,7 +114,7 @@
     "location": "Velachery",
     "category": "Electronics",
     "business": "iFix Smart Hub",
-    "badge": "SPOTLIGHT DEAL",
+    "badge": "DEAL",
     "features": [
       "30-Min Express Repair",
       "9H Gorilla Glass Free",
@@ -140,7 +140,7 @@
     "location": "Tambaram",
     "category": "Fitness",
     "business": "Iron Vault Fitness Gym",
-    "badge": "SPOTLIGHT 50% OFF",
+    "badge": "50% OFF",
     "features": [
       "3 Free Personal Sessions",
       "Steam Bath & Locker Access",
@@ -165,7 +165,7 @@
     "location": "Anna Nagar",
     "category": "Home Services",
     "business": "Sparkle Cleaners",
-    "badge": "SPOTLIGHT FEATURED",
+    "badge": "FEATURED",
     "features": [
       "5-Star Deep Sanitation",
       "Free Herbal Pest Control",
@@ -191,7 +191,7 @@
     "location": "Mylapore",
     "category": "Fashion",
     "business": "Silk Heritage Silks",
-    "badge": "SPOTLIGHT OFFER",
+    "badge": "OFFER",
     "features": [
       "Silk Mark Certified",
       "Direct Weaver Price",
