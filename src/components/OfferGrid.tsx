@@ -7,6 +7,7 @@ import { lookupUserArea, distanceKm } from "@/lib/utils";
 import { Navbar } from "./Navbar";
 import { MobileCategoryGrid } from "./MobileCategoryGrid";
 import { LatestListingsCarousel } from "./LatestListingsCarousel";
+import { HomeFeatureSections } from "./HomeFeatureSections";
 
 import { Footer } from "./Footer";
 import { CheckCircle2, AlertCircle } from "lucide-react";
@@ -155,6 +156,9 @@ export function OfferGrid({ initialOffers }: OfferGridProps) {
           userLocation={userLocation}
           onSeeAll={handleSeeAll}
         />
+
+        {/* 3. Informational Feature Carousels */}
+        <HomeFeatureSections />
       </main>
 
       {/* Footer (Desktop & Mobile) */}
