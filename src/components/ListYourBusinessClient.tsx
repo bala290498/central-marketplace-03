@@ -201,7 +201,7 @@ export function ListYourBusinessClient() {
                   onChange={(e) =>
                     setFormData({ ...formData, whatsapp: e.target.value })
                   }
-                  placeholder="+91 94431 00000 (optional)"
+                  placeholder="+91 94431 00000"
                   className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm font-semibold outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 shadow-2xs"
                 />
               </div>
