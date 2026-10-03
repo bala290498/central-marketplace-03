@@ -228,25 +228,47 @@ export default function MustTryPage() {
               <div className="bg-orange-50/80 border border-orange-200 rounded-2xl p-4 sm:p-5 space-y-3.5 animate-in fade-in duration-200">
                 <div className="flex items-start gap-2.5">
                   <HelpCircle className="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" />
-                  <div className="space-y-1.5 min-w-0 flex-1">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <span className="text-[10px] font-black uppercase tracking-wider text-orange-700 bg-orange-100/90 px-2 py-0.5 rounded-md border border-orange-200/80">
-                        Selected Listing
-                      </span>
-                      {selectedItem?.business && (
-                        <span className="text-xs font-extrabold text-slate-700">
+                  <div className="space-y-2 min-w-0 flex-1">
+                    {/* Brand Name & Type Badge */}
+                    <div className="flex items-center justify-between gap-2 flex-wrap">
+                      {selectedItem?.business ? (
+                        <span className="text-xs sm:text-sm font-extrabold text-slate-800">
                           {selectedItem.business}
+                        </span>
+                      ) : (
+                        <div />
+                      )}
+                      {selectedItem?.type && (
+                        <span
+                          className={`text-[10px] font-extrabold px-2 py-0.5 rounded-md flex-shrink-0 flex items-center gap-1 ${
+                            selectedItem.type === "Spotlight"
+                              ? "bg-amber-100 text-amber-800 border border-amber-200"
+                              : "bg-orange-100 text-orange-800 border border-orange-200"
+                          }`}
+                        >
+                          {selectedItem.type === "Spotlight" ? (
+                            <Sparkles className="w-3 h-3 text-amber-600" />
+                          ) : (
+                            <Tag className="w-3 h-3 text-orange-600" />
+                          )}
+                          {selectedItem.type}
                         </span>
                       )}
                     </div>
+
+                    {/* Title */}
                     <h3 className="text-sm sm:text-base font-extrabold text-slate-900 leading-snug">
                       {selectedItem?.title || listingId}
                     </h3>
+
+                    {/* Description */}
                     {selectedItem?.description && (
                       <p className="text-xs text-slate-600 leading-relaxed bg-white/80 p-2.5 rounded-xl border border-orange-200/60">
                         {selectedItem.description}
                       </p>
                     )}
+
+                    {/* Question Prompt */}
                     <p className="text-xs sm:text-sm font-extrabold text-slate-900 pt-1">
                       Is this offer / claim true as described? <span className="text-red-500">*</span>
                     </p>
