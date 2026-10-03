@@ -304,13 +304,12 @@ export default function MustTryPage() {
               </div>
             </div>
 
-            {/* Additional Details */}
+            {/* Additional Details (Optional) */}
             <div>
               <label className="block text-xs sm:text-sm font-bold text-slate-900 mb-1.5">
-                Additional Details <span className="text-red-500">*</span>
+                Additional Details <span className="text-slate-400 font-normal">(optional)</span>
               </label>
               <textarea
-                required
                 rows={4}
                 value={details}
                 onChange={(e) => setDetails(e.target.value)}
