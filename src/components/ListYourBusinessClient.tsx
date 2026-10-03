@@ -263,7 +263,7 @@ export function ListYourBusinessClient() {
             </div>
 
             {/* Submit Button */}
-            <div className="pt-2">
+            <div className="pt-4 flex justify-center text-center">
               <button
                 type="submit"
                 className="w-auto px-8 sm:px-10 py-3 sm:py-3.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-extrabold text-sm sm:text-base shadow-md shadow-orange-500/25 transition-all cursor-pointer inline-flex items-center justify-center gap-2"
