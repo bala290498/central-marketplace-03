@@ -114,7 +114,7 @@ export function ListYourBusinessClient() {
                 <PlusCircle className="w-7 h-7" />
               </div>
               <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-                Free Listing &amp; Posting
+                Free Listing
               </h1>
               <p className="text-sm sm:text-base text-slate-500 max-w-lg mx-auto mt-2 leading-relaxed">
                 Publish your business, dining offers, retail deals, or neighborhood announcements for free on Central Marketplace.
